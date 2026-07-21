@@ -1,0 +1,88 @@
+:root {
+    /* Colors */
+    --color-primary: #0069cb;
+    --color-primary-dark: #004f9d;
+    --color-brand-yellow: #FFC600;
+    --color-navy: #002b5c;
+    --color-dark: #15191d;
+    --color-black: #000000;
+    --color-text: #333333;
+    --color-muted: #6c757d;
+    --color-border: #dfe3e7;
+    --color-light: #f5f7f9;
+    --color-white: #ffffff;
+
+    /* Typography */
+    --font-body: "Commuters Sans", Arial, Helvetica, sans-serif;
+    --font-heading: "Commuters Sans", Arial, Helvetica, sans-serif;
+
+    --body-font-size: 13px;
+    --body-font-weight: 500;
+    --body-line-height: 1.6667;
+
+    --h1-font-size: 80px;
+    --h1-line-height: 85px;
+    --h1-font-weight: 600;
+
+    --h2-font-size: 60px;
+    --h2-line-height: 72px;
+    --h2-font-weight: 400;
+
+    --h3-font-size: 18px;
+    --h3-line-height: 21px;
+    --h3-font-weight: 600;
+
+    --h4-font-size: 18px;
+    --h4-line-height: 21px;
+    --h4-font-weight: 600;
+
+    --h5-font-size: 13px;
+    --h5-line-height: 21px;
+    --h5-font-weight: 700;
+
+    --h6-font-size: 13px;
+    --h6-line-height: 1.6667;
+    --h6-font-weight: 500;
+
+    --eyebrow-font-size: 13px;
+    --eyebrow-line-height: 2.1429;
+    --eyebrow-font-weight: 500;
+
+    --nav-font-size: 12px;
+    --nav-line-height: 15px;
+    --nav-font-weight: 700;
+
+    /* Widths */
+    --container: 1380px;
+    --container-narrow: 860px;
+
+    /* Horizontal spacing */
+    --gutter: 20px;
+    --hero-margin-inline: 20px;
+
+    /* Homepage spacing */
+    --home-hero-padding-top: 70px;
+    --home-hero-padding-bottom: 20px;
+    --home-section-space: 80px;
+    --home-body-top: 80px;
+    --home-body-bottom: 100px;
+
+    /* Interior page spacing */
+    --page-hero-padding-block: 90px;
+    --page-section-space: 100px;
+    --page-body-top: 50px;
+    --page-body-bottom: 100px;
+
+    /* Dark sections */
+    --dark-section-padding: 70px;
+
+    /* Buttons */
+    --button-margin-top: 40px;
+    --button-radius: 4px;
+
+    /* UI */
+    --radius-sm: 4px;
+    --radius-md: 10px;
+    --shadow-sm: 0 8px 28px rgba(0, 31, 63, 0.09);
+    --transition: 180ms ease;
+}

@@ -1,0 +1,260 @@
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-semibold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-heavy.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-bold-italic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background: var(--color-white);
+	font-family: var(--font-body);
+	font-size: var(--body-font-size);
+	font-weight: var(--body-font-weight);
+	line-height: var(--body-line-height);
+	letter-spacing: 0;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body.menu-open {
+	overflow: hidden;
+}
+
+main {
+	display: block;
+}
+
+img,
+svg,
+video,
+canvas {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+iframe {
+	max-width: 100%;
+}
+
+figure {
+	margin: 0;
+}
+
+a {
+	color: var(--color-primary);
+}
+
+a:hover,
+a:focus-visible {
+	color: var(--color-primary-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	margin-top: 0;
+	margin-bottom: 0.6em;
+	color: var(--color-dark);
+	font-family: var(--font-heading);
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+h1,
+.h1 {
+	font-size: var(--h1-font-size);
+	font-weight: var(--h1-font-weight);
+	line-height: var(--h1-line-height);
+}
+
+h2,
+.h2 {
+	font-size: var(--h2-font-size);
+	font-weight: var(--h2-font-weight);
+	line-height: var(--h2-line-height);
+}
+
+h3,
+.h3 {
+	font-size: var(--h3-font-size);
+	font-weight: var(--h3-font-weight);
+	line-height: var(--h3-line-height);
+}
+
+h4,
+.h4 {
+	font-size: var(--h4-font-size);
+	font-weight: var(--h4-font-weight);
+	line-height: var(--h4-line-height);
+}
+
+h5,
+.h5 {
+	font-size: var(--h5-font-size);
+	font-weight: var(--h5-font-weight);
+	line-height: var(--h5-line-height);
+}
+
+h6,
+.h6 {
+	font-size: var(--h6-font-size);
+	font-weight: var(--h6-font-weight);
+	line-height: var(--h6-line-height);
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 1.3em;
+}
+
+ul,
+ol {
+	margin-top: 0;
+	margin-bottom: 1.3em;
+	padding-left: 1.5em;
+}
+
+p:last-child,
+ul:last-child,
+ol:last-child {
+	margin-bottom: 0;
+}
+
+.mcc-eyebrow,
+.eyebrow,
+.section-eyebrow,
+.hero-eyebrow {
+	display: block;
+	margin: 0;
+	padding-bottom: 10px;
+	font-family: var(--font-heading);
+	font-size: var(--eyebrow-font-size);
+	font-weight: var(--eyebrow-font-weight);
+	line-height: var(--eyebrow-line-height);
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+button,
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
+blockquote {
+	margin: 0 0 1.3em;
+	padding-left: 24px;
+	border-left: 3px solid var(--color-primary);
+}
+
+hr {
+	height: 1px;
+	margin: 30px 0;
+	border: 0;
+	background: var(--color-border);
+}
+
+::selection {
+	color: var(--color-white);
+	background: var(--color-primary);
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 3px;
+}
+
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.screen-reader-text:focus,
+.skip-link:focus {
+	z-index: 100000;
+	top: 10px;
+	left: 10px;
+	width: auto;
+	height: auto;
+	padding: 12px 16px;
+	overflow: visible;
+	clip: auto;
+	clip-path: none;
+	color: var(--color-white);
+	background: var(--color-dark);
+}

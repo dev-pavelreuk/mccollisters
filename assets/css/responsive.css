@@ -1,0 +1,38 @@
+@media (max-width: 1180px) {
+    .site-header__cta {
+        display: none;
+    }
+
+    .site-footer__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 960px) {
+    /* Mobile menu open/close, toggle button, and dropdown behavior are
+       handled entirely by header.css + navigation.js at the 1024px
+       breakpoint — do not duplicate that logic here with different
+       class names, it silently won't apply and creates drift. */
+
+    .content-grid--posts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .content-grid--posts,
+    .site-footer__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer__bottom-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding-block: 22px;
+    }
+
+    .home-hero {
+        min-height: 620px;
+    }
+}

@@ -1,0 +1,620 @@
+.site-header {
+	position: relative;
+	z-index: 1000;
+	width: 100%;
+	background: var(--color-white);
+	transition:
+		box-shadow var(--transition),
+		transform 300ms ease,
+		background-color var(--transition);
+}
+
+.site-header.is-sticky {
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 0 15px 38px rgba(0, 0, 0, 0.1);
+}
+
+.admin-bar .site-header.is-sticky {
+	top: 32px;
+}
+
+.site-header__inner {
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+	margin-inline: auto;
+	padding-inline: 20px;
+}
+
+.site-header__branding {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	padding: 34px 0;
+}
+
+.site-header__branding .custom-logo-link {
+	display: block;
+	line-height: 0;
+}
+
+.site-header__branding .custom-logo {
+	display: block;
+	width: 191px;
+	max-width: 100%;
+	height: auto;
+}
+
+.site-navigation {
+	display: flex;
+	flex: 1;
+	align-items: stretch;
+	justify-content: center;
+	margin-inline: 40px;
+}
+
+.site-navigation__menu,
+.site-navigation__menu ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.site-navigation__menu {
+	display: flex;
+	align-items: stretch;
+	gap: 25px;
+}
+
+.site-navigation__menu > li {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+}
+
+.site-navigation__menu > li > a {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 40px 0;
+	color: var(--color-black);
+	font-family: var(--font-heading);
+	font-size: var(--nav-font-size);
+	font-weight: var(--nav-font-weight);
+	line-height: var(--nav-line-height);
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: color var(--transition);
+}
+
+.site-navigation__menu > li > a::after {
+	position: absolute;
+	right: 0;
+	bottom: 30px;
+	left: 0;
+	height: 2px;
+	background: var(--color-primary);
+	content: "";
+	transform: scaleX(0);
+	transform-origin: right center;
+	transition: transform 250ms ease;
+}
+
+.site-navigation__menu > li:hover > a,
+.site-navigation__menu > li > a:hover,
+.site-navigation__menu > li > a:focus-visible,
+.site-navigation__menu > .current-menu-item > a,
+.site-navigation__menu > .current-menu-ancestor > a {
+	color: var(--color-primary);
+}
+
+.site-navigation__menu > li:hover > a::after,
+.site-navigation__menu > li > a:hover::after,
+.site-navigation__menu > li > a:focus-visible::after,
+.site-navigation__menu > .current-menu-item > a::after,
+.site-navigation__menu > .current-menu-ancestor > a::after {
+	transform: scaleX(1);
+	transform-origin: left center;
+}
+
+/* Dropdown shell — shared by both the mega (Services) and split
+   (Industries/Resources) layouts. Full viewport width, anchored to the
+   bottom of the header via --mcc-header-height (set in navigation.js). */
+.site-navigation__menu .sub-menu {
+	position: fixed;
+	z-index: 20;
+	top: var(--mcc-header-height, 96px);
+	left: 0;
+	width: 100%;
+	padding: 32px calc((100% - var(--container)) / 2 + 20px);
+	background: var(--color-light);
+	box-shadow: var(--shadow-sm);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition:
+		opacity 200ms ease,
+		visibility 200ms ease,
+		transform 200ms ease;
+}
+
+.site-navigation__menu li:hover > .sub-menu,
+.site-navigation__menu li:focus-within > .sub-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.sub-menu__eyebrow {
+	padding-bottom: 12px;
+	margin-bottom: 24px;
+	color: var(--color-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--color-border);
+}
+
+/* --- Mega layout (Services): full-width equal columns, no promo panel --- */
+.mega-columns {
+	display: flex;
+	gap: 48px;
+}
+
+.mega-column {
+	flex: 1 0 160px;
+}
+
+.mega-column__heading {
+	display: block;
+	margin-bottom: 14px;
+	color: var(--color-navy);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.mega-column__heading:hover,
+.mega-column__heading:focus-visible {
+	color: var(--color-primary);
+}
+
+.mega-column__links {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.mega-column__links a {
+	display: block;
+	padding: 7px 0;
+	color: var(--color-text);
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	text-transform: none;
+}
+
+.mega-column__links a:hover,
+.mega-column__links a:focus-visible {
+	color: var(--color-primary);
+}
+
+/* --- Split layout (Industries/Resources): two-column flat links + promo panel --- */
+.sub-menu__split {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	gap: 48px;
+}
+
+.sub-menu__links-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0 40px;
+}
+
+.sub-menu__links-grid a {
+	display: block;
+	padding: 9px 0;
+	color: var(--color-text);
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.sub-menu__links-grid a:hover,
+.sub-menu__links-grid a:focus-visible {
+	color: var(--color-primary);
+}
+
+.sub-menu__split-promo {
+	padding-left: 40px;
+	border-left: 1px solid var(--color-border);
+}
+
+.menu-promo__posts {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.menu-promo__post {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	text-decoration: none;
+}
+
+.menu-promo__post-image {
+	flex: 0 0 64px;
+	overflow: hidden;
+	border-radius: 6px;
+}
+
+.menu-promo__post-image img {
+	display: block;
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+}
+
+.menu-promo__post-title {
+	display: block;
+	color: var(--color-text);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.menu-promo__post-link {
+	display: block;
+	margin-top: 4px;
+	color: var(--color-primary);
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.menu-promo__newsletter-label {
+	margin: 0 0 8px;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.menu-promo__newsletter-form {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+	padding-bottom: 6px;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.menu-promo__newsletter-form input {
+	flex: 1;
+	padding: 4px 0;
+	font-size: 13px;
+	border: 0;
+	background: transparent;
+}
+
+.menu-promo__newsletter-form button {
+	padding: 4px 10px;
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--color-white);
+	background: var(--color-primary);
+	border: 0;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.menu-promo__social {
+	display: flex;
+	gap: 14px;
+	margin-top: 16px;
+	font-size: 16px;
+}
+
+.menu-promo__social a {
+	color: var(--color-black);
+}
+
+/* Menu items tagged with this CSS class in wp-admin (Appearance > Menus,
+   per-item "CSS Classes" field) are hidden on desktop/tablet. No matching
+   "show on mobile" rule is needed inside the 1024px breakpoint below —
+   the existing `.site-navigation__menu > li { display: block; }` rule
+   there is more specific and already overrides this for every <li>,
+   including this one, once the mobile menu is active. */
+.mobile-only-item {
+	display: none;
+}
+
+/* Header actions */
+.site-header__actions {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 20px;
+}
+
+.site-header__account {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
+    color: #000;
+}
+
+.site-header__account::before {
+	content: "Drive Portal";
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + 5px);
+	transform: translateX(-50%);
+	background: #222;
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 4px;
+	font-size: 12px;
+	line-height: 1;
+	white-space: nowrap;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 9999;
+}
+
+.site-header__account::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + 4px);
+	transform: translateX(-50%);
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #222;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 9999;
+}
+
+.site-header__account:hover::before,
+.site-header__account:hover::after {
+	opacity: 1;
+	visibility: visible;
+}
+
+.site-header__account .fas {
+	font-size: 20px;
+	line-height: 1;
+}
+
+.site-header__account:hover,
+.site-header__account:focus-visible {
+	color: var(--color-brand-yellow);
+}
+
+.site-header__cta {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 60px;
+	padding: 10px 20px;
+	overflow: hidden;
+	border-radius: 15px;
+	color: var(--color-white);
+	background: var(--color-black);
+	font-family: var(--font-heading);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition:
+		color 250ms ease,
+		background-color 250ms ease,
+		transform 250ms ease,
+		box-shadow 250ms ease;
+}
+
+.site-header__cta:hover,
+.site-header__cta:focus-visible {
+	color: var(--color-black);
+	background: #ffc600;
+}
+
+.site-header__toggle {
+	display: none;
+}
+
+@media (max-width: 1024px) {
+	.site-header__inner {
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px;
+	}
+
+	.site-header__branding {
+		padding: 0;
+	}
+
+	.site-header__branding .custom-logo {
+		width: 150px;
+	}
+
+	.site-header__toggle {
+		position: relative;
+		z-index: 1002;
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 38px;
+		height: 38px;
+		padding: 6px;
+		border: 0;
+		color: var(--color-primary);
+		background: transparent;
+	}
+
+	.site-header__toggle-line {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: currentColor;
+		transform-origin: center;
+		transition:
+			transform 250ms ease,
+			opacity 250ms ease;
+	}
+
+	.site-header__toggle[aria-expanded="true"]
+	.site-header__toggle-line:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+
+	.site-header__toggle[aria-expanded="true"]
+	.site-header__toggle-line:nth-child(2) {
+		opacity: 0;
+	}
+
+	.site-header__toggle[aria-expanded="true"]
+	.site-header__toggle-line:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
+	.site-navigation {
+		position: fixed;
+		z-index: 1001;
+		top: 78px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: block;
+		margin: 0;
+		padding: 35px 20px 80px;
+		overflow-y: auto;
+		background: var(--color-white);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-15px);
+		transition:
+			opacity 250ms ease,
+			visibility 250ms ease,
+			transform 250ms ease;
+	}
+
+	.site-navigation.is-open {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.site-navigation__menu {
+		display: block;
+	}
+
+	.site-navigation__menu > li {
+		display: block;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.site-navigation__menu > li > a {
+		display: block;
+		padding: 15px 0;
+		font-size: 24px;
+		line-height: 26px;
+	}
+
+	.site-navigation__menu > li > a::after {
+		display: none;
+	}
+
+	.site-navigation__menu .sub-menu {
+		position: static;
+		display: none;
+		width: 100%;
+		padding: 0 0 15px 20px;
+		background: transparent;
+		box-shadow: none;
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+		transition: none;
+	}
+
+	.site-navigation__menu .menu-item-has-children.is-open > .sub-menu {
+		display: block;
+	}
+
+	.site-navigation__menu .sub-menu li {
+		border: 0;
+	}
+
+	.site-navigation__menu .sub-menu a {
+		padding: 10px 0;
+		color: var(--color-text);
+		font-size: 16px;
+	}
+
+	.site-navigation__menu .sub-menu a:hover,
+	.site-navigation__menu .sub-menu a:focus-visible {
+		padding-left: 0;
+		color: var(--color-primary);
+		background: transparent;
+	}
+
+	.site-header__actions {
+		display: none;
+	}
+
+	/* Both dropdown shapes collapse to a single stacked column on mobile;
+	   .sub-menu itself already switches to position: static/display: none
+	   above, this just fixes the internal flex/grid layouts inside it. */
+	.mega-columns,
+	.sub-menu__split {
+		display: block;
+	}
+
+	.mega-column + .mega-column {
+		margin-top: 20px;
+	}
+
+	.mega-column__heading {
+		font-size: 15px;
+	}
+
+	.mega-column__links a {
+		font-size: 16px;
+		padding: 8px 0;
+	}
+
+	.sub-menu__links-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sub-menu__links-grid a {
+		font-size: 16px;
+		padding: 8px 0;
+	}
+
+	.sub-menu__split-promo {
+		padding: 24px 0 0;
+		margin-top: 20px;
+		border-left: 0;
+		border-top: 1px solid var(--color-border);
+	}
+}
+
+@media (max-width: 782px) {
+	.admin-bar .site-header.is-sticky {
+		top: 46px;
+	}
+}
