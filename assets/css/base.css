@@ -231,6 +231,19 @@ hr {
 	outline-offset: 3px;
 }
 
+/* Form fields drop the offset outline ring (it reads as a floating blue box
+   around the field) in favour of an in-place indicator on the field's own
+   border — see components.css / header.css / footer.css. Focus stays visible;
+   removing it outright would fail WCAG 2.4.7. */
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+	outline: none;
+}
+
 .screen-reader-text {
 	position: absolute;
 	width: 1px;

@@ -65,7 +65,7 @@
 .site-navigation__menu {
 	display: flex;
 	align-items: stretch;
-	gap: 25px;
+	gap: 50px;
 }
 
 .site-navigation__menu > li {
@@ -89,19 +89,6 @@
 	transition: color var(--transition);
 }
 
-.site-navigation__menu > li > a::after {
-	position: absolute;
-	right: 0;
-	bottom: 30px;
-	left: 0;
-	height: 2px;
-	background: var(--color-primary);
-	content: "";
-	transform: scaleX(0);
-	transform-origin: right center;
-	transition: transform 250ms ease;
-}
-
 .site-navigation__menu > li:hover > a,
 .site-navigation__menu > li > a:hover,
 .site-navigation__menu > li > a:focus-visible,
@@ -110,41 +97,104 @@
 	color: var(--color-primary);
 }
 
-.site-navigation__menu > li:hover > a::after,
-.site-navigation__menu > li > a:hover::after,
-.site-navigation__menu > li > a:focus-visible::after,
-.site-navigation__menu > .current-menu-item > a::after,
-.site-navigation__menu > .current-menu-ancestor > a::after {
-	transform: scaleX(1);
-	transform-origin: left center;
+/* Dropdown indicator on top-level items that have a sub-menu. A CSS-drawn
+   chevron (square with two borders, rotated 45deg = points down). Uses
+   currentColor so it tracks the link's hover color. */
+.site-navigation__arrow {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin-left: 8px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	/* Pivot around the chevron's ink centroid (~66% 66%), not the box center.
+	   That point is the rotation's fixed point, so the glyph stays vertically
+	   put when it flips instead of swinging below/above the text. */
+	transform-origin: 66% 66%;
+	transform: translateY(-1.3px) rotate(45deg);
+	transition: transform 250ms ease;
+}
+
+/* Rotate 180deg (45 -> 225) so the chevron points up while the dropdown is
+   open — on hover/focus (desktop) and when the mobile accordion is toggled. */
+.site-navigation__menu > li:hover > a .site-navigation__arrow,
+.site-navigation__menu > li:focus-within > a .site-navigation__arrow,
+.site-navigation__menu > li.is-open > a .site-navigation__arrow {
+	transform: translateY(-1.3px) rotate(225deg);
 }
 
 /* Dropdown shell — shared by both the mega (Services) and split
-   (Industries/Resources) layouts. Full viewport width, anchored to the
-   bottom of the header via --mcc-header-height (set in navigation.js). */
+   (Industries/Resources) layouts. Centered card capped at the container
+   width (1380px) so the page shows on either side; anchored to the bottom
+   of the header via --mcc-header-bottom (set in navigation.js). */
 .site-navigation__menu .sub-menu {
 	position: fixed;
 	z-index: 20;
-	top: var(--mcc-header-height, 96px);
+	/* Anchored to the header's bottom edge, not its height — otherwise the
+	   admin bar (which shifts the header down) makes the panel overlap it. */
+	top: var(--mcc-header-bottom, 96px);
 	left: 0;
+	right: 0;
 	width: 100%;
-	padding: 32px calc((100% - var(--container)) / 2 + 20px);
-	background: var(--color-light);
+	max-width: var(--container);
+	margin-inline: auto;
+	padding: 40px;
+	/* Floored to the tallest dropdown (measured in navigation.js) so the
+	   overlay keeps a consistent height when hovering between menu items. */
+	min-height: var(--mcc-submenu-height, auto);
+	background: var(--menu-panel-bg);
 	box-shadow: var(--shadow-sm);
 	opacity: 0;
 	visibility: hidden;
-	transform: translateY(10px);
 	transition:
 		opacity 200ms ease,
-		visibility 200ms ease,
-		transform 200ms ease;
+		visibility 200ms ease;
 }
 
 .site-navigation__menu li:hover > .sub-menu,
 .site-navigation__menu li:focus-within > .sub-menu {
 	opacity: 1;
 	visibility: visible;
-	transform: translateY(0);
+}
+
+/* CSS-only full page fuzzy overlay, shown behind the dropdown while a
+   submenu parent is open. Sits above the page (z-index: 1) but below the
+   header/dropdown (z-index: 1000), so the page beneath blurs and tints
+   blue while the header and overlay stay sharp. */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 105, 203, 0.10);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+	z-index: 1;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Reveal it (desktop only) when a top-level item with a dropdown is
+   hovered or keyboard-focused. */
+@media (min-width: 1025px) {
+	body:has(.site-navigation__menu > .menu-item-has-children:hover)::before,
+	body:has(.site-navigation__menu > .menu-item-has-children:focus-within)::before {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+/* Split dropdowns (Industries/Resources): two-tone full-bleed background —
+   warm panel on the left half, grey promo panel on the right. The 50% hard
+   stop lines up with the container centre (where the promo column begins),
+   because the shell's horizontal padding is symmetric. */
+.site-navigation__menu .sub-menu--split {
+	background: linear-gradient(
+		to right,
+		var(--menu-panel-bg) 50%,
+		var(--menu-promo-bg) 50%
+	);
 }
 
 .sub-menu__eyebrow {
@@ -155,24 +205,32 @@
 	font-weight: 600;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	border-bottom: 1px solid var(--color-border);
+	border-bottom: 1px solid rgb(145, 145, 145);
 }
 
 /* --- Mega layout (Services): full-width equal columns, no promo panel --- */
 .mega-columns {
 	display: flex;
-	gap: 48px;
+	/* Spacing between columns. */
+	gap: 180px;
+	/* Center the column group within the overlay instead of stretching it
+	   edge-to-edge; columns keep their content width (see .mega-column). */
+	justify-content: center;
 }
 
 .mega-column {
-	flex: 1 0 160px;
+	/* Don't grow to fill; size to content so the group stays centered. */
+	flex: 0 1 auto;
+	min-width: 180px;
 }
 
 .mega-column__heading {
 	display: block;
-	margin-bottom: 14px;
-	color: var(--color-navy);
-	font-size: 14px;
+	/* 7px + the first link's 7px top padding = 14px, matching the
+	   link-to-link gap. */
+	margin-bottom: 7px;
+	color: #1f1f1f;
+	font-size: 13px;
 	font-weight: 700;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -191,10 +249,11 @@
 
 .mega-column__links a {
 	display: block;
+	/* 7px top + 7px bottom = 14px between adjacent items. */
 	padding: 7px 0;
-	color: var(--color-text);
-	font-size: 14px;
-	font-weight: 500;
+	color: #1f1f1f;
+	font-size: 13px;
+	font-weight: 600;
 	text-decoration: none;
 	text-transform: none;
 }
@@ -207,129 +266,223 @@
 /* --- Split layout (Industries/Resources): two-column flat links + promo panel --- */
 .sub-menu__split {
 	display: grid;
-	grid-template-columns: 1.4fr 1fr;
-	gap: 48px;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+	align-items: stretch;
 }
 
-.sub-menu__links-grid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 0 40px;
+/* Keep the left links clear of the vertical colour split. */
+.sub-menu__split-links {
+	padding-right: 48px;
 }
 
-.sub-menu__links-grid a {
-	display: block;
-	padding: 9px 0;
-	color: var(--color-text);
-	font-size: 15px;
-	font-weight: 600;
-	text-decoration: none;
+/* Industries/Resources links reuse the Services sub-item styling
+   (.mega-column__links); here they're just flowed into two columns. */
+/* Both classes are on the <ul>, so this compound selector (0,2,0) beats
+   `.mega-column__links { margin: 0 }` (0,1,0) — otherwise the auto margins get
+   cancelled. The % width guarantees the block is narrower than its container,
+   so the auto margins always have room to center it under the divider. */
+.mega-column__links.sub-menu__split-list {
+	columns: 2;
+	column-gap: 80px;
+	max-width: 85%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.sub-menu__links-grid a:hover,
-.sub-menu__links-grid a:focus-visible {
-	color: var(--color-primary);
+.sub-menu__split-list li {
+	break-inside: avoid;
 }
 
 .sub-menu__split-promo {
-	padding-left: 40px;
-	border-left: 1px solid var(--color-border);
+	padding-left: 48px;
+	/* Drop the promo so the first post's top lines up with the divider under
+	   the eyebrow on the left (eyebrow line ~21.7px + 12px padding-bottom).
+	   Matching padding-bottom keeps the top and bottom spacing equal. */
+	padding-top: 34px;
+	padding-bottom: 34px;
+}
+
+/* Recent posts (left) beside the newsletter (right) inside the promo panel. */
+.menu-promo {
+	display: grid;
+	grid-template-columns: 1.35fr 1fr;
+	gap: 60px;
 }
 
 .menu-promo__posts {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	margin-bottom: 24px;
+	gap: 24px;
+	margin-bottom: 0;
+	max-width: 290px;
 }
 
 .menu-promo__post {
 	display: flex;
-	gap: 12px;
+	gap: 14px;
 	align-items: flex-start;
 	text-decoration: none;
 }
 
 .menu-promo__post-image {
-	flex: 0 0 64px;
+	flex: 0 0 72px;
 	overflow: hidden;
-	border-radius: 6px;
+	border-radius: 8px;
 }
 
 .menu-promo__post-image img {
 	display: block;
-	width: 64px;
-	height: 64px;
+	width: 72px;
+	height: 72px;
 	object-fit: cover;
 }
 
 .menu-promo__post-title {
 	display: block;
-	color: var(--color-text);
-	font-size: 14px;
+	/* Live article titles use var(--e-global-color-primary), which resolves to
+	   near-black on mccollisters.com (same var colors the black account icon). */
+	color: var(--color-black);
+	font-family: var(--font-heading);
+	font-size: 13px;
 	font-weight: 600;
-	line-height: 1.3;
+	line-height: 17px;
 }
 
 .menu-promo__post-link {
 	display: block;
-	margin-top: 4px;
-	color: var(--color-primary);
+	margin-top: 6px;
+	color: var(--color-black);
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 400;
+}
+
+/* Newsletter column: label + field at top, social pinned to the bottom
+   (aligned with the last post), matching the live layout. */
+.menu-promo__newsletter {
+	display: flex;
+	flex-direction: column;
 }
 
 .menu-promo__newsletter-label {
-	margin: 0 0 8px;
+	margin: 0 0 14px;
+	/* Same styling as the article titles. */
+	color: var(--color-black);
+	font-family: var(--font-heading);
 	font-size: 13px;
-	font-weight: 700;
+	font-weight: 600;
+	line-height: 17px;
 }
 
-.menu-promo__newsletter-form {
+/* Underline sits on the field wrapper so the revealed button/consent below
+   aren't inside the underlined area. */
+.menu-promo__newsletter-field {
 	display: flex;
 	gap: 8px;
 	align-items: flex-end;
+	/* Match the width of the "Subscribe to our newsletter:" label so the
+	   underline doesn't run past it. */
+	max-width: 200px;
 	padding-bottom: 6px;
-	border-bottom: 1px solid var(--color-border);
+	border-bottom: 1px solid #b0b0b0;
 }
 
-.menu-promo__newsletter-form input {
+/* Focus indicator for the underline field (the outline ring is removed). */
+.menu-promo__newsletter-field:focus-within {
+	border-bottom-color: var(--color-primary);
+}
+
+/* Override the global boxed-input style (components.css). The live field is an
+   underline only; input[type="email"] (0,2,1) matches that rule's specificity
+   and wins on source order. */
+.menu-promo__newsletter-form input[type="email"] {
 	flex: 1;
+	width: auto;
+	min-height: 0;
 	padding: 4px 0;
 	font-size: 13px;
+	color: var(--color-dark);
 	border: 0;
+	border-radius: 0;
 	background: transparent;
 }
 
-.menu-promo__newsletter-form button {
-	padding: 4px 10px;
-	font-size: 12px;
-	font-weight: 700;
-	color: var(--color-white);
-	background: var(--color-primary);
-	border: 0;
-	border-radius: 4px;
-	cursor: pointer;
+.menu-promo__newsletter-form input[type="email"]::placeholder {
+	color: var(--color-muted);
+}
+
+/* Button + reveal behaviour come from the shared .mcc-subscribe /
+   .mcc-newsletter-reveal component in components.css — only the header's
+   own spacing lives here. */
+.menu-promo__newsletter-reveal {
+	margin-top: 26px;
+}
+
+.menu-promo__newsletter-form .mcc-subscribe {
+	margin: 12px 26px;
+}
+
+.menu-promo__newsletter-consent {
+	margin: 22px 0 0;
+	color: var(--color-black);
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.menu-promo__newsletter-consent a {
+	color: inherit;
+	text-decoration: underline;
 }
 
 .menu-promo__social {
-	display: flex;
-	gap: 14px;
-	margin-top: 16px;
-	font-size: 16px;
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	column-gap: 32px;
+	row-gap: 0;
+	justify-content: start;
+	justify-items: start;
+	margin-top: auto;
+	padding-top: 40px;
+	font-size: 20px;
 }
 
 .menu-promo__social a {
 	color: var(--color-black);
 }
 
-/* Menu items tagged with this CSS class in wp-admin (Appearance > Menus,
-   per-item "CSS Classes" field) are hidden on desktop/tablet. No matching
-   "show on mobile" rule is needed inside the 1024px breakpoint below —
-   the existing `.site-navigation__menu > li { display: block; }` rule
-   there is more specific and already overrides this for every <li>,
-   including this one, once the mobile menu is active. */
-.mobile-only-item {
+/* Hover each promo element independently — hovering the title tints only the
+   title, hovering Read More tints only Read More (they share one <a>, so we
+   key off each element's own :hover rather than the card's). */
+.menu-promo__post-title:hover,
+.menu-promo__post:focus-visible .menu-promo__post-title {
+	color: var(--color-primary);
+}
+
+.menu-promo__post-link:hover {
+	color: var(--color-primary);
+}
+
+.menu-promo__social a:hover,
+.menu-promo__social a:focus-visible {
+	color: var(--color-primary);
+}
+
+/* Top-level items carrying this class (e.g. "Find a Facility", tagged in
+   mega-menu.php) are hidden on desktop/tablet and only revealed once the
+   mobile menu is active (see the re-show rule inside the 1024px breakpoint
+   below). Scoped to `.site-navigation__menu > li` on purpose: a bare
+   `.mobile-only-item` (specificity 0,1,0) loses to the desktop
+   `.site-navigation__menu > li { display: flex }` rule (0,1,1) and never
+   actually hides. */
+.site-navigation__menu > li.mobile-only-item {
+	display: none;
+}
+
+/* Mobile-only chrome that lives inside the nav panel — hidden on desktop. */
+.site-navigation__cta-wrap,
+.site-navigation__locations,
+.mega-column__arrow {
 	display: none;
 }
 
@@ -490,64 +643,98 @@
 		transform: translateY(-7px) rotate(-45deg);
 	}
 
+	/* Panel is a flex column: the menu scrolls, the CTA + locations stay
+	   pinned to the bottom so they're always visible as the list grows. */
 	.site-navigation {
 		position: fixed;
 		z-index: 1001;
-		top: 78px;
+		/* Sits below the header's actual bottom edge (accounts for the admin
+		   bar and sticky state) rather than a hardcoded offset. */
+		top: var(--mcc-header-bottom, 78px);
 		right: 0;
 		bottom: 0;
 		left: 0;
-		display: block;
+		display: flex;
+		flex-direction: column;
 		margin: 0;
-		padding: 35px 20px 80px;
-		overflow-y: auto;
-		background: var(--color-white);
+		padding: 0;
+		overflow: hidden;
+		background: var(--menu-panel-bg);
 		opacity: 0;
 		visibility: hidden;
-		transform: translateY(-15px);
 		transition:
 			opacity 250ms ease,
-			visibility 250ms ease,
-			transform 250ms ease;
+			visibility 250ms ease;
 	}
 
 	.site-navigation.is-open {
 		opacity: 1;
 		visibility: visible;
-		transform: translateY(0);
 	}
 
+	/* Block is centred in the panel, text inside stays left-aligned. */
 	.site-navigation__menu {
 		display: block;
+		flex: 1;
+		width: fit-content;
+		min-width: 260px;
+		margin-inline: auto;
+		padding: 40px 20px;
+		overflow-y: auto;
+		text-align: left;
 	}
 
 	.site-navigation__menu > li {
 		display: block;
-		border-bottom: 1px solid var(--color-border);
+	}
+
+	/* Reveal mobile-only items now the hamburger menu is active. Matches the
+	   desktop hide rule's specificity (0,2,1) and wins by source order. */
+	.site-navigation__menu > li.mobile-only-item {
+		display: block;
 	}
 
 	.site-navigation__menu > li > a {
-		display: block;
-		padding: 15px 0;
-		font-size: 24px;
-		line-height: 26px;
+		display: flex;
+		align-items: center;
+		padding: 16px 0;
+		font-size: 28px;
+		line-height: 1.1;
+		color: #1f1f1f;
 	}
 
-	.site-navigation__menu > li > a::after {
-		display: none;
+	/* Open top-level item turns brand blue. */
+	.site-navigation__menu > li.is-open > a {
+		color: var(--color-primary);
+	}
+
+	.site-navigation__menu > li > a .site-navigation__arrow {
+		width: 12px;
+		height: 12px;
+		margin-left: 14px;
+		border-width: 3px;
 	}
 
 	.site-navigation__menu .sub-menu {
 		position: static;
 		display: none;
 		width: 100%;
-		padding: 0 0 15px 20px;
+		max-width: none;
+		min-height: 0;
+		margin-inline: 0;
+		padding: 0 0 10px;
 		background: transparent;
 		box-shadow: none;
 		opacity: 1;
 		visibility: visible;
-		transform: none;
 		transition: none;
+	}
+
+	/* The in-panel eyebrow label and the promo panel aren't part of the
+	   mobile menu — it's a plain nested list. */
+	.sub-menu__eyebrow,
+	.sub-menu__split-promo {
+		display: none;
 	}
 
 	.site-navigation__menu .menu-item-has-children.is-open > .sub-menu {
@@ -571,38 +758,106 @@
 		background: transparent;
 	}
 
+	/* Keep the Drive Portal icon visible, sitting just left of the toggle.
+	   (The CTA inside is already hidden below 1180px and lives in the panel.)
+	   Ordering is explicit because .site-header__actions comes after the
+	   toggle in the DOM. */
 	.site-header__actions {
-		display: none;
+		position: relative;
+		z-index: 1002;
+		display: flex;
+		order: 2;
+		margin-left: auto;
+		margin-right: 18px;
+	}
+
+	.site-header__account {
+		color: var(--color-primary);
+	}
+
+	.site-header__toggle {
+		order: 3;
+	}
+
+	/* Panel is z-index 1001 inside the header's stacking context, so the logo
+	   needs to outrank it or it gets covered while the menu is open. */
+	.site-header__branding {
+		position: relative;
+		z-index: 1002;
 	}
 
 	/* Both dropdown shapes collapse to a single stacked column on mobile;
 	   .sub-menu itself already switches to position: static/display: none
 	   above, this just fixes the internal flex/grid layouts inside it. */
 	.mega-columns,
-	.sub-menu__split {
+	.sub-menu__split,
+	.menu-promo {
 		display: block;
 	}
 
-	.mega-column + .mega-column {
-		margin-top: 20px;
+	/* Reset the desktop split paddings when the panel is stacked. */
+	.sub-menu__split-links {
+		padding-right: 0;
 	}
 
+	.mega-column + .mega-column {
+		margin-top: 0;
+	}
+
+	/* Second-level accordion (Transportation / Warehousing / …). */
 	.mega-column__heading {
-		font-size: 15px;
+		display: flex;
+		align-items: center;
+		margin-bottom: 0;
+		padding: 14px 0;
+		font-size: 16px;
+	}
+
+	.mega-column.is-open > .mega-column__heading {
+		color: var(--color-primary);
+	}
+
+	.mega-column__arrow {
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		margin-left: 12px;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform-origin: 66% 66%;
+		transform: translateY(-1.3px) rotate(45deg);
+		transition: transform 250ms ease;
+	}
+
+	.mega-column.is-open > .mega-column__heading .mega-column__arrow {
+		transform: translateY(-1.3px) rotate(225deg);
+	}
+
+	.mega-column__links {
+		display: none;
+		padding-left: 28px;
+	}
+
+	.mega-column.is-open .mega-column__links {
+		display: block;
 	}
 
 	.mega-column__links a {
 		font-size: 16px;
-		padding: 8px 0;
+		padding: 10px 0;
 	}
 
-	.sub-menu__links-grid {
-		grid-template-columns: 1fr;
+	/* Industries/Resources links sit flat under their parent (no nesting). */
+	.mega-column__links.sub-menu__split-list {
+		display: block;
+		padding-left: 0;
 	}
 
-	.sub-menu__links-grid a {
-		font-size: 16px;
-		padding: 8px 0;
+	.mega-column__links.sub-menu__split-list {
+		columns: 1;
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	.sub-menu__split-promo {
@@ -610,6 +865,78 @@
 		margin-top: 20px;
 		border-left: 0;
 		border-top: 1px solid var(--color-border);
+	}
+
+	.menu-promo__newsletter {
+		margin-top: 24px;
+	}
+
+	/* Stacked: align the icon row to the start and don't pin it to the bottom. */
+	.menu-promo__social {
+		justify-content: start;
+		margin-top: 20px;
+		padding-top: 0;
+	}
+
+	/* --- Pinned footer: CTA + locations, always visible as the menu scrolls --- */
+
+	/* Full-width rule separating the scrolling menu from the pinned CTA, so
+	   the list doesn't appear to run into the button as it expands. */
+	.site-navigation__cta-wrap {
+		display: block;
+		flex: 0 0 auto;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.site-navigation__cta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: calc(100% - 40px);
+		max-width: 440px;
+		min-height: 64px;
+		margin: 0 auto 20px;
+		padding: 10px 20px;
+		color: var(--color-white);
+		background: var(--color-primary);
+		border-radius: 10px;
+		font-family: var(--font-heading);
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.site-navigation__locations {
+		display: block;
+		flex: 0 0 auto;
+		padding: 18px 20px 22px;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.site-navigation__locations ul {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		gap: 0;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.site-navigation__locations a {
+		color: var(--color-primary);
+		font-family: var(--font-heading);
+		/* Scales with the viewport so all the states stay on a single row,
+		   clamped so they never get unreadably small or oversized. */
+		font-size: clamp(10px, 2.8vw, 13px);
+		font-weight: 700;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
 	}
 }
 

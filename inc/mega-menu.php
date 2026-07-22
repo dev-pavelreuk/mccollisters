@@ -97,6 +97,11 @@ function mcc_menu_item_is_mega(array $item): bool
  */
 function mcc_menu_promo_panel(): void
 {
+	// This panel renders once per split dropdown (Industries, Resources), so
+	// give each email field a unique id to keep <label for> valid.
+	static $instance = 0;
+	$email_id = 'menu-promo-email-' . ++$instance;
+
 	$recent = new WP_Query([
 		'posts_per_page'      => 3,
 		'no_found_rows'       => true,
@@ -119,20 +124,73 @@ function mcc_menu_promo_panel(): void
 		<div class="menu-promo__newsletter">
 			<p class="menu-promo__newsletter-label"><?php esc_html_e('Subscribe to our newsletter:', 'mccollisters'); ?></p>
 			<!-- TODO: wire to a real ESP (Mailchimp / HubSpot / etc.) — this is markup only. -->
-			<form class="menu-promo__newsletter-form" action="#" method="post">
-				<label class="screen-reader-text" for="menu-promo-email"><?php esc_html_e('Email', 'mccollisters'); ?></label>
-				<input type="email" id="menu-promo-email" name="email" placeholder="Email" required>
-				<button type="submit"><?php esc_html_e('Subscribe', 'mccollisters'); ?></button>
+			<form class="menu-promo__newsletter-form mcc-newsletter" action="#" method="post">
+				<div class="menu-promo__newsletter-field">
+					<label class="screen-reader-text" for="<?php echo esc_attr($email_id); ?>"><?php esc_html_e('Email', 'mccollisters'); ?></label>
+					<input type="email" id="<?php echo esc_attr($email_id); ?>" name="email" placeholder="Email" required>
+				</div>
+				<?php // Revealed by navigation.js once 3+ characters are typed. ?>
+				<div class="menu-promo__newsletter-reveal mcc-newsletter-reveal">
+					<button type="submit" class="mcc-subscribe"><?php esc_html_e('Subscribe', 'mccollisters'); ?></button>
+					<p class="menu-promo__newsletter-consent">
+						<?php esc_html_e('You can withdraw consent at any time.', 'mccollisters'); ?>
+						<a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><?php esc_html_e('Privacy policy.', 'mccollisters'); ?></a>
+					</p>
+				</div>
 			</form>
 			<div class="menu-promo__social">
 				<a href="https://www.instagram.com/mccollisters1945/" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-				<a href="https://www.facebook.com/McCollisters/" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-				<a href="https://www.linkedin.com/company/mccollister's-transportation/" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+				<a href="https://www.facebook.com/McCollisters/" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+				<a href="https://www.linkedin.com/company/mccollister's-transportation/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
 				<a href="https://www.youtube.com/@Mccollisters" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
 			</div>
 		</div>
 	</div>
 	<?php
+}
+
+/**
+ * State shortcuts pinned to the bottom of the mobile menu.
+ *
+ * Kept in code rather than a nav menu location so the row always renders even
+ * when the menu list grows and scrolls. Swap to a registered menu later if
+ * editors need to manage it.
+ */
+function mcc_render_mobile_locations(): void
+{
+	$states = ['CA', 'FL', 'GA', 'IL', 'MI', 'MO', 'NJ', 'NY', 'PA', 'TX', 'VA'];
+	?>
+	<div class="site-navigation__locations">
+		<ul>
+			<?php foreach ($states as $state) : ?>
+				<li>
+					<a href="<?php echo esc_url(home_url('/locations/#' . strtolower($state))); ?>">
+						<?php echo esc_html($state); ?>
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<?php
+}
+
+/**
+ * Menu labels for the split dropdowns (Industries/Resources) are stored in
+ * ALL CAPS in wp-admin. Render them in title case so they match the Services
+ * sub-items and the live site. Only fully-uppercase labels are transformed,
+ * and a couple of acronyms are preserved.
+ */
+function mcc_menu_label(string $title): string
+{
+	$title = trim($title);
+
+	if ($title === '' || mb_strtoupper($title, 'UTF-8') !== $title) {
+		return $title; // Not all-caps — respect the author's casing.
+	}
+
+	$label = mb_convert_case(mb_strtolower($title, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+
+	return strtr($label, ['Esg' => 'ESG', 'Faqs' => 'FAQs']);
 }
 
 /**
@@ -155,6 +213,14 @@ function mcc_render_primary_navigation(): void
 			<?php
 			$li_classes = $has_children ? ['menu-item-has-children'] : [];
 			$li_classes = array_merge($li_classes, $item['classes']);
+
+			// "Find a Facility" is a mobile-only nav item: hidden on desktop,
+			// shown in the hamburger menu (see .mobile-only-item in header.css).
+			// Tagged here so it works without an editor adding the CSS class
+			// in Appearance > Menus, and without duplicating the menu item.
+			if (strcasecmp(trim($item['title']), 'Find a Facility') === 0) {
+				$li_classes[] = 'mobile-only-item';
+			}
 			?>
 			<li class="<?php echo esc_attr(implode(' ', $li_classes)); ?>">
 				<a
@@ -162,6 +228,9 @@ function mcc_render_primary_navigation(): void
 					<?php echo $has_children ? ' aria-haspopup="true" aria-expanded="false"' : ''; ?>
 				>
 					<?php echo esc_html($item['title']); ?>
+					<?php if ($has_children) : ?>
+						<span class="site-navigation__arrow" aria-hidden="true"></span>
+					<?php endif; ?>
 				</a>
 
 				<?php if ($has_children) : ?>
@@ -174,6 +243,10 @@ function mcc_render_primary_navigation(): void
 									<div class="mega-column">
 										<a class="mega-column__heading" href="<?php echo esc_url($column['url']); ?>">
 											<?php echo esc_html($column['title']); ?>
+											<?php if (!empty($column['children'])) : ?>
+												<?php // Mobile-only accordion indicator (hidden at desktop widths). ?>
+												<span class="mega-column__arrow" aria-hidden="true"></span>
+											<?php endif; ?>
 										</a>
 										<?php if (!empty($column['children'])) : ?>
 											<ul class="mega-column__links">
@@ -191,11 +264,11 @@ function mcc_render_primary_navigation(): void
 							<div class="sub-menu__split">
 								<div class="sub-menu__split-links">
 									<div class="sub-menu__eyebrow"><?php echo esc_html($eyebrow); ?></div>
-									<div class="sub-menu__links-grid">
+									<ul class="mega-column__links sub-menu__split-list">
 										<?php foreach ($item['children'] as $link) : ?>
-											<a href="<?php echo esc_url($link['url']); ?>"><?php echo esc_html($link['title']); ?></a>
+											<li><a href="<?php echo esc_url($link['url']); ?>"><?php echo esc_html(mcc_menu_label($link['title'])); ?></a></li>
 										<?php endforeach; ?>
-									</div>
+									</ul>
 								</div>
 								<div class="sub-menu__split-promo">
 									<?php mcc_menu_promo_panel(); ?>

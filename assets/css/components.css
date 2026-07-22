@@ -114,3 +114,44 @@ textarea {
 textarea {
     min-height: 150px;
 }
+
+/* In-place focus indicator, replacing the global outline ring. */
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+}
+
+/* --- Newsletter subscribe reveal ---------------------------------------
+   Shared by the header dropdowns and the site footer. The wrapper stays
+   hidden until navigation.js adds .is-visible (3+ characters typed). */
+.mcc-newsletter-reveal {
+    display: none;
+}
+
+.mcc-newsletter-reveal.is-visible {
+    display: block;
+}
+
+.mcc-subscribe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 33px;
+    padding: 11px 15px 10px 15px;
+    color: var(--color-black);
+    background-color: transparent;
+    border: 1px solid var(--color-black);
+    border-radius: 10px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mcc-subscribe:hover,
+.mcc-subscribe:focus-visible {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
