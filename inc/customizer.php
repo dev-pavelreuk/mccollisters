@@ -29,6 +29,24 @@ function mcc_customize_register(WP_Customize_Manager $wp_customize): void
             'type'    => 'email',
             'sanitize'=> 'sanitize_email',
         ],
+        'mcc_phone_secondary' => [
+            'label'   => __('Secondary Phone', 'mccollisters'),
+            'default' => '800-257-9595',
+            'type'    => 'text',
+            'sanitize'=> 'sanitize_text_field',
+        ],
+        'mcc_address' => [
+            'label'   => __('Headquarters Address', 'mccollisters'),
+            'default' => "8 Terri Lane\nBurlington, NJ  08016",
+            'type'    => 'textarea',
+            'sanitize'=> 'sanitize_textarea_field',
+        ],
+        'mcc_usdot' => [
+            'label'   => __('USDOT / MC Numbers', 'mccollisters'),
+            'default' => "USDOT 805405, MC-358185\nUSDOT 2213118, MC-182358",
+            'type'    => 'textarea',
+            'sanitize'=> 'sanitize_textarea_field',
+        ],
         'mcc_cta_url' => [
             'label'   => __('Talk to an Expert URL', 'mccollisters'),
             'default' => '/contact-us/',

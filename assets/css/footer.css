@@ -1,69 +1,293 @@
+/* Dark rounded card, inset from the viewport edges. */
 .site-footer {
-    color: rgba(255, 255, 255, 0.78);
-    background: var(--color-navy);
+    margin: 0 20px 20px;
+    padding: 40px clamp(24px, 3vw, 56px);
+    color: var(--color-white);
+    background: #1f1f1f;
+    border-radius: 24px;
+    /* Footer body copy is uniformly 11px / 400; display type (the tagline and
+       "since 1945") sets its own size. */
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.site-footer__inner {
+    max-width: var(--container);
+    margin-inline: auto;
 }
 
 .site-footer a {
     color: inherit;
     text-decoration: none;
+    transition: color var(--transition);
 }
 
 .site-footer a:hover,
 .site-footer a:focus-visible {
-    color: var(--color-white);
+    color: var(--color-brand-yellow);
 }
 
-.site-footer__main {
-    padding-block: clamp(60px, 8vw, 100px);
+/* --- Tagline --- */
+.site-footer__tagline {
+    margin: 0 0 34px;
+    padding-bottom: 34px;
+    color: rgb(255, 255, 255);
+    font-family: var(--font-heading);
+    /* 30px base scaling up to the 60px desktop size from the spec. */
+    font-size: clamp(30px, 5vw, 60px);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2em;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.site-footer__tagline span {
+    color: var(--color-primary);
+}
+
+/* --- Grid --- */
 .site-footer__grid {
     display: grid;
-    grid-template-columns: 1.4fr repeat(4, 1fr) 1.3fr;
-    gap: 38px;
+    grid-template-columns: 1.25fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+/* --- Brand column --- */
+/* Size the logo on the link; the image just fills it. */
+.site-footer__brand .custom-logo-link {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    margin-bottom: 30px;
 }
 
 .site-footer__brand .custom-logo {
+    width: 100%;
+    height: auto;
     filter: brightness(0) invert(1);
-    margin-bottom: 24px;
 }
 
 .site-footer__title {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 26px;
     color: var(--color-white);
     font-size: 26px;
     font-weight: 800;
 }
 
-.site-footer__heading {
-    color: var(--color-white);
-    font-size: 17px;
-}
-
-.footer-menu li + li {
-    margin-top: 10px;
-}
-
-.site-footer__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.site-footer__bottom-inner {
+.site-footer__social {
     display: flex;
+    gap: 26px;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+    font-size: 18px;
+}
+
+.site-footer__phones,
+.site-footer__address,
+.site-footer__email,
+.site-footer__usdot {
+    margin: 0 0 22px;
+    font-size: 12px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 1.7;
+}
+
+.site-footer__phones a {
+    display: block;
+}
+
+.site-footer__address-label {
+    display: block;
+    text-transform: uppercase;
+}
+
+/* Inline BBB mark — fill follows the footer colour, so it turns yellow on
+   hover along with every other footer link. */
+.site-footer__bbb {
+    display: inline-block;
+    width: 46px;
+    margin-bottom: 18px;
+}
+
+.site-footer__bbb svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    fill: currentColor;
+}
+
+/* --- Link columns (no headings by design) --- */
+
+/* Drop the three link columns so they start level with the social icons in
+   the brand column — i.e. past the logo (~34px tall) plus its 30px margin. */
+.site-footer__col {
+    padding-top: 64px;
+}
+
+.footer-menu {
+    margin: 0 0 34px;
+    padding: 0;
+    list-style: none;
+}
+
+.site-footer__col .footer-menu:last-child {
+    margin-bottom: 0;
+}
+
+.footer-menu a {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* --- Newsletter --- */
+/* Resources column sits tighter against the newsletter beneath it. The
+   newsletter's own top margin is cleared so it doesn't collapse-override
+   the 20px below the list. */
+.footer-menu--footer-resources {
+    margin-bottom: 20px;
+}
+
+.site-footer__newsletter {
+    margin-top: 0;
+}
+
+.site-footer__newsletter-label {
+    margin: 0 0 14px;
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* input[type="email"] (0,2,1) matches the global boxed-input rule in
+   components.css and wins on source order, so the field stays an underline. */
+.site-footer__newsletter-form input[type="email"] {
+    width: 100%;
+    min-height: 0;
+    padding: 4px 0 10px;
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 600;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0;
+}
+
+.site-footer__newsletter-form input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* Focus indicator for the underline field (the outline ring is removed).
+   White rather than brand blue — blue on #1f1f1f is too low-contrast. */
+.site-footer__newsletter-form input[type="email"]:focus {
+    border-bottom-color: var(--color-white);
+}
+
+/* Shared subscribe button, recoloured for the dark footer. No consent copy
+   here — the footer reveal is the button only. */
+.site-footer .mcc-newsletter-reveal {
+    margin-top: 18px;
+}
+
+.site-footer .mcc-subscribe {
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.site-footer .mcc-subscribe:hover,
+.site-footer .mcc-subscribe:focus-visible {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* --- "since 1945" outlined mark --- */
+.site-footer__since {
+    margin: 44px 0 0;
+    font-family: "Manrope Alt", sans-serif;
+    font-size: 63px;
+    font-weight: 700;
+    line-height: 1em;
+    letter-spacing: -0.03em;
+    text-align: left;
+    color: #ffffff00;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ffc600;
+}
+
+.site-footer__since span {
+    display: block;
+}
+
+/* --- Bottom bar --- */
+.site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    min-height: 76px;
-    gap: 24px;
-    font-size: 13px;
+    gap: 16px;
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .site-footer__bottom p {
     margin: 0;
 }
 
+/* Legal links + the build credit (appended as a final <li>) all wrap in this
+   one flex row. */
 .footer-legal-menu {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-legal-menu li + li::before {
+    content: "|";
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* --- Mobile (stacked single column) --- */
+@media (max-width: 720px) {
+    /* No logo above the columns to clear, so drop the offset. */
+    .site-footer__col {
+        padding-top: 0;
+    }
+
+    .site-footer__tagline {
+        font-size: 37px;
+    }
+
+    .site-footer__brand .custom-logo-link {
+        width: 145px;
+    }
+
+    /* Force "DELIVERED" onto its own line rather than relying on the text
+       happening to wrap at this width. */
+    .site-footer__tagline span {
+        display: block;
+    }
+
+    /* Keep the legal row to two lines at 12px. At ~400px the second line
+       (Privacy / Sitemap / credit) overruns the content width by only a pixel
+       or two, so tightening each separator to 2px reclaims ~12px and lets it
+       sit on one line. */
+    .footer-legal-menu {
+        gap: 2px;
+    }
+
+    .footer-legal-menu li + li::before {
+        margin-right: 2px;
+    }
 }

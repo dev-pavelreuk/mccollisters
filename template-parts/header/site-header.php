@@ -49,6 +49,18 @@ if (!defined('ABSPATH')) {
 			aria-label="<?php esc_attr_e('Primary navigation', 'mccollisters'); ?>"
 		>
 			<?php mcc_render_primary_navigation(); ?>
+
+			<?php // CTA + locations below are mobile-only (hidden at desktop widths). ?>
+			<div class="site-navigation__cta-wrap">
+				<a
+					class="site-navigation__cta"
+					href="<?php echo esc_url(home_url('/talk-to-an-expert/')); ?>"
+				>
+					<?php esc_html_e('Talk to an Expert', 'mccollisters'); ?>
+				</a>
+			</div>
+
+			<?php mcc_render_mobile_locations(); ?>
 		</nav>
 
 		<div class="site-header__actions">
