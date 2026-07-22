@@ -40,10 +40,3 @@ if (!function_exists('mcc_get_theme_option')) {
 		'The template-functions.php file was loaded, but mcc_get_theme_option() was not defined.'
 	);
 }
-
-wp_enqueue_style(
-	'mcc-font-awesome',
-	'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
-	[],
-	'6.7.2'
-);

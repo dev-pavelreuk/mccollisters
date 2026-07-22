@@ -20,11 +20,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		);
 	};
 
+	// getBoundingClientRect() forces a synchronous layout, so batch it into a
+	// single animation frame instead of running it on every scroll tick.
+	let headerMeasureQueued = false;
+
+	const queueHeaderMeasure = () => {
+		if (headerMeasureQueued) {
+			return;
+		}
+
+		headerMeasureQueued = true;
+
+		window.requestAnimationFrame(() => {
+			headerMeasureQueued = false;
+			setHeaderHeightVar();
+		});
+	};
+
 	setHeaderHeightVar();
-	window.addEventListener("resize", setHeaderHeightVar);
-	// Header height changes when .is-sticky toggles (padding/shadow shift),
+	window.addEventListener("resize", queueHeaderMeasure);
+	// Header position changes when .is-sticky toggles (padding/shadow shift),
 	// so re-measure on scroll too rather than only once on load.
-	window.addEventListener("scroll", setHeaderHeightVar, { passive: true });
+	window.addEventListener("scroll", queueHeaderMeasure, { passive: true });
 
 	// Give every dropdown the same height as the tallest one, so the overlay
 	// doesn't resize when moving between Services / Industries / Resources.
@@ -104,6 +121,42 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.body.classList.toggle("menu-open", !isOpen);
 	});
 
+	// Keep aria-expanded in sync with the dropdown's actual state. It's
+	// rendered as "false" and, without this, never updates — so screen readers
+	// announce every dropdown as collapsed even while it's open (WCAG 4.1.2).
+	submenuParents.forEach((item) => {
+		const parentLink = item.querySelector(":scope > a[aria-haspopup]");
+
+		if (!parentLink) {
+			return;
+		}
+
+		const setExpanded = (isExpanded) => {
+			parentLink.setAttribute("aria-expanded", String(isExpanded));
+		};
+
+		item.addEventListener("mouseenter", () => {
+			if (window.innerWidth > 1024) {
+				setExpanded(true);
+			}
+		});
+
+		item.addEventListener("mouseleave", () => {
+			if (window.innerWidth > 1024) {
+				setExpanded(false);
+			}
+		});
+
+		// Keyboard equivalent of the hover state.
+		item.addEventListener("focusin", () => setExpanded(true));
+
+		item.addEventListener("focusout", (event) => {
+			if (!item.contains(event.relatedTarget)) {
+				setExpanded(false);
+			}
+		});
+	});
+
 	submenuParents.forEach((item) => {
 		const link = item.querySelector(":scope > a");
 
@@ -122,10 +175,22 @@ document.addEventListener("DOMContentLoaded", () => {
 				submenuParents.forEach((otherItem) => {
 					if (otherItem !== item) {
 						otherItem.classList.remove("is-open");
+
+						const otherLink = otherItem.querySelector(
+							":scope > a[aria-haspopup]"
+						);
+
+						if (otherLink) {
+							otherLink.setAttribute("aria-expanded", "false");
+						}
 					}
 				});
 
 				item.classList.add("is-open");
+
+				if (link.hasAttribute("aria-haspopup")) {
+					link.setAttribute("aria-expanded", "true");
+				}
 			}
 		});
 	});
