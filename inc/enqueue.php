@@ -50,6 +50,15 @@ function mcc_enqueue_assets(): void
         $dependency = $handle;
     }
 
+    // Icon font. Enqueued here (not at theme-load time) so it runs on the
+    // wp_enqueue_scripts hook as WordPress expects.
+    wp_enqueue_style(
+        'mcc-font-awesome',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
+        [],
+        '6.7.2'
+    );
+
     wp_enqueue_script(
         'mcc-navigation',
         MCC_THEME_URI . '/assets/js/navigation.js',

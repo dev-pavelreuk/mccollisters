@@ -7,7 +7,7 @@
     --color-dark: #15191d;
     --color-black: #000000;
     --color-text: #333333;
-    --color-muted: #6c757d;
+    --color-muted: #5f6a73;   /* 4.9:1 on the #f1f1f1 panel — #6c757d was 4.2:1, under WCAG AA */
     --color-border: #dfe3e7;
     --color-light: #f5f7f9;
     --menu-panel-bg: #f1f1f1;   /* dropdown overlay: left / mega (Services) panel */

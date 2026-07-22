@@ -102,11 +102,20 @@ function mcc_menu_promo_panel(): void
 	static $instance = 0;
 	$email_id = 'menu-promo-email-' . ++$instance;
 
-	$recent = new WP_Query([
-		'posts_per_page'      => 3,
-		'no_found_rows'       => true,
-		'ignore_sticky_posts' => true,
-	]);
+	// Cached across calls: the panel renders once per split dropdown, so this
+	// would otherwise run the identical query twice on every page load.
+	static $recent = null;
+
+	if ($recent === null) {
+		$recent = new WP_Query([
+			'posts_per_page'      => 3,
+			'no_found_rows'       => true,
+			'ignore_sticky_posts' => true,
+			'update_post_term_cache' => false,
+		]);
+	}
+
+	$recent->rewind_posts();
 	?>
 	<div class="menu-promo">
 		<div class="menu-promo__posts">
