@@ -213,6 +213,7 @@ body :is(
 body :is(
     .section-head__title,
     .svc-expertise__title,
+    .svc-whychoose__title,
     .home-services__title,
     .home-about__title,
     .home-features__title,
@@ -229,6 +230,7 @@ body :is(
     body :is(
         .section-head__title,
         .svc-expertise__title,
+        .svc-whychoose__title,
         .home-services__title,
         .home-about__title,
         .home-features__title,
