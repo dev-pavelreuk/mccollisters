@@ -33,6 +33,7 @@ function mcc_enqueue_assets(): void
         'mcc-header'      => '/assets/css/header.css',
         'mcc-footer'      => '/assets/css/footer.css',
         'mcc-home'        => '/assets/css/home.css',
+        'mcc-service'     => '/assets/css/service.css',
         'mcc-pages'       => '/assets/css/pages.css',
         'mcc-responsive'  => '/assets/css/responsive.css',
     ];
@@ -66,5 +67,26 @@ function mcc_enqueue_assets(): void
         mcc_asset_version('/assets/js/navigation.js'),
         true
     );
+
+    // Reusable interactive components (counters, accordions, sliders) — loaded
+    // site-wide so any page can use the data-attribute hooks.
+    wp_enqueue_script(
+        'mcc-components',
+        MCC_THEME_URI . '/assets/js/components.js',
+        [],
+        mcc_asset_version('/assets/js/components.js'),
+        true
+    );
+
+    // Hero typewriter animation — only needed on the front page.
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'mcc-hero',
+            MCC_THEME_URI . '/assets/js/hero.js',
+            [],
+            mcc_asset_version('/assets/js/hero.js'),
+            true
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'mcc_enqueue_assets');

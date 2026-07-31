@@ -30,8 +30,4 @@
         flex-direction: column;
         justify-content: center;
     }
-
-    .home-hero {
-        min-height: 620px;
-    }
 }

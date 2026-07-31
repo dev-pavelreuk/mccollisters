@@ -25,6 +25,7 @@
     --h1-font-size: 80px;
     --h1-line-height: 85px;
     --h1-font-weight: 600;
+    --h1-letter-spacing: -0.03em;
 
     --h2-font-size: 60px;
     --h2-line-height: 72px;
@@ -87,4 +88,15 @@
     --radius-md: 10px;
     --shadow-sm: 0 8px 28px rgba(0, 31, 63, 0.09);
     --transition: 180ms ease;
+}
+
+/* Tighter side spacing on mobile: 10px gutters site-wide. Body text bumps to
+   16px on mobile for readability. */
+@media (max-width: 782px) {
+    :root {
+        --gutter: 10px;
+        --hero-margin-inline: 10px;
+        --body-font-size: 16px;
+        --body-line-height: 1.375; /* 22px at 16px */
+    }
 }

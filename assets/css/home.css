@@ -1,24 +1,1460 @@
+/* --- Services overview -----------------------------------------------------
+   Heading on the left, three stacked service cards on the right. */
+/* Backgroundless sections carry the same inline inset as the dark cards'
+   outer margin, so their headings/copy/buttons line up with those sections at
+   every width (card margin + container gutter === this padding + gutter). */
+.home-services {
+    padding-top: clamp(60px, 8vw, 110px);
+    padding-bottom: 0;
+    padding-inline: var(--hero-margin-inline);
+    background: var(--color-white);
+}
+
+.home-services__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+}
+
+.home-services__eyebrow {
+    margin: 0 0 22px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.home-services__title {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.05;
+}
+
+.home-services__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-service {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+    padding: clamp(24px, 3vw, 40px) 0;
+}
+
+.home-service + .home-service {
+    border-top: 1px solid var(--color-border);
+}
+
+.home-service__icon {
+    flex: 0 0 auto;
+    width: clamp(120px, 12vw, 170px);
+}
+
+.home-service__icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.home-service__title {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.home-service__title a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+/* Stretched link — the whole card is clickable, but the accessible name stays
+   just the service title. */
+.home-service__title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.home-service:hover .home-service__title a,
+.home-service__title a:focus-visible {
+    color: var(--color-primary);
+}
+
+.home-service__desc {
+    margin: 0;
+    max-width: 100%;
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+    .home-services__grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+    }
+
+    /* Cards stack: icon on top, title + description beneath (mobile design). */
+    .home-service {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .home-service__icon {
+        width: 150px;
+    }
+}
+
+/* --- Homepage hero ---------------------------------------------------------
+   Background is a cross-fading slider of images set in Customizer > Homepage
+   Hero Slider; falls back to solid navy when none are set. */
 .home-hero {
     position: relative;
-    display: grid;
-    min-height: clamp(620px, 74vh, 860px);
-    align-items: center;
+    isolation: isolate;
+    height: 500px;
+    margin-inline: var(--hero-margin-inline);
+    color: var(--color-white);
     overflow: hidden;
-    background:
-        linear-gradient(90deg, rgba(0, 43, 92, 0.96) 0%, rgba(0, 43, 92, 0.78) 56%, rgba(0, 43, 92, 0.35) 100%),
-        var(--color-navy);
+    background: var(--color-navy);
+    border-radius: 24px;
 }
 
+.home-hero__slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.home-hero__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.home-hero__slide.is-active {
+    opacity: 1;
+}
+
+/* Legibility gradient over the slider, darker on the left behind the copy. */
+.home-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(9, 13, 18, 0.92) 0%, rgba(9, 13, 18, 0.6) 46%, rgba(9, 13, 18, 0.3) 100%);
+}
+
+/* Content group is vertically centered; the facility box below is pulled out
+   of the flow and pinned to the bottom-right corner. */
+.home-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-block: 44px;
+}
+
+/* Full width so the headline can stay on one line (the lead + buttons keep
+   their own narrower widths below). */
 .home-hero__content {
-    max-width: 880px;
+    max-width: none;
 }
 
-.home-hero .eyebrow {
-    color: #75baff;
+.home-hero__title {
+    margin: 0 0 26px;
+    color: var(--color-white);
+    /* 80px on desktop; scales down on smaller viewports so it never overflows. */
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: var(--h1-font-weight);
+    line-height: 1.02;
+    letter-spacing: var(--h1-letter-spacing);
 }
 
-.home-hero .lead {
-    color: rgba(255, 255, 255, 0.82);
+/* The rotating word: outlined (transparent fill, white stroke). */
+.home-hero__typed {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-white);
+}
+
+/* While the word is mid-delete (empty), keep its line from collapsing so the
+   rest of the headline doesn't jump — a zero-width space holds the line box. */
+.home-hero__typed:empty::before {
+    content: "\200b";
+}
+
+/* Keep the headline on a single line at tablet and up; it still wraps on
+   phones, where one line would overflow. */
+@media (min-width: 783px) {
+    .home-hero__title {
+        white-space: nowrap;
+    }
+}
+
+.home-hero__lead {
+    max-width: 620px;
+    margin: 0 0 34px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+/* Buttons use the global .mcc-btn component (assets/css/components.css). */
+.home-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 40px;
+    row-gap: 18px;
+}
+
+/* Category tags — the last item in the centered content group. */
+.home-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.home-hero__tags li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.home-hero__tags li:not(:first-child)::before {
+    content: "/";
+    color: var(--color-white);
+    font-size: 15px;
+    font-weight: 900;
+}
+
+/* Facility search card — pinned to the bottom-right corner, independent of
+   the centered content. */
+.home-hero__facility {
+    position: absolute;
+    right: 0;
+    bottom: 44px;
+    z-index: 3;
+    width: auto;
+    height: 138px;
+    padding: 20px 24px 22px;
+    background: rgba(18, 22, 28, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 14px;
+}
+
+.home-hero__facility-label {
+    margin: 0 0 14px;
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* The Agile Store Locator search widget renders inside here and carries its
+   own styling (button colour is set via the shortcode's btn-color). */
+.home-hero__facility-asl {
+    width: 100%;
+}
+
+/* Strip the plugin's wrapper padding/background so the search sits directly
+   under the label instead of leaving a tall gap. */
+.home-hero__facility-asl #asl-search,
+.home-hero__facility-asl .sl-container,
+.home-hero__facility-asl .asl-search-cont,
+.home-hero__facility-asl .asl-search-cont > .sl-row {
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+    background: transparent;
+}
+
+/* Override the plugin's own `.asl-search .asl-search-cont { padding: 2.5rem;
+   background: #f7f7f7 }`. The extra class lifts specificity above the plugin
+   rule (0,3,0 vs 0,2,0) so it wins regardless of stylesheet load order. */
+.home-hero__facility-asl .asl-search .asl-search-cont {
+    padding: 0;
+    background: transparent;
+}
+
+/* Zero the Bootstrap-style container gutters the plugin applies. */
+.home-hero__facility-asl .asl-cont .sl-container,
+.home-hero__facility-asl .asl-cont .sl-container-fluid,
+.home-hero__facility-asl .asl-cont .sl-container-lg,
+.home-hero__facility-asl .asl-cont .sl-container-md,
+.home-hero__facility-asl .asl-cont .sl-container-sm,
+.home-hero__facility-asl .asl-cont .sl-container-xl {
+    padding: 0;
+}
+
+/* Zero the padding on every ASL grid column — condensed from the full
+   .pol / .pol-* / .pol-{sm,md,lg,xl}-* list into one equivalent selector. */
+.home-hero__facility-asl .asl-cont [class*="pol-"],
+.home-hero__facility-asl .asl-cont .pol {
+    padding: 0;
+}
+
+/* Input group + Search button connected on one 42px row (the plugin's grid
+   otherwise wraps the button beneath the input at this width). */
+.home-hero__facility-asl .asl-search-widget {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    height: 42px;
+    /* Override the plugin's `.text-center` so the field reads left-aligned. */
+    text-align: left;
+}
+
+.home-hero__facility-asl .asl-search-widget > .pol-md-10 {
+    position: relative; /* anchors the geo icon for vertical centering */
+    flex: 1 1 auto;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    height: 42px;
+    max-height: 42px;
+    margin: 0;
+}
+
+.home-hero__facility-asl .asl-search-widget > .pol-md {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    height: 42px;
+    max-height: 42px;
+    margin: 0;
+}
+
+/* Input + button: 42px tall, 14px / 700 text; placeholder 14px / 500. */
+/* .asl-search prefix lifts specificity to (0,3,0), above the theme's global
+   `input { min-height: 50px }` (0,2,1) — and min-height must be reset too,
+   since it wins over height. */
+.home-hero__facility-asl .asl-search .asl-search-cntrl,
+.home-hero__facility-asl .asl-search #asl-btn-search {
+    height: 42px;
+    min-height: 42px;
+    max-height: 42px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Geo icon sits inside the input field, pinned to the right and vertically
+   centered in the 42px field. */
+.home-hero__facility-asl .asl-cont.asl-search .sl-geo-btn {
+    position: absolute;
+    right: 12px;
+    left: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+}
+
+/* Leave room on the right for the geo icon sitting inside the field. */
+.home-hero__facility-asl .asl-search .asl-search-cntrl {
+    text-align: left;
+    padding-right: 42px;
+}
+
+.home-hero__facility-asl .asl-search-cntrl::placeholder {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Search button sits at a compact width; the input flexes to fill the rest. */
+.home-hero__facility-asl #asl-btn-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 108px;
+    padding: 0 16px;
+    white-space: nowrap;
+}
+
+/* Industries ticker — seamless infinite marquee. */
+.home-marquee {
+    margin-block: 80px 50px;
+    overflow: hidden;
+}
+
+.home-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: home-marquee-scroll 120s linear infinite;
+}
+
+.home-marquee__group {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.home-marquee__item {
+    font-family: var(--font-heading);
+    font-size: 80px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #000;
+    white-space: nowrap;
+}
+
+.home-marquee__dot {
+    flex: 0 0 auto;
+    position: relative;
+    top: -1px;
+    width: 12px;
+    height: 12px;
+    margin-inline: clamp(20px, 2.4vw, 38px);
+    border-radius: 50%;
+    background: var(--color-primary);
+    vertical-align: middle;
+}
+
+/* Two identical groups sit side by side; shifting the track by half its width
+   lands the second group exactly where the first began — a seamless loop. */
+@keyframes home-marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-marquee__track {
+        animation: none;
+    }
+}
+
+/* --- About Us --------------------------------------------------------------
+   Dark block: miles counter, heading + copy, and an employee quote card. */
+.home-about {
+    margin-inline: var(--hero-margin-inline);
+    padding-block: clamp(70px, 8vw, 120px);
+    color: var(--color-white);
+    background: #141414;
+    border-radius: 24px;
+}
+
+.home-about__eyebrow {
+    margin: 0 0 clamp(40px, 6vw, 80px);
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Big animated mileage figure with its label to the right. */
+.home-about__metric {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-bottom: clamp(48px, 6vw, 90px);
+}
+
+.home-about__count {
+    font-family: var(--font-heading);
+    font-size: clamp(56px, 11vw, 150px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.home-about__count-label {
+    font-family: var(--font-heading);
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+/* Heading left, copy + button right. */
+.home-about__cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(30px, 5vw, 80px);
+    align-items: start;
+}
+
+.home-about__title {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-white);
+}
+
+.home-about__body {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.home-about__body p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-white);
+}
+
+/* Buttons in this section use the global .mcc-btn component; a little top gap
+   separates them from the copy. */
+.home-about__btn {
+    align-self: flex-start;
+    margin-top: 6px;
+}
+
+/* Quote card — full-bleed image with copy overlaid on the right. */
+.home-about__quote {
+    --overlay-opacity: 0.1;
+    position: relative;
+    isolation: isolate;
+    margin-top: clamp(40px, 5vw, 70px);
+    padding: clamp(40px, 5vw, 64px);
+    min-height: 528px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--color-navy);
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+/* Dark overlay across the photo so the white quote stands out against the
+   blue. Tune with --overlay-opacity on .home-about__quote. */
+.home-about__quote::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(10, 14, 20, var(--overlay-opacity));
+}
+
+.home-about__quote--no-image {
+    background-image: linear-gradient(120deg, #0a2a52 0%, #0069cb 100%);
+}
+
+.home-about__quote-inner {
+    margin: 0;
+    max-width: 460px;
+}
+
+.home-about__quote-text {
+    margin: 0 0 20px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-white);
+}
+
+.home-about__quote-inner figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 26px;
+}
+
+.home-about__quote-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--color-white);
+}
+
+.home-about__quote-role {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* --- Certifications / affiliations -----------------------------------------
+   A single row of black logos, evenly spaced, on the white page. */
+.home-certs {
+    padding-block: clamp(48px, 6vw, 80px);
+    padding-inline: clamp(24px, 4vw, 50px);
+    background: var(--color-white);
+}
+
+/* Centered so the icons sit closer together (a tighter gap) rather than being
+   stretched edge to edge. */
+.home-certs__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(120px, 5vw, 80px);
+}
+
+.home-certs__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 auto;
+    opacity: 0.85;
+    transition: opacity var(--transition);
+}
+
+.home-certs__item:hover,
+.home-certs__item:focus-visible {
+    opacity: 1;
+}
+
+/* Logos share a common height; width follows each logo's aspect ratio. */
+.home-certs__logo {
+    display: block;
+    width: auto;
+    height: clamp(40px, 4.5vw, 56px);
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* --- Features accordion ----------------------------------------------------
+   Blue truck bleeds off the left edge; the differentiators accordion sits on
+   the right. Native <details> handles the open/close; the arrow rotates and
+   turns brand blue when a row is open. */
+.home-features {
+    padding-block: clamp(60px, 8vw, 110px);
+    overflow: hidden;
+}
+
+.home-features__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    /* Top-aligned so the truck stays put as panels open and close (centering
+       would re-position it every time the right column's height changed). */
+    align-items: start;
+    gap: clamp(30px, 5vw, 70px);
+}
+
+.home-features__media {
+    /* Pull the image to the very left edge of the viewport, and pull its right
+       edge in so there's a wider gap before the accordion. */
+    margin-left: calc(-1 * var(--hero-margin-inline));
+    margin-right: clamp(30px, 6vw, 110px);
+}
+
+.home-features__img {
+    display: block;
+    /* Larger than its column: the right edge stays put while the extra width
+       (and the truck's rear) runs off the left edge and is clipped. */
+    width: 130%;
+    max-width: none;
+    height: auto;
+    margin-left: -30%;
+}
+
+.home-features__content {
+    padding-right: clamp(20px, 5vw, 80px);
+}
+
+.home-features__eyebrow {
+    margin: 0 0 20px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.home-features__title {
+    margin: 0 0 clamp(18px, 3vw, 36px);
+    font-size: clamp(38px, 4.6vw, 68px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.home-features__item {
+    border-top: 1px solid var(--color-border);
+}
+
+.home-features__item:last-of-type {
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* The clickable row: number, label, then the arrow pushed to the right. */
+.home-features__summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+/* Remove the default disclosure triangle. */
+.home-features__summary::-webkit-details-marker {
+    display: none;
+}
+
+.home-features__summary::marker {
+    content: "";
+}
+
+.home-features__arrow {
+    display: inline-flex;
+    margin-left: auto;
+    color: var(--color-dark);
+    /* Rotated 90° so the up-right glyph points down-right when closed. */
+    transform: rotate(90deg);
+    transition: transform var(--transition), color var(--transition);
+}
+
+.home-features__arrow svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+/* Hover: arrow turns brand blue. */
+.home-features__summary:hover .home-features__arrow,
+.home-features__summary:focus-visible .home-features__arrow {
+    color: var(--color-primary);
+}
+
+/* Open: arrow points up-right and stays brand blue. */
+.home-features__item[open] .home-features__arrow {
+    transform: rotate(0deg);
+    color: var(--color-primary);
+}
+
+.home-features__panel {
+    /* Flush-left with the step number/title above it. */
+    padding: 0 0 26px;
+    max-width: 100%;
+}
+
+.home-features__panel p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.home-features__cta {
+    margin-top: clamp(28px, 4vw, 48px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-features__arrow {
+        transition: color var(--transition);
+    }
+}
+
+/* --- Industries carousel ---------------------------------------------------
+   Dark container-textured band; an infinite marquee of industry cards, each
+   revealing a brand-blue gradient on hover. */
+.home-industries {
+    position: relative;
+    isolation: isolate;
+    padding-top: clamp(60px, 8vw, 110px);
+    padding-bottom: clamp(30px, 4vw, 55px);
+    color: var(--color-white);
+    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: top right;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Darken the container photo so the heading and cards read clearly. */
+.home-industries::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(rgba(12, 12, 14, 0.10), rgba(12, 12, 14, 0.73));
+}
+
+.home-industries__head {
+    padding-inline: var(--hero-margin-inline);
+    margin-bottom: clamp(30px, 5vw, 60px);
+}
+
+.home-industries__eyebrow {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.home-industries__title {
+    margin: 0;
+    max-width: 100%;
+    font-size: clamp(36px, 4.6vw, 68px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.home-industries__carousel {
+    overflow: hidden;
+}
+
+.home-industries__track {
+    display: flex;
+    width: max-content;
+    animation: home-industries-scroll 55s linear infinite;
+}
+
+/* Pause so a card can be read/clicked. */
+.home-industries__carousel:hover .home-industries__track,
+.home-industries__carousel:focus-within .home-industries__track {
+    animation-play-state: paused;
+}
+
+/* Trailing margin lives on every card so both passes are identical and the
+   -50% shift lands seamlessly. */
+.home-industry {
+    position: relative;
+    flex: 0 0 auto;
+    display: block;
+    width: clamp(240px, 24vw, 320px);
+    height: clamp(300px, 30vw, 380px);
+    margin-right: clamp(16px, 1.6vw, 24px);
+    border-radius: 18px;
+    overflow: hidden;
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.home-industry__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Always-on scrim at the base so the label stays legible over any photo. */
+.home-industry::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 46%);
+    pointer-events: none;
+}
+
+/* Brand-blue gradient that fades in on hover/focus. */
+.home-industry::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(
+        to top,
+        rgba(0, 105, 203, 0.85) 0%,
+        rgba(0, 105, 203, 0.55) 35%,
+        rgba(0, 105, 203, 0.15) 65%,
+        rgba(0, 105, 203, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+}
+
+.home-industry:hover::before,
+.home-industry:focus-visible::before {
+    opacity: 1;
+}
+
+/* Sits above both the base scrim and the blue hover gradient (z-index 4);
+   horizontally centred along the bottom of the card. */
+.home-industry__label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    z-index: 4;
+    padding-inline: 16px;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: clamp(16px, 1.4vw, 20px);
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+/* Stay white on hover/focus (overrides the global link-hover colour). */
+.home-industry:hover .home-industry__label,
+.home-industry:focus-visible .home-industry__label {
+    color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-industries__track {
+        animation: none;
+    }
+}
+
+@keyframes home-industries-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* --- Expertise / stats -----------------------------------------------------
+   Black band, "The McCollister's Difference": three animated figures. */
+.home-stats {
+    padding-top: clamp(30px, 4vw, 55px);
+    padding-bottom: clamp(60px, 8vw, 110px);
+    color: var(--color-white);
+    background: #000;
+}
+
+.home-stats__inner {
+    padding-inline: var(--hero-margin-inline);
+}
+
+.home-stats__eyebrow {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.home-stats__title {
+    margin: 0 0 clamp(40px, 6vw, 80px);
+    max-width: 100%;
+    font-size: clamp(38px, 5vw, 76px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.home-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(30px, 4vw, 72px);
+}
+
+.home-stat__number {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: clamp(52px, 6vw, 96px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.home-stat__label {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.home-stat__divider {
+    margin: 0 0 22px;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.home-stat__desc {
+    margin: 0 0 24px;
+    color: var(--color-white);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.home-stat__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home-stat__list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--color-white);
+}
+
+.home-stat__list-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.home-stat__list-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+/* --- Testimonials ----------------------------------------------------------
+   Big outlined quote mark on the left; heading + autoplaying fade slider on
+   the right. Slides are stacked in one grid cell so the container matches the
+   tallest quote and nothing jumps between slides. */
+.home-testimonials {
+    padding-block: clamp(70px, 9vw, 130px);
+    background: var(--color-white);
+    color: var(--color-dark);
+}
+
+.home-testimonials__inner {
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: var(--hero-margin-inline);
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(16px, 3vw, 50px);
+}
+
+/* Quote mark occupies a 37%-wide column (max 671px, height 209px per design);
+   the SVG sits top-left within it. min-width keeps it from shrinking below the
+   glyph's full-height width (~267px at 209px tall). */
+.home-testimonials__mark {
+    flex: 0 1 37%;
+    min-width: 267px;
+    max-width: 671px;
+    height: 209px;
+    object-fit: contain;
+    object-position: left top;
+}
+
+.home-testimonials__body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.home-testimonials__title {
+    margin: 0 0 clamp(28px, 4vw, 48px);
+    font-size: clamp(38px, 5vw, 74px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+/* Draggable horizontal track. overflow clips to one slide; touch-action keeps
+   horizontal drags for the slider while allowing vertical page scroll. */
+.home-testimonials__slider {
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.home-testimonials__slider.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+/* Slides sit side by side; JS translates the track. */
+.home-testimonials__slides {
+    display: flex;
+    align-items: flex-start;
+    will-change: transform;
+}
+
+.home-testimonials__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    /* Reset the theme's global blockquote border/padding. */
+    margin: 0;
+    padding-left: 0;
+    border-left: 0;
+}
+
+.home-testimonials__quote p {
+    margin: 0 0 20px;
+    max-width: 100%;
+    color: var(--color-text);
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.7;
+}
+
+.home-testimonials__quote p:last-child {
+    margin-bottom: 0;
+}
+
+.home-testimonials__author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 26px;
+}
+
+.home-testimonials__name {
+    font-weight: 700;
+}
+
+.home-testimonials__company {
+    color: var(--color-text);
+    font-size: 15px;
+}
+
+.home-testimonials__footer {
+    display: none;
+}
+
+.home-testimonials__progress {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.home-testimonials__dots {
+    display: flex;
+    gap: 10px;
+}
+
+.home-testimonials__dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.home-testimonials__dot.is-active {
+    background: var(--color-primary);
+}
+
+/* --- Blog ------------------------------------------------------------------
+   Heading + "See all posts" button, then three latest-post cards. */
+.home-blog {
+    padding-block: clamp(60px, 8vw, 110px);
+    padding-inline: var(--hero-margin-inline);
+    background: var(--color-white);
+}
+
+.home-blog__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    margin-bottom: clamp(40px, 5vw, 70px);
+}
+
+.home-blog__eyebrow {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.home-blog__title {
+    margin: 0;
+    max-width: 100%;
+    font-size: clamp(38px, 5vw, 74px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.home-blog__cta {
+    flex: 0 0 auto;
+}
+
+.home-blog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 48px);
+}
+
+.home-blog__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-blog__card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.home-blog__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.home-blog__divider {
+    margin: 14px 0 20px;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.home-blog__card-title {
+    margin: 0 0 16px;
+    font-size: clamp(20px, 1.6vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.home-blog__card-title a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+/* Whole card is clickable via a stretched link on the title. */
+.home-blog__card-title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.home-blog__card:hover .home-blog__card-title a {
+    color: var(--color-primary);
+}
+
+.home-blog__excerpt {
+    margin: 0 0 24px;
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Image sits at the bottom of every card, regardless of text length. The
+   square ratio lives on the container; the image fills it absolutely so it
+   always crops to a perfect square (independent of the source aspect). */
+.home-blog__card-media {
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    height: 0;
+    /* padding-bottom is a % of the card's width, so the box is always a
+       perfect square regardless of the flex/grid context. */
+    padding-bottom: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+/* The class lands on the <picture> wrapper (WebP plugin) or the bare <img>;
+   fill the square media box either way, and force the inner <img> to cover. */
+.home-blog__card-img,
+.home-blog__card-media img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Brand-blue gradient that fades in over the image on hover (matches the
+   industries carousel). */
+.home-blog__card-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to top,
+        rgba(0, 105, 203, 0.85) 0%,
+        rgba(0, 105, 203, 0.55) 35%,
+        rgba(0, 105, 203, 0.15) 65%,
+        rgba(0, 105, 203, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+}
+
+.home-blog__card:hover .home-blog__card-media::after {
+    opacity: 1;
+}
+
+@media (max-width: 782px) {
+    /* Card hugs its content on mobile; the background image covers regardless
+       of height, so no min-height is needed. */
+    .home-hero,
+    .home-hero__inner {
+        height: auto;
+    }
+
+    /* Full width of the card with 20px inside padding on the sides and exactly
+       50px top/bottom. Top-aligned so the bottom can't inflate from centering. */
+    .home-hero__inner {
+        width: auto;
+        margin-inline: 0;
+        justify-content: flex-start;
+        padding: 50px 20px;
+    }
+
+    /* Facility search and the category tags are hidden on mobile. */
+    .home-hero__facility,
+    .home-hero__tags {
+        display: none;
+    }
+
+    /* Headline stacks onto three lines: WHEN / [animated word] / MATTERS. */
+    .home-hero__title {
+        font-size: 50px;
+        line-height: 1.2em;
+    }
+
+    .home-hero__title-part {
+        display: block;
+    }
+
+    /* Tighter lead so the copy fits four lines instead of five. */
+    .home-hero__lead {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    /* Buttons stack, keeping their natural width. */
+    .home-hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Bolder button labels on mobile. */
+    .home-hero__actions .mcc-btn__label {
+        font-weight: 700;
+    }
+
+    /* Tighter spacing around the industries ticker on mobile. */
+    .home-marquee {
+        margin-block: 40px 30px;
+    }
+
+    /* About Us stacks to a single column on mobile. */
+    .home-about__cols {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Certification logos wrap and center on mobile. */
+    .home-certs__row {
+        justify-content: center;
+        gap: 32px 40px;
+    }
+
+    /* Features stacks: truck on top, accordion beneath. */
+    .home-features__grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .home-features__content {
+        padding-inline: var(--hero-margin-inline);
+        padding-right: var(--hero-margin-inline);
+    }
+
+    .home-features__media {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .home-features__img {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .home-features__panel {
+        padding-inline: 0;
+    }
+
+    /* Stats stack to one column on mobile. */
+    .home-stats__grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+    }
+
+    /* Testimonials: quote mark above the content on mobile. */
+    .home-testimonials__inner {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .home-testimonials__mark {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 0;
+        height: 130px;
+        object-position: left center;
+        margin-bottom: 20px;
+    }
+
+    /* Blog: heading and button stack; cards go single-column. */
+    .home-blog__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .home-blog__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .home-about__quote {
+        justify-content: flex-start;
+        min-height: 0;
+    }
 }
 
 .home-placeholder:nth-of-type(even) {

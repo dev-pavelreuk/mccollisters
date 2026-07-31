@@ -1,6 +1,6 @@
 # McCollister's Custom Theme Foundation
 
-This package is a clean custom WordPress theme foundation. It does not depend on Elementor or Logico.
+This package is a clean custom WordPress theme foundation.
 
 ## Build order
 
