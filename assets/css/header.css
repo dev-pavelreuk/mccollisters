@@ -1,23 +1,32 @@
+/* Sticky (not fixed) so it never leaves the document flow — no layout jump
+   when scrolling starts. It sticks to the top from the very first pixel. */
 .site-header {
-	position: relative;
+	position: sticky;
+	top: 0;
 	z-index: 1000;
 	width: 100%;
 	background: var(--color-white);
 	transition:
 		box-shadow var(--transition),
-		transform 300ms ease,
+		transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
 		background-color var(--transition);
 }
 
+/* Shadow appears only after scrolling a little (toggled in navigation.js). */
 .site-header.is-sticky {
-	position: fixed;
-	top: 0;
-	left: 0;
 	box-shadow: 0 15px 38px rgba(0, 0, 0, 0.1);
 }
 
-.admin-bar .site-header.is-sticky {
-	top: 32px;
+/* Slide up out of view while scrolling down; eases back in on scroll up. */
+.site-header.is-sticky.is-hidden {
+	transform: translateY(-100%);
+}
+
+/* Sit below the WordPress admin bar when logged in (desktop). */
+@media screen and (min-width: 783px) {
+	.admin-bar .site-header {
+		top: 32px;
+	}
 }
 
 .site-header__inner {

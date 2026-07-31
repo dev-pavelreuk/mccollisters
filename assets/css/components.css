@@ -49,6 +49,138 @@ input[type="submit"] {
     gap: 14px;
 }
 
+/* --- Global button ---------------------------------------------------------
+   The site-wide button: an outline pill with an arrow box on the right. On
+   hover an ink fill sweeps in from the right, the label flips to the paper
+   colour and nudges toward the arrow, and the arrow "shots" back-then-forward.
+   Two custom properties recolour it for any background — --btn-ink (border,
+   label, arrow box, sweep fill) and --btn-paper (the contrast against it). The
+   default suits dark backgrounds (white ink); add .mcc-btn--on-light on light
+   backgrounds to flip to dark ink. */
+.mcc-btn {
+    --btn-ink: var(--color-white);
+    --btn-paper: var(--color-black);
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    max-height: 43px;
+    overflow: hidden;
+    color: var(--btn-ink);
+    text-decoration: none;
+    border: 1px solid var(--btn-ink);
+    border-radius: 10px;
+}
+
+.mcc-btn--on-light {
+    --btn-ink: var(--color-black);
+    --btn-paper: var(--color-white);
+}
+
+/* Ink fill that sweeps in from the arrow box (right) on hover/focus. */
+.mcc-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--btn-ink);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.55s ease;
+}
+
+.mcc-btn:hover::before,
+.mcc-btn:focus-visible::before {
+    transform: scaleX(1);
+}
+
+.mcc-btn__label {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 1em 5.21em 1em 1.71em;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--btn-ink);
+    transition: color 0.55s ease, transform 0.55s ease;
+}
+
+.mcc-btn:hover .mcc-btn__label,
+.mcc-btn:focus-visible .mcc-btn__label {
+    color: var(--btn-paper);
+    transform: translateX(8px);
+}
+
+/* Button label is lighter (600) on mobile, globally. */
+@media (max-width: 782px) {
+    .mcc-btn__label {
+        font-weight: 600;
+    }
+}
+
+/* Arrow box: an ink-filled, rounded box pinned inside the label's right
+   padding (like the reference's absolutely-positioned ::after). Its border
+   radius rounds the inner corners too. */
+.mcc-btn__arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.4em;
+    color: var(--btn-paper);
+    background: var(--btn-ink);
+    /* Flush with the button's top/right/bottom edges; only the inner (left)
+       corners round. Right corners match the button's inner radius. */
+    border-radius: 9px 0 0 9px;
+}
+
+.mcc-btn__arrow svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+}
+
+.mcc-btn:hover .mcc-btn__arrow svg,
+.mcc-btn:focus-visible .mcc-btn__arrow svg {
+    animation: mcc-btn-arrow-shot 0.5s;
+}
+
+/* "Shot": a slow windup back (down-left, opposite the arrow), then a fast snap
+   forward. Per-keyframe timing makes the release quicker than the pull-back. */
+@keyframes mcc-btn-arrow-shot {
+    0% {
+        transform: translate(0, 0);
+        animation-timing-function: ease-in;
+    }
+
+    55% {
+        transform: translate(-6px, 6px);
+        animation-timing-function: cubic-bezier(0.15, 0.85, 0.25, 1);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mcc-btn::before {
+        transition: none;
+    }
+
+    .mcc-btn:hover .mcc-btn__arrow svg,
+    .mcc-btn:focus-visible .mcc-btn__arrow svg {
+        animation: none;
+    }
+}
+
 .eyebrow {
     margin-bottom: 18px;
     color: var(--color-primary);
@@ -56,6 +188,172 @@ input[type="submit"] {
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+}
+
+/* Global eyebrow sizing: 13px / 500 across every eyebrow variant, driven by the
+   design tokens. The `body` prefix raises specificity so it wins over the
+   per-section eyebrow rules regardless of stylesheet load order. */
+body :is(
+    .eyebrow,
+    .section-head__eyebrow,
+    .home-services__eyebrow,
+    .home-about__eyebrow,
+    .home-features__eyebrow,
+    .home-industries__eyebrow,
+    .home-stats__eyebrow,
+    .home-blog__eyebrow
+) {
+    font-size: var(--eyebrow-font-size);
+    font-weight: var(--eyebrow-font-weight);
+}
+
+/* Global h2 heading size/weight: 60px / 400 (design tokens) across every
+   section-title variant. body prefix wins over the per-section rules
+   regardless of load order; mobile scales down so titles don't overflow. */
+body :is(
+    .section-head__title,
+    .svc-expertise__title,
+    .home-services__title,
+    .home-about__title,
+    .home-features__title,
+    .home-industries__title,
+    .home-stats__title,
+    .home-testimonials__title,
+    .home-blog__title
+) {
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+}
+
+@media (max-width: 782px) {
+    body :is(
+        .section-head__title,
+        .svc-expertise__title,
+        .home-services__title,
+        .home-about__title,
+        .home-features__title,
+        .home-industries__title,
+        .home-stats__title,
+        .home-testimonials__title,
+        .home-blog__title
+    ) {
+        font-size: 32px;
+    }
+}
+
+/* Global body / reading text: 13px / 500 across sections, driven by the body
+   tokens. The `body` prefix wins over the per-section paragraph rules. */
+body :is(
+    .section-head__lead,
+    .svc-prose p,
+    .svc-tabs__desc,
+    .svc-faq__panel p,
+    .home-service__desc,
+    .home-about__body p,
+    .home-features__panel p,
+    .home-stat__desc,
+    .home-blog__excerpt
+) {
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+}
+
+/* Body text on dark backgrounds is a touch heavier (600) for legibility on
+   desktop; on mobile the larger 16px text reads fine at the standard 500. */
+body :is(
+    .svc-expertise__prose p,
+    .home-about__body p,
+    .home-stat__desc
+) {
+    font-weight: 600;
+}
+
+@media (max-width: 782px) {
+    body :is(
+        .svc-expertise__prose p,
+        .home-about__body p,
+        .home-stat__desc
+    ) {
+        font-weight: 500;
+    }
+
+    /* 22px line-height on all body text on mobile. */
+    body :is(
+        .section-head__lead,
+        .svc-prose p,
+        .svc-tabs__desc,
+        .svc-tabs__prose p,
+        .svc-faq__panel p,
+        .svc-freight__prose p,
+        .svc-freight__col-intro,
+        .svc-freight__col-closing,
+        .svc-integrated__text,
+        .svc-caps__text,
+        .svc-features__text,
+        .svc-certs__caption,
+        .home-service__desc,
+        .home-about__body p,
+        .home-features__panel p,
+        .home-stat__desc,
+        .home-blog__excerpt,
+        .svc-expertise__prose p
+    ) {
+        line-height: 22px;
+    }
+}
+
+/* --- Section head ----------------------------------------------------------
+   The site-wide "/ eyebrow /" + big uppercase heading used to open sections.
+   Add .section-head--light on dark backgrounds to lighten the text. */
+.section-head__eyebrow {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.section-head__title {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 74px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.section-head__lead {
+    margin: 20px 0 0;
+    max-width: 100%;
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.section-head--light .section-head__eyebrow {
+    color: var(--color-white);
+}
+
+/* Eyebrows on dark/black backgrounds are heavier (600) on mobile for
+   legibility. Global across the dark-section eyebrow variants. */
+@media (max-width: 782px) {
+    body :is(
+        .section-head--light .section-head__eyebrow,
+        .home-about__eyebrow,
+        .home-stats__eyebrow,
+        .home-industries__eyebrow
+    ) {
+        font-weight: 600;
+    }
+}
+
+.section-head--light .section-head__title {
+    color: var(--color-white);
+}
+
+.section-head--light .section-head__lead {
+    color: var(--color-white);
 }
 
 .lead {

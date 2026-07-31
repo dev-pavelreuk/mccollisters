@@ -226,10 +226,35 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
+	// Sticky header that hides on scroll-down and slides back in on scroll-up.
+	let lastScrollY = window.scrollY;
+	let headerTicking = false;
+
+	const updateHeaderScroll = () => {
+		const y = window.scrollY;
+		const sticky = y > 80;
+		header.classList.toggle("is-sticky", sticky);
+
+		// Don't hide while the mobile menu is open.
+		const menuOpen = document.body.classList.contains("menu-open");
+
+		if (sticky && !menuOpen && y > lastScrollY && y > 100) {
+			header.classList.add("is-hidden"); // scrolling down → hide
+		} else if (!sticky || y < lastScrollY || menuOpen) {
+			header.classList.remove("is-hidden"); // scrolling up / at top → show
+		}
+
+		lastScrollY = y;
+		headerTicking = false;
+	};
+
 	window.addEventListener(
 		"scroll",
 		() => {
-			header.classList.toggle("is-sticky", window.scrollY > 80);
+			if (!headerTicking) {
+				window.requestAnimationFrame(updateHeaderScroll);
+				headerTicking = true;
+			}
 		},
 		{ passive: true }
 	);

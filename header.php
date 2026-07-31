@@ -26,5 +26,4 @@ if (!defined('ABSPATH')) {
 </a>
 
 <?php get_template_part('template-parts/header/site', 'header'); ?>
-
-<main id="primary" class="site-main">
+<?php // Each page template opens its own <main id="primary">; the skip link targets it. ?>

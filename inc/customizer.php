@@ -67,5 +67,75 @@ function mcc_customize_register(WP_Customize_Manager $wp_customize): void
             'type'    => $field['type'],
         ]);
     }
+
+    // Homepage hero background slider — up to six images.
+    $wp_customize->add_section('mcc_hero', [
+        'title'    => __('Homepage Hero Slider', 'mccollisters'),
+        'priority' => 31,
+    ]);
+
+    for ($slide = 1; $slide <= 6; $slide++) {
+        $slide_id = 'mcc_hero_slide_' . $slide;
+
+        $wp_customize->add_setting($slide_id, [
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ]);
+
+        $wp_customize->add_control(
+            new WP_Customize_Image_Control($wp_customize, $slide_id, [
+                /* translators: %d: slide number */
+                'label'   => sprintf(__('Hero Slide %d', 'mccollisters'), $slide),
+                'section' => 'mcc_hero',
+            ])
+        );
+    }
+
+    // Homepage "About Us" quote card background image.
+    $wp_customize->add_section('mcc_about', [
+        'title'    => __('Homepage About Section', 'mccollisters'),
+        'priority' => 32,
+    ]);
+
+    $wp_customize->add_setting('mcc_about_image', [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control($wp_customize, 'mcc_about_image', [
+            'label'       => __('Quote Card Background Image', 'mccollisters'),
+            'description' => __('The photo behind the employee quote in the About section.', 'mccollisters'),
+            'section'     => 'mcc_about',
+        ])
+    );
+
+    // Homepage "Features" accordion image.
+    $wp_customize->add_setting('mcc_features_image', [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control($wp_customize, 'mcc_features_image', [
+            'label'       => __('Features Section Image', 'mccollisters'),
+            'description' => __('The truck image beside the "Confidence with McCollister’s" accordion.', 'mccollisters'),
+            'section'     => 'mcc_about',
+        ])
+    );
+
+    // Homepage "Industries" band background image.
+    $wp_customize->add_setting('mcc_industries_bg', [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control($wp_customize, 'mcc_industries_bg', [
+            'label'       => __('Industries Background Image', 'mccollisters'),
+            'description' => __('The dark textured background behind the "Specialty Solutions" industries carousel.', 'mccollisters'),
+            'section'     => 'mcc_about',
+        ])
+    );
 }
 add_action('customize_register', 'mcc_customize_register');
