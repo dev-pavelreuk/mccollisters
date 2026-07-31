@@ -27,11 +27,15 @@
 }
 
 .svc-hero__inner {
+    /* Same centered max-width container as the body sections, so the hero copy
+       lines up with the section content and tracks it on resize. */
+    max-width: var(--container);
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 400px;
-    padding: 90px 40px;
+    padding: 90px 0;
 }
 
 .svc-hero__title {
@@ -297,6 +301,11 @@
         padding-block: 50px;
     }
 
+    /* Same 50px padding for the Auto Transport accordion grey card. */
+    .svc-tabs-section:has(.svc-tabs--auto) {
+        padding-block: 50px;
+    }
+
     /* Accordion separators stay solid black in every state (default/hover/open). */
     .svc-tabs-section.svc-tabs-section--installexp .svc-tabs {
         border-bottom-color: var(--color-black);
@@ -429,6 +438,7 @@
 
 .svc-faq__icon {
     display: inline-flex;
+    flex: 0 0 auto;
     margin-left: auto;
     color: var(--color-dark);
     transform: rotate(90deg);
@@ -1185,6 +1195,481 @@
     }
 }
 
+/* --- Aerospace: two-column prose body ------------------------------------- */
+.svc-prose__cols {
+    column-count: 2;
+    column-gap: clamp(30px, 4vw, 64px);
+    margin-top: 1.2em;
+}
+
+.svc-prose__cols p {
+    margin: 0;
+}
+
+/* Right-aligned CTA under a section's copy (left-aligned on mobile). */
+.svc-cta-right {
+    display: flex;
+    width: fit-content;
+    margin-top: clamp(24px, 3vw, 40px);
+    margin-left: auto;
+}
+
+/* --- Aerospace: animated stat counters ------------------------------------ */
+.svc-stats {
+    margin-inline: var(--hero-margin-inline);
+    margin-block: clamp(50px, 7vw, 90px);
+}
+
+.svc-stats__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(48px, 8vw, 110px);
+    max-width: var(--container);
+    margin-inline: auto;
+}
+
+.svc-stat {
+    text-align: center;
+}
+
+.svc-stat__number {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 80px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+}
+
+.svc-stat__label {
+    margin: 12px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* --- Aerospace: full-width image band ------------------------------------- */
+.svc-media-band {
+    max-width: var(--container);
+    margin: clamp(50px, 7vw, 90px) auto 0;
+}
+
+.svc-media-band img {
+    width: 100%;
+    max-height: 520px;
+    aspect-ratio: 1000 / 408;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+/* --- Aerospace: capabilities checklist (three columns) -------------------- */
+/* Tighter top (40px) since the image band sits directly above it. */
+.svc-checklist-section {
+    padding-block-start: 40px;
+}
+
+.svc-checklist__intro {
+    max-width: 100%;
+    margin: 20px 0 clamp(36px, 4vw, 50px);
+    color: var(--color-text);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.75;
+}
+
+.svc-checklist__list {
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 12px clamp(30px, 5vw, 80px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.svc-checklist__list li {
+    display: flex;
+    gap: 14px;
+    color: var(--color-text);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.4;
+}
+
+.svc-checklist__check {
+    flex: 0 0 auto;
+    margin-top: 1px;
+    color: var(--color-primary);
+}
+
+.svc-checklist__check svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Aerospace: Confidence (blue box + black box + image) ------------------ */
+.svc-confidence {
+    margin-inline: var(--hero-margin-inline);
+    margin-block: clamp(50px, 7vw, 90px) 0;
+}
+
+.svc-confidence__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: stretch;
+    max-width: var(--container);
+    margin-inline: auto;
+}
+
+.svc-confidence__left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.svc-confidence__title-box {
+    padding: clamp(28px, 3.4vw, 44px);
+    background: var(--color-primary);
+    border-radius: 24px;
+}
+
+.svc-confidence__title-box h2 {
+    margin: 0;
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 400;
+    line-height: 1.05;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.svc-confidence__text-box {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(26px, 3vw, 40px);
+    background: #141414;
+    border-radius: 24px;
+}
+
+.svc-confidence__text-box p {
+    margin: 0 0 1.2em;
+    color: var(--color-white);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.75;
+}
+
+.svc-confidence__text-box p:last-child {
+    margin-bottom: 0;
+}
+
+.svc-confidence__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+/* Aerospace responsive reflow. */
+@media (max-width: 960px) {
+    .svc-checklist__list {
+        grid-template-rows: repeat(9, auto);
+    }
+}
+
+@media (max-width: 860px) {
+    .svc-confidence__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .svc-confidence__media img {
+        aspect-ratio: 3 / 2;
+        height: auto;
+    }
+}
+
+@media (max-width: 782px) {
+    .svc-prose__cols {
+        column-count: 1;
+    }
+
+    .svc-cta-right {
+        margin-left: 0;
+    }
+
+    .svc-checklist__list {
+        grid-template-rows: none;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* --- Auto Transport: quote banner (external embed, overlaps hero) --------- */
+.svc-quote {
+    position: relative;
+    z-index: 3;
+    max-width: 1000px;
+    margin: -70px auto 0;
+    padding-inline: var(--hero-margin-inline);
+}
+
+.svc-quote__inner {
+    overflow: hidden;
+    background: var(--color-white);
+    border-radius: 25px;
+    box-shadow: 0 24px 60px rgba(0, 31, 63, 0.14);
+}
+
+.svc-quote__inner iframe {
+    display: block;
+    width: 100%;
+    min-height: 126px;
+    border: 0;
+    border-radius: 25px;
+}
+
+@media (max-width: 782px) {
+    /* Below the hero (no overlap) on mobile — the embed is tall when stacked. */
+    .svc-quote {
+        margin-top: 50px;
+    }
+}
+
+/* --- Auto Transport: feature icons row ------------------------------------ */
+.svc-features-row {
+    max-width: var(--container);
+    margin: clamp(40px, 6vw, 70px) auto;
+    padding-inline: var(--hero-margin-inline);
+}
+
+.svc-features-row__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(14px, 1.6vw, 28px);
+}
+
+.svc-feature {
+    text-align: center;
+}
+
+.svc-feature__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92px;
+    margin-bottom: 20px;
+}
+
+.svc-feature__icon img {
+    width: auto;
+    max-width: 100%;
+    max-height: 92px;
+    object-fit: contain;
+}
+
+.svc-feature__title {
+    margin: 0 0 6px;
+    font-family: var(--font-heading);
+    /* Shrinks on narrower 5-column widths; nowrap keeps it on one line. */
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-dark);
+}
+
+.svc-feature__sub {
+    margin: 0;
+    font-size: 14px;
+    font-weight: var(--body-font-weight);
+    color: var(--color-text);
+}
+
+/* --- Auto Transport: intro paragraph -------------------------------------- */
+.svc-autotransport-intro {
+    padding-block-start: 40px;
+}
+
+.svc-autotransport-intro__text {
+    max-width: 100%;
+    margin: 0;
+    color: var(--color-text);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+/* --- Auto Transport: tabs (sentence-case titles, multi-paragraph body) ----- */
+/* 30px above the tab buttons (instead of the default 100px). */
+.svc-tabs--auto {
+    margin-block: 30px 0;
+}
+
+.svc-tabs--auto .svc-tabs__title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: none;
+}
+
+/* 30px above the Explore button in the Auto Transport tab panels. */
+.svc-tabs--auto .svc-tabs__cta {
+    margin-top: 30px;
+}
+
+/* Multi-paragraph tab descriptions (only affects tabs whose desc wraps <p>). */
+.svc-tabs__desc p {
+    margin: 0 0 1em;
+}
+
+.svc-tabs__desc p:last-child {
+    margin-bottom: 0;
+}
+
+/* In the mobile accordion the panel title is normally hidden (label == title);
+   Auto Transport's label differs from its title, so keep the title visible. */
+@media (max-width: 1024px) {
+    .svc-tabs-section .svc-tabs--auto .svc-tabs__title {
+        display: block;
+        margin: 20px 0 0;
+    }
+}
+
+/* --- Auto Transport: stats heading ---------------------------------------- */
+.svc-stats__head {
+    margin: 0 0 clamp(30px, 4vw, 50px);
+    text-align: center;
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 700;
+    line-height: 1.05;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+/* --- Auto Transport: why customers choose us ------------------------------ */
+.svc-whychoose {
+    padding-block-start: 0;
+}
+
+.svc-whychoose__title {
+    /* Size/weight come from the global h2 rule (60px / 400, 32px on mobile). */
+    margin: 0 0 26px;
+    line-height: 1.05;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.svc-whychoose__list {
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.svc-whychoose__list li {
+    display: flex;
+    gap: 14px;
+    color: var(--color-text);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.5;
+}
+
+.svc-whychoose__check {
+    flex: 0 0 auto;
+    margin-top: 2px;
+    color: var(--color-primary);
+}
+
+.svc-whychoose__check svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+/* --- Auto Transport: brand logo strip (seamless infinite marquee) ---------- */
+.svc-logos {
+    margin: 100px 20px;
+    overflow: hidden;
+}
+
+/* Two identical groups scroll as one loop (translateX 0 → -50%). Pauses when
+   the strip is hovered/focused. */
+.svc-logos__track {
+    display: flex;
+    width: max-content;
+    animation: svc-logos-scroll 40s linear infinite;
+}
+
+.svc-logos:hover .svc-logos__track,
+.svc-logos:focus-within .svc-logos__track {
+    animation-play-state: paused;
+}
+
+.svc-logos__group {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.svc-logos__group img {
+    flex: 0 0 auto;
+    width: auto;
+    height: 44px;
+    margin-inline: clamp(28px, 4vw, 60px);
+    object-fit: contain;
+}
+
+/* Lucid is a wide wordmark — shrink it so it isn't oversized next to the rest. */
+.svc-logos__group img[src*="lucid"] {
+    height: 18px;
+}
+
+@keyframes svc-logos-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .svc-logos__track {
+        animation: none;
+    }
+}
+
+/* Auto Transport responsive reflow. */
+@media (max-width: 960px) {
+    .svc-features-row__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px 20px;
+    }
+}
+
+@media (max-width: 782px) {
+    .svc-features-row__grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .svc-logos__group img {
+        height: 36px;
+    }
+}
+
 /* --- CTA cards ------------------------------------------------------------- */
 .cta-cards {
     padding-block: 0 20px;
@@ -1272,7 +1757,7 @@
         display: flex;
         flex-direction: column;
         margin-block: 30px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid var(--color-black);
     }
 
     .svc-tabs-section .svc-tabs__nav {
@@ -1289,7 +1774,8 @@
         margin: 0;
         padding: 15px 0;
         border: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.15);
+        /* Solid black divider at all times (global — no hover/active change). */
+        border-top: 1px solid var(--color-black);
         border-radius: 0;
         background: none;
         color: var(--color-dark);
@@ -1298,7 +1784,6 @@
         letter-spacing: 0.02em;
     }
 
-    /* Separator turns solid black on hover / when the row is open. */
     .svc-tabs-section .svc-tabs__tab:hover,
     .svc-tabs-section .svc-tabs__tab.is-active {
         color: var(--color-dark);
@@ -1549,10 +2034,32 @@
         font-weight: 600;
     }
 
-    /* Double the FAQ arrow icon on mobile so it matches the accordion arrows. */
+    /* Darker, bolder lead paragraph on mobile. */
+    .svc-prose p.svc-prose__lead {
+        font-weight: 700;
+        color: rgb(17, 17, 17);
+    }
+
+    /* Tickers smaller and stacked one per row on mobile. */
+    .svc-stat__number {
+        font-size: 50px;
+    }
+
+    .svc-stats__grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    /* Keep a 10px inset on the capabilities image on mobile. */
+    .svc-media-band {
+        padding-inline: 10px;
+    }
+
+    /* Larger FAQ arrow icon on mobile. */
     .svc-faq__icon svg {
-        width: 40px;
-        height: 40px;
+        width: 25px;
+        height: 25px;
     }
 
     /* Accordion panel content is 95% wide, still left-aligned (global — every
@@ -1565,6 +2072,21 @@
     .svc-freight__caps li,
     .svc-freight__list li {
         line-height: 22px;
+    }
+
+    /* Any visible accordion panel title (global): accordion typography with a
+       20px gap below it before the body text. Titles that stay hidden in the
+       accordion are unaffected (they're display:none). */
+    .svc-tabs-section .svc-tabs__title {
+        margin: 24px 0 20px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    /* "The McCollister's Difference" stat heading: bigger and heaviest weight. */
+    .svc-stats__head {
+        font-size: 35px;
+        font-weight: 900;
     }
 
     /* 20px below the accordion detail text before the CTA button. */
@@ -1595,7 +2117,7 @@
     .svc-hero__inner {
         height: auto;
         min-height: 340px;
-        padding: 40px 20px;
+        padding: 40px 0;
     }
 
     .svc-hero__title {
