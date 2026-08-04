@@ -1137,12 +1137,19 @@
     /* Reserve two lines so every title is the same height and the copy below
        lines up across the four columns. */
     min-height: 2.3em;
-    margin: 0 0 16px;
+    margin: 0 0 10px;
     font-size: 18px;
     font-weight: 600;
     line-height: 1.15;
     text-transform: none;
     color: var(--color-dark);
+}
+
+@media (max-width: 782px) {
+    .svc-integrated__title {
+        min-height: 0;
+        line-height: 21px;
+    }
 }
 
 .svc-integrated__title a {
@@ -2446,6 +2453,632 @@
 
     .svc-avcaps__list-title {
         line-height: 30px;
+    }
+}
+
+/* --- About Us -------------------------------------------------------------- */
+/* "Watch our video" button pinned to the hero's bottom-right. */
+.svc-hero__video {
+    position: absolute;
+    right: clamp(20px, 3vw, 48px);
+    bottom: clamp(20px, 3vw, 40px);
+    z-index: 4;
+}
+
+@media (max-width: 782px) {
+    .svc-hero__video {
+        right: var(--hero-margin-inline);
+        bottom: 20px;
+    }
+}
+
+/* Who We Serve: industry banner cards. First card spans full width, the rest
+   fall into a 2-up grid. */
+.svc-serve {
+    padding-block-start: 70px;
+}
+
+.svc-serve__intro {
+    margin-top: 20px;
+}
+
+/* Asymmetric brick grid: Aerospace tall on the left, then wide/narrow pairs.
+   4 columns (left column wider); 2 rows sized by grid-auto-rows. */
+.svc-serve__grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    grid-auto-rows: clamp(200px, 22vw, 300px);
+    gap: clamp(16px, 1.8vw, 24px);
+    margin-top: clamp(32px, 4vw, 52px);
+}
+
+.svc-serve__card:nth-child(1) { grid-column: 1;     grid-row: 1 / 3; } /* Aerospace */
+.svc-serve__card:nth-child(2) { grid-column: 2 / 4; grid-row: 1; }     /* Fitness */
+.svc-serve__card:nth-child(3) { grid-column: 4;     grid-row: 1; }     /* Technical */
+.svc-serve__card:nth-child(4) { grid-column: 2;     grid-row: 2; }     /* Auto Transport */
+.svc-serve__card:nth-child(5) { grid-column: 3 / 5; grid-row: 2; }     /* Warehousing */
+
+.svc-serve__card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: clamp(18px, 1.8vw, 28px);
+    border-radius: 18px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-decoration: none;
+    isolation: isolate;
+}
+
+/* Soft top scrim so the top-left label stays legible over bright photos. */
+.svc-serve__card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0) 42%);
+}
+
+/* Brand-blue gradient that fades in on hover/focus (same as the homepage
+   industries cards). */
+.svc-serve__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        to top,
+        rgba(0, 105, 203, 0.85) 0%,
+        rgba(0, 105, 203, 0.55) 35%,
+        rgba(0, 105, 203, 0.15) 65%,
+        rgba(0, 105, 203, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+}
+
+.svc-serve__card:hover::before,
+.svc-serve__card:focus-visible::before {
+    opacity: 1;
+}
+
+.svc-serve__label {
+    position: relative;
+    z-index: 3;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+    color: var(--color-white);
+}
+
+/* Tablet: 2 columns, each card its own row. */
+@media (max-width: 1024px) {
+    .svc-serve__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: clamp(180px, 30vw, 260px);
+    }
+
+    .svc-serve__card:nth-child(1) { grid-column: 1 / -1; grid-row: auto; }
+    .svc-serve__card:nth-child(2) { grid-column: 1 / -1; grid-row: auto; }
+    .svc-serve__card:nth-child(3),
+    .svc-serve__card:nth-child(4),
+    .svc-serve__card:nth-child(5) { grid-column: auto; grid-row: auto; }
+}
+
+@media (max-width: 782px) {
+    .svc-serve__grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 139px;
+        margin-top: 70px;
+    }
+
+    .svc-serve__card:nth-child(n) {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    /* Centered labels on mobile (with a fuller scrim behind them). */
+    .svc-serve__card {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .svc-serve__card::after {
+        background: rgba(0, 0, 0, 0.28);
+    }
+}
+
+/* History timeline: reuses the .svc-logos marquee (initMarquee → rAF-driven,
+   pauses on hover) but with year/divider/title/description cards. */
+.svc-history-slider {
+    margin-top: 80px;
+}
+
+.svc-history-slider .svc-logos__group {
+    align-items: stretch;
+}
+
+.svc-history-card {
+    flex: 0 0 auto;
+    width: clamp(300px, 32vw, 420px);
+    margin-inline: clamp(24px, 3.4vw, 56px);
+}
+
+.svc-history-card__year {
+    margin: 0 0 25px;
+    font-family: var(--font-heading);
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 60px;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+}
+
+.svc-history-card__divider {
+    margin: 0;
+    border: 0;
+    border-top: 2px solid #111 !important;
+}
+
+.svc-history-card__title {
+    margin: 15px 0 14px;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-transform: none;
+    color: var(--color-dark);
+}
+
+.svc-history-card__text {
+    margin: 0;
+    color: var(--color-text);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.6;
+}
+
+/* History intro CTA: right-aligned button below the timeline. */
+.svc-history__cta {
+    display: flex;
+    width: fit-content;
+    margin-top: clamp(28px, 3.5vw, 44px);
+    margin-left: auto;
+}
+
+@media (max-width: 782px) {
+    .svc-history-slider {
+        margin-inline: 10px;
+    }
+
+    .svc-history-card__year {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .svc-history__cta {
+        margin-left: 0;
+    }
+}
+
+/* Separation below the "More About" icon cards before the CTA cards, matching
+   the pre-CTA spacing used elsewhere (About page ends on .svc-integrated). */
+.svc-integrated:has(+ .cta-cards) {
+    margin-bottom: clamp(56px, 8vw, 90px);
+}
+
+/* Video modal (Vimeo). */
+.svc-video[hidden] {
+    display: none;
+}
+
+.svc-video {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.svc-video__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.svc-video__box {
+    position: relative;
+    width: min(90vw, 1000px);
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.svc-video__frame,
+.svc-video__frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.svc-video__close {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-black);
+    font-size: 24px;
+    line-height: 36px;
+    cursor: pointer;
+}
+
+/* --- Our History ----------------------------------------------------------- */
+.hist-head {
+    padding-block-end: 0;
+}
+
+.hist-head__crumb {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.hist-head__title {
+    margin: 0;
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+    line-height: 0.98;
+    letter-spacing: var(--h1-letter-spacing);
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+/* Interactive timeline card. */
+.hist-timeline {
+    padding-top: clamp(28px, 4vw, 48px);
+    padding-bottom: 0;
+    padding-inline: var(--hero-margin-inline);
+}
+
+/* Total gap above "Today and Beyond" = 80px (no extra from the timeline). */
+.hist-today {
+    padding-block-start: 80px;
+}
+
+.hist-timeline__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+}
+
+.hist-slider {
+    position: relative;
+    height: clamp(440px, 46vw, 675px);
+    border-radius: 25px;
+    overflow: hidden;
+    background: #101418;
+    isolation: isolate;
+}
+
+/* Vertical track: all slides stacked in a column; JS translates it by
+   -index*100% so the active year slides up/down into view. */
+.hist-slider__stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+.hist-slider__slide {
+    position: relative;
+    flex: 0 0 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Per-slide framing so subjects sit correctly in the crop. */
+.hist-slider__slide[data-hist-slide="0"] {
+    /* 1945: shift framing up so the person sits a little higher. */
+    background-position: center 38%;
+}
+
+.hist-slider__slide[data-hist-slide="1"] {
+    /* 1955: shift framing down so the head lands mid-slide. */
+    background-position: center 22%;
+}
+
+.hist-slider__slide[data-hist-slide="2"] {
+    /* 1965: shift framing down so the woman's head sits near the title's top line. */
+    background-position: center 20%;
+}
+
+.hist-slider__slide[data-hist-slide="8"] {
+    /* 2025: shift the framing down so the subject's head shows. */
+    background-position: center 18%;
+}
+
+/* Dark wash — heavier on the left where the year nav + copy sit. */
+.hist-slider__slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(12, 15, 18, 0.88) 0%,
+        rgba(12, 15, 18, 0.66) 42%,
+        rgba(12, 15, 18, 0.25) 80%,
+        rgba(12, 15, 18, 0.15) 100%
+    );
+}
+
+.hist-slider__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    max-width: 1000px;
+    padding: clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px) clamp(120px, 15vw, 220px);
+    color: var(--color-white);
+}
+
+.hist-slider__eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 22px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hist-slider__title {
+    margin: 0 0 22px;
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 4.2vw, 60px);
+    font-weight: 500;
+    line-height: 72px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.hist-slider__text {
+    margin: 0;
+    max-width: 600px;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* Year navigation — vertical list pinned to the left, arrows at the bottom. */
+.hist-slider__nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: clamp(24px, 3vw, 48px) 0 clamp(24px, 3vw, 48px) clamp(30px, 4vw, 48px);
+}
+
+/* Vertical divider centered in the gap between the year list and the slide
+   content. */
+.hist-slider__nav::after {
+    content: "";
+    position: absolute;
+    top: clamp(85px, 12vw, 165px);
+    bottom: clamp(85px, 12vw, 165px);
+    left: 100%;
+    margin-left: clamp(26px, 3vw, 46px);
+    width: 1px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.hist-slider__years {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hist-slider__year {
+    position: relative;
+    padding: 1px 0 1px 40px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    /* Grey by default; only the active year is white. */
+    color: rgba(255, 255, 255, 0.5);
+    transition: color var(--transition);
+}
+
+.hist-slider__year:hover,
+.hist-slider__year:focus-visible {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.hist-slider__year.is-active {
+    color: var(--color-white);
+}
+
+.hist-slider__year.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 2px;
+    background: var(--color-brand-yellow);
+}
+
+.hist-slider__arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    /* Sit just below the year list, centered under the year numbers (the 40px
+       left inset matches the year text so the chevrons line up under them). */
+    padding-left: 40px;
+    margin-top: 7px;
+}
+
+.hist-slider__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 20px;
+    border: 0;
+    background: none;
+    color: var(--color-white);
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity var(--transition);
+}
+
+/* Dimmed + inert when there's no year to move to in that direction. */
+.hist-slider__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.hist-slider__arrow svg {
+    display: block;
+    width: 38px;
+    height: 38px;
+}
+
+.hist-slider__arrow svg path {
+    stroke-width: 1.4;
+}
+
+.hist-slider__arrow--prev svg {
+    transform: rotate(180deg);
+}
+
+/* Today and Beyond: video button below the copy. */
+.hist-today__video {
+    margin-top: clamp(28px, 3.5vw, 44px);
+}
+
+@media (max-width: 782px) {
+    /* Definite height so the vertical-track slides resolve their 100% heights. */
+    .hist-slider {
+        height: 675px;
+    }
+
+    /* Copy sits to the right of the year rail + divider, below the arrows. */
+    .hist-slider__content {
+        padding: clamp(64px, 16vw, 84px) 22px clamp(64px, 16vw, 84px) clamp(88px, 24vw, 104px);
+        justify-content: center;
+    }
+
+    /* Tighter title leading on mobile so the taller slides don't clip. */
+    .hist-slider__title {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 30px;
+    }
+
+    .hist-slider__text {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 19px;
+    }
+
+    /* Full-width so the arrows can reach both slider edges; the empty area
+       stays click-through so it doesn't block the copy. */
+    .hist-slider__nav {
+        width: 100%;
+        padding: 24px 0 24px 20px;
+        pointer-events: none;
+    }
+
+    .hist-slider__year,
+    .hist-slider__arrow {
+        pointer-events: auto;
+    }
+
+    /* Year rail runs down the left, evenly spread rather than bunched; buttons
+       stay content-width so the active underline measures against the year. */
+    .hist-slider__years {
+        align-items: flex-start;
+        gap: clamp(32px, 7.5vw, 48px);
+    }
+
+    /* No left tick space on mobile — years sit flush left. */
+    .hist-slider__year {
+        padding-left: 0;
+    }
+
+    /* Yellow indicator moves underneath the active year, left-aligned and 10%
+       narrower than the year field. */
+    .hist-slider__year.is-active::before {
+        top: auto;
+        bottom: -3px;
+        left: 0;
+        transform: none;
+        width: 78%;
+        height: 2px;
+    }
+
+    /* Divider now sits at a fixed left (the nav is full-width, so it can't key
+       off the nav's right edge) just past the year rail, spanning the list. */
+    .hist-slider__nav::after {
+        display: block;
+        top: 50%;
+        bottom: auto;
+        left: clamp(74px, 20vw, 88px);
+        transform: translateY(-50%);
+        height: clamp(380px, 68vw, 520px);
+        margin-left: 0;
+    }
+
+    /* Prev/next pinned near the top at the true slider edges (~5% down). */
+    .hist-slider__arrows {
+        flex-direction: row;
+        justify-content: space-between;
+        position: absolute;
+        top: 5%;
+        left: 20px;
+        right: 20px;
+        margin-top: 0;
+        padding-left: 0;
+    }
+
+    .hist-slider__arrow--prev svg {
+        transform: rotate(90deg);
+    }
+
+    .hist-slider__arrow--next svg {
+        transform: rotate(-90deg);
     }
 }
 
