@@ -74,7 +74,12 @@
 .site-navigation__menu {
 	display: flex;
 	align-items: stretch;
-	gap: 50px;
+	/* No flex gap — the spacing lives inside each link as horizontal padding so
+	   the items sit edge-to-edge with no dead zones between them (moving a bit
+	   left/right of the text still keeps the dropdown open). The negative inline
+	   margin cancels the outermost links' padding so the text stays put. */
+	gap: 0;
+	margin-inline: -25px;
 }
 
 .site-navigation__menu > li {
@@ -87,7 +92,7 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	padding: 40px 0;
+	padding: 40px 25px;
 	color: var(--color-black);
 	font-family: var(--font-heading);
 	font-size: var(--nav-font-size);
@@ -155,15 +160,21 @@
 	box-shadow: var(--shadow-sm);
 	opacity: 0;
 	visibility: hidden;
+	/* Base (hidden) state = the CLOSE transition: quick, so the panel is fully
+	   gone before the cursor can reach where it was and re-trigger it. */
 	transition:
-		opacity 200ms ease,
-		visibility 200ms ease;
+		opacity 90ms ease,
+		visibility 90ms ease;
 }
 
 .site-navigation__menu li:hover > .sub-menu,
 .site-navigation__menu li:focus-within > .sub-menu {
 	opacity: 1;
 	visibility: visible;
+	/* Open transition stays smooth. */
+	transition:
+		opacity 200ms ease,
+		visibility 200ms ease;
 }
 
 /* CSS-only full page fuzzy overlay, shown behind the dropdown while a
@@ -181,7 +192,8 @@ body::before {
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
+	/* Base (hidden) state = the quick CLOSE transition. */
+	transition: opacity 90ms ease, visibility 90ms ease;
 }
 
 /* Reveal it (desktop only) when a top-level item with a dropdown is
@@ -191,6 +203,8 @@ body::before {
 	body:has(.site-navigation__menu > .menu-item-has-children:focus-within)::before {
 		opacity: 1;
 		visibility: visible;
+		/* Open transition stays smooth. */
+		transition: opacity 0.3s ease, visibility 0.3s ease;
 	}
 }
 

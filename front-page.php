@@ -600,7 +600,13 @@ get_header();
             <div class="home-blog__head">
                 <div>
                     <p class="home-blog__eyebrow">/ <?php esc_html_e('blog', 'mccollisters'); ?> /</p>
-                    <h2 class="home-blog__title"><?php esc_html_e('See Latest Articles From Our Company', 'mccollisters'); ?></h2>
+                    <h2 class="home-blog__title"><?php
+                        esc_html_e('See Latest', 'mccollisters');
+                        echo '<br>';
+                        esc_html_e('Articles From', 'mccollisters');
+                        echo '<br>';
+                        esc_html_e('Our Company', 'mccollisters');
+                    ?></h2>
                 </div>
                 <a class="mcc-btn mcc-btn--on-light home-blog__cta" href="<?php echo esc_url($blog_url); ?>">
                     <span class="mcc-btn__label"><?php esc_html_e('See All Posts', 'mccollisters'); ?></span>
