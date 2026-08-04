@@ -524,6 +524,84 @@
 		});
 	}
 
+	/**
+	 * Interactive history timeline. One slide is active at a time; the year list
+	 * and up/down arrows switch slides with a smooth cross-fade. Keyboard: the
+	 * year buttons are real <button>s, and Left/Right/Up/Down move when focus is
+	 * inside the slider.
+	 */
+	function initHistorySlider() {
+		document.querySelectorAll("[data-hist-slider]").forEach((slider) => {
+			const stage = slider.querySelector(".hist-slider__stage");
+			const slides = Array.from(
+				slider.querySelectorAll("[data-hist-slide]")
+			);
+			const years = Array.from(slider.querySelectorAll("[data-hist-go]"));
+			const prev = slider.querySelector("[data-hist-prev]");
+			const next = slider.querySelector("[data-hist-next]");
+			if (slides.length === 0) {
+				return;
+			}
+
+			let current = 0;
+
+			const go = (index) => {
+				current = Math.max(0, Math.min(slides.length - 1, index));
+				// Slide the track up/down to the active year.
+				if (stage) {
+					stage.style.transform =
+						"translateY(" + -current * 100 + "%)";
+				}
+				slides.forEach((slide, i) => {
+					const on = i === current;
+					slide.classList.toggle("is-active", on);
+					if (on) {
+						slide.removeAttribute("aria-hidden");
+					} else {
+						slide.setAttribute("aria-hidden", "true");
+					}
+				});
+				years.forEach((year, i) => {
+					const on = i === current;
+					year.classList.toggle("is-active", on);
+					year.setAttribute("aria-selected", on ? "true" : "false");
+				});
+				// Only light up an arrow when there's a year to move to.
+				if (prev) {
+					prev.disabled = current === 0;
+				}
+				if (next) {
+					next.disabled = current === slides.length - 1;
+				}
+			};
+
+			years.forEach((year, i) => {
+				year.addEventListener("click", () => go(i));
+			});
+			if (prev) {
+				prev.addEventListener("click", () => go(current - 1));
+			}
+			if (next) {
+				next.addEventListener("click", () => go(current + 1));
+			}
+			slider.addEventListener("keydown", (event) => {
+				if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+					event.preventDefault();
+					go(current - 1);
+				} else if (
+					event.key === "ArrowRight" ||
+					event.key === "ArrowDown"
+				) {
+					event.preventDefault();
+					go(current + 1);
+				}
+			});
+
+			// Set the initial arrow availability (first slide → prev disabled).
+			go(0);
+		});
+	}
+
 	document.addEventListener("DOMContentLoaded", () => {
 		initCounters();
 		initAccordions();
@@ -531,5 +609,6 @@
 		initTabs();
 		initHeadingReveal();
 		initMarquee();
+		initHistorySlider();
 	});
 })();
