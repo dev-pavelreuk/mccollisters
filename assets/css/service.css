@@ -2774,6 +2774,10 @@
     overflow: hidden;
     background: #101418;
     isolation: isolate;
+    /* Shared gap between the year rail and the copy. The divider sits at half
+       of it and the copy is inset by the full amount, so the line stays
+       centered with equal padding either side as the gap flexes on laptops. */
+    --hist-gap: clamp(34px, 4.5vw, 78px);
 }
 
 /* Vertical track: all slides stacked in a column; JS translates it by
@@ -2838,7 +2842,10 @@
     justify-content: center;
     height: 100%;
     max-width: 1000px;
-    padding: clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px) clamp(120px, 15vw, 220px);
+    /* Left inset = year rail right edge (nav pad + ~90px button) + full gap, so
+       the copy always clears the divider by gap/2. */
+    padding: clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px) clamp(40px, 5vw, 70px)
+        calc(90px + clamp(30px, 4vw, 48px) + var(--hist-gap));
     color: var(--color-white);
 }
 
@@ -2892,7 +2899,7 @@
     top: clamp(85px, 12vw, 165px);
     bottom: clamp(85px, 12vw, 165px);
     left: 100%;
-    margin-left: clamp(26px, 3vw, 46px);
+    margin-left: calc(var(--hist-gap) / 2);
     width: 1px;
     background: rgba(255, 255, 255, 0.28);
 }
@@ -2988,7 +2995,9 @@
     margin-top: clamp(28px, 3.5vw, 44px);
 }
 
-@media (max-width: 782px) {
+/* Compact timeline layout for tablets and phones; laptops and desktops keep
+   the full side-by-side version. */
+@media (max-width: 1024px) {
     /* Definite height so the vertical-track slides resolve their 100% heights. */
     .hist-slider {
         height: 675px;
@@ -3079,6 +3088,15 @@
 
     .hist-slider__arrow--next svg {
         transform: rotate(-90deg);
+    }
+}
+
+/* Tablet + large-phone range (compact layout is on, but the taller viewport
+   makes the year column run under the top arrows): keep the year gap tight all
+   the way down to the mobile width. True phones (<600px) stay untouched. */
+@media (min-width: 600px) and (max-width: 1024px) {
+    .hist-slider__years {
+        gap: clamp(20px, 3vw, 30px);
     }
 }
 
