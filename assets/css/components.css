@@ -181,6 +181,57 @@ input[type="submit"] {
     }
 }
 
+/* --- Heading letter-reveal -------------------------------------------------
+   Site-wide entrance effect for section <h2>s. components.js splits each
+   heading into .mcc-reveal__word > .mcc-reveal__letter spans (with staggered
+   inline animation-delays) and adds .is-revealed when the heading scrolls into
+   view. Letters fade in while rising from below — matching the reference. */
+/* Each word is a mask: its letters rise from behind it and are clipped to the
+   line box, so the animation stays inside the heading instead of overlapping the
+   text below it. Extra bottom padding + matching negative margin give descenders
+   room without clipping, and shift the mask so the baseline stays put. */
+.mcc-reveal__word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    white-space: nowrap;
+    padding-bottom: 0.15em;
+    margin-bottom: -0.15em;
+}
+
+.mcc-reveal__letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%);
+    will-change: transform, opacity;
+}
+
+.mcc-reveal.is-revealed .mcc-reveal__letter {
+    animation:
+        mcc-reveal-fade 0.35s forwards,
+        mcc-reveal-rise 0.7s cubic-bezier(0.26, -0.14, 0, 1.01) forwards;
+}
+
+@keyframes mcc-reveal-fade {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mcc-reveal-rise {
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mcc-reveal__letter {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
+
 .eyebrow {
     margin-bottom: 18px;
     color: var(--color-primary);
@@ -214,6 +265,8 @@ body :is(
     .section-head__title,
     .svc-expertise__title,
     .svc-whychoose__title,
+    .svc-freight__title,
+    .svc-levels__packages-title,
     .home-services__title,
     .home-about__title,
     .home-features__title,
@@ -224,6 +277,7 @@ body :is(
 ) {
     font-size: var(--h2-font-size);
     font-weight: var(--h2-font-weight);
+    line-height: var(--h2-line-height);
 }
 
 @media (max-width: 782px) {
@@ -231,6 +285,8 @@ body :is(
         .section-head__title,
         .svc-expertise__title,
         .svc-whychoose__title,
+        .svc-freight__title,
+        .svc-levels__packages-title,
         .home-services__title,
         .home-about__title,
         .home-features__title,
@@ -240,6 +296,7 @@ body :is(
         .home-blog__title
     ) {
         font-size: 32px;
+        line-height: 36px;
     }
 }
 

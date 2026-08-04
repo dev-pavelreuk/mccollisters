@@ -339,10 +339,197 @@
 		});
 	}
 
+	/**
+	 * Heading letter-reveal. Splits every section <h2> into per-letter spans
+	 * (preserving <br> line breaks) and plays a staggered fade + rise as the
+	 * heading scrolls into view — the site-wide entrance effect. Global: it
+	 * targets h2 elements whose content is plain text/<br> only, so it never
+	 * disturbs headings that contain other markup.
+	 */
+	function initHeadingReveal() {
+		var reduce = window.matchMedia(
+			"(prefers-reduced-motion: reduce)"
+		).matches;
+		if (reduce) {
+			return;
+		}
+
+		// CTA card titles are excluded from the reveal globally.
+		var headings = document.querySelectorAll("main h2:not(.cta-card__title)");
+		var targets = [];
+
+		headings.forEach(function (h2) {
+			if (h2.dataset.mccReveal) {
+				return;
+			}
+
+			// Only split headings made of text + <br>; skip anything richer so
+			// links/spans inside a heading are never destroyed.
+			var ok = Array.prototype.every.call(h2.childNodes, function (node) {
+				return (
+					node.nodeType === 3 ||
+					(node.nodeType === 1 && node.tagName === "BR")
+				);
+			});
+			if (!ok || h2.textContent.trim() === "") {
+				return;
+			}
+
+			var frag = document.createDocumentFragment();
+			var delay = 0;
+
+			Array.prototype.forEach.call(h2.childNodes, function (node) {
+				if (node.nodeType === 1 && node.tagName === "BR") {
+					frag.appendChild(document.createElement("br"));
+					return;
+				}
+				node.textContent.split(/(\s+)/).forEach(function (part) {
+					if (part === "") {
+						return;
+					}
+					if (/^\s+$/.test(part)) {
+						frag.appendChild(document.createTextNode(part));
+						return;
+					}
+					var word = document.createElement("span");
+					word.className = "mcc-reveal__word";
+					Array.prototype.forEach.call(part, function (ch) {
+						var letter = document.createElement("span");
+						letter.className = "mcc-reveal__letter";
+						letter.textContent = ch;
+						letter.style.animationDelay = delay.toFixed(2) + "s";
+						delay += 0.02;
+						word.appendChild(letter);
+					});
+					frag.appendChild(word);
+				});
+			});
+
+			h2.textContent = "";
+			h2.appendChild(frag);
+			h2.classList.add("mcc-reveal");
+			h2.dataset.mccReveal = "1";
+			targets.push(h2);
+		});
+
+		if (!targets.length) {
+			return;
+		}
+
+		if (!("IntersectionObserver" in window)) {
+			targets.forEach(function (h2) {
+				h2.classList.add("is-revealed");
+			});
+			return;
+		}
+
+		var observer = new IntersectionObserver(
+			function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("is-revealed");
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+		);
+
+		targets.forEach(function (h2) {
+			observer.observe(h2);
+		});
+	}
+
+	/**
+	 * Brand-logo marquees, driven by requestAnimationFrame instead of a CSS
+	 * animation. rAF is suspended while the tab is hidden, so there is no clock
+	 * to "catch up" on return — the strip resumes exactly where it left off with
+	 * no twitch. Matches the seamless behaviour of a JS slider plugin.
+	 *
+	 * Each strip holds two identical .svc-logos__group elements; the track loops
+	 * by adding one group's width back once it has scrolled past it. Speed is
+	 * derived from the group width so one group passes in ~40s (as before).
+	 * Pauses on hover/focus; honours prefers-reduced-motion.
+	 */
+	function initMarquee() {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			return;
+		}
+
+		const instances = [];
+
+		document.querySelectorAll(".svc-logos").forEach((slider) => {
+			const track = slider.querySelector(".svc-logos__track");
+			const group = track
+				? track.querySelector(".svc-logos__group")
+				: null;
+			if (!track || !group) {
+				return;
+			}
+
+			const inst = { track, group, offset: 0, paused: false, last: null };
+			const pause = () => {
+				inst.paused = true;
+			};
+			const resume = () => {
+				inst.paused = false;
+			};
+			slider.addEventListener("mouseenter", pause);
+			slider.addEventListener("mouseleave", resume);
+			slider.addEventListener("focusin", pause);
+			slider.addEventListener("focusout", resume);
+			instances.push(inst);
+		});
+
+		if (!instances.length) {
+			return;
+		}
+
+		const frame = (ts) => {
+			instances.forEach((inst) => {
+				if (inst.last === null) {
+					inst.last = ts;
+					return;
+				}
+				// Clamp dt so a stray long frame can never produce a big jump.
+				const dt = Math.min((ts - inst.last) / 1000, 0.05);
+				inst.last = ts;
+				if (inst.paused) {
+					return;
+				}
+				const width = inst.group.offsetWidth;
+				if (width <= 0) {
+					return;
+				}
+				inst.offset -= (width / 40) * dt;
+				while (-inst.offset >= width) {
+					inst.offset += width;
+				}
+				inst.track.style.transform = `translate3d(${inst.offset.toFixed(
+					2
+				)}px, 0, 0)`;
+			});
+			window.requestAnimationFrame(frame);
+		};
+		window.requestAnimationFrame(frame);
+
+		// On returning to the tab, resync each clock so the first frame after the
+		// gap doesn't advance the offset (belt-and-suspenders with the dt clamp).
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden) {
+				instances.forEach((inst) => {
+					inst.last = null;
+				});
+			}
+		});
+	}
+
 	document.addEventListener("DOMContentLoaded", () => {
 		initCounters();
 		initAccordions();
 		initSliders();
 		initTabs();
+		initHeadingReveal();
+		initMarquee();
 	});
 })();

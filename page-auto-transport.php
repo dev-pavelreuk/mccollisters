@@ -46,7 +46,7 @@ $tabs = [
             'McCollister’s provides professional, personalized auto transport solutions designed for people who care deeply about their vehicles. Whether you’re relocating, purchasing a car from an auction, heading south for the winter, or transporting a classic or luxury vehicle, we treat your car like it’s our own.',
             'With our easy quote-to-book platform, you stay in control—no waiting, no uncertainty, no hassle.',
         ],
-        'url'   => home_url('/talk-to-an-expert/'),
+        'url'   => home_url('/auto-transport/individuals/'),
     ],
     [
         'label' => 'Dealers',
@@ -56,7 +56,7 @@ $tabs = [
             'McCollister’s helps dealerships move inventory quickly and reliably, from single-unit deliveries to high-volume, multi-location distribution. Our teams coordinate schedules, routing, and vehicle handling so cars arrive lot-ready and on time.',
             'With real-time tracking and a dedicated account manager, you get the visibility and accountability that keep your operation moving.',
         ],
-        'url'   => home_url('/talk-to-an-expert/'),
+        'url'   => home_url('/auto-transport/dealers/'),
     ],
     [
         'label' => 'OEMs',
@@ -66,7 +66,7 @@ $tabs = [
             'McCollister’s supports OEMs with scalable, specialized auto logistics—from plant and port to processing centers and final destinations. Our asset-based fleet, specialized equipment, and experienced teams handle high-value and pre-production vehicles with precision.',
             'Integrated tracking, secure handling, and nationwide reach give manufacturers a partner built for complex, time-sensitive programs.',
         ],
-        'url'   => home_url('/talk-to-an-expert/'),
+        'url'   => home_url('/auto-transport/oems/'),
     ],
 ];
 
