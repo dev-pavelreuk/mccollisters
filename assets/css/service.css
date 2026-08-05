@@ -2809,6 +2809,77 @@
     isolation: isolate;
 }
 
+/* Locations list: drop the dashed focus outline (and the native focus ring that
+   flashes on click) plus the grey highlight the plugin shows when
+   selecting/switching between locations. The extra .sl-list raises specificity
+   above the plugin's own `!important` rule, which loads after the theme CSS. */
+#asl-storelocator.asl-cont .sl-list li.sl-item:focus,
+#asl-storelocator.asl-cont .sl-list li.sl-item:focus-visible,
+#asl-storelocator.asl-cont .sl-list li.sl-item:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Selected location: darker grey highlight (plugin's own --sl-highlighted is a
+   lighter #F7F7F7, so set #f1f1f1 explicitly). */
+#asl-storelocator.asl-cont .sl-main-cont .asl-panel-inner .sl-main-cont-box ul.sl-list li.sl-item.highlighted {
+    background-color: #f1f1f1 !important;
+}
+
+/* Branded corner radius on the "Directions" button in each location row. */
+#asl-storelocator.asl-cont .sl-main-cont .asl-panel-inner .sl-main-cont-box ul.sl-list li.sl-item .sl-addr-sec .sl-act-btns .s-direction {
+    border-radius: 15px !important;
+}
+
+/* Thinner, white underline under the ASL "Search Location" label (plugin
+   default is a heavy 3px black line). Matches the plugin's own selector so it
+   overrides cleanly. */
+#asl-storelocator.asl-cont.asl-template-1 .asl-wrapper .Filter_section .search_filter label {
+    border-bottom: 1px solid #fff !important;
+}
+
+/* Narrow the whole info box (not just the inner content) so the library's
+   close button — an <img align=right> anchored to the box's right edge — sits
+   at the top-right of the visible box. Re-center it over the marker: the
+   library uses margin-left: -width/2 (-160 for its 320px default), so a 224px
+   box needs -112px. */
+#asl-storelocator.asl-cont .infoBox {
+    width: 224px !important;
+    margin-left: -112px !important;
+}
+
+/* Branded rounded corners on the map info-window box (plugin ships it square).
+   The box is a title <h3> stacked on the .infowindowContent body, so round the
+   header's top corners and the body's bottom corners to form one rounded box. */
+#asl-storelocator.asl-cont .infoBox h3 {
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+    /* Match the narrowed body width (box-sizing so padding stays inside). */
+    width: 224px !important;
+    box-sizing: border-box !important;
+}
+
+#asl-storelocator.asl-cont .infoBox .infowindowContent {
+    border-radius: 0 0 18px 18px !important;
+    /* 30% narrower than the plugin's default 320px box; border-box so it lines
+       up exactly with the header (which is also border-box at 224px). */
+    width: 224px !important;
+    box-sizing: border-box !important;
+}
+
+/* Restore bullet markers on the description list (it's a real <ul><li>, but the
+   list reset strips the dots) and pull it up a little closer to the title. */
+#asl-storelocator.asl-cont .infoBox .infowindowContent ul {
+    list-style: disc !important;
+    margin: -10px 0 0 !important;
+    padding-left: 20px !important;
+}
+
+#asl-storelocator.asl-cont .infoBox .infowindowContent ul li {
+    display: list-item !important;
+    list-style: disc !important;
+}
+
 @media (max-width: 782px) {
     /* Smaller title and a 3-line break pattern on phones. */
     .loc-head__title {
