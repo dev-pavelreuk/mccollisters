@@ -303,7 +303,8 @@ body :is(
     .home-features__eyebrow,
     .home-industries__eyebrow,
     .home-stats__eyebrow,
-    .home-blog__eyebrow
+    .home-blog__eyebrow,
+    .loc-head__crumb
 ) {
     font-size: var(--eyebrow-font-size);
     font-weight: var(--eyebrow-font-weight);
