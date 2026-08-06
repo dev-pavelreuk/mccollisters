@@ -4376,3 +4376,204 @@
         display: none;
     }
 }
+
+/* --- Contact Us page ------------------------------------------------------ */
+/* Testimonial spacing on the contact page: fixed 135px top, no bottom. */
+.home-testimonials--contact {
+    padding-top: 135px;
+    padding-bottom: 0;
+}
+
+@media (max-width: 782px) {
+    .home-testimonials--contact {
+        padding-top: 50px;
+    }
+}
+
+/* Dark hero holding the form + contact info. */
+.contact-hero {
+    position: relative;
+    margin-inline: var(--hero-margin-inline);
+    padding: clamp(28px, 3.5vw, 60px);
+    border-radius: 25px;
+    overflow: hidden;
+    color: var(--color-white);
+    background-color: #1f1f1f;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.contact-hero__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: clamp(32px, 5vw, 84px);
+    align-items: center;
+}
+
+.contact-hero__form {
+    padding: clamp(26px, 3vw, 48px);
+    color: var(--color-dark);
+    background: var(--color-white);
+    border-radius: 20px;
+}
+
+.contact-hero__form-title {
+    margin: 0 0 clamp(20px, 2.4vw, 32px);
+    font-family: var(--font-heading);
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+    line-height: var(--h1-line-height);
+    letter-spacing: var(--h1-letter-spacing);
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.contact-hero__eyebrow {
+    margin: 0 0 28px;
+    font-family: var(--font-heading);
+    font-size: var(--eyebrow-font-size);
+    font-weight: var(--eyebrow-font-weight);
+    color: var(--color-white);
+}
+
+.contact-hero__title {
+    margin: 0 0 clamp(20px, 2.5vw, 30px);
+    font-family: var(--font-heading);
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: var(--h2-font-weight);
+    line-height: 1.06;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.contact-hero__text {
+    margin: 0 0 clamp(24px, 3vw, 34px);
+    max-width: 30em;
+    font-size: var(--body-font-size);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.contact-hero__socials {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.contact-hero__socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.contact-hero__socials i {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.contact-hero__socials a:hover {
+    color: var(--color-brand-yellow);
+}
+
+/* Gravity Forms — scoped styling so it matches the card design regardless of
+   the plugin's default theme. */
+.contact-hero__gform label,
+.contact-hero__gform .gfield_label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.contact-hero__gform .gfield {
+    margin-bottom: 16px;
+}
+
+.contact-hero__gform input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.contact-hero__gform textarea,
+.contact-hero__gform select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-dark);
+    background: var(--color-white);
+    border: 1px solid #c9ced3;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.contact-hero__gform textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact-hero__gform input:focus,
+.contact-hero__gform textarea:focus,
+.contact-hero__gform select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.contact-hero__gform .gfield_required {
+    color: #d0021b;
+}
+
+.contact-hero__gform .gform_footer input[type="submit"],
+.contact-hero__gform .gform_footer button,
+.contact-hero__gform button[type="submit"] {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-white);
+    background: var(--color-dark);
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.contact-hero__gform .gform_footer input[type="submit"]:hover,
+.contact-hero__gform .gform_footer button:hover,
+.contact-hero__gform button[type="submit"]:hover {
+    background: #000;
+}
+
+@media (max-width: 1024px) {
+    /* Stack: contact info on top, form below (matches mobile screenshots). */
+    .contact-hero__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(28px, 6vw, 44px);
+    }
+
+    .contact-hero__info {
+        order: -1;
+    }
+}
+
+@media (max-width: 782px) {
+    /* Global h1 mobile size (matches svc-hero__title / the design tokens). */
+    .contact-hero__form-title {
+        font-size: 35px;
+        line-height: 40px;
+    }
+}
