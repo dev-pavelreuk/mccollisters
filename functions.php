@@ -21,6 +21,7 @@ $includes = [
 	'/inc/customizer.php',
 	'/inc/template-functions.php',
 	'/inc/mega-menu.php',
+	'/inc/faq-data.php',
 ];
 
 foreach ($includes as $file) {
