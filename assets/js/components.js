@@ -77,8 +77,8 @@
 	/* --- Accordion --------------------------------------------------------- */
 	// Smoothly animate native <details> open/close and keep one row open per
 	// [data-accordion] group. The panel is the element after <summary>.
-	function initAccordions() {
-		document.querySelectorAll("[data-accordion]").forEach((group) => {
+	function initAccordions(root) {
+		(root || document).querySelectorAll("[data-accordion]").forEach((group) => {
 			const items = Array.from(group.querySelectorAll("details"));
 			if (items.length === 0) {
 				return;
@@ -611,4 +611,8 @@
 		initMarquee();
 		initHistorySlider();
 	});
+
+	// Exposed so dynamically injected content (e.g. the FAQs industry modal)
+	// can get the same smooth accordion animation. Pass a root element to scope.
+	window.mccInitAccordions = initAccordions;
 })();
