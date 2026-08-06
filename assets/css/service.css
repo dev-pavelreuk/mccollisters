@@ -3742,3 +3742,637 @@
         font-size: clamp(22px, 7vw, 32px);
     }
 }
+
+/* --- Forms, Certifications & Guides page ---------------------------------- */
+/* Anchor targets clear the sticky header when jumped to (#credentials etc.). */
+#downloadables,
+#credentials,
+#guides {
+    scroll-margin-top: 110px;
+}
+
+/* Shared blue file icon (PDF / DOC) used by the forms cards + guides list. */
+.svc-fileicon {
+    display: block;
+    width: 44px;
+    height: 50px;
+}
+
+/* Forms — download cards in a 3-up grid. */
+.svc-docs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: clamp(32px, 4vw, 48px);
+}
+
+.svc-docs__card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    /* Extra bottom room for the corner-pinned download icon. */
+    padding: 24px 26px 30px;
+    border: 1px solid var(--color-dark);
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--color-dark);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.svc-docs__card:hover,
+.svc-docs__card:focus-visible {
+    border-color: var(--color-border);
+    box-shadow: 0 6px 20px rgba(21, 25, 29, 0.08);
+}
+
+.svc-docs__icon {
+    flex: 0 0 auto;
+}
+
+.svc-docs__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.svc-docs__title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.svc-docs__type {
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+.svc-docs__dl {
+    /* Pinned to the bottom-right corner of the card, matching the live layout:
+       25px inset + 20px icon on desktop, 15px inset on mobile. */
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    display: inline-flex;
+    color: #111111;
+}
+
+.svc-docs__dl svg {
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 840px) {
+    .svc-docs__dl {
+        right: 15px;
+        bottom: 15px;
+    }
+}
+
+/* Certifications — centered logo rows (4-up desktop wraps to a centered 3;
+   2-up mobile with a lone centered BBB). Flex-wrap + centered justification
+   keeps each row centered instead of left-aligned like a grid. */
+.svc-creds__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(48px, 6vw, 96px) clamp(36px, 4vw, 70px);
+    margin-top: clamp(36px, 4.5vw, 56px);
+}
+
+.svc-creds__logo {
+    flex: 0 0 auto;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svc-creds__logo img {
+    max-width: 100%;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.svc-creds__bbb svg {
+    display: block;
+    height: 96px;
+    width: auto;
+    fill: var(--color-dark);
+}
+
+/* NSC logo runs large next to the others — trim it down. */
+.svc-creds__logo--sm img {
+    max-height: 74px;
+}
+
+/* Helpful Guides — list with top + row dividers. */
+.svc-guides__list {
+    list-style: none;
+    margin: clamp(32px, 4vw, 48px) 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-dark);
+}
+
+.svc-guides__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: clamp(24px, 3vw, 34px) 0;
+    border-bottom: 1px solid var(--color-dark);
+    transition: background-color 0.45s ease, padding 0.45s ease;
+}
+
+/* Hover: light-grey fill with the content nudged inward from both edges. */
+.svc-guides__item:hover {
+    background-color: rgb(237, 237, 237);
+    padding-inline: clamp(16px, 2vw, 26px);
+}
+
+.svc-guides__icon {
+    flex: 0 0 auto;
+}
+
+.svc-guides__body {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "title actions"
+        "type  actions";
+    align-items: center;
+    column-gap: 24px;
+    row-gap: 4px;
+    min-width: 0;
+}
+
+.svc-guides__title {
+    grid-area: title;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-dark);
+}
+
+.svc-guides__type {
+    grid-area: type;
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+.svc-guides__actions {
+    grid-area: actions;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.svc-guides__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.svc-guides__action:hover,
+.svc-guides__action:focus-visible {
+    color: var(--color-primary);
+}
+
+.svc-guides__action-icon {
+    display: inline-flex;
+}
+
+.svc-guides__action-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1024px) {
+    .svc-docs__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Three certification logos per row on tablets. */
+    .svc-creds__logo {
+        width: 26%;
+    }
+}
+
+@media (max-width: 782px) {
+    .svc-docs__grid {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 20px;
+    }
+
+    /* Two-up on phones; the trailing BBB centers on its own row. */
+    .svc-creds__logo {
+        width: 38%;
+    }
+
+    .svc-creds__logo img {
+        max-height: 80px;
+    }
+
+    /* NSC reads large on mobile too — keep it smaller than the rest. */
+    .svc-creds__logo--sm img {
+        max-height: 60px;
+    }
+
+    .svc-creds__bbb svg {
+        height: 80px;
+    }
+
+    /* Stack the guide row: title, type, then the View/Download actions. */
+    .svc-guides__body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "title"
+            "type"
+            "actions";
+    }
+
+    .svc-guides__actions {
+        margin-top: 14px;
+        gap: 40px;
+    }
+}
+
+/* --- Careers page --------------------------------------------------------- */
+/* What Drives You Forward? — prose left, blue Drivers callout right. */
+.careers-drives__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+    gap: clamp(32px, 4vw, 64px);
+}
+
+.careers-drivers {
+    position: relative;
+    padding: clamp(30px, 3vw, 44px);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border-radius: 24px;
+}
+
+/* Desktop: map pinned in the upper-right, clear of the contact block below. */
+.careers-drivers__map {
+    position: absolute;
+    top: clamp(24px, 4vw, 52px);
+    right: clamp(14px, 2vw, 30px);
+    width: clamp(105px, 12.7vw, 165px);
+    height: auto;
+}
+
+.careers-drivers__title {
+    margin: 0 0 16px;
+    max-width: 12em;
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 2.4vw, 30px);
+    font-weight: 600;
+    line-height: 1.15;
+    /* Override the global h1–h6 uppercase — this stays Title Case. */
+    text-transform: none;
+    color: var(--color-white);
+}
+
+.careers-drivers__text {
+    margin: 0 0 clamp(18px, 2.4vw, 34px);
+    max-width: 28em;
+    font-size: var(--body-font-size);
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.careers-drivers__label {
+    margin: 0 0 2px;
+    font-family: var(--font-heading);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 600;
+}
+
+.careers-drivers__contact {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.careers-drivers__contact a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.careers-drivers__contact a:hover {
+    text-decoration: underline;
+}
+
+/* Dark region — differentiators + culture + opportunities. */
+.careers-dark {
+    margin-inline: var(--hero-margin-inline);
+    margin-top: clamp(56px, 8vw, 100px);
+    padding: clamp(48px, 6vw, 90px) clamp(24px, 3vw, 56px);
+    color: var(--color-white);
+    background: #141414;
+    border-radius: 24px;
+}
+
+.careers-dark__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+}
+
+.careers-dark__title {
+    margin: 0 0 18px;
+    font-family: var(--font-heading);
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+    line-height: var(--h2-line-height);
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.careers-dark__intro {
+    margin: 0 0 22px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    color: var(--color-white);
+}
+
+.careers-dark__closing {
+    margin: 22px 0 0;
+    font-size: var(--body-font-size);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* What Sets Us Apart — top rule, big title, 4 numbered columns. */
+.careers-apart__head {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.careers-apart__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 40px);
+    margin-top: clamp(28px, 3.5vw, 48px);
+}
+
+.careers-apart__num {
+    display: block;
+    margin-bottom: 14px;
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 4.4vw, 60px);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-primary);
+}
+
+.careers-apart__text {
+    margin: 0;
+    font-size: var(--body-font-size);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Yellow-check list shared by Culture + Opportunities. */
+.careers-checklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+}
+
+.careers-checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: var(--body-font-size);
+    line-height: 1.45;
+    color: var(--color-white);
+}
+
+.careers-check {
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: var(--color-brand-yellow);
+}
+
+.careers-check svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Our Culture — image left, copy right. */
+.careers-culture,
+.careers-opps {
+    display: grid;
+    align-items: center;
+    gap: clamp(32px, 4vw, 70px);
+    margin-top: clamp(56px, 7vw, 100px);
+}
+
+.careers-culture {
+    grid-template-columns: 0.9fr 1.1fr;
+}
+
+.careers-opps {
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.careers-culture__media img,
+.careers-opps__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* Culture people image sits on the dark bg (transparent PNG) — no radius. */
+.careers-culture__media img {
+    border-radius: 0;
+}
+
+.careers-opps__growth {
+    margin-top: clamp(36px, 4vw, 56px);
+}
+
+/* Careers reuses the homepage .home-testimonials slider; drop its bottom
+   padding here since the next section supplies the top spacing. */
+.home-testimonials--flush-bottom {
+    padding-bottom: 0;
+}
+
+/* Join the team — ADP recruitment widget wrapper. */
+.careers-join__lead {
+    margin: 18px 0 clamp(28px, 3vw, 40px);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    color: var(--color-dark);
+}
+
+.careers-join__widget {
+    min-height: 200px;
+}
+
+@media (max-width: 1024px) {
+    .careers-apart__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 782px) {
+    .careers-drives__inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Map drops into the flow, below the title and larger. */
+    .careers-drivers__map {
+        position: static;
+        display: block;
+        width: 56%;
+        max-width: 250px;
+        height: auto;
+        margin: 16px 0 28px;
+    }
+
+    .careers-drivers__title,
+    .careers-drivers__text {
+        max-width: none;
+    }
+
+    .careers-drivers__contact {
+        white-space: normal;
+    }
+
+    .careers-apart__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(22px, 6vw, 32px);
+    }
+
+    /* Stack media above copy on phones. */
+    .careers-culture,
+    .careers-opps {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .careers-culture__media {
+        order: -1;
+    }
+
+    .careers-opps__media {
+        order: -1;
+    }
+
+    .careers-dark__intro {
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+    }
+}
+
+/* --- ESG Practices page --------------------------------------------------- */
+/* Hero image anchored top-left (per the live page). */
+.svc-hero--esg {
+    background-position: top left;
+}
+
+/* Policies intro: a lead paragraph over the standard body copy. */
+.esg-intro {
+    margin-top: clamp(18px, 2.4vw, 28px);
+    margin-bottom: clamp(34px, 4.5vw, 54px);
+}
+
+.esg-intro p {
+    margin: 0 0 14px;
+    font-size: var(--body-font-size);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.esg-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.esg-intro .esg-intro__lead {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--color-dark);
+}
+
+/* Inset the policy answers from the right. */
+.esg-policies__list .svc-faq__panel {
+    padding-right: 11%;
+}
+
+/* Blue statement band. */
+.esg-statement {
+    padding: 100px var(--hero-margin-inline);
+    background: var(--color-white);
+}
+
+/* The statement band supplies the spacing, so the following "More About"
+   section drops its top padding. */
+.esg-statement + .svc-integrated {
+    padding-block-start: 0;
+}
+
+.esg-statement__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    text-align: center;
+}
+
+.esg-statement__text {
+    margin: 0 auto;
+    max-width: 78%;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 36px;
+    letter-spacing: -0.96px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+@media (max-width: 782px) {
+    /* Larger, left-aligned statement on phones (matches the live layout). */
+    .esg-statement__inner {
+        text-align: left;
+    }
+
+    .esg-statement__text {
+        max-width: none;
+        font-size: clamp(34px, 10vw, 46px);
+        line-height: 1.12;
+    }
+
+    /* Let the statement wrap naturally on phones. */
+    .esg-br {
+        display: none;
+    }
+}
