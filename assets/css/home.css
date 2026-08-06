@@ -1450,6 +1450,15 @@
         gap: 0;
     }
 
+    /* Stretch the body to the screen width (a non-stretched column flex item
+       would otherwise size to the text's max-content and overflow). The copy
+       then wraps and the slide grows taller instead of running off-screen. */
+    .home-testimonials__body {
+        flex-basis: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
     .home-testimonials__mark {
         flex: 0 0 auto;
         width: auto;
