@@ -4988,7 +4988,7 @@
     margin: 0 0 10px;
     font-family: var(--font-heading);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.3;
     text-transform: none;
     color: var(--color-dark);
@@ -4996,7 +4996,8 @@
 
 .terms__body p {
     margin: 0 0 12px;
-    font-size: 15px;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
     line-height: 1.7;
     color: var(--color-text);
 }
@@ -5026,7 +5027,8 @@
 .terms__body ul li {
     position: relative;
     padding-left: 30px;
-    font-size: 15px;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
     line-height: 1.6;
     color: var(--color-text);
 }
@@ -5052,5 +5054,311 @@
 
     .terms__subtitle {
         font-size: 30px;
+    }
+}
+
+/* --- Talk to an Expert page ----------------------------------------------- */
+.tte-head__intro {
+    max-width: 1100px;
+    margin-top: clamp(18px, 2.4vw, 28px);
+}
+
+.tte-head__intro p {
+    margin: 0 0 12px;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.tte-head__intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* Dark form panel. */
+.tte {
+    margin-inline: var(--hero-margin-inline);
+    margin-top: clamp(32px, 4vw, 56px);
+    margin-bottom: 100px;
+    padding: 100px clamp(40px, 8vw, 120px);
+    color: var(--color-white);
+    background: #1f1f1f;
+    border-radius: 25px;
+}
+
+.tte__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+}
+
+/* Gravity Forms on the dark panel — white fields, white labels, custom
+   checkboxes, white submit. Scoped so it doesn't affect other GF instances. */
+/* Force every label/description/section/counter to white on the black panel
+   (the input/textarea/select values stay dark on their white fields). */
+.tte .gform_wrapper,
+.tte .gform_wrapper label,
+.tte .gform_wrapper legend,
+.tte .gform_wrapper span,
+.tte .gform_wrapper p,
+.tte .gform_wrapper li,
+.tte .gform_wrapper .gfield_label,
+.tte .gform_wrapper .gform-field-label,
+.tte .gform_wrapper .gsection_title,
+.tte .gform_wrapper .gfield_description,
+.tte .gform_wrapper .gform_required_legend,
+.tte .gform_wrapper .ginput_counter {
+    color: var(--color-white) !important;
+}
+
+.tte .gfield_label,
+.tte label,
+.tte .gsection_title,
+.tte .gsection .gsection_title,
+.tte legend {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.tte .gsection_title,
+.tte legend {
+    font-size: 18px;
+}
+
+/* Section divider lines pure white on the dark panel, with even 20px spacing. */
+.tte .gform_wrapper .gfield--type-section,
+.tte .gform_wrapper .gsection,
+.tte .gform_wrapper hr {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--color-white) !important;
+}
+
+/* The empty section heading shouldn't add its own spacing. */
+.tte .gform_wrapper .gfield--type-section .gsection_title {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Consent copy renders as plain text (GF wraps it in a bordered scroll box). */
+.tte .gform_wrapper .gfield_consent_description {
+    border: 0 !important;
+    padding: 0 !important;
+    margin-top: 6px;
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+}
+
+/* Links inside the form (e.g. Privacy Policy) — white, brand-yellow on hover. */
+.tte .gform_wrapper a {
+    color: var(--color-white) !important;
+    text-decoration: underline;
+    transition: color var(--transition);
+}
+
+.tte .gform_wrapper a:hover,
+.tte .gform_wrapper a:focus {
+    color: var(--color-brand-yellow) !important;
+}
+
+/* No grid row gap — vertical spacing comes from the field margins below. */
+.tte .gform_wrapper .gform_fields {
+    grid-row-gap: 0 !important;
+    row-gap: 0 !important;
+}
+
+.tte .gfield {
+    margin-bottom: 18px;
+}
+
+.tte input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.tte textarea,
+.tte select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-dark);
+    background: var(--color-white);
+    border: 0;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.tte textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.tte input:focus,
+.tte textarea:focus,
+.tte select:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+}
+
+/* Custom checkboxes: white square, blue check. */
+.tte input[type="checkbox"],
+.tte input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin: 0 10px 0 0;
+    background: var(--color-white);
+    border: 0;
+    border-radius: 3px;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.tte input[type="radio"] {
+    border-radius: 50%;
+}
+
+/* Remove Gravity Forms' own check glyph so only the custom one shows. */
+.tte input[type="checkbox"]::before,
+.tte input[type="radio"]::before {
+    content: none !important;
+    display: none !important;
+}
+
+.tte input[type="checkbox"]:checked,
+.tte input[type="radio"]:checked {
+    background-image: none !important;
+}
+
+.tte input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* Checkbox spec (matches the live site): 15px white square, thin white border. */
+#gform_3 input[type="checkbox"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 15px !important;
+    height: 15px !important;
+    background: rgb(255, 255, 255) !important;
+    border: 1px solid rgb(255, 255, 255) !important;
+    border-radius: 2px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    margin: 3px 10px 0 0 !important;
+}
+
+.tte input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.tte .gchoice {
+    display: flex;
+    align-items: center;
+}
+
+.tte .gchoice label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Marketing consent: checkbox floats left (vertically centered with the first
+   line) so wrapped lines run full width under it, starting at the checkbox's
+   left edge. Form-id selector beats Gravity Forms' own flex layout. */
+#gform_3 .ginput_container_consent {
+    display: block !important;
+}
+
+#gform_3 .ginput_container_consent input[type="checkbox"] {
+    float: left !important;
+    margin: 3px 10px 0 0 !important;
+}
+
+#gform_3 .gfield_consent_label {
+    display: inline !important;
+    color: var(--color-white) !important;
+    font-family: var(--font-body);
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    cursor: pointer;
+}
+
+.tte .ginput_counter,
+.tte .gform_required_legend,
+.tte .gfield_description {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#gform_3 .gform_button {
+    width: auto !important;
+    background: #fff !important;
+    color: #000 !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 16px 24px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+#gform_3 .gform_button:hover,
+#gform_3 .gform_button:focus,
+#gform_3 .gform_button:active {
+    background: var(--color-brand-yellow) !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transform: none !important;
+}
+
+.tte .gform_footer {
+    margin-top: 18px;
+}
+
+@media (max-width: 782px) {
+    /* All Talk-to-an-Expert form text at 16px on mobile. */
+    .tte .gform_wrapper,
+    .tte .gform_wrapper label,
+    .tte .gform_wrapper legend,
+    .tte .gform_wrapper .gfield_label,
+    .tte .gform_wrapper .gform-field-label,
+    .tte .gform_wrapper .gsection_title,
+    .tte .gform_wrapper .gfield_consent_label,
+    .tte .gform_wrapper .gfield_description,
+    .tte .gform_wrapper .gform_required_legend,
+    .tte .gform_wrapper .ginput_counter,
+    .tte .gchoice label,
+    .tte input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+    .tte textarea,
+    .tte select {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 782px) {
+    /* Keep the consent disclaimer smaller than the rest on mobile. */
+    .tte .gform_wrapper .gfield_consent_description {
+        font-size: 13px !important;
     }
 }
