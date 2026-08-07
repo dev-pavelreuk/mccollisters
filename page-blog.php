@@ -78,64 +78,7 @@ $blog_query = new WP_Query([
                     <?php endif; ?>
                 </div>
 
-                <aside class="blog__sidebar" aria-label="<?php esc_attr_e('Blog sidebar', 'mccollisters'); ?>">
-                    <form class="blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-                        <input type="search" name="s" class="blog-search__input" placeholder="<?php esc_attr_e('Search…', 'mccollisters'); ?>" value="<?php echo esc_attr(get_search_query()); ?>" aria-label="<?php esc_attr_e('Search articles', 'mccollisters'); ?>">
-                        <button type="submit" class="blog-search__btn" aria-label="<?php esc_attr_e('Search', 'mccollisters'); ?>">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                        </button>
-                    </form>
-
-                    <?php $categories = get_categories(['hide_empty' => true]); ?>
-                    <?php if ($categories) : ?>
-                        <div class="blog-widget">
-                            <h3 class="blog-widget__title"><?php esc_html_e('Categories', 'mccollisters'); ?><span class="blog-widget__arrow" aria-hidden="true"><?php echo $arrow_ext; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></h3>
-                            <ul class="blog-widget__list blog-widget__list--counted">
-                                <?php foreach ($categories as $c) : ?>
-                                    <li>
-                                        <a href="<?php echo esc_url(get_category_link($c)); ?>"><?php echo esc_html($c->name); ?></a>
-                                        <span class="blog-widget__count">(<?php echo esc_html($c->count); ?>)</span>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php $archives = wp_get_archives(['type' => 'monthly', 'echo' => false, 'format' => 'custom', 'before' => '<li>', 'after' => '</li>']); ?>
-                    <?php if ($archives) : ?>
-                        <div class="blog-widget">
-                            <h3 class="blog-widget__title"><?php esc_html_e('Archive', 'mccollisters'); ?><span class="blog-widget__arrow" aria-hidden="true"><?php echo $arrow_ext; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></h3>
-                            <ul class="blog-widget__list"><?php echo $archives; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></ul>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php $tags = get_tags(['hide_empty' => true]); ?>
-                    <?php if ($tags) : ?>
-                        <div class="blog-widget">
-                            <h3 class="blog-widget__title"><?php esc_html_e('Tags', 'mccollisters'); ?><span class="blog-widget__arrow" aria-hidden="true"><?php echo $arrow_ext; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></h3>
-                            <div class="blog-tags">
-                                <?php foreach ($tags as $t) : ?>
-                                    <a class="blog-tag" href="<?php echo esc_url(get_tag_link($t)); ?>"><?php echo esc_html($t->name); ?></a>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="blog-widget blog-subscribe">
-                        <h3 class="blog-widget__title"><?php esc_html_e('Subscribe to our newsletter', 'mccollisters'); ?><span class="blog-widget__arrow" aria-hidden="true"><?php echo $arrow_ext; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></h3>
-                        <p class="blog-subscribe__text"><?php esc_html_e('Get industry insights, project highlights, and company updates delivered straight to your inbox.', 'mccollisters'); ?></p>
-                        <form class="blog-subscribe__form mcc-newsletter" action="#" method="post">
-                            <label class="screen-reader-text" for="blog-newsletter-email"><?php esc_html_e('Email', 'mccollisters'); ?></label>
-                            <input type="email" id="blog-newsletter-email" name="email" placeholder="<?php esc_attr_e('Email', 'mccollisters'); ?>" required>
-
-                            <?php // Revealed by navigation.js once 3+ characters are typed. ?>
-                            <div class="mcc-newsletter-reveal">
-                                <button type="submit" class="mcc-subscribe"><?php esc_html_e('Subscribe', 'mccollisters'); ?></button>
-                            </div>
-                        </form>
-                        <p class="blog-subscribe__consent"><?php esc_html_e('You can withdraw consent at any time.', 'mccollisters'); ?><br><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><?php esc_html_e('Privacy Policy', 'mccollisters'); ?></a></p>
-                    </div>
-                </aside>
+                <?php get_template_part('template-parts/blog/sidebar'); ?>
             </div>
         </div>
     </section>

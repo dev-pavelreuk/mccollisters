@@ -101,6 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			syncReveal();
 		});
 
+	// Single-post "print" share button.
+	document.querySelectorAll("[data-print]").forEach((btn) => {
+		btn.addEventListener("click", () => window.print());
+	});
+
 	const closeMenu = () => {
 		toggle.setAttribute("aria-expanded", "false");
 		toggle.setAttribute("aria-label", "Open main menu");
