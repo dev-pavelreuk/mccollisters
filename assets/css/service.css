@@ -449,22 +449,17 @@
 
 .svc-faq__icon svg {
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
-/* Slightly thicker arrow stroke (overrides the inline stroke-width="2"). */
+/* Thin arrow stroke (overrides the inline stroke-width="2"). */
 .svc-faq__icon svg path {
-    stroke-width: 2.5;
-}
-
-.svc-faq__summary:hover .svc-faq__icon {
-    color: var(--color-primary);
+    stroke-width: 1.75;
 }
 
 .svc-faq[open] .svc-faq__icon {
     transform: rotate(0deg);
-    color: var(--color-primary);
 }
 
 .svc-faq__panel {
@@ -5736,6 +5731,471 @@
     }
 
     .blog-card__excerpt {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   Single post (single.php) + Latest Posts sidebar widget
+   Layout reuses the .blog__inner grid (main column + global sidebar).
+   ========================================================================== */
+
+.single-post {
+    margin-bottom: 100px;
+}
+
+.single-post__main {
+    min-width: 0;
+}
+
+/* "View All Posts" link sitting above the title (in place of an eyebrow). */
+.single-post__back {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-dark);
+    /* Underline is a thin gradient anchored bottom-right (spanning through the
+       end of the chevron) that shrinks to the right on hover — mirrors the
+       live site's .logico-small-button background-size technique. */
+    background-image: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: 100% 0.0625em;
+    /* Shrink is immediate on hover-in (--back-delay 0s); on hover-out the line
+       grows back after a short beat (0.2s) as the chevron clears. */
+    transition: background-size 0.2s linear var(--back-delay, 0.2s);
+}
+
+/* Keep the link black on hover/focus (overrides the global a:hover colour). */
+.single-post__back:hover,
+.single-post__back:focus-visible {
+    color: var(--color-dark);
+}
+
+.single-post__back:hover {
+    background-size: 0% 0.0625em;
+    --back-delay: 0s;
+}
+
+/* Diagonal (↗) arrow gives way to a right chevron (›) that slides in from the
+   left as the underline finishes retracting — reads as one continuous motion. */
+.single-post__back-arrow {
+    position: relative;
+    display: inline-flex;
+    width: 15px;
+    height: 15px;
+}
+
+.single-post__back-arrow svg {
+    position: absolute;
+    inset: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.single-post__back-arrow-diagonal {
+    transform: scale(0.78);
+    /* Fades out at once on hover-in; fades back in with the underline (0.3s)
+       on hover-out. */
+    transition: opacity 0.2s linear var(--diag-delay, 0.2s);
+}
+
+/* Chevron rises from underneath with a little bounce.
+   Hover-in : appears AFTER the underline has retracted (--chev-delay 0.2s).
+   Hover-out: disappears FIRST, immediately (--chev-delay 0s), before the line
+              and diagonal come back. */
+.single-post__back-arrow-chevron {
+    opacity: 0;
+    transform: translateY(10px) rotate(90deg);
+    transition:
+        opacity var(--chev-dur, 0.2s) var(--chev-ease, ease) var(--chev-delay, 0s),
+        transform var(--chev-dur, 0.2s) var(--chev-ease, ease) var(--chev-delay, 0s);
+}
+
+.single-post__back:hover .single-post__back-arrow-diagonal {
+    opacity: 0;
+    --diag-delay: 0s;
+}
+
+.single-post__back:hover .single-post__back-arrow-chevron {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+    --chev-delay: 0.2s;
+    --chev-dur: 0.45s;
+    --chev-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Article H1 uses its own type — not the global 80px h1. */
+.single-post__title {
+    margin: 0 0 22px;
+    max-width: 12em;
+    font-family: var(--font-heading);
+    font-size: 60px;
+    font-weight: 500;
+    line-height: 63px;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+/* Blue intro excerpt, below the featured image. Fixed type for every article. */
+.single-post__excerpt {
+    margin: clamp(28px, 3.5vw, 40px) 0 0;
+}
+
+.single-post__excerpt p {
+    margin: 0 0 0.6em;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 36px;
+    letter-spacing: -0.96px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.single-post__excerpt p:last-child {
+    margin-bottom: 0;
+}
+
+/* Date • category on the left, share icons on the right, over a top rule. */
+.single-post__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+}
+
+.single-post__meta-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+}
+
+.single-post__date {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-dark);
+}
+
+.single-post__dot {
+    flex: 0 0 auto;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.single-post__cat {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.single-post__cat:hover {
+    color: var(--color-primary);
+}
+
+.single-post__share {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.single-post__share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    color: var(--color-dark);
+    transition: color var(--transition);
+}
+
+.single-post__share-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.single-post__share-btn:hover {
+    color: var(--color-primary);
+}
+
+.single-post__media {
+    margin: clamp(28px, 3.5vw, 40px) 0 0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.single-post__media img {
+    display: block;
+    width: 100%;
+    max-height: 443px;
+    object-fit: cover;
+    /* Bias the crop toward the top so faces/subjects (usually in the upper part
+       of a photo) stay visible instead of being cut off. Override per post with
+       an inline style, e.g. style="object-position: center 60%". */
+    object-position: center 5%;
+}
+
+/* ---- Post body (Gutenberg content) ---------------------------------- */
+.post-content {
+    margin-top: clamp(28px, 3.5vw, 40px);
+}
+
+.post-content > * {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.post-content > *:last-child {
+    margin-bottom: 0;
+}
+
+.post-content p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: var(--body-font-weight);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.post-content h2 {
+    margin-top: 1.4em;
+    font-family: var(--font-heading);
+    font-size: clamp(34px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.post-content h3 {
+    margin-top: 1.2em;
+    font-family: var(--font-heading);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: none;
+    color: var(--color-dark);
+}
+
+.post-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.post-content strong {
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+/* Blue-check bullet lists, matching the article design. */
+.post-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.post-content ul li {
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 32px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: var(--body-font-weight);
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.post-content ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 12.5 9 17.5 20 6.5' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.post-content ol {
+    padding-left: 1.2em;
+}
+
+.post-content ol li {
+    margin-bottom: 14px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.post-content blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 24px;
+    border-left: 3px solid var(--color-primary);
+    font-style: italic;
+    color: var(--color-dark);
+}
+
+/* ---- Prev / Next navigation ----------------------------------------- */
+.single-post__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: clamp(40px, 5vw, 64px);
+}
+
+.single-post__nav-next {
+    margin-left: auto;
+    text-align: right;
+}
+
+.single-post__nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--color-dark);
+    transition: color var(--transition);
+}
+
+.single-post__nav a:hover {
+    color: var(--color-primary);
+}
+
+.single-post__nav a svg {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+}
+
+.single-post__nav-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.single-post__nav-next .single-post__nav-inner {
+    align-items: flex-end;
+}
+
+.single-post__nav-label {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.single-post__nav-title {
+    max-width: 22ch;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+/* ---- Latest Posts sidebar widget ------------------------------------ */
+.blog-latest {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.blog-latest__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.blog-latest__thumb {
+    flex: 0 0 auto;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blog-latest__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-latest__title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition);
+}
+
+.blog-latest__title:hover {
+    color: var(--color-primary);
+}
+
+/* Archive description (category/tag intro), if any. */
+.blog__intro {
+    margin: -20px 0 clamp(32px, 4vw, 50px);
+    max-width: 60ch;
+    font-family: var(--font-body);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+@media (max-width: 782px) {
+    .single-post {
+        margin-bottom: 64px;
+    }
+
+    .single-post__title {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    /* Stack date/category above the share icons. */
+    .single-post__meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .post-content h2 {
+        font-size: 30px;
+    }
+
+    /* Mobile prev/next shows only the label + arrow (no title). */
+    .single-post__nav-title {
         display: none;
     }
 }
