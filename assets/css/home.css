@@ -4,7 +4,7 @@
    outer margin, so their headings/copy/buttons line up with those sections at
    every width (card margin + container gutter === this padding + gutter). */
 .home-services {
-    padding-top: clamp(60px, 8vw, 110px);
+    padding-top: clamp(60px, 8vw, 100px);
     padding-bottom: 0;
     padding-inline: var(--hero-margin-inline);
     background: var(--color-white);
@@ -45,7 +45,7 @@
 }
 
 .home-service + .home-service {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-dark);
 }
 
 .home-service__icon {
@@ -108,6 +108,24 @@
 
     .home-service__icon {
         width: 150px;
+    }
+}
+
+/* Services section — mobile-only overrides. */
+@media (max-width: 782px) {
+    .home-services {
+        padding-inline: 10px;
+    }
+
+    /* Grid is a .container; drop its own inset so only the section's 10px
+       padding spaces it from the edges. */
+    .home-services__grid {
+        width: 100%;
+    }
+
+    .home-service__title {
+        font-size: 18px;
+        font-weight: 600;
     }
 }
 
@@ -396,7 +414,7 @@
 
 /* Industries ticker — seamless infinite marquee. */
 .home-marquee {
-    margin-block: 80px 50px;
+    margin-block: 80px 80px;
     overflow: hidden;
 }
 
@@ -457,7 +475,8 @@
    Dark block: miles counter, heading + copy, and an employee quote card. */
 .home-about {
     margin-inline: var(--hero-margin-inline);
-    padding-block: clamp(70px, 8vw, 120px);
+    padding-top: 100px;
+    padding-bottom: 100px;
     color: var(--color-white);
     background: #141414;
     border-radius: 24px;
@@ -466,11 +485,11 @@
 .home-about__eyebrow {
     margin: 0 0 clamp(40px, 6vw, 80px);
     padding-bottom: 22px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid #fff;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.7);
+    color: #fff;
 }
 
 /* Big animated mileage figure with its label to the right. */
@@ -479,14 +498,14 @@
     align-items: baseline;
     flex-wrap: wrap;
     gap: 8px 22px;
-    margin-bottom: clamp(48px, 6vw, 90px);
+    padding-bottom: 100px;
 }
 
 .home-about__count {
     font-family: var(--font-heading);
-    font-size: clamp(56px, 11vw, 150px);
-    font-weight: 700;
-    line-height: 0.95;
+    font-size: 130px;
+    font-weight: 600;
+    line-height: 130px;
     letter-spacing: -0.02em;
     color: var(--color-primary);
     font-variant-numeric: tabular-nums;
@@ -496,6 +515,7 @@
 @media (max-width: 782px) {
     .home-about__count {
         font-size: clamp(34px, 10vw, 52px);
+        line-height: 40px;
     }
 }
 
@@ -549,7 +569,7 @@
     --overlay-opacity: 0.1;
     position: relative;
     isolation: isolate;
-    margin-top: clamp(40px, 5vw, 70px);
+    margin-top: 100px;
     padding: clamp(40px, 5vw, 64px);
     min-height: 528px;
     display: flex;
@@ -580,6 +600,9 @@
 .home-about__quote-inner {
     margin: 0;
     max-width: 460px;
+    /* Drop the global blockquote's blue left border/indent. */
+    padding-left: 0;
+    border-left: 0;
 }
 
 .home-about__quote-text {
@@ -655,7 +678,8 @@
    the right. Native <details> handles the open/close; the arrow rotates and
    turns brand blue when a row is open. */
 .home-features {
-    padding-block: clamp(60px, 8vw, 110px);
+    padding-top: 0;
+    padding-bottom: clamp(60px, 8vw, 100px);
     overflow: hidden;
 }
 
@@ -686,11 +710,13 @@
 }
 
 .home-features__content {
-    padding-right: clamp(20px, 5vw, 80px);
+    /* Extra right padding narrows the column so the title wraps to three lines
+       (CONFIDENCE / WITH / MCCOLLISTER'S). */
+    padding-right: clamp(20px, 15vw, 150px);
 }
 
 .home-features__eyebrow {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     font-family: var(--font-heading);
     font-size: 15px;
     font-weight: 600;
@@ -708,24 +734,26 @@
 }
 
 .home-features__item {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-black);
 }
 
 .home-features__item:last-of-type {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-black);
 }
 
 /* The clickable row: number, label, then the arrow pushed to the right. */
 .home-features__summary {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 22px 0;
+    gap: 5px;
+    padding: 15px 0;
     cursor: pointer;
     list-style: none;
     font-family: var(--font-heading);
-    font-size: clamp(18px, 1.5vw, 22px);
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-transform: none;
     color: var(--color-dark);
 }
 
@@ -767,7 +795,7 @@
 
 .home-features__panel {
     /* Flush-left with the step number/title above it. */
-    padding: 0 0 26px;
+    padding: 0 0 15px;
     max-width: 100%;
 }
 
@@ -794,7 +822,7 @@
 .home-industries {
     position: relative;
     isolation: isolate;
-    padding-top: clamp(60px, 8vw, 110px);
+    padding-top: clamp(60px, 8vw, 100px);
     padding-bottom: clamp(30px, 4vw, 55px);
     color: var(--color-white);
     background-color: #1a1a1a;
@@ -825,7 +853,7 @@
     font-family: var(--font-heading);
     font-size: 15px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.75);
+    color: #fff;
 }
 
 .home-industries__title {
@@ -859,6 +887,9 @@
    -50% shift lands seamlessly. */
 .home-industry {
     position: relative;
+    /* Own stacking context so the label (z-index 4) reliably paints above the
+       hover gradient (z-index 3) regardless of the animated track. */
+    isolation: isolate;
     flex: 0 0 auto;
     display: block;
     width: clamp(240px, 24vw, 320px);
@@ -868,6 +899,20 @@
     overflow: hidden;
     color: var(--color-white);
     text-decoration: none;
+}
+
+/* Smaller 180×180 slides with a 25px gap on mobile. */
+@media (max-width: 782px) {
+    .home-industry {
+        width: 180px;
+        margin-right: 25px;
+    }
+
+    /* Smaller label so even the longest names fit on one line. */
+    .home-industry__label {
+        padding-inline: 12px;
+        font-size: 12px;
+    }
 }
 
 .home-industry__img {
@@ -953,9 +998,17 @@
    Black band, "The McCollister's Difference": three animated figures. */
 .home-stats {
     padding-top: clamp(30px, 4vw, 55px);
-    padding-bottom: clamp(60px, 8vw, 110px);
+    padding-bottom: clamp(60px, 8vw, 100px);
     color: var(--color-white);
     background: #000;
+}
+
+/* Rounded bottom corners on the black expertise section on mobile. */
+@media (max-width: 782px) {
+    .home-stats {
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
 }
 
 .home-stats__inner {
@@ -969,7 +1022,7 @@
     font-family: var(--font-heading);
     font-size: 15px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.75);
+    color: #fff;
 }
 
 .home-stats__title {
@@ -992,8 +1045,8 @@
 .home-stat__number {
     margin: 0 0 18px;
     font-family: var(--font-heading);
-    font-size: clamp(52px, 6vw, 96px);
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 600;
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--color-primary);
@@ -1049,14 +1102,28 @@
     height: 18px;
 }
 
+/* Mobile: label in title-case (not uppercase). */
+@media (max-width: 782px) {
+    .home-stat__label {
+        text-transform: none;
+    }
+}
+
 /* --- Testimonials ----------------------------------------------------------
    Big outlined quote mark on the left; heading + autoplaying fade slider on
    the right. Slides are stacked in one grid cell so the container matches the
    tallest quote and nothing jumps between slides. */
 .home-testimonials {
-    padding-block: clamp(70px, 9vw, 130px);
+    padding-block: 100px;
     background: var(--color-white);
     color: var(--color-dark);
+}
+
+/* Mobile keeps a smaller vertical rhythm than the 100px used on larger screens. */
+@media (max-width: 782px) {
+    .home-testimonials {
+        padding-block: 70px;
+    }
 }
 
 .home-testimonials__inner {
@@ -1190,7 +1257,8 @@
 /* --- Blog ------------------------------------------------------------------
    Heading + "See all posts" button, then three latest-post cards. */
 .home-blog {
-    padding-block: clamp(60px, 8vw, 110px);
+    padding-top: 0;
+    padding-bottom: clamp(60px, 8vw, 100px);
     padding-inline: var(--hero-margin-inline);
     background: var(--color-white);
 }
@@ -1227,8 +1295,19 @@
     color: var(--color-dark);
 }
 
+/* Title line breaks: desktop shows the --d breaks (3 lines), mobile the --m
+   break (2 lines). */
+.home-blog__br--m {
+    display: none;
+}
+
 .home-blog__cta {
     flex: 0 0 auto;
+}
+
+/* The mobile "See All Posts" (below the slider) is hidden on larger screens. */
+.home-blog__cta--mobile {
+    display: none;
 }
 
 .home-blog__grid {
@@ -1248,9 +1327,22 @@
     align-items: center;
     gap: 12px;
     font-family: var(--font-heading);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--color-dark);
+}
+
+/* Meta links sit above the card's stretched title link and turn blue on hover. */
+.home-blog__card-meta a {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.home-blog__card-meta a:hover {
+    color: var(--color-primary);
 }
 
 .home-blog__dot {
@@ -1267,10 +1359,14 @@
 }
 
 .home-blog__card-title {
-    margin: 0 0 16px;
-    font-size: clamp(20px, 1.6vw, 24px);
-    font-weight: 700;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
     line-height: 1.2;
+    text-transform: none;
+    /* Reserve up to three lines so the excerpts line up across the columns
+       regardless of a 1- vs 3-line title. */
+    min-height: calc(1.2em * 3);
 }
 
 .home-blog__card-title a {
@@ -1286,7 +1382,9 @@
     inset: 0;
 }
 
-.home-blog__card:hover .home-blog__card-title a {
+/* Title turns blue when hovering the card via its stretched link, but not when
+   hovering the meta links (they sit above the stretched link). */
+.home-blog__card-title a:hover {
     color: var(--color-primary);
 }
 
@@ -1310,6 +1408,9 @@
     padding-bottom: 100%;
     border-radius: 18px;
     overflow: hidden;
+    /* Sit above the card's stretched title link so hovering the image (and only
+       the image) triggers the overlay, and the image stays clickable. */
+    z-index: 1;
 }
 
 /* The class lands on the <picture> wrapper (WebP plugin) or the bare <img>;
@@ -1343,7 +1444,8 @@
     pointer-events: none;
 }
 
-.home-blog__card:hover .home-blog__card-media::after {
+/* Only when hovering the featured image itself — not the date/category/title. */
+.home-blog__card-media:hover::after {
     opacity: 1;
 }
 
@@ -1399,7 +1501,33 @@
 
     /* Tighter spacing around the industries ticker on mobile. */
     .home-marquee {
-        margin-block: 40px 30px;
+        margin-block: 50px;
+    }
+
+    .home-marquee__item {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    /* Black box sits 10px from the edges with 20px inner padding; its inner
+       .container drops its own inset so the padding isn't doubled. */
+    .home-about {
+        margin-inline: 10px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-inline: 20px;
+    }
+
+    .home-about__inner {
+        width: 100%;
+    }
+
+    .home-about__eyebrow {
+        margin-bottom: 30px;
+    }
+
+    .home-about__metric {
+        padding-bottom: 30px;
     }
 
     /* About Us stacks to a single column on mobile. */
@@ -1407,10 +1535,17 @@
         grid-template-columns: minmax(0, 1fr);
     }
 
-    /* Certification logos wrap and center on mobile. */
+    /* Certification logos: 2 columns × 3 rows on mobile. */
     .home-certs__row {
-        justify-content: center;
-        gap: 32px 40px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: clamp(60px, 14vw, 90px) 24px;
+    }
+
+    /* Bigger, uniform logo height across all six on mobile. */
+    .home-certs__logo {
+        height: 64px;
     }
 
     /* Features stacks: truck on top, accordion beneath. */
@@ -1475,14 +1610,133 @@
         gap: 24px;
     }
 
+    /* Blog cards become a drag/swipe carousel on mobile (JS-driven so it feels
+       the same as the live site: horizontal drag moves it, release snaps to the
+       nearest card; vertical drag still scrolls the page). */
     .home-blog__grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        display: flex;
+        flex-wrap: nowrap;
+        grid-template-columns: none;
+        gap: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        touch-action: pan-y;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        cursor: grab;
+        /* Track the cursor 1:1 while dragging (override the global smooth
+           scroll-behavior); the release snap re-enables smooth via scrollTo. */
+        scroll-behavior: auto;
+    }
+
+    .home-blog__grid.is-dragging {
+        cursor: grabbing;
+        user-select: none;
+    }
+
+    /* Stop the browser from "ghost-dragging" the card images/links so the drag
+       scrolls the slider instead. */
+    .home-blog__grid a,
+    .home-blog__grid img {
+        -webkit-user-drag: none;
+        user-select: none;
+    }
+
+    .home-blog__grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Mobile "See All Posts": below the slider with 50px of space above. */
+    .home-blog__cta--desktop {
+        display: none;
+    }
+
+    .home-blog__cta--mobile {
+        display: inline-flex;
+        margin-top: 50px;
+    }
+
+    .home-blog {
+        padding-bottom: 90px;
+    }
+
+    .home-blog__card {
+        flex: 0 0 80%;
+        min-width: 0;
+        /* Let the JS handle horizontal drags from anywhere on the card. */
+        touch-action: pan-y;
+    }
+
+    /* Image on top, no excerpt, full title (matches the mobile design). */
+    .home-blog__card-media {
+        order: -1;
+        margin-top: 0;
+    }
+
+    .home-blog__excerpt {
+        display: none;
+    }
+
+    /* Stack the meta: date on top, category beneath, no blue dot; 20px above. */
+    .home-blog__card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-top: 20px;
+    }
+
+    .home-blog__dot {
+        display: none;
+    }
+
+    /* No divider between the meta and the title on the mobile slider. */
+    .home-blog__divider {
+        display: none;
+    }
+
+    .home-blog__card-title {
+        min-height: 0;
+        padding-top: 30px;
+        max-width: 70%;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 18px;
+    }
+
+    /* Toggle the title's line breaks for the 2-line mobile version. */
+    .home-blog__br--d {
+        display: none;
+    }
+
+    .home-blog__br--m {
+        display: inline;
     }
 
     .home-about__quote {
         justify-content: flex-start;
-        min-height: 0;
+        min-height: 528px;
+        /* Shift the photo left so only a sliver of his face shows at the left
+           edge, and drop the navy fill so no blue strip shows. */
+        background-position-x: -1050px;
+        background-color: transparent;
+    }
+
+    .home-about__quote-text {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 19px;
+    }
+
+    .home-about__quote-name {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2em;
+    }
+
+    .home-about__quote-role {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.2em;
     }
 }
 
@@ -1492,4 +1746,12 @@
 
 .home-placeholder .container {
     min-height: 180px;
+}
+
+/* Hide the hero "Find A McCollister's Facility Near You" box at 955px and below
+   (it's a desktop-only feature; the mobile block also hides it under 782px). */
+@media (max-width: 955px) {
+    .home-hero__facility {
+        display: none;
+    }
 }

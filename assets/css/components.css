@@ -332,6 +332,7 @@ body :is(
     font-size: var(--h2-font-size);
     font-weight: var(--h2-font-weight);
     line-height: var(--h2-line-height);
+    letter-spacing: -1.8px;
 }
 
 @media (max-width: 782px) {

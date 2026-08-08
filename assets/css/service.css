@@ -1307,7 +1307,7 @@
 /* Dealer/OEM dark-section sub-blocks: extra breathing room above each. */
 .svc-freight__header--gap,
 .svc-freight__fleet--gap {
-    margin-top: clamp(56px, 7vw, 110px);
+    margin-top: clamp(56px, 7vw, 100px);
 }
 
 /* --- OEM: "Confidence With McCollister's" partnership section -------------- */
@@ -5081,6 +5081,14 @@
     border-radius: 25px;
 }
 
+/* Black panels use 50px top/bottom padding on mobile (matches .home-about). */
+@media (max-width: 782px) {
+    .tte {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
 .tte__inner {
     max-width: var(--container);
     margin-inline: auto;
@@ -5844,8 +5852,7 @@ body.search .blog-search__btn {
     text-decoration: none;
     color: var(--color-dark);
     /* Underline is a thin gradient anchored bottom-right (spanning through the
-       end of the chevron) that shrinks to the right on hover — mirrors the
-       live site's .logico-small-button background-size technique. */
+       end of the chevron) that shrinks to the right on hover */
     background-image: linear-gradient(0deg, currentColor 0%, currentColor 100%);
     background-repeat: no-repeat;
     background-position: 100% 100%;

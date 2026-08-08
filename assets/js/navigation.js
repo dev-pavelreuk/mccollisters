@@ -106,6 +106,69 @@ document.addEventListener("DOMContentLoaded", () => {
 		btn.addEventListener("click", () => window.print());
 	});
 
+	// Drag/swipe carousel for the homepage blog slider (mouse + touch). Works
+	// like the live site: a horizontal drag moves the cards and, on release,
+	// snaps to the nearest card. A real drag also cancels the card link.
+	document.querySelectorAll(".home-blog__grid").forEach((slider) => {
+		let down = false;
+		let startX = 0;
+		let startScroll = 0;
+		let dragged = false;
+
+		const snapToNearest = () => {
+			const first = slider.children[0];
+			if (!first) return;
+			const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
+			const step = first.getBoundingClientRect().width + gap;
+			const index = Math.round(slider.scrollLeft / step);
+			slider.scrollTo({ left: index * step, behavior: "smooth" });
+		};
+
+		// Start on the slider (events bubble up from the cards, so you can grab
+		// anywhere); track move/up on the window so the drag never gets "stuck"
+		// when it starts on a link or image.
+		slider.addEventListener("pointerdown", (e) => {
+			down = true;
+			dragged = false;
+			startX = e.clientX;
+			startScroll = slider.scrollLeft;
+			slider.classList.add("is-dragging");
+		});
+
+		window.addEventListener("pointermove", (e) => {
+			if (!down) return;
+			const dx = e.clientX - startX;
+			if (Math.abs(dx) > 4) dragged = true;
+			slider.scrollLeft = startScroll - dx;
+		});
+
+		const release = () => {
+			if (!down) return;
+			down = false;
+			slider.classList.remove("is-dragging");
+			if (dragged) snapToNearest();
+		};
+
+		window.addEventListener("pointerup", release);
+		window.addEventListener("pointercancel", release);
+
+		// Block native image/link dragging so the pointer drags the slider.
+		slider.addEventListener("dragstart", (e) => e.preventDefault());
+
+		// Swallow the click that follows a drag so the card link doesn't fire.
+		slider.addEventListener(
+			"click",
+			(e) => {
+				if (dragged) {
+					e.preventDefault();
+					e.stopPropagation();
+					dragged = false;
+				}
+			},
+			true
+		);
+	});
+
 	const closeMenu = () => {
 		toggle.setAttribute("aria-expanded", "false");
 		toggle.setAttribute("aria-label", "Open main menu");
@@ -276,6 +339,18 @@ document.addEventListener("DOMContentLoaded", () => {
 				column.classList.remove("is-open");
 			});
 		}
+	});
+
+	// Suppress transitions while the window is actively resizing so the mobile
+	// nav panel doesn't fade in/out (flash) when crossing the desktop/mobile
+	// breakpoint.
+	let resizeGuardTimer;
+	window.addEventListener("resize", () => {
+		document.documentElement.classList.add("is-resizing");
+		clearTimeout(resizeGuardTimer);
+		resizeGuardTimer = setTimeout(() => {
+			document.documentElement.classList.remove("is-resizing");
+		}, 200);
 	});
 
 	document.addEventListener("keydown", (event) => {
