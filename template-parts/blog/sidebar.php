@@ -19,15 +19,18 @@ $categories = get_categories(['hide_empty' => true]);
 $archives   = wp_get_archives(['type' => 'monthly', 'echo' => false, 'format' => 'custom', 'before' => '<li>', 'after' => '</li>']);
 $tags       = get_tags(['hide_empty' => true]);
 
-// Latest posts, excluding the one currently being viewed on a single.
-$latest = new WP_Query([
+// The "Latest Posts" widget can be turned off per template (hidden on the
+// archive/search results).
+$show_latest = !isset($args['show_latest']) || $args['show_latest'] !== false;
+
+$latest = $show_latest ? new WP_Query([
     'post_type'           => 'post',
     'post_status'         => 'publish',
     'posts_per_page'      => 3,
     'ignore_sticky_posts' => true,
     'no_found_rows'       => true,
     'post__not_in'        => is_singular('post') ? [get_the_ID()] : [],
-]);
+]) : null;
 ?>
 <aside class="blog__sidebar" aria-label="<?php esc_attr_e('Blog sidebar', 'mccollisters'); ?>">
     <form class="blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
@@ -51,7 +54,7 @@ $latest = new WP_Query([
         </div>
     <?php endif; ?>
 
-    <?php if ($latest->have_posts()) : ?>
+    <?php if ($show_latest && $latest->have_posts()) : ?>
         <div class="blog-widget">
             <h3 class="blog-widget__title"><?php esc_html_e('Latest Posts', 'mccollisters'); ?><span class="blog-widget__arrow" aria-hidden="true"><?php echo $arrow_ext; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></h3>
             <ul class="blog-latest">

@@ -14,8 +14,8 @@ get_header();
 
     <section class="svc-section blog">
         <div class="svc-section__inner">
-            <p class="blog__crumb">/ <?php echo esc_html(single_term_title('', false) ?: get_the_archive_title()); ?> /</p>
-            <h1 class="blog__title"><?php echo esc_html(single_term_title('', false) ?: wp_strip_all_tags(get_the_archive_title())); ?></h1>
+            <?php get_template_part('template-parts/blog/view-all-posts'); ?>
+            <h1 class="blog__title blog__title--archive"><?php echo esc_html(single_term_title('', false) ?: wp_strip_all_tags(get_the_archive_title())); ?></h1>
 
             <?php $desc = get_the_archive_description(); ?>
             <?php if ($desc) : ?>
@@ -24,7 +24,7 @@ get_header();
 
             <div class="blog__inner">
                 <div class="blog__main">
-                    <div class="blog__grid">
+                    <div class="blog__grid blog__grid--three">
                         <?php if (have_posts()) : ?>
                             <?php while (have_posts()) : the_post(); ?>
                                 <?php $cats = get_the_category(); $cat = $cats ? $cats[0] : null; ?>
@@ -65,7 +65,7 @@ get_header();
                     <?php endif; ?>
                 </div>
 
-                <?php get_template_part('template-parts/blog/sidebar'); ?>
+                <?php get_template_part('template-parts/blog/sidebar', null, ['show_latest' => false]); ?>
             </div>
         </div>
     </section>
