@@ -5490,11 +5490,34 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
 
-.blog-card__media:hover img {
-    transform: scale(1.03);
+/* Archive/search cards: brand-blue gradient fades in over the image on hover,
+   matching the other clickable image links across the site. */
+.blog__grid--three .blog-card__media {
+    position: relative;
+}
+
+.blog__grid--three .blog-card__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        to top,
+        rgba(0, 105, 203, 0.85) 0%,
+        rgba(0, 105, 203, 0.55) 35%,
+        rgba(0, 105, 203, 0.15) 65%,
+        rgba(0, 105, 203, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+}
+
+.blog__grid--three .blog-card__media:hover::before,
+.blog__grid--three .blog-card__media:focus-visible::before {
+    opacity: 1;
 }
 
 /* Pagination. */
@@ -5570,6 +5593,20 @@
 .blog-search__btn svg {
     width: 22px;
     height: 22px;
+}
+
+/* Archive/search: the sidebar search is a bordered, rounded box (the blog index
+   keeps the underline style). */
+body.archive .blog-search__input,
+body.search .blog-search__input {
+    padding: 14px 48px 14px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+body.archive .blog-search__btn,
+body.search .blog-search__btn {
+    right: 16px;
 }
 
 .blog-widget {
@@ -5735,6 +5772,49 @@
     }
 }
 
+/* Archive/search title is 60px (vs the 80px blog-index title). */
+.blog__title--archive {
+    font-size: 60px;
+    line-height: 63px;
+}
+
+@media (max-width: 782px) {
+    .blog__title--archive {
+        font-size: 35px;
+        line-height: 40px;
+    }
+}
+
+/* Archive/search cards: the divider sits below the meta row (not at the very
+   top of the card). */
+.blog__grid--three .blog-card {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.blog__grid--three .blog-card__meta {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-dark);
+}
+
+/* Archive/search results pack 3 per row (2 on tablet, 1 on mobile). */
+.blog__grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+    .blog__grid--three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 782px) {
+    .blog__grid--three {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
 /* ==========================================================================
    Single post (single.php) + Latest Posts sidebar widget
    Layout reuses the .blog__inner grid (main column + global sidebar).
@@ -5846,6 +5926,18 @@
     color: var(--color-dark);
 }
 
+/* Sub-head (ACF) below the article title. */
+.single-post__subhead {
+    margin: 0 0 26px;
+    max-width: 34em;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-transform: none;
+    color: var(--color-dark);
+}
+
 /* Blue intro excerpt, below the featured image. Fixed type for every article. */
 .single-post__excerpt {
     margin: clamp(28px, 3.5vw, 40px) 0 0;
@@ -5911,7 +6003,7 @@
 .single-post__share {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
 }
 
 .single-post__share-btn {
@@ -5927,8 +6019,8 @@
 }
 
 .single-post__share-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
 }
 
 .single-post__share-btn:hover {
@@ -5968,7 +6060,7 @@
 
 .post-content p {
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
     line-height: 1.7;
     color: var(--color-text);
@@ -6022,7 +6114,7 @@
     margin-bottom: 14px;
     padding-left: 32px;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
     line-height: 1.6;
     color: var(--color-text);
@@ -6045,7 +6137,8 @@
 .post-content ol li {
     margin-bottom: 14px;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
     line-height: 1.6;
     color: var(--color-text);
 }
@@ -6085,6 +6178,11 @@
     color: var(--color-primary);
 }
 
+/* The title sets its own colour, so turn it blue on hover too. */
+.single-post__nav a:hover .single-post__nav-title {
+    color: var(--color-primary);
+}
+
 .single-post__nav a svg {
     flex: 0 0 auto;
     width: 22px;
@@ -6094,7 +6192,6 @@
 .single-post__nav-inner {
     display: flex;
     flex-direction: column;
-    gap: 2px;
 }
 
 .single-post__nav-next .single-post__nav-inner {
@@ -6103,16 +6200,20 @@
 
 .single-post__nav-label {
     font-family: var(--font-heading);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
+    line-height: 22px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .single-post__nav-title {
-    max-width: 22ch;
+    /* Stay on one line until the title would exceed ~30% of the screen. */
+    max-width: 30vw;
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 22px;
     color: var(--color-text);
 }
 
