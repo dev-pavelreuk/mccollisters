@@ -1,3 +1,11 @@
+/* While the window is actively resizing (navigation.js toggles .is-resizing on
+   <html>), kill the mobile nav panel's fade so it doesn't flash when the layout
+   crosses the desktop/mobile breakpoint. */
+.is-resizing .site-navigation,
+.is-resizing .site-navigation * {
+	transition: none !important;
+}
+
 /* Sticky (not fixed) so it never leaves the document flow — no layout jump
    when scrolling starts. It sticks to the top from the very first pixel. */
 .site-header {
@@ -171,10 +179,10 @@
 .site-navigation__menu li:focus-within > .sub-menu {
 	opacity: 1;
 	visibility: visible;
-	/* Open transition stays smooth. */
+	/* Open transition stays smooth (a touch quicker than before). */
 	transition:
-		opacity 200ms ease,
-		visibility 200ms ease;
+		opacity 150ms ease,
+		visibility 150ms ease;
 }
 
 /* CSS-only full page fuzzy overlay, shown behind the dropdown while a
@@ -203,8 +211,8 @@ body::before {
 	body:has(.site-navigation__menu > .menu-item-has-children:focus-within)::before {
 		opacity: 1;
 		visibility: visible;
-		/* Open transition stays smooth. */
-		transition: opacity 0.3s ease, visibility 0.3s ease;
+		/* Open transition stays smooth (a touch quicker than before). */
+		transition: opacity 0.2s ease, visibility 0.2s ease;
 	}
 }
 
@@ -407,12 +415,12 @@ body::before {
 	   underline doesn't run past it. */
 	max-width: 200px;
 	padding-bottom: 6px;
-	border-bottom: 1px solid #b0b0b0;
+	border-bottom: 1px solid #000;
 }
 
-/* Focus indicator for the underline field (the outline ring is removed). */
+/* Underline stays black in every state (no blue on focus). */
 .menu-promo__newsletter-field:focus-within {
-	border-bottom-color: var(--color-primary);
+	border-bottom-color: #000;
 }
 
 /* Override the global boxed-input style (components.css). The live field is an

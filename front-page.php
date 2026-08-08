@@ -601,14 +601,18 @@ get_header();
                 <div>
                     <p class="home-blog__eyebrow">/ <?php esc_html_e('blog', 'mccollisters'); ?> /</p>
                     <h2 class="home-blog__title"><?php
+                        // Desktop breaks after "Latest"/"From" (3 lines); mobile
+                        // breaks after "Articles" (2 lines) — toggled in CSS.
                         esc_html_e('See Latest', 'mccollisters');
-                        echo '<br>';
-                        esc_html_e('Articles From', 'mccollisters');
-                        echo '<br>';
+                        echo '<br class="home-blog__br--d"> ';
+                        esc_html_e('Articles', 'mccollisters');
+                        echo '<br class="home-blog__br--m"> ';
+                        esc_html_e('From', 'mccollisters');
+                        echo '<br class="home-blog__br--d"> ';
                         esc_html_e('Our Company', 'mccollisters');
                     ?></h2>
                 </div>
-                <a class="mcc-btn mcc-btn--on-light home-blog__cta" href="<?php echo esc_url($blog_url); ?>">
+                <a class="mcc-btn mcc-btn--on-light home-blog__cta home-blog__cta--desktop" href="<?php echo esc_url($blog_url); ?>">
                     <span class="mcc-btn__label"><?php esc_html_e('See All Posts', 'mccollisters'); ?></span>
                     <span class="mcc-btn__arrow" aria-hidden="true"><?php echo $blog_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></span>
                 </a>
@@ -623,10 +627,12 @@ get_header();
                     ?>
                     <article class="home-blog__card">
                         <div class="home-blog__card-meta">
-                            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('m.d.Y')); ?></time>
+                            <a href="<?php echo esc_url(get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d'))); ?>">
+                                <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('m.d.Y')); ?></time>
+                            </a>
                             <?php if ($blog_cat) : ?>
                                 <span class="home-blog__dot" aria-hidden="true"></span>
-                                <span class="home-blog__cat"><?php echo esc_html($blog_cat->name); ?></span>
+                                <a class="home-blog__cat" href="<?php echo esc_url(get_category_link($blog_cat)); ?>"><?php echo esc_html($blog_cat->name); ?></a>
                             <?php endif; ?>
                         </div>
                         <hr class="home-blog__divider">
@@ -635,18 +641,28 @@ get_header();
                         </h3>
                         <p class="home-blog__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
                         <?php if (has_post_thumbnail()) : ?>
-                            <div class="home-blog__card-media">
+                            <a class="home-blog__card-media" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
                                 <?php the_post_thumbnail('large', ['class' => 'home-blog__card-img', 'loading' => 'lazy', 'decoding' => 'async']); ?>
-                            </div>
+                            </a>
                         <?php endif; ?>
                     </article>
                 <?php endwhile; ?>
             </div>
+
+            <?php // Mobile-only: "See All Posts" sits below the articles. ?>
+            <a class="mcc-btn mcc-btn--on-light home-blog__cta home-blog__cta--mobile" href="<?php echo esc_url($blog_url); ?>">
+                <span class="mcc-btn__label"><?php esc_html_e('See All Posts', 'mccollisters'); ?></span>
+                <span class="mcc-btn__arrow" aria-hidden="true"><?php echo $blog_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></span>
+            </a>
         </div>
     </section>
     <?php
         wp_reset_postdata();
     endif;
     ?>
+
+    <!-- CTA cards -->
+    <?php get_template_part('template-parts/components/cta-cards'); ?>
+
 </main>
 <?php get_footer(); ?>
