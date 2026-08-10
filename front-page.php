@@ -618,6 +618,7 @@ get_header();
                 </a>
             </div>
 
+            <div class="home-blog__viewport">
             <div class="home-blog__grid">
                 <?php
                 while ($blog_query->have_posts()) :
@@ -647,6 +648,7 @@ get_header();
                         <?php endif; ?>
                     </article>
                 <?php endwhile; ?>
+            </div>
             </div>
 
             <?php // Mobile-only: "See All Posts" sits below the articles. ?>

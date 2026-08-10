@@ -1322,6 +1322,11 @@
     flex-direction: column;
 }
 
+/* Loop clones only exist for the mobile carousel; hidden everywhere else. */
+.home-blog__card--clone {
+    display: none;
+}
+
 .home-blog__card-meta {
     display: flex;
     align-items: center;
@@ -1610,40 +1615,45 @@
         gap: 24px;
     }
 
-    /* Blog cards become a drag/swipe carousel on mobile (JS-driven so it feels
-       the same as the live site: horizontal drag moves it, release snaps to the
-       nearest card; vertical drag still scrolls the page). */
+    /* Blog cards become a transform-based carousel on mobile — same behaviour as
+       the live site's Swiper: drag tracks the finger 1:1, and on release it
+       animates one slide over 500ms (navigation.js drives the transform). */
+    .home-blog__viewport {
+        overflow: hidden;
+        touch-action: pan-y;
+    }
+
     .home-blog__grid {
         display: flex;
         flex-wrap: nowrap;
         grid-template-columns: none;
         gap: 20px;
-        overflow-x: auto;
-        overflow-y: hidden;
+        transform: translateX(0);
+        transition: transform 0.5s ease;
+        will-change: transform;
         touch-action: pan-y;
-        overscroll-behavior-x: contain;
-        scrollbar-width: none;
         cursor: grab;
-        /* Track the cursor 1:1 while dragging (override the global smooth
-           scroll-behavior); the release snap re-enables smooth via scrollTo. */
-        scroll-behavior: auto;
-    }
-
-    .home-blog__grid.is-dragging {
-        cursor: grabbing;
+        /* No text selection / image callout while swiping. */
         user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
     }
 
-    /* Stop the browser from "ghost-dragging" the card images/links so the drag
-       scrolls the slider instead. */
+    /* No transition while dragging so the track follows the finger/cursor 1:1. */
+    .home-blog__grid.is-dragging {
+        transition: none;
+        cursor: grabbing;
+    }
+
+    /* Stop the browser from "ghost-dragging" the card images/links. */
     .home-blog__grid a,
     .home-blog__grid img {
         -webkit-user-drag: none;
-        user-select: none;
     }
 
-    .home-blog__grid::-webkit-scrollbar {
-        display: none;
+    /* Cloned slides (for the infinite loop) show on the mobile carousel. */
+    .home-blog__card--clone {
+        display: flex;
     }
 
     /* Mobile "See All Posts": below the slider with 50px of space above. */
@@ -1663,7 +1673,6 @@
     .home-blog__card {
         flex: 0 0 80%;
         min-width: 0;
-        /* Let the JS handle horizontal drags from anywhere on the card. */
         touch-action: pan-y;
     }
 
