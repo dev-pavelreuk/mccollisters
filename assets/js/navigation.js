@@ -106,57 +106,111 @@ document.addEventListener("DOMContentLoaded", () => {
 		btn.addEventListener("click", () => window.print());
 	});
 
-	// Drag/swipe carousel for the homepage blog slider (mouse + touch). Works
-	// like the live site: a horizontal drag moves the cards and, on release,
-	// snaps to the nearest card. A real drag also cancels the card link.
-	document.querySelectorAll(".home-blog__grid").forEach((slider) => {
-		let down = false;
-		let startX = 0;
-		let startScroll = 0;
-		let dragged = false;
+	// Transform-based INFINITE carousel for the homepage blog slider (mouse +
+	// touch), matching the live site's Swiper: drag tracks the pointer 1:1, and
+	// on release it animates exactly one slide (500ms CSS transition). The set
+	// is cloned before/after so it loops seamlessly; after landing on a clone we
+	// jump (no animation) to the matching real slide. Only active on mobile.
+	document.querySelectorAll(".home-blog__grid").forEach((track) => {
+		const reals = Array.prototype.slice.call(track.children);
+		const realCount = reals.length;
+		if (realCount <= 1) return;
 
-		const snapToNearest = () => {
-			const first = slider.children[0];
+		// Drag from the whole frame (viewport) so grabbing a card OR the gap
+		// between cards both start the swipe.
+		const frame = track.parentElement || track;
+		const isMobile = () => window.matchMedia("(max-width: 782px)").matches;
+
+		// Clone the whole set after and before the originals.
+		const makeClone = (node) => {
+			const clone = node.cloneNode(true);
+			clone.classList.add("home-blog__card--clone");
+			clone.setAttribute("aria-hidden", "true");
+			clone.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
+			return clone;
+		};
+		reals.forEach((node) => track.appendChild(makeClone(node)));
+		for (let k = realCount - 1; k >= 0; k--) {
+			track.insertBefore(makeClone(reals[k]), track.firstChild);
+		}
+
+		let index = realCount; // first real slide (after the leading clones)
+		let step = 0; // card width + gap
+		let down = false;
+		let dragged = false;
+		let startX = 0;
+		let baseTx = 0;
+		let currentTx = 0;
+
+		const measure = () => {
+			const first = track.children[0];
 			if (!first) return;
-			const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
-			const step = first.getBoundingClientRect().width + gap;
-			const index = Math.round(slider.scrollLeft / step);
-			slider.scrollTo({ left: index * step, behavior: "smooth" });
+			const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+			step = first.getBoundingClientRect().width + gap;
 		};
 
-		// Start on the slider (events bubble up from the cards, so you can grab
-		// anywhere); track move/up on the window so the drag never gets "stuck"
-		// when it starts on a link or image.
-		slider.addEventListener("pointerdown", (e) => {
+		const setTx = (tx, animate) => {
+			currentTx = tx;
+			track.style.transition = animate ? "" : "none"; // "" = the 0.5s CSS rule
+			track.style.transform = "translateX(" + tx + "px)";
+		};
+
+		const goTo = (i) => {
+			measure();
+			index = i;
+			setTx(-index * step, true);
+		};
+
+		// After the slide animation, if we're on a clone, snap to the matching
+		// real slide with no animation so it loops forever.
+		track.addEventListener("transitionend", (e) => {
+			if (e.propertyName !== "transform" || !isMobile()) return;
+			if (index >= 2 * realCount) {
+				index -= realCount;
+				setTx(-index * step, false);
+			} else if (index < realCount) {
+				index += realCount;
+				setTx(-index * step, false);
+			}
+		});
+
+		frame.addEventListener("pointerdown", (e) => {
+			if (!isMobile()) return;
 			down = true;
 			dragged = false;
 			startX = e.clientX;
-			startScroll = slider.scrollLeft;
-			slider.classList.add("is-dragging");
+			baseTx = currentTx;
+			track.classList.add("is-dragging");
 		});
 
 		window.addEventListener("pointermove", (e) => {
 			if (!down) return;
 			const dx = e.clientX - startX;
 			if (Math.abs(dx) > 4) dragged = true;
-			slider.scrollLeft = startScroll - dx;
+			setTx(baseTx + dx, false);
 		});
 
-		const release = () => {
+		const release = (e) => {
 			if (!down) return;
 			down = false;
-			slider.classList.remove("is-dragging");
-			if (dragged) snapToNearest();
+			track.classList.remove("is-dragging");
+			measure();
+			const dx = (e ? e.clientX : startX) - startX;
+			const threshold = step * 0.2;
+			let target = index;
+			if (dx <= -threshold) target += 1;
+			else if (dx >= threshold) target -= 1;
+			goTo(target);
 		};
 
 		window.addEventListener("pointerup", release);
 		window.addEventListener("pointercancel", release);
 
-		// Block native image/link dragging so the pointer drags the slider.
-		slider.addEventListener("dragstart", (e) => e.preventDefault());
+		// Block native image/link dragging so the pointer drives the carousel.
+		frame.addEventListener("dragstart", (e) => e.preventDefault());
 
-		// Swallow the click that follows a drag so the card link doesn't fire.
-		slider.addEventListener(
+		// Swallow the click that follows a real drag so the card link doesn't fire.
+		frame.addEventListener(
 			"click",
 			(e) => {
 				if (dragged) {
@@ -167,6 +221,20 @@ document.addEventListener("DOMContentLoaded", () => {
 			},
 			true
 		);
+
+		// Position instantly on load and when crossing the breakpoint / resizing.
+		const sync = () => {
+			if (isMobile()) {
+				measure();
+				setTx(-index * step, false);
+			} else {
+				track.style.transform = "";
+				track.style.transition = "";
+				currentTx = 0;
+			}
+		};
+		window.addEventListener("resize", sync);
+		sync();
 	});
 
 	const closeMenu = () => {
