@@ -6307,3 +6307,223 @@ body.search .blog-search__btn {
         display: none;
     }
 }
+
+/* ==========================================================================
+   Our Team (page-our-team.php) — "Powered by People" header + quote, then
+   team_member cards grouped by team_group. Colour headshots greyscale on hover
+   while the corner "+" turns brand-blue.
+   ========================================================================== */
+
+/* Two-column header: crumb/title/intro on the left, black quote card right. */
+.team-head__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+}
+
+.team-head__intro {
+    max-width: 760px;
+    margin-top: 20px;
+}
+
+.team-head__intro p {
+    margin: 0 0 1em;
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.team-head__intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* Black rounded quote card with a gold outlined quotation mark. */
+.team-quote {
+    margin: 0;
+    padding: clamp(36px, 4vw, 60px);
+    background: #15191d;
+    border-radius: 25px;
+    color: var(--color-white);
+}
+
+.team-quote__mark {
+    display: block;
+    margin-bottom: clamp(4px, 1vw, 12px);
+    font-family: var(--font-heading);
+    font-size: clamp(70px, 8vw, 110px);
+    line-height: 0.7;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--color-brand-yellow);
+}
+
+.team-quote__text {
+    margin: 0 0 clamp(20px, 2.4vw, 30px);
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.8vw, 24px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-white);
+}
+
+.team-quote__by {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Team grid ------------------------------------------------------------ */
+.team {
+    margin-bottom: 100px;
+}
+
+.team__group + .team__group {
+    margin-top: clamp(48px, 6vw, 84px);
+}
+
+.team__group-title {
+    margin: 0 0 clamp(24px, 3vw, 40px);
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.team__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 44px) clamp(20px, 2.4vw, 32px);
+}
+
+.team__empty {
+    font-size: var(--body-font-size);
+    color: var(--color-text);
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Colour photo that greyscales on hover; the corner "+" turns blue. */
+.team-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-light);
+    text-decoration: none;
+}
+
+.team-card__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0);
+    transition: filter 0.45s ease;
+}
+
+.team-card__img--placeholder {
+    background: linear-gradient(160deg, #e7ebef 0%, #d7dde3 100%);
+}
+
+.team-card__media:hover .team-card__img,
+.team-card__media:focus-visible .team-card__img {
+    filter: grayscale(1);
+}
+
+.team-card__plus {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    transition: color 0.45s ease;
+    pointer-events: none;
+}
+
+.team-card__plus svg {
+    width: 100%;
+    height: 100%;
+}
+
+.team-card__media:hover .team-card__plus,
+.team-card__media:focus-visible .team-card__plus {
+    color: var(--color-primary);
+}
+
+/* LinkedIn mark (cards that have a link) — fades in on hover, bottom-right. */
+.team-card__in {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 2;
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.35s ease, color 0.35s ease;
+    pointer-events: none;
+}
+
+.team-card__in svg {
+    width: 100%;
+    height: 100%;
+}
+
+.team-card__media:hover .team-card__in,
+.team-card__media:focus-visible .team-card__in {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+.team-card__name {
+    margin: 16px 0 4px;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: none;
+    color: var(--color-dark);
+}
+
+.team-card__role {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+@media (max-width: 1024px) {
+    .team__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    /* Quote card drops below the heading on tablets. */
+    .team-head__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(30px, 5vw, 44px);
+    }
+}
+
+@media (max-width: 782px) {
+    .team {
+        margin-bottom: 64px;
+    }
+
+    .team__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
