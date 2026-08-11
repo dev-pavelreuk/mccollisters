@@ -6322,6 +6322,22 @@ body.search .blog-search__btn {
     align-items: center;
 }
 
+/* Team page title is smaller than the global h1 (scoped to this header). */
+.team-head .loc-head__title {
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 72px;
+    letter-spacing: -1.8px;
+}
+
+@media (max-width: 782px) {
+    .team-head .loc-head__title {
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 35px;
+    }
+}
+
 .team-head__intro {
     max-width: 760px;
     margin-top: 20px;
@@ -6339,50 +6355,116 @@ body.search .blog-search__btn {
     margin-bottom: 0;
 }
 
-/* Black rounded quote card with a gold outlined quotation mark. */
+/* Black rounded quote card: gold outlined mark beside the text + attribution. */
 .team-quote {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.6vw, 40px);
     margin: 0;
-    padding: clamp(36px, 4vw, 60px);
+    padding: 55px 30px;
     background: #15191d;
     border-radius: 25px;
     color: var(--color-white);
 }
 
 .team-quote__mark {
-    display: block;
-    margin-bottom: clamp(4px, 1vw, 12px);
-    font-family: var(--font-heading);
-    font-size: clamp(70px, 8vw, 110px);
-    line-height: 0.7;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--color-brand-yellow);
+    flex: 0 0 auto;
+    width: clamp(56px, 6vw, 92px);
+    height: auto;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.team-quote__body {
+    min-width: 0;
+}
+
+@media (max-width: 782px) {
+    /* Stack the quotation mark above the text, both left-aligned. */
+    .team-quote {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .team-quote__text {
-    margin: 0 0 clamp(20px, 2.4vw, 30px);
+    margin: 0 0 clamp(16px, 2vw, 24px);
     font-family: var(--font-heading);
-    font-size: clamp(18px, 1.8vw, 24px);
+    font-size: 18px;
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 21.6px;
+    letter-spacing: -0.54px;
     color: var(--color-white);
 }
 
 .team-quote__by {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 22px;
     color: rgba(255, 255, 255, 0.85);
 }
 
 /* ---- Team grid ------------------------------------------------------------ */
 .team {
-    margin-bottom: 100px;
+    margin-bottom: 0;
 }
 
-.team__group + .team__group {
-    margin-top: clamp(48px, 6vw, 84px);
+/* Desktop: tab switcher; only the active group's grid shows, titles hidden. */
+.team__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(28px, 4vw, 56px);
+    margin-bottom: 30px;
+}
+
+.team__tab {
+    position: relative;
+    margin: 0;
+    padding: 0 0 10px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--color-dark);
+    transition: color var(--transition);
+}
+
+.team__tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+
+.team__tab:hover,
+.team__tab.is-active {
+    color: var(--color-primary);
+}
+
+.team__tab:hover::after,
+.team__tab.is-active::after {
+    transform: scaleX(1);
+}
+
+.team__group {
+    display: none;
+}
+
+.team__group.is-active {
+    display: block;
 }
 
 .team__group-title {
+    display: none;
     margin: 0 0 clamp(24px, 3vw, 40px);
     font-family: var(--font-heading);
     font-size: clamp(24px, 3vw, 36px);
@@ -6392,10 +6474,21 @@ body.search .blog-search__btn {
     color: var(--color-dark);
 }
 
+/* Flex (not grid) so an incomplete final row centers instead of left-aligning.
+   Card width is derived from the column count so full rows still fill edge to
+   edge; only orphan rows get centered. */
 .team__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(24px, 3vw, 44px) clamp(20px, 2.4vw, 32px);
+    --team-cols: 4;
+    --team-col-gap: clamp(20px, 2.4vw, 32px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px var(--team-col-gap);
+}
+
+.team-card {
+    flex: 0 0 calc((100% - (var(--team-cols) - 1) * var(--team-col-gap)) / var(--team-cols));
+    max-width: calc((100% - (var(--team-cols) - 1) * var(--team-col-gap)) / var(--team-cols));
 }
 
 .team__empty {
@@ -6408,27 +6501,41 @@ body.search .blog-search__btn {
     flex-direction: column;
 }
 
-/* Colour photo that greyscales on hover; the corner "+" turns blue. */
+/* Colour photo that greyscales on hover; the corner "+" turns blue. Fixed
+   height; the image fills that height and keeps its natural ratio (centered,
+   sides cropped if wider) so it never distorts. */
 .team-card__media {
     position: relative;
     display: block;
-    aspect-ratio: 3 / 4;
-    border-radius: 16px;
+    height: 420px;
+    border-radius: 20px;
     overflow: hidden;
     background: var(--color-light);
     text-decoration: none;
 }
 
-.team-card__img {
+.team-card__media picture {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+/* Cover the whole box (no grey showing), no distortion. A slight zoom + shift
+   nudges the image down while keeping the box fully covered. */
+.team-card__img {
+    width: 100%;
+    height: 100%;
+    display: block;
     object-fit: cover;
-    filter: grayscale(0);
-    transition: filter 0.45s ease;
+    object-position: center top;
+    transform: scale(1.4) translateY(12%);
+    transform-origin: center;
+    filter: grayscale(0%);
+    transition: filter 0.4s ease;
 }
 
 .team-card__img--placeholder {
+    width: 100%;
     background: linear-gradient(160deg, #e7ebef 0%, #d7dde3 100%);
 }
 
@@ -6490,7 +6597,7 @@ body.search .blog-search__btn {
     margin: 16px 0 4px;
     font-family: var(--font-heading);
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     text-transform: none;
     color: var(--color-dark);
@@ -6506,7 +6613,7 @@ body.search .blog-search__btn {
 
 @media (max-width: 1024px) {
     .team__grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        --team-cols: 3;
     }
 }
 
@@ -6524,6 +6631,39 @@ body.search .blog-search__btn {
     }
 
     .team__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        --team-cols: 1;
+        row-gap: 30px;
+    }
+
+    .team-card__name {
+        margin: 10px 0 4px 20px;
+    }
+
+    .team-card__role {
+        margin-left: 20px;
+    }
+
+    /* Mobile: no tabs — every group stacks with its title as a divider. */
+    .team__tabs {
+        display: none;
+    }
+
+    .team__group,
+    .team__group.is-active {
+        display: block;
+    }
+
+    .team__group + .team__group {
+        margin-top: clamp(48px, 8vw, 64px);
+    }
+
+    .team__group-title {
+        display: block;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--color-black);
+        font-size: 25px;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: var(--color-black);
     }
 }

@@ -426,4 +426,27 @@ document.addEventListener("DOMContentLoaded", () => {
 			closeMenu();
 		}
 	});
+
+	/* Our Team tabs: click a tab to reveal its group panel (desktop only; on
+	   mobile CSS shows every panel, so these clicks are simply inert there). */
+	const teamTabs = Array.from(document.querySelectorAll(".team__tab"));
+	const teamPanels = Array.from(document.querySelectorAll(".team__group"));
+	if (teamTabs.length && teamPanels.length) {
+		teamTabs.forEach((tab) => {
+			tab.addEventListener("click", () => {
+				const index = tab.getAttribute("data-team-tab");
+				teamTabs.forEach((t) => {
+					const active = t === tab;
+					t.classList.toggle("is-active", active);
+					t.setAttribute("aria-selected", active ? "true" : "false");
+				});
+				teamPanels.forEach((panel) => {
+					panel.classList.toggle(
+						"is-active",
+						panel.getAttribute("data-team-panel") === index
+					);
+				});
+			});
+		});
+	}
 });
