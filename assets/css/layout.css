@@ -3,6 +3,13 @@
     margin-inline: auto;
 }
 
+/* Mobile: drop the gutter inset so containers span the full width. */
+@media (max-width: 782px) {
+    .container {
+        width: 100%;
+    }
+}
+
 .container--narrow {
     max-width: var(--container-narrow);
 }

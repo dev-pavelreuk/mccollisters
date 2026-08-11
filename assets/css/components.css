@@ -309,6 +309,8 @@ body :is(
 ) {
     font-size: var(--eyebrow-font-size);
     font-weight: var(--eyebrow-font-weight);
+    /* Consistent 10px gap under every section eyebrow. */
+    margin-bottom: 10px;
 }
 
 /* Global h2 heading size/weight: 60px / 400 (design tokens) across every

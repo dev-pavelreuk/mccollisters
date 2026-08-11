@@ -397,7 +397,7 @@ get_header();
     <section class="home-industries" style="background-image: url('<?php echo esc_url($industries_bg); ?>');">
         <div class="home-industries__head">
             <p class="home-industries__eyebrow">/ <?php esc_html_e('industries', 'mccollisters'); ?> /</p>
-            <h2 class="home-industries__title"><?php esc_html_e('Specialty Solutions for Every Industry', 'mccollisters'); ?></h2>
+            <h2 class="home-industries__title"><?php echo wp_kses(__('Specialty<br>Solutions for<br>Every Industry', 'mccollisters'), ['br' => []]); ?></h2>
         </div>
 
         <div class="home-industries__carousel">
@@ -462,7 +462,7 @@ get_header();
     <section class="home-stats">
         <div class="home-stats__inner">
             <p class="home-stats__eyebrow">/ <?php esc_html_e('expertise', 'mccollisters'); ?> /</p>
-            <h2 class="home-stats__title"><?php esc_html_e('The McCollister’s Difference', 'mccollisters'); ?></h2>
+            <h2 class="home-stats__title"><?php echo wp_kses(__('The McCollister’s<br>Difference', 'mccollisters'), ['br' => []]); ?></h2>
 
             <div class="home-stats__grid">
                 <?php foreach ($stats as $stat) : ?>
