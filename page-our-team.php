@@ -79,15 +79,15 @@ if (!function_exists('mcc_team_card')) {
         $img_size   = in_array($slug, $tall_crops, true) ? '2048x2048' : 'large';
         ?>
         <article class="team-card team-card--<?php echo esc_attr($slug); ?>">
-            <div class="team-card__media" aria-label="<?php echo esc_attr($name); ?>">
+            <a class="team-card__media" href="<?php echo esc_url(get_permalink($post_id)); ?>" aria-label="<?php echo esc_attr($name); ?>">
                 <span class="team-card__plus" aria-hidden="true"><?php echo $plus_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
                 <?php if (has_post_thumbnail($post_id)) : ?>
                     <?php echo get_the_post_thumbnail($post_id, $img_size, ['class' => 'team-card__img', 'loading' => 'lazy', 'decoding' => 'async', 'alt' => esc_attr($name)]); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <?php else : ?>
                     <span class="team-card__img team-card__img--placeholder" aria-hidden="true"></span>
                 <?php endif; ?>
-            </div>
-            <h3 class="team-card__name"><?php echo esc_html($name); ?></h3>
+            </a>
+            <h3 class="team-card__name"><a href="<?php echo esc_url(get_permalink($post_id)); ?>"><?php echo esc_html($name); ?></a></h3>
             <?php if ($position) : ?>
                 <p class="team-card__role"><?php echo esc_html($position); ?></p>
             <?php endif; ?>
