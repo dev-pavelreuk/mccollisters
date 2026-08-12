@@ -446,6 +446,13 @@
     font-weight: 600;
 }
 
+/* Finance & Banking: accordion beside the image uses a larger question type. */
+.svc-faqs__list--beside .svc-faq__q {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+}
+
 .svc-faq__summary::-webkit-details-marker {
     display: none;
 }
@@ -556,6 +563,14 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 22px;
+}
+
+/* Fitness "Let McCollister's do the heavy lifting" prose. */
+.svc-heavylift .svc-prose p {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.6px;
+    letter-spacing: -0.54px;
 }
 
 /* 30px lead variant (Residential "Who is this for" subtitle). */
@@ -2498,15 +2513,28 @@
 .svc-avconf__cols {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(32px, 5vw, 72px);
+    /* Two shared rows (title, body) so the body text aligns across both columns
+       even when one title wraps to two lines — see the subgrid on the column. */
+    grid-template-rows: auto auto;
+    column-gap: clamp(32px, 5vw, 72px);
+    row-gap: 0;
     margin-top: clamp(36px, 4.5vw, 60px);
+}
+
+.svc-avconf__col {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
 }
 
 .svc-avconf__col-title {
     margin: 0 0 16px;
     font-family: var(--font-heading);
-    font-size: clamp(20px, 2.2vw, 26px);
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: -0.9px;
+    text-transform: none;
     color: var(--color-white);
 }
 
@@ -2521,7 +2549,14 @@
 @media (max-width: 782px) {
     .svc-avconf__cols {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
         gap: 32px;
+    }
+
+    /* Stacked: no cross-column alignment needed, so drop the subgrid. */
+    .svc-avconf__col {
+        display: block;
+        grid-row: auto;
     }
 }
 

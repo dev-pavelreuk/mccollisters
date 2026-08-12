@@ -111,19 +111,19 @@ $faqs = [
         ],
         [
             'q' => 'Will I have a dedicated project manager and consistent updates?',
-            'a' => '<p>Yes. Every engagement is managed by a dedicated construction and project manager who owns scope, schedule, and communication from conceptualization through closeout—so you get a single point of contact and consistent, proactive updates throughout the deployment.</p>',
+            'a' => '<p>Yes. McCollister’s project managers and rigging experts work with customers through each project phase; managers are responsible for planning, permitting, and construction and can meet client-dictated update cadences.</p>',
         ],
         [
             'q' => 'How do you address ADA compliance risk?',
-            'a' => '<p>ADA compliance is verified, not assumed. We field-check clearances, reach ranges, approach paths, and elevation deltas against current standards and document everything for audit and sign-off, reducing the risk of rework, delays, and regulatory exposure.</p>',
+            'a' => '<p>McCollister’s verifies ATM installations for ADA compliance, including required height, wheelchair access, and access pathways, helping reduce exposure to alleged violations.</p>',
         ],
         [
             'q' => 'Can you support multi-site deployments?',
-            'a' => '<p>Yes. We coordinate sequenced, multi-site and nationwide rollouts through our asset-based network, with standardized program controls, staging, and reporting that keep execution consistent and disruption to branch operations to a minimum.</p>',
+            'a' => '<p>Yes. McCollister’s is an all-in-one source for programmatic deployment and installation and provides logistics support that includes nationwide warehousing, staging, distribution, reverse logistics, and disposal—helpful for repeat deployments across multiple locations.</p>',
         ],
         [
             'q' => 'Do you support decommissioning or certified destruction?',
-            'a' => '<p>Yes. We support decommissioning, removal, and relocation of ATMs and related equipment, and can coordinate certified destruction and secure disposition when required.</p>',
+            'a' => '<p>Yes. McCollister’s offers PCI destruction &amp; NPI decommissioning services and can provide documentation supporting confidentiality and proper handling.</p>',
         ],
     ],
 ];
@@ -187,7 +187,7 @@ $faqs = [
             </div>
             <div class="svc-avcaps__grid svc-avcaps__grid--reverse svc-avcaps__grid--free">
                 <div class="svc-avcaps__content">
-                    <div class="svc-faqs__list" data-accordion>
+                    <div class="svc-faqs__list svc-faqs__list--beside" data-accordion>
                         <?php foreach ($capabilities['items'] as $i => $item) : ?>
                             <details class="svc-faq"<?php echo 0 === $i ? ' open' : ''; ?>>
                                 <summary class="svc-faq__summary">
