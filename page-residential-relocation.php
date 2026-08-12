@@ -195,7 +195,7 @@ $faqs = [
                     <img src="<?php echo esc_url($teams['image']); ?>" alt="<?php echo esc_attr($teams['alt']); ?>" loading="lazy" decoding="async">
                 </div>
                 <div class="svc-avcaps__content">
-                    <h2 class="svc-avcaps__list-title"><?php echo esc_html($teams['list_title']); ?></h2>
+                    <h3 class="svc-avcaps__list-title"><?php echo esc_html($teams['list_title']); ?></h3>
                     <ul class="svc-avcaps__list">
                         <?php foreach ($teams['items'] as $item) : ?>
                             <li>
