@@ -53,8 +53,7 @@ $tabs = [
         'image' => $uploads . '2026/03/dealer-auto-transport-inset.jpg',
         'title' => 'Auto transport built for dealers',
         'paras' => [
-            'McCollister’s helps dealerships move inventory quickly and reliably, from single-unit deliveries to high-volume, multi-location distribution. Our teams coordinate schedules, routing, and vehicle handling so cars arrive lot-ready and on time.',
-            'With real-time tracking and a dedicated account manager, you get the visibility and accountability that keep your operation moving.',
+            'From original equipment manufacturer (OEM) deliveries and dealer trades to auctions and customer drop-offs, we help dealerships keep vehicles moving and customers satisfied—with dedicated account management and integrated self-booking technology.',
         ],
         'url'   => home_url('/auto-transport/dealers/'),
     ],
@@ -63,8 +62,7 @@ $tabs = [
         'image' => $uploads . '2026/03/oeg-auto.jpg',
         'title' => 'Auto transport built for OEMs',
         'paras' => [
-            'McCollister’s supports OEMs with scalable, specialized auto logistics—from plant and port to processing centers and final destinations. Our asset-based fleet, specialized equipment, and experienced teams handle high-value and pre-production vehicles with precision.',
-            'Integrated tracking, secure handling, and nationwide reach give manufacturers a partner built for complex, time-sensitive programs.',
+            'McCollister’s delivers scalable, secure, and technology-driven transport solutions for OEMs navigating complex supply chains—supported by dedicated account management, real-time visibility, and a best-in-class, asset-based fleet.',
         ],
         'url'   => home_url('/auto-transport/oems/'),
     ],
@@ -80,7 +78,8 @@ $stats = [
 ];
 
 $whychoose = [
-    'image' => $uploads . '2026/03/mccollisters-blue-driver.jpg',
+    'image' => $uploads . '2026/03/inset-pages-auto.jpg',
+    'image_alt' => 'A man wearing a black cap, sunglasses, and a black McCollister’s polo shirt stands in front of a large blue Auto Transport semi-truck, outdoors on a sunny day.',
     'title' => 'Why Customers Choose Us:',
     'items' => [
         'White-glove enclosed transport options',
@@ -234,7 +233,7 @@ $logos = [
         <div class="svc-section__inner">
             <div class="svc-features__grid">
                 <div class="svc-features__media">
-                    <img src="<?php echo esc_url($whychoose['image']); ?>" alt="" loading="lazy" decoding="async">
+                    <img src="<?php echo esc_url($whychoose['image']); ?>" alt="<?php echo esc_attr($whychoose['image_alt']); ?>" loading="lazy" decoding="async">
                 </div>
                 <div class="svc-features__body">
                     <h2 class="svc-whychoose__title"><?php echo esc_html($whychoose['title']); ?></h2>
