@@ -20,7 +20,7 @@ $check   = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 
 
 $hero = [
     'image'    => $uploads . '2026/01/mccollisters-fitness-eqipment-exercise.jpg',
-    'title'    => 'Fitness Solutions',
+    'title'    => 'Fitness',
     'subtitle' => 'Logistics built for performance',
     'buttons'  => [
         ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
