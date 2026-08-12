@@ -125,7 +125,7 @@ $certs = [
     'intro' => 'As regulatory requirements tighten and customer expectations increase, partnering with a warehousing provider that offers certified facilities not only helps ensure compliance but also boosts your credibility. Depending on the location, our warehouses have the following certifications:',
     'items' => [
         [
-            'logo'    => get_template_directory_uri() . '/assets/img/iso-13485-medical.svg',
+            'logo'    => get_stylesheet_directory_uri() . '/assets/img/iso-13485-medical.svg',
             'alt'     => 'ISO 13485:2016 certified',
             'caption' => 'Supports compliant storage and handling of regulated medical devices.',
         ],

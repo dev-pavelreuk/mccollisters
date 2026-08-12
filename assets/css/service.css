@@ -162,7 +162,7 @@
     flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: flex-start;
-    gap: 4px clamp(6px, 3.57vw, 50px);
+    gap: 6px;
 }
 
 .svc-tabs__tab {
@@ -263,6 +263,14 @@
     color: var(--color-text);
     font-size: 15px;
     line-height: 1.7;
+}
+
+.svc-tabs__desc p {
+    margin: 0 0 1em;
+}
+
+.svc-tabs__desc p:last-child {
+    margin-bottom: 0;
 }
 
 /* Logistics tabs: the Aerospace copy is longer than the default 150px reserve,
@@ -548,7 +556,7 @@
 .svc-caps__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 20px 50px;
     margin-top: 20px;
 }
 
@@ -627,13 +635,19 @@
 
 .svc-services__grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* Content-sized columns packed to the left (not stretched full width), so
+       each divider sits a consistent distance from its column's text instead of
+       floating in the empty space of a wide 1fr cell. */
+    grid-template-columns: repeat(4, max-content);
+    justify-content: start;
     /* Cells stretch to the tallest column so the dividers align. */
     align-items: stretch;
 }
 
+/* Left border divider; extra padding on the left (right side of the line)
+   pushes the next column's content over so the line reads centered. */
 .svc-services__col {
-    padding-inline: clamp(20px, 2.4vw, 36px);
+    padding-inline: 50px;
     border-left: 1px solid var(--color-black);
 }
 
@@ -670,14 +684,14 @@
 /* --- Warehouse features (image + checklist) ------------------------------- */
 .svc-features__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(30px, 4vw, 64px);
     align-items: center;
 }
 
 .svc-features__media img {
     width: 100%;
-    aspect-ratio: 4 / 3.4;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 20px;
 }
@@ -962,8 +976,9 @@
 .svc-freight__label {
     margin: 34px 0 24px;
     font-family: var(--font-heading);
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
     color: var(--color-white);
 }
 
@@ -1052,9 +1067,10 @@
 
 .svc-freight__col-head {
     margin: 0 0 20px;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.15;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
     text-transform: none;
     color: var(--color-white);
 }
