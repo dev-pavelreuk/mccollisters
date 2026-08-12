@@ -29,7 +29,7 @@ $hero = [
 
 $overview = [
     'eyebrow' => 'overview',
-    'title'   => 'We Don’t Just<br>Deliver It—We Make<br>It Work',
+    'title'   => 'We Don’t Just<br>Deliver It—We<br>Make It Work',
     'paras'   => [
         'McCollister’s installation services support the transport, staging, and installation of complex, high-value equipment, such as ATMs and kiosks, data center infrastructure, technical systems, and fitness equipment. These projects require pre-planning, site visits, infrastructure reviews, meticulous handling, exact placement, and a deep understanding of both the equipment and the environment in which it operates.',
         'By combining our nationwide transportation footprint, secure warehousing, experienced installation teams, and dedicated project management, McCollister’s delivers installations that are executed to specification and ready for use—not simply dropped off.',
@@ -50,14 +50,14 @@ $tabs = [
         'label' => 'Data Centers',
         'image' => $uploads . '2026/03/technical-services-installation.jpg',
         'title' => 'Data Centers',
-        'desc'  => 'McCollister’s supports data center and technical infrastructure deployments with precise handling, staging, and installation of servers, racks, and sensitive IT equipment. Our teams coordinate delivery, placement, and setup to strict specifications, minimizing downtime and risk across mission-critical environments.',
+        'desc'  => 'McCollister’s Technical Services supports installation projects where data security, system integrity, and precision handling are non-negotiable. From data center infrastructure and enterprise IT deployments to decommissioning and migration projects, our specialized technicians and project managers deliver carefully planned, securely executed installations—integrated with McCollister’s nationwide transportation and logistics network.',
         'url'   => home_url('/technical-services/'),
     ],
     [
         'label' => 'Fitness Equipment',
         'image' => $uploads . '2026/03/fitness-equipment-install.jpg',
-        'title' => 'Fitness Equipment',
-        'desc'  => 'McCollister’s delivers end-to-end fitness equipment logistics and installation for gyms, hospitality, residential, and commercial facilities. From transport and staging to precise assembly and placement, we ensure equipment is installed safely, correctly, and ready for use.',
+        'title' => 'Fitness Solutions',
+        'desc'  => 'McCollister’s installs fitness equipment across a wide range of environments—from private home gyms and residential communities to commercial facilities, wellness centers, and multi-location rollouts. Our dedicated fitness teams understand the precision, sequencing, and care required to install equipment in finished, people-occupied spaces, helping ensure safe setup, protected equipment, and a smooth path to operational readiness.',
         'url'   => home_url('/fitness/'),
     ],
 ];
@@ -81,15 +81,15 @@ $faqs = [
         ],
         [
             'q' => 'Do you support multi-location or phased rollouts?',
-            'a' => '<p>Yes. We plan and execute multi-site and phased deployments under a single project team, coordinating schedules, logistics, and on-site installation so each location is completed consistently and on time.</p>',
+            'a' => '<p>Yes. McCollister’s regularly manages installations across multiple locations, supporting phased deployments, scheduled rollouts, and site-specific requirements through centralized project management.</p>',
         ],
         [
             'q' => 'How does project management factor into installation services?',
-            'a' => '<p>Dedicated project managers oversee every installation from pre-planning and site surveys through delivery, placement, and final setup—keeping timelines, communication, and quality under one point of accountability.</p>',
+            'a' => '<p>Each installation project is supported by experienced project managers who coordinate timelines, site readiness, transportation, staging, and on-site execution to ensure consistency and accountability.</p>',
         ],
         [
             'q' => 'Can installation services be bundled with transportation and warehousing?',
-            'a' => '<p>Absolutely. Installation integrates with our transportation, warehousing, and logistics services, so a single partner handles everything from inbound freight and storage to staging, final-mile delivery, and on-site installation.</p>',
+            'a' => '<p>Absolutely. Installation services are often bundled with transportation and warehousing to create a seamless, end-to-end solution that minimizes delays, reduces risk, and improves overall project efficiency.</p>',
         ],
     ],
 ];
@@ -97,7 +97,7 @@ $faqs = [
 <main id="primary" class="site-main">
 
     <!-- Hero -->
-    <section class="svc-hero" style="background-image: url('<?php echo esc_url($hero['image']); ?>');">
+    <section class="svc-hero" style="background-image: url('<?php echo esc_url($hero['image']); ?>'); background-position: 30% center;">
         <div class="svc-hero__inner">
             <h1 class="svc-hero__title"><?php echo esc_html($hero['title']); ?></h1>
             <p class="svc-hero__subtitle"><?php echo esc_html($hero['subtitle']); ?></p>
