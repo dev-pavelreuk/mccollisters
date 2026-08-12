@@ -617,7 +617,7 @@
     margin: 0 0 20px;
     font-size: 13px;
     font-weight: 600;
-    line-height: 1.5;
+    line-height: 1.2em;
     color: var(--color-white);
 }
 
@@ -971,13 +971,17 @@
     left: 0;
     right: 0;
     bottom: 20px;
-    z-index: 4;
+    /* Above the base scrim (2) and the blue hover gradient (3); never let the
+       animated track or a bright photo make the title look faded/transparent. */
+    z-index: 5;
     padding-inline: 16px;
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(16px, 1.4vw, 20px);
     font-weight: 700;
     color: var(--color-white);
+    opacity: 1;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* Stay white on hover/focus (overrides the global link-hover colour). */
@@ -1294,7 +1298,7 @@
     justify-content: space-between;
     align-items: flex-end;
     gap: 30px;
-    margin-bottom: clamp(40px, 5vw, 70px);
+    margin-bottom: 100px;
 }
 
 .home-blog__eyebrow {
@@ -1314,6 +1318,9 @@
     letter-spacing: -0.01em;
     text-transform: uppercase;
     color: var(--color-dark);
+    /* Break only at the explicit <br>s so "Articles From" never soft-wraps into
+       two lines; mobile resets this (see the <=782px block). */
+    white-space: nowrap;
 }
 
 /* Title line breaks: desktop shows the --d breaks (3 lines), mobile the --m
@@ -1639,6 +1646,11 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 24px;
+        margin-bottom: clamp(40px, 5vw, 70px);
+    }
+
+    .home-blog__title {
+        white-space: normal;
     }
 
     /* Blog cards become a transform-based carousel on mobile — same behaviour as

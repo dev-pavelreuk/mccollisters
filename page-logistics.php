@@ -20,7 +20,7 @@ $check    = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5
 /* -- Editable content (→ ACF later) --------------------------------------- */
 
 $hero = [
-    'image'    => $uploads . '2026/03/transportation-inset-2.jpg',
+    'image'    => $uploads . '2026/03/automotive-hero5.jpg',
     'title'    => 'Logistics',
     'subtitle' => 'Single-source logistics specialists',
     'buttons'  => [
@@ -50,21 +50,21 @@ $tabs = [
         'label' => 'Auto Transport',
         'image' => $uploads . '2026/03/auto-logistics-inset.jpg',
         'title' => 'Auto Transport',
-        'desc'  => 'McCollister’s provides specialized auto transport logistics for dealerships, OEMs, collectors, and commercial clients. From single high-value vehicles to coordinated multi-unit moves, we tailor equipment, handling, and routing so vehicles arrive on schedule and in the condition expected, with clear communication throughout the move.',
+        'desc'  => 'McCollister’s supports aerospace and defense organizations with specialized logistics services for sensitive, oversized, and mission-critical assets. These shipments require a higher level of planning, coordination, and risk management—delivered through structured project oversight and trained teams. Rather than treating aerospace as standard freight, McCollister’s approaches each move as a managed project, aligning people, process, and equipment to meet strict requirements. For full details on aerospace transportation services, certifications, and project capabilities, visit our Aerospace Logistics page.',
         'url'   => home_url('/auto-transport/'),
     ],
     [
         'label' => 'Aviation',
         'image' => $uploads . '2026/03/aviation-logistics-inset.jpg',
         'title' => 'Aviation',
-        'desc'  => 'McCollister’s delivers time-critical aviation logistics, supporting aircraft-on-ground (AOG) events, component moves, and maintenance operations with rapid coordination, experienced handling, and nationwide reach to help keep aircraft and operations moving.',
+        'desc'  => "McCollister’s offers specialized aviation logistics and transportation services for time-critical aircraft components and operationally sensitive shipments. These moves often require rapid response, precise coordination, and experienced handling to minimize downtime and keep aircraft in service.\n\nOur aviation logistics capabilities support aircraft engines and parts transportation, maintenance and repair operations, and aircraft-on-ground (AOG) shipments—managed through disciplined planning and around-the-clock coordination.\n\nFor full details on aviation transportation services, AOG support, and aviation-specific capabilities, visit our dedicated Aviation Logistics page.",
         'url'   => home_url('/aviation/'),
     ],
 ];
 
 $freight = [
     'eyebrow' => 'freight brokerage',
-    'title'   => 'Domestic Logistics &amp; Freight Brokerage Services',
+    'title'   => 'Domestic Logistics &amp;<br>Freight Brokerage<br>Services',
     'para'    => 'McCollister’s provides nationwide domestic logistics and freight brokerage services supported by an asset-based fleet, a trusted network of partner agencies, and service branches and distribution centers positioned across major US markets. Strategic consolidation points and regularly scheduled truck routes allow us to optimize transit times, reduce product placement and return cycles, and maintain control over service quality and cost.',
     'caps_label' => 'Capabilities Include:',
     'caps'    => [
@@ -79,7 +79,7 @@ $freight = [
     ],
     'closing' => 'With decades of experience organizing high-value and non-standard freight, McCollister’s delivers control, consistency, and confidence for customers who cannot afford uncertainty.',
     'button'  => ['label' => 'Talk to an Expert', 'url' => home_url('/talk-to-an-expert/')],
-    'image'   => $uploads . '2026/03/mccollisters-blue-driver.jpg',
+    'image'   => $uploads . '2026/03/logistics-man.jpg',
 ];
 
 $heavy = [
@@ -167,19 +167,19 @@ $faqs = [
         ],
         [
             'q' => 'When should I use a logistics provider instead of a single carrier?',
-            'a' => '<p>A logistics provider is the better fit when a shipment involves multiple steps, modes, or locations—or when you need coordinated planning, warehousing, and delivery under one point of accountability. A single carrier simply moves freight; a logistics partner manages the entire process.</p>',
+            'a' => '<p>A logistics provider is best suited for shipments that involve multiple service components, specialized handling, tight timelines, or operational complexity. Logistics support helps reduce coordination burden, improve visibility, and manage risk when moves require more than standard transportation.</p>',
         ],
         [
             'q' => 'Can McCollister’s handle urgent or time-sensitive shipments?',
-            'a' => '<p>Yes. We support expedited and time-definite moves with rapid coordination, dedicated equipment, and real-time communication, helping ensure critical shipments arrive on schedule.</p>',
+            'a' => '<p>Yes. McCollister’s supports urgent and time-critical shipments by coordinating equipment availability, routing, handling requirements, and communication across all service components. Our teams manage execution details to help meet aggressive timelines while maintaining shipment integrity.</p>',
         ],
         [
             'q' => 'How does McCollister’s manage visibility across complex logistics projects?',
-            'a' => '<p>We provide GPS-based tracking and electronic order visibility through secure web portals, along with dedicated coordinators who keep you informed at every stage—from planning through final delivery.</p>',
+            'a' => '<p>McCollister’s maintains visibility across logistics projects through centralized coordination, proactive communication, and tracking technologies that span transportation, handling, and delivery stages. This approach allows customers to stay informed while our logistics teams manage execution and issue resolution behind the scenes.</p>',
         ],
         [
             'q' => 'Can McCollister’s scale as my needs change?',
-            'a' => '<p>Yes. Our asset-based fleet, nationwide partner network, and integrated warehousing and final-mile services let us scale up or adjust scope as your logistics needs evolve, without sacrificing control or consistency.</p>',
+            'a' => '<p>Yes. McCollister’s works with you to design a logistics solution tailor-made for your project. We make sure it is built to scale with your changing needs, including fluctuating volumes, seasonal demand, and project-based requirements. Service scope and resources can be adjusted to support evolving logistics challenges without disrupting your operations.</p>',
         ],
     ],
 ];
@@ -253,7 +253,7 @@ $faqs = [
                         </div>
                         <div class="svc-tabs__body">
                             <h3 class="svc-tabs__title"><?php echo esc_html($tab['title']); ?></h3>
-                            <p class="svc-tabs__desc"><?php echo esc_html($tab['desc']); ?></p>
+                            <div class="svc-tabs__desc"><?php echo wp_kses_post(wpautop($tab['desc'])); ?></div>
                             <a class="mcc-btn mcc-btn--on-light svc-tabs__cta" href="<?php echo esc_url($tab['url']); ?>">
                                 <span class="mcc-btn__label"><?php esc_html_e('Explore', 'mccollisters'); ?></span>
                                 <span class="mcc-btn__arrow" aria-hidden="true"><?php echo $arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>

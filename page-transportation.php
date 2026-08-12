@@ -29,7 +29,7 @@ $hero = [
 
 $overview = [
     'eyebrow' => 'overview',
-    'title'   => 'The Right Lane<br>For Your Next<br>Move',
+    'title'   => 'The Right Lane For<br>Your Next Move',
     'paras'   => [
         'Every move comes with its own set of constraints and is shaped by the asset, the environment, and the expectations tied to it. McCollister’s brings proven experience across specialized markets while remaining flexible enough to support transportation needs in virtually any setting. Whether the move is routine or highly complex, we apply the same disciplined attention to detail every time.',
         'Our transportation services are tailored to each move, never forced into a standard template. With purpose-built equipment, experienced drivers, and teams trained to handle sensitive, high-value assets, we ensure every shipment is protected from pickup through delivery.',
