@@ -153,7 +153,7 @@ $faqs = [
     </section>
 
     <!-- Our Capabilities (image + labelled list) -->
-    <section class="svc-section svc-avcaps">
+    <section class="svc-section svc-avcaps svc-avcaps--fmwg">
         <div class="svc-section__inner">
             <?php get_template_part('template-parts/components/section-head', null, [
                 'title' => $capabilities['title'],

@@ -127,19 +127,21 @@ $faqs = [
         ],
         [
             'q' => 'How are computers, monitors, and phone systems handled during an office move?',
-            'a' => '<p>Workstation technology is packed, protected, and reconnected with care. We use antistatic protection for monitors, organized and labeled packing for keyboards, cables, and peripherals, and clear asset labeling so every device returns to the right desk. Where needed, our technical services division handles IT asset moves and reconnection so employees are productive on day one.</p>',
+            'a' => '<p>McCollister’s supports the packing, protection, and coordination of employee desk-level technology as part of a commercial relocation. We provide antistatic monitor protection and organized packing solutions for keyboards, cables, mice, phones, and related equipment to keep components protected and properly grouped.</p>'
+                 . '<p>If requested, McCollister’s can also coordinate disconnection, reconnection, and rebooting of computers and phone systems through McCollister’s Technical Services (MTS) to help reduce downtime.</p>',
         ],
         [
             'q' => 'Do you coordinate technology and data infrastructure moves?',
-            'a' => '<p>Yes. We coordinate furniture and IT/data infrastructure moves together through our technical services division, which specializes in data center relocation, IT asset handling, secure data destruction, and enterprise technology transitions—reducing vendors, risk, and timeline gaps so your workplace and technology come online together.</p>',
+            'a' => '<p>Yes. McCollister’s coordinates commercial relocation projects with our in-house technical services team, allowing organizations to manage furniture, systems furniture, desk-level technology, and more complex IT assets under one integrated plan.</p>'
+                 . '<p>This approach helps eliminate coordination gaps and ensures workspaces and technology environments come online together.</p>',
         ],
         [
             'q' => 'What information is needed to get a quote for a commercial relocation project?',
-            'a' => '<p>To build an accurate quote, it helps to know the origin and destination, square footage and workstation counts, the types of assets involved (systems furniture, labs, IT/data infrastructure, specialty equipment), any storage or disposition needs, and your target timeline and access constraints. Contact us and a relocation specialist will scope the project with you.</p>',
+            'a' => '<p>To begin, we typically need a general understanding of the project scope, estimated size, locations involved, and desired timeline. For more complex relocations, we may conduct a site walk or planning call to ensure the quote reflects the full scope of work and avoids surprises later.</p>',
         ],
         [
             'q' => 'When should we contact McCollister’s about our office move?',
-            'a' => '<p>The earlier the better. Reaching out during the planning phase—ideally several weeks to months ahead for larger moves—gives us time to survey the space, build a phased plan, coordinate vendors and building access, and minimize downtime. We can also support expedited timelines when needed.</p>',
+            'a' => '<p>The earlier, the better. Engaging McCollister’s early in the planning process allows us to help design the move, identify risks, and create a realistic timeline. Early involvement leads to smoother execution, fewer disruptions, and greater confidence throughout the relocation.</p>',
         ],
     ],
 ];

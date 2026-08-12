@@ -2160,6 +2160,10 @@
 
 /* Image keeps its natural aspect ratio rather than a forced square
    (Residential "Our teams focus on" and "Moving beyond" landscape photos). */
+.svc-avcaps__grid--free {
+    margin-top: 0;
+}
+
 .svc-avcaps__grid--free .svc-avcaps__media img {
     aspect-ratio: auto;
 }
@@ -2175,7 +2179,7 @@
 
 /* Blue emphasised lead above a capabilities list (Residential). */
 .svc-avcaps__lead-blue {
-    margin: 0 0 24px;
+    margin: 20px 0;
     color: var(--color-primary);
     font-family: var(--font-heading);
     font-size: 18px;
@@ -2198,12 +2202,16 @@
     margin-top: clamp(24px, 3vw, 34px);
 }
 
+/* Sub-section (h3) title under a section's h2. Proper case comes straight from
+   the source text (text-transform: none, not the inherited heading uppercase). */
 .svc-avcaps__list-title {
     margin: 0 0 24px;
     font-family: var(--font-heading);
-    font-size: clamp(20px, 2.2vw, 26px);
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     line-height: 36px;
+    letter-spacing: -0.9px;
+    text-transform: none;
     color: var(--color-dark);
 }
 
@@ -2216,7 +2224,7 @@
 
 .svc-fmlist__item {
     padding: 18px 0;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-black);
     color: var(--color-text);
     font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
@@ -2282,7 +2290,7 @@
 .svc-capblocks {
     display: grid;
     gap: clamp(48px, 7vw, 96px);
-    margin-top: clamp(40px, 5vw, 70px);
+    margin-top: 20px;
 }
 
 .svc-capblock {
@@ -2312,7 +2320,12 @@
     font-size: clamp(22px, 2.4vw, 30px);
     font-weight: 700;
     line-height: 1.2;
+    text-transform: lowercase;
     color: var(--color-dark);
+}
+
+.svc-capblock__title::first-letter {
+    text-transform: uppercase;
 }
 
 .svc-capblock__text {
@@ -2328,7 +2341,12 @@
     font-family: var(--font-heading);
     font-size: 16px;
     font-weight: 700;
+    text-transform: lowercase;
     color: var(--color-dark);
+}
+
+.svc-capblock__list-title::first-letter {
+    text-transform: uppercase;
 }
 
 .svc-capblock__list {

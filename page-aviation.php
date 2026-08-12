@@ -79,19 +79,19 @@ $faqs = [
         ],
         [
             'q' => 'What is aircraft-on-ground (AOG) transportation?',
-            'a' => '<p>Aircraft-on-ground (AOG) transportation is the urgent movement of parts, engines, or components needed to return a grounded aircraft to service. Because every hour of downtime is costly, AOG moves are expedited and closely coordinated—McCollister’s mobilizes quickly, plans the fastest compliant route, and keeps you updated until the part is delivered.</p>',
+            'a' => '<p>AOG transportation supports situations where an aircraft is grounded due to mechanical issues or missing components. These shipments are time-critical and require immediate coordination to restore operations as quickly as possible.</p>',
         ],
         [
             'q' => 'Can McCollister’s support time-critical aviation shipments?',
-            'a' => '<p>Yes. Time-critical and time-specific aviation moves are a core part of what we do. With an asset-based fleet, trained drivers, and 24/7/365 dispatch, we coordinate expedited pickups and deliveries and provide GPS-tracked visibility so you know exactly where your shipment is at every step.</p>',
+            'a' => '<p>Yes. McCollister’s provides 24/7/365 pickup, delivery, and support for time-sensitive aviation moves, including AOG requests and scheduled critical shipments.</p>',
         ],
         [
             'q' => 'How does McCollister’s ensure the safety of aviation components?',
-            'a' => '<p>We protect aviation components with specialized equipment, trained personnel, secure handling, and careful route planning. Shipments travel in asset-based, appropriately outfitted trailers with GPS tracking and full chain-of-custody documentation, so sensitive and high-value assets stay safe from pickup to delivery.</p>',
+            'a' => '<p>Our aviation shipments are handled by trained drivers using specialized equipment and secure loading practices. Shipments are GPS-tracked to provide visibility and accountability throughout transit.</p>',
         ],
         [
             'q' => 'How do I get started with McCollister’s for my aviation project?',
-            'a' => '<p>Getting started is easy—reach out to our team with the details of your shipment (origin, destination, component, and timeline) and we’ll build a tailored plan. Contact us to talk to an aviation logistics expert and coordinate your move.</p>',
+            'a' => '<p>Simply contact our team to speak with an aviation logistics expert. We’ll assess your requirements and coordinate a transportation solution built around your timeline, asset, and operational needs.</p>',
         ],
     ],
 ];
@@ -130,7 +130,7 @@ $faqs = [
     </section>
 
     <!-- Our Capabilities (image + checklist) -->
-    <section class="svc-section svc-avcaps">
+    <section class="svc-section svc-avcaps svc-avcaps--aviation">
         <div class="svc-section__inner">
             <?php get_template_part('template-parts/components/section-head', null, [
                 'title' => $capabilities['title'],
