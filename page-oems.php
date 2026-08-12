@@ -174,11 +174,12 @@ $faqs = [
         ],
         [
             'q' => 'What types of OEM clients do you work with?',
-            'a' => '<p>We partner with automakers and their logistics arms across the full production-to-delivery journey—transporting prototypes, concept and clay-model vehicles, pre-production and launch units, and finished inventory. We move vehicles between plants, processing centers, ports, marshalling yards, railheads, dealers, and special events, scaling from single high-priority units to high-volume, multi-location distribution.</p>',
+            'a' => '<p>We work with a range of OEM clients, including car manufacturers, automotive suppliers, EV companies, and global logistics partners needing white-label or branded shipping services.</p>',
         ],
         [
             'q' => 'What factors influence the cost of OEM auto transport?',
-            'a' => '<p>OEM transport pricing depends on volume and lane density, distance and route, the mix of open vs. enclosed and standard vs. white-glove service, vehicle type and condition (including oversized, low-clearance, and pre-production units), pickup and delivery timing, seasonal demand, and any special handling or storage requirements. Consolidated, well-planned lanes lower the cost per delivered vehicle, while expedited and enclosed white-glove moves carry a premium.</p>',
+            'a' => '<p>McCollister’s OEM transport rates are structured around your specific logistics needs and volumes, as well as seasonal demand and market capacity.</p>'
+                 . '<p>For an accurate quote, please contact our dedicated OEM logistics team directly.</p>',
         ],
     ],
 ];

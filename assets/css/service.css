@@ -538,6 +538,11 @@
     line-height: 22px;
 }
 
+/* Aerospace overview lead is bolder. */
+.svc-prose--aerospace p.svc-prose__lead {
+    font-weight: 700;
+}
+
 /* Larger lead variant (Final-Mile & White-Glove overview). */
 .svc-prose p.svc-prose__lead--xl {
     margin-bottom: 20px;
@@ -1311,7 +1316,7 @@
    column gap widens each column so the longest item stays on one line. */
 .svc-freight__caps--tall {
     grid-template-rows: repeat(6, auto);
-    column-gap: clamp(12px, 1.2vw, 20px);
+    column-gap: clamp(12px, 1.2vw, 0px);
 }
 
 .svc-freight__caps--tall li {
@@ -1365,6 +1370,23 @@
     font-size: 18px;
     font-weight: 700;
     color: var(--color-dark);
+}
+
+/* Non-mobile type scale for the OEM confidence section. */
+@media (min-width: 783px) {
+    .svc-oemconf__lead {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 36px;
+        text-transform: capitalize;
+    }
+
+    .svc-oemconf__item-title {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 22px;
+        text-transform: capitalize;
+    }
 }
 
 .svc-oemconf__item-text {
@@ -1713,11 +1735,19 @@
 
 .svc-confidence__title-box h2 {
     margin: 0;
-    font-size: clamp(30px, 3.6vw, 44px);
+    font-size: 60px;
     font-weight: 400;
-    line-height: 1.05;
+    line-height: 72px;
+    letter-spacing: -1.8px;
     text-transform: uppercase;
     color: var(--color-white);
+}
+
+@media (max-width: 782px) {
+    .svc-confidence__title-box h2 {
+        font-size: 34px;
+        line-height: 1.1;
+    }
 }
 
 .svc-confidence__text-box {
@@ -1899,6 +1929,16 @@
     line-height: 22px;
 }
 
+/* Non-mobile: lighter weight, tighter tracking/leading. */
+@media (min-width: 783px) {
+    .svc-autotransport-intro__text {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21.6px;
+        letter-spacing: -0.54px;
+    }
+}
+
 /* --- Auto Transport: tabs (sentence-case titles, multi-paragraph body) ----- */
 /* 30px above the tab buttons (instead of the default 100px). */
 .svc-tabs--auto {
@@ -1950,6 +1990,16 @@
 /* --- Auto Transport: why customers choose us ------------------------------ */
 .svc-whychoose {
     padding-block-start: 0;
+}
+
+/* Reuses the features grid, but with a wider landscape image that pushes the
+   list content a little further right (scoped so warehousing stays square). */
+.svc-whychoose .svc-features__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.svc-whychoose .svc-features__media img {
+    aspect-ratio: 3 / 2;
 }
 
 .svc-whychoose__title {

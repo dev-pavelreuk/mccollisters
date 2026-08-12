@@ -131,7 +131,7 @@ $faqs = [
                 'eyebrow' => $overview['eyebrow'],
                 'title'   => $overview['title'],
             ]); ?>
-            <div class="svc-prose">
+            <div class="svc-prose svc-prose--aerospace">
                 <p class="svc-prose__lead"><?php echo wp_kses($overview['lead'], ['strong' => []]); ?></p>
                 <div class="svc-prose__cols">
                     <p><?php echo esc_html($overview['body']); ?></p>

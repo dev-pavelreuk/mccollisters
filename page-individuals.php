@@ -94,7 +94,7 @@ $fleet = [
 
 $levels = [
     'eyebrow'        => 'service levels',
-    'title'          => 'Take Charge Of Your<br>Auto Transportation',
+    'title'          => 'Take Charge Of<br>Your Auto<br>Transportation',
     'lead'           => 'McCollister’s offers three levels of service, suitable for different needs and budgets.',
     'para'           => 'All of our shipment options provide the responsive customer service and attention to detail McCollister’s is known for. Our platinum package features white-glove service and McCollister’s own top-grade equipment. This option delivers the ultimate experience in precision and confidentiality, setting the standard for high-end auto transport. Our gold and silver services are performed through our 3PL network of vetted carriers that we trust and partner with throughout the US. These options are more budget-friendly and may offer a quicker turnaround than our platinum package.',
     'packages_title' => 'Choose From One Of Our Three Packages:',

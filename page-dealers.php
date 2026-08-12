@@ -47,7 +47,7 @@ $overview = [
     ],
 ];
 
-$partners_title = 'Trusted By Our Partners';
+$partners_title = 'Trusted By Our<br>Partners';
 
 // Same brand marquee as the Auto Transport page.
 $logos = [
@@ -109,7 +109,7 @@ $network = [
 
 $levels = [
     'eyebrow'        => 'service levels',
-    'title'          => 'Take Charge Of Your<br>Auto Transportation',
+    'title'          => 'Take Charge Of<br>Your Auto<br>Transportation',
     'lead'           => 'Through our online quoting system, we bring efficiency, accuracy, and accountability to auto relocation.',
     'paras'          => [
         'Through this platform, you can get quotes instantly. Book your transport immediately upon quoting or have the quote emailed to you to book at your convenience. Track your vehicles every step of the way.',
@@ -258,7 +258,7 @@ $faqs = [
     <!-- Trusted by our partners -->
     <section class="svc-section svc-partners">
         <div class="svc-section__inner">
-            <h2 class="section-head__title svc-partners__title"><?php echo esc_html($partners_title); ?></h2>
+            <h2 class="section-head__title svc-partners__title"><?php echo wp_kses($partners_title, ['br' => []]); ?></h2>
         </div>
     </section>
 
