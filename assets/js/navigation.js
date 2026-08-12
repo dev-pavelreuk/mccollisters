@@ -371,12 +371,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		const sticky = y > 80;
 		header.classList.toggle("is-sticky", sticky);
 
-		// Don't hide while the mobile menu is open.
+		// Don't hide while the mobile menu is open, or while a desktop mega-menu
+		// overlay is open on hover — hiding the header mid-hover yanks the overlay
+		// away and looks glitchy, so keep it put until the menu is unhovered.
 		const menuOpen = document.body.classList.contains("menu-open");
+		const submenuOpen =
+			window.innerWidth > 1024 &&
+			!!navigation.querySelector(
+				'.menu-item-has-children > a[aria-expanded="true"]'
+			);
+		const keepVisible = menuOpen || submenuOpen;
 
-		if (sticky && !menuOpen && y > lastScrollY && y > 100) {
+		if (sticky && !keepVisible && y > lastScrollY && y > 100) {
 			header.classList.add("is-hidden"); // scrolling down → hide
-		} else if (!sticky || y < lastScrollY || menuOpen) {
+		} else if (!sticky || y < lastScrollY || keepVisible) {
 			header.classList.remove("is-hidden"); // scrolling up / at top → show
 		}
 
