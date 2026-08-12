@@ -61,13 +61,13 @@ $certs = [
     'eyebrow' => 'credentials',
     'title'   => 'Certifications',
     'logos'   => [
-        ['img' => $uploads . '2026/03/iso-13485-2016-2.svg',          'alt' => 'ISO 13485 certified'],
-        ['img' => $uploads . '2026/05/smartway-blk-1.svg',            'alt' => 'SmartWay partner'],
-        ['img' => $uploads . '2026/05/ndta-blk-1.svg',               'alt' => 'NDTA member'],
-        ['img' => $uploads . '2026/05/ctpat-blk-1.svg',              'alt' => 'CTPAT — your supply chain’s strongest link'],
-        ['img' => $uploads . '2026/05/nsc-blk-1.svg',                'alt' => 'National Safety Council member', 'class' => 'svc-creds__logo--sm'],
-        ['img' => $uploads . '2026/05/commercial-space-federation.svg', 'alt' => 'Commercial Space Federation member'],
-        ['bbb' => true,                                              'alt' => 'Better Business Bureau accredited'],
+        ['img' => $uploads . '2026/03/iso-13485-2016-2.svg',          'alt' => 'ISO 13485 certified', 'url' => 'https://www.iso.org/iso-13485-medical-devices.html'],
+        ['img' => $uploads . '2026/05/smartway-blk-1.svg',            'alt' => 'SmartWay partner', 'url' => 'https://www.epa.gov/smartway'],
+        ['img' => $uploads . '2026/05/ndta-blk-1.svg',               'alt' => 'NDTA member', 'url' => 'https://www.ndtahq.com/'],
+        ['img' => $uploads . '2026/05/ctpat-blk-1.svg',              'alt' => 'CTPAT — your supply chain’s strongest link', 'url' => 'https://www.cbp.gov/border-security/ports-entry/cargo-security/ctpat'],
+        ['img' => $uploads . '2026/05/nsc-blk-1.svg',                'alt' => 'National Safety Council member', 'class' => 'svc-creds__logo--sm', 'url' => 'https://www.nsc.org/'],
+        ['img' => $uploads . '2026/05/commercial-space-federation.svg', 'alt' => 'Commercial Space Federation member', 'url' => 'https://commercialspace.org/'],
+        ['bbb' => true,                                              'alt' => 'Better Business Bureau accredited', 'url' => 'https://www.bbb.org/us/nj/burlington/profile/moving-companies/mccollisters-global-services-0221-80001208'],
     ],
 ];
 
@@ -161,13 +161,21 @@ $more = [
             ]); ?>
             <div class="svc-creds__grid">
                 <?php foreach ($certs['logos'] as $logo) : ?>
-                    <div class="svc-creds__logo<?php echo isset($logo['class']) ? ' ' . esc_attr($logo['class']) : ''; ?>">
-                        <?php if (!empty($logo['bbb'])) : ?>
-                            <span class="svc-creds__bbb" role="img" aria-label="<?php echo esc_attr($logo['alt']); ?>"><?php echo $bbb_svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-                        <?php else : ?>
-                            <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
-                        <?php endif; ?>
-                    </div>
+                    <?php
+                    $logo_classes = 'svc-creds__logo' . (isset($logo['class']) ? ' ' . $logo['class'] : '');
+                    $logo_inner   = !empty($logo['bbb'])
+                        ? '<span class="svc-creds__bbb" role="img" aria-label="' . esc_attr($logo['alt']) . '">' . $bbb_svg . '</span>'
+                        : '<img src="' . esc_url($logo['img']) . '" alt="' . esc_attr($logo['alt']) . '" loading="lazy" decoding="async">';
+                    ?>
+                    <?php if (!empty($logo['url'])) : ?>
+                        <a class="<?php echo esc_attr($logo_classes); ?>" href="<?php echo esc_url($logo['url']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr('Visit ' . $logo['alt']); ?>">
+                            <?php echo $logo_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        </a>
+                    <?php else : ?>
+                        <div class="<?php echo esc_attr($logo_classes); ?>">
+                            <?php echo $logo_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>

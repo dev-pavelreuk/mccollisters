@@ -49,7 +49,7 @@ $drives = [
 ];
 
 $why = [
-    'title' => 'Why Work At McCollister’s?',
+    'title' => 'Why Work At<br>McCollister’s?',
     'para'  => 'McCollister’s operates in a demanding, fast-paced industry—but it’s also one filled with challenges, collaboration, and opportunity. Our teams support meticulous moves and installations for discerning individuals and high-value, mission-critical projects for clients in industries such as aerospace, medical equipment, IT, automotive logistics, and commercial relocation.',
 ];
 
@@ -228,12 +228,14 @@ $more = [
 
     <!-- Why Work At McCollister's? -->
     <section class="svc-section careers-why">
-        <div class="svc-section__inner">
-            <?php get_template_part('template-parts/components/section-head', null, [
-                'title' => $why['title'],
-            ]); ?>
-            <div class="svc-prose">
-                <p><?php echo esc_html($why['para']); ?></p>
+        <div class="svc-section__inner careers-why__inner">
+            <div class="careers-why__prose">
+                <?php get_template_part('template-parts/components/section-head', null, [
+                    'title' => $why['title'],
+                ]); ?>
+                <div class="svc-prose">
+                    <p><?php echo esc_html($why['para']); ?></p>
+                </div>
             </div>
         </div>
     </section>

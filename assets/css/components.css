@@ -518,10 +518,9 @@ input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
     width: 100%;
-    min-height: 50px;
     padding: 12px 14px;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: 10px;
     color: var(--color-dark);
     background: var(--color-white);
 }

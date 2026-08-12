@@ -472,13 +472,20 @@
 
 .svc-faq__icon svg {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
 }
 
-/* Thin arrow stroke (overrides the inline stroke-width="2"). */
+/* Arrow stroke (overrides the inline stroke-width="2"). */
 .svc-faq__icon svg path {
-    stroke-width: 1.75;
+    stroke-width: 2.5;
+}
+
+/* Brand blue on hover and when open. */
+.svc-faq__summary:hover .svc-faq__icon,
+.svc-faq__summary:focus-visible .svc-faq__icon,
+.svc-faq[open] .svc-faq__icon {
+    color: var(--color-primary);
 }
 
 .svc-faq[open] .svc-faq__icon {
@@ -519,8 +526,8 @@
     position: absolute;
     left: 0;
     top: 0.3em;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
@@ -532,6 +539,18 @@
 /* No trailing gap under the last block in a panel. */
 .svc-faq__panel > :last-child {
     margin-bottom: 0;
+}
+
+/* FAQ page: no per-item gap in the panel lists (all devices). */
+.faqs-main .svc-faq__panel li {
+    margin: 0;
+}
+
+/* FAQ page, mobile: a slightly thicker checkmark. */
+@media (max-width: 782px) {
+    .faqs-main .svc-faq__panel li::before {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+    }
 }
 
 /* --- Prose lead (bold intro paragraph under an overview title) ------------- */
@@ -836,8 +855,8 @@
 
 .svc-wms__check svg {
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
 }
 
 /* --- Our Certifications (logos + captions) -------------------------------- */
@@ -2050,8 +2069,8 @@
 
 .svc-whychoose__check svg {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 /* --- Auto Transport: brand logo strip (seamless infinite marquee) ---------- */
@@ -2609,7 +2628,9 @@
    4 columns (left column wider); 2 rows sized by grid-auto-rows. */
 .svc-serve__grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    /* Aerospace (col 1) and Fitness (cols 2-3) sit a little wider than the
+       Technical/Warehousing columns. */
+    grid-template-columns: 1.5fr .8fr .8fr 1fr;
     grid-auto-rows: clamp(200px, 22vw, 300px);
     gap: clamp(16px, 1.8vw, 24px);
     margin-top: clamp(32px, 4vw, 52px);
@@ -2721,6 +2742,11 @@
    pauses on hover) but with year/divider/title/description cards. */
 .svc-history-slider {
     margin-top: 80px;
+    /* Match the other sections' width; the scrolling slides are clipped to this
+       box (overflow: hidden on .svc-logos) rather than bleeding across the body.
+       Mobile keeps its own 10px side margin below. */
+    max-width: var(--container);
+    margin-inline: auto;
 }
 
 .svc-history-slider .svc-logos__group {
@@ -3182,7 +3208,7 @@
 
 .hist-slider__year {
     position: relative;
-    padding: 1px 0 1px 40px;
+    padding: 1px 0 1px 52px;
     border: 0;
     background: none;
     cursor: pointer;
@@ -3204,15 +3230,22 @@
     color: var(--color-white);
 }
 
-.hist-slider__year.is-active::before {
+/* Yellow tick next to the year. Present on every year (collapsed to 0) so it
+   can animate its width open when a year becomes active. */
+.hist-slider__year::before {
     content: "";
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 22px;
+    width: 0;
     height: 2px;
     background: var(--color-brand-yellow);
+    transition: width 0.25s ease-out;
+}
+
+.hist-slider__year.is-active::before {
+    width: 34px;
 }
 
 .hist-slider__arrows {
@@ -3318,7 +3351,12 @@
     }
 
     /* Yellow indicator moves underneath the active year, left-aligned and 10%
-       narrower than the year field. */
+       narrower than the year field. No expand animation here (line is below,
+       not beside, the year). */
+    .hist-slider__year::before {
+        transition: none;
+    }
+
     .hist-slider__year.is-active::before {
         top: auto;
         bottom: -3px;
@@ -3678,8 +3716,8 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
         background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
     }
 
@@ -3693,8 +3731,8 @@
 
     /* Larger check that sits lower, aligning with the bigger mobile body text. */
     .svc-wms__check svg {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -3995,6 +4033,24 @@
     max-height: 74px;
 }
 
+/* Linked logos: recolour to brand blue on hover/focus. The <img> SVGs can't be
+   filled via CSS, so approximate the brand blue with a filter; the inline BBB
+   SVG uses fill directly. */
+.svc-creds__logo img,
+.svc-creds__bbb svg {
+    transition: filter 0.3s ease, fill 0.3s ease;
+}
+
+a.svc-creds__logo:hover img,
+a.svc-creds__logo:focus-visible img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(94%) saturate(1936%) hue-rotate(196deg) brightness(94%) contrast(101%);
+}
+
+a.svc-creds__logo:hover .svc-creds__bbb svg,
+a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
+    fill: var(--color-primary);
+}
+
 /* Helpful Guides — list with top + row dividers. */
 .svc-guides__list {
     list-style: none;
@@ -4140,6 +4196,20 @@
     grid-template-columns: 1.15fr 0.85fr;
     align-items: start;
     gap: clamp(32px, 4vw, 64px);
+}
+
+/* "Why Work At" mirrors the two-column split above — content left, right empty. */
+.careers-why__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+    gap: clamp(32px, 4vw, 64px);
+}
+
+@media (max-width: 782px) {
+    .careers-why__inner {
+        grid-template-columns: 1fr;
+    }
 }
 
 .careers-drivers {
@@ -4295,15 +4365,15 @@
 .careers-check {
     flex: 0 0 auto;
     display: inline-flex;
-    width: 20px;
-    height: 20px;
-    margin-top: 1px;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
     color: var(--color-brand-yellow);
 }
 
 .careers-check svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 }
 
 /* Our Culture — image left, copy right. */
@@ -4424,8 +4494,8 @@
 
 /* Policies intro: a lead paragraph over the standard body copy. */
 .esg-intro {
-    margin-top: clamp(18px, 2.4vw, 28px);
-    margin-bottom: clamp(34px, 4.5vw, 54px);
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .esg-intro p {
@@ -4615,8 +4685,9 @@
 
 /* Gravity Forms — scoped styling so it matches the card design regardless of
    the plugin's default theme. */
-.contact-hero__gform label,
-.contact-hero__gform .gfield_label {
+/* Field labels visible in black (matches the live site). */
+.contact-hero__gform .gfield_label,
+.contact-hero__gform .gform-field-label {
     display: block;
     margin-bottom: 6px;
     font-family: var(--font-heading);
@@ -4625,8 +4696,102 @@
     color: var(--color-dark);
 }
 
+/* Hide the First/Last sublabels and the redundant field descriptions
+   (email/message duplicate the label); keep the consent text + char counter. */
+.contact-hero__gform .gform-field-label--type-sub {
+    display: none !important;
+}
+
+.contact-hero__gform .gfield_description:not(.gfield_consent_description):not(.ginput_counter) {
+    display: none;
+}
+
+.contact-hero__gform .gform-theme--foundation .gform_fields,
+.contact-hero__gform .gform_fields {
+    row-gap: 18px !important;
+}
+
 .contact-hero__gform .gfield {
-    margin-bottom: 16px;
+    margin-bottom: 0;
+}
+
+/* Consent row: same styling as the Talk to an Expert form (#gform_3), just in
+   black instead of white. !important mirrors that form so GF can't override. */
+.contact-hero__gform .ginput_container_consent {
+    display: block !important;
+    line-height: 1.7 !important;
+}
+
+.contact-hero__gform .ginput_container_consent input[type="checkbox"] {
+    display: inline-block !important;
+    margin: 1px 8px 0 0 !important;
+    vertical-align: top !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    background: var(--color-white) !important;
+    border: 1px solid var(--color-black) !important;
+    border-radius: 2px !important;
+    position: relative !important;
+    cursor: pointer !important;
+}
+
+/* Centered black checkmark. */
+.contact-hero__gform .ginput_container_consent input[type="checkbox"]::before {
+    content: none !important;
+}
+
+.contact-hero__gform .ginput_container_consent input[type="checkbox"]:checked::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 5px !important;
+    top: 1px !important;
+    width: 4px !important;
+    height: 9px !important;
+    border: solid var(--color-black) !important;
+    border-width: 0 2px 2px 0 !important;
+    transform: rotate(45deg) !important;
+}
+
+.contact-hero__gform .gfield_consent_label,
+.contact-hero__gform .gform-field-label--type-inline {
+    display: inline !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    font-family: var(--font-body);
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.7 !important;
+    color: var(--color-dark) !important;
+}
+
+.contact-hero__gform .gfield_consent_label a {
+    color: var(--color-dark) !important;
+    text-decoration: underline !important;
+    transition: color var(--transition);
+}
+
+.contact-hero__gform .gfield_consent_label a:hover,
+.contact-hero__gform .gfield_consent_label a:focus {
+    color: var(--color-primary) !important;
+}
+
+.contact-hero__gform .gfield_consent_description {
+    margin-top: 14px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    color: var(--color-dark) !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+}
+
+.contact-hero__gform .charleft {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
 }
 
 .contact-hero__gform input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
@@ -4638,9 +4803,15 @@
     font-size: 15px;
     color: var(--color-dark);
     background: var(--color-white);
-    border: 1px solid #c9ced3;
-    border-radius: 8px;
+    border: 1px solid var(--color-black);
+    border-radius: 3px;
     box-sizing: border-box;
+}
+
+.contact-hero__gform input::placeholder,
+.contact-hero__gform textarea::placeholder {
+    color: #9aa0a6;
+    opacity: 1;
 }
 
 .contact-hero__gform textarea {
@@ -4661,24 +4832,29 @@
 
 .contact-hero__gform .gform_footer input[type="submit"],
 .contact-hero__gform .gform_footer button,
+.contact-hero__gform .gform_button,
 .contact-hero__gform button[type="submit"] {
-    width: 100%;
-    padding: 16px 20px;
+    width: 100% !important;
+    padding: 16px 24px !important;
     font-family: var(--font-heading);
-    font-size: 15px;
+    font-size: 15px !important;
     font-weight: 700;
-    color: var(--color-white);
-    background: var(--color-dark);
-    border: 0;
-    border-radius: 10px;
+    color: var(--color-white) !important;
+    background: var(--color-black) !important;
+    border: none !important;
+    border-radius: 10px !important;
     cursor: pointer;
-    transition: background var(--transition);
+    transition: background var(--transition), color var(--transition);
 }
 
 .contact-hero__gform .gform_footer input[type="submit"]:hover,
 .contact-hero__gform .gform_footer button:hover,
-.contact-hero__gform button[type="submit"]:hover {
-    background: #000;
+.contact-hero__gform .gform_button:hover,
+.contact-hero__gform button[type="submit"]:hover,
+.contact-hero__gform .gform_button:focus,
+.contact-hero__gform button[type="submit"]:focus {
+    color: var(--color-white) !important;
+    background: var(--color-primary) !important;
 }
 
 @media (max-width: 1024px) {
@@ -4694,10 +4870,29 @@
 }
 
 @media (max-width: 782px) {
+    .contact-hero {
+        padding: 20px;
+    }
+
     /* Global h1 mobile size (matches svc-hero__title / the design tokens). */
     .contact-hero__form-title {
         font-size: 35px;
         line-height: 40px;
+    }
+
+    .contact-hero__text {
+        font-weight: 600;
+    }
+
+    /* reCAPTCHA is a fixed 304px widget — scale it down so it fits the card. */
+    .contact-hero__gform .ginput_recaptcha {
+        transform: scale(0.82);
+        transform-origin: 0 0;
+    }
+
+    /* Keep the message (textarea) border black like the other fields. */
+    .contact-hero__gform textarea {
+        border: 1px solid var(--color-black) !important;
     }
 }
 
@@ -4720,7 +4915,7 @@
 }
 
 .faqs-industries__label {
-    margin: 0 0 20px;
+    margin: 0 0 12px;
     font-family: var(--font-heading);
     font-size: 13px;
     font-weight: 700;
@@ -4734,7 +4929,7 @@
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 12px;
+    gap: 8px;
 }
 
 .faqs-industries__link {
@@ -5041,14 +5236,15 @@
         grid-template-columns: auto minmax(0, 1fr);
         grid-template-areas:
             "icon body"
-            "view view";
+            ".    view";
         align-items: start;
         row-gap: 16px;
-        transition: none;
+        transition: background-color 0.3s ease;
     }
 
+    /* Same grey hover fill as desktop (no inset shift on mobile). */
     .press__item:hover {
-        background-color: transparent;
+        background-color: rgb(237, 237, 237);
         padding-inline: 0;
     }
 
@@ -5144,7 +5340,7 @@
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 8px;
+    gap: 5px;
 }
 
 .terms__body ul li {
@@ -5162,8 +5358,8 @@
     position: absolute;
     left: 0;
     top: 3px;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     background: no-repeat center / contain
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M20 6 9 17l-5-5' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
@@ -5530,22 +5726,22 @@
 .blog__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(34px, 3.5vw, 52px) clamp(24px, 3vw, 40px);
+    gap: 80px clamp(24px, 3vw, 40px);
 }
 
 /* Post card: meta / title / excerpt / image (image floats to the bottom). */
 .blog-card {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
-    border-top: 1px solid var(--color-dark);
 }
 
 .blog-card__meta {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-bottom: 14px;
     margin-bottom: 14px;
+    border-bottom: 1px solid var(--color-dark);
     font-family: var(--font-heading);
     font-size: 13px;
 }
@@ -5554,6 +5750,12 @@
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--color-dark);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.blog-card__date:hover {
+    color: var(--color-primary);
 }
 
 .blog-card__dot {
@@ -5755,7 +5957,7 @@ body.search .blog-search__btn {
     justify-content: space-between;
     gap: 12px;
     margin: 0;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--color-dark);
     font-family: var(--font-heading);
     font-size: 18px;
@@ -5777,11 +5979,11 @@ body.search .blog-search__btn {
 }
 
 .blog-widget__list {
-    margin: 18px 0 0;
+    margin: 12px 0 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 14px;
+    gap: 3px;
 }
 
 .blog-widget__list li {
@@ -5812,7 +6014,7 @@ body.search .blog-search__btn {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .blog-tag {
@@ -5832,7 +6034,7 @@ body.search .blog-search__btn {
 }
 
 .blog-subscribe__text {
-    margin: 18px 0 20px;
+    margin: 18px 0 10px;
     font-size: var(--body-font-size);
     line-height: 1.6;
     color: var(--color-text);
@@ -5840,7 +6042,7 @@ body.search .blog-search__btn {
 
 .blog-subscribe .blog-subscribe__form input {
     width: 100%;
-    padding: 10px 0;
+    padding: 0;
     border-top: 0;
     border-right: 0;
     border-left: 0;
@@ -5948,6 +6150,37 @@ body.search .blog-search__btn {
 @media (max-width: 782px) {
     .blog__grid--three {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Archive/search on mobile keep the desktop stacking order — meta, divider,
+       title, description, then the image at the bottom (not moved to the top),
+       with the description shown. Row gap stays 80px from .blog__grid. */
+    .blog__grid--three .blog-card__media {
+        order: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .blog__grid--three .blog-card__excerpt {
+        display: block;
+    }
+
+    /* Date and category on one line with the brand-blue dot between them. */
+    .blog__grid--three .blog-card__meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .blog__grid--three .blog-card__dot {
+        display: block;
+        width: 8px;
+        height: 8px;
+    }
+
+    .blog__grid--three .blog-card__date,
+    .blog__grid--three .blog-card__date time {
+        text-decoration: none;
     }
 }
 
@@ -6260,8 +6493,8 @@ body.search .blog-search__btn {
     position: absolute;
     left: 0;
     top: 3px;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 12.5 9 17.5 20 6.5' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 

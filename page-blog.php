@@ -29,7 +29,7 @@ $blog_query = new WP_Query([
     <section class="svc-section blog">
         <div class="svc-section__inner">
             <p class="blog__crumb">/ blog /</p>
-            <h1 class="blog__title"><?php echo wp_kses(__('See the Latest<br>Articles From Our<br>Company', 'mccollisters'), ['br' => []]); ?></h1>
+            <h1 class="blog__title"><?php echo wp_kses(__('See the Latest<br>Articles From<br>Our Company', 'mccollisters'), ['br' => []]); ?></h1>
 
             <div class="blog__inner">
                 <div class="blog__main">
@@ -78,7 +78,7 @@ $blog_query = new WP_Query([
                     <?php endif; ?>
                 </div>
 
-                <?php get_template_part('template-parts/blog/sidebar'); ?>
+                <?php get_template_part('template-parts/blog/sidebar', null, ['show_latest' => false]); ?>
             </div>
         </div>
     </section>
