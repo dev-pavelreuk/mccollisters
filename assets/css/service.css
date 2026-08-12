@@ -240,12 +240,20 @@
 
 .svc-tabs__title {
     margin: 0 0 20px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+    color: var(--color-dark);
+}
+
+/* Transportation page keeps the original larger uppercase tab titles. */
+.svc-tabs--transport .svc-tabs__title {
     font-size: 30px;
     font-weight: 500;
     line-height: 1.05;
-    letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: var(--color-dark);
 }
 
 .svc-tabs__subtitle {
@@ -1898,10 +1906,11 @@
 }
 
 .svc-tabs--auto .svc-tabs__title {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
     letter-spacing: -0.01em;
-    text-transform: none;
+    text-transform: capitalize;
 }
 
 /* 30px above the Explore button in the Auto Transport tab panels. */

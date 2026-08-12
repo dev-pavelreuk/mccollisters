@@ -173,7 +173,7 @@ $faqs = [
                 'lead'    => $industries['intro'],
             ]); ?>
 
-            <div class="svc-tabs" data-tabs>
+            <div class="svc-tabs svc-tabs--transport" data-tabs>
                 <div class="svc-tabs__nav" role="tablist">
                     <?php foreach ($industries['tabs'] as $i => $tab) : ?>
                         <button
