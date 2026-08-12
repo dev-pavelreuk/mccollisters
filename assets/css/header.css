@@ -450,7 +450,7 @@ body::before {
 }
 
 .menu-promo__newsletter-form .mcc-subscribe {
-	margin: 12px 26px;
+	margin: 0;
 }
 
 .menu-promo__newsletter-consent {
@@ -690,7 +690,7 @@ body::before {
 		margin: 0;
 		padding: 0;
 		overflow: hidden;
-		background: var(--menu-panel-bg);
+		background: var(--color-white);
 		opacity: 0;
 		visibility: hidden;
 		transition:
@@ -941,6 +941,12 @@ body::before {
 		text-transform: uppercase;
 	}
 
+	/* Keep the label white on hover (a global link-hover would turn it blue). */
+	.site-navigation__cta:hover,
+	.site-navigation__cta:focus-visible {
+		color: var(--color-white);
+	}
+
 	.site-navigation__locations {
 		display: block;
 		flex: 0 0 auto;
@@ -974,5 +980,14 @@ body::before {
 @media (max-width: 782px) {
 	.admin-bar .site-header.is-sticky {
 		top: 46px;
+	}
+
+	/* Smaller account/driver-portal icon, slightly larger logo. */
+	.site-header__account .fas {
+		font-size: 16px;
+	}
+
+	.site-header__branding .custom-logo {
+		width: 210px;
 	}
 }
