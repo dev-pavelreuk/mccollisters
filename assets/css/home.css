@@ -982,6 +982,12 @@
     color: var(--color-white);
     opacity: 1;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    /* Force the label onto its own compositor layer so it always paints above
+       the blue hover gradient (which gets promoted to a layer while its opacity
+       animates). Without this the gradient can flash over the title for a frame
+       after the marquee's rAF layers are rebuilt (e.g. returning to the tab). */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* Stay white on hover/focus (overrides the global link-hover colour). */
