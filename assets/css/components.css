@@ -67,7 +67,11 @@ input[type="submit"] {
     overflow: hidden;
     color: var(--btn-ink);
     text-decoration: none;
-    border: 1px solid var(--btn-ink);
+    /* Outline is drawn as an INSET shadow, not a border, so the arrow tab can
+       clip to the very same edge and cover it flush on the right — a real 1px
+       border sits on the border-box while overflow clips children to the
+       padding-box, which leaves a 1px ring around the tab. */
+    box-shadow: inset 0 0 0 1px var(--btn-ink);
     border-radius: 10px;
 }
 
@@ -98,7 +102,10 @@ input[type="submit"] {
     z-index: 1;
     display: inline-flex;
     align-items: center;
-    padding: 1em 5.21em 1em 1.71em;
+    /* Right padding = the tab's visible width (45px) + a 1.71em inset that
+       matches the left inset, so the title has equal breathing space on both
+       sides with the tab flush on the far right. */
+    padding: 1em calc(45px + 1.71em) 1em 1.71em;
     font-family: var(--font-heading);
     font-size: 12px;
     font-weight: 700;
@@ -114,7 +121,8 @@ input[type="submit"] {
     transform: translateX(8px);
 }
 
-/* Button label is lighter (600) on mobile, globally. */
+/* Button label is lighter (600) on mobile, globally. The tab geometry (flush,
+   pinned px) now lives on the base rule so it applies on every device. */
 @media (max-width: 782px) {
     .mcc-btn__label {
         font-weight: 600;
@@ -126,18 +134,23 @@ input[type="submit"] {
    radius rounds the inner corners too. */
 .mcc-btn__arrow {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    /* 1px overfill on top/right/bottom so the tab clips flush into the button's
+       rounded corners with no gap. Left edge lands at 45px from the right
+       (width 46 - 1px overfill); the label reserves 47px so the title always
+       clears the tab by ~2px. Pinned in px so it matches the label padding on
+       every device. */
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
     z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 3.4em;
+    width: 46px;
     color: var(--btn-paper);
     background: var(--btn-ink);
-    /* Flush with the button's top/right/bottom edges; only the inner (left)
-       corners round. Right corners match the button's inner radius. */
+    /* Only the inner (left) corners round; the right corners get clipped to the
+       button's radius by overflow:hidden. */
     border-radius: 9px 0 0 9px;
 }
 
@@ -394,9 +407,10 @@ body :is(
         font-weight: 500;
     }
 
-    /* 22px line-height on all body text on mobile. */
+    /* 22.4px line-height on all body text on mobile. */
     body :is(
         .section-head__lead,
+        .svc-services__intro,
         .svc-prose p,
         .svc-tabs__desc,
         .svc-tabs__prose p,
@@ -415,7 +429,49 @@ body :is(
         .home-blog__excerpt,
         .svc-expertise__prose p
     ) {
-        line-height: 22px;
+        line-height: 22.4px;
+    }
+
+    /* 22.4px line-height on all content list items on mobile (was 24px). */
+    body :is(
+        .svc-faq__panel,
+        .svc-services__list,
+        .svc-features__list,
+        .svc-wms__benefits,
+        .svc-freight__caps,
+        .svc-freight__caps--tall,
+        .svc-freight__caps--tall7,
+        .svc-freight__list,
+        .svc-package__list,
+        .svc-checklist__list,
+        .svc-whychoose__list,
+        .svc-avcaps__list,
+        .svc-capblock__list,
+        .careers-checklist
+    ) li {
+        line-height: 22.4px;
+    }
+
+    /* Nudge all list checkmarks up 3px on mobile so they align better with the
+       first line of text. Covers both the ::before markers and the inline SVG
+       check icons (transform works on absolute pseudo-elements and flex kids
+       alike, without disturbing layout). */
+    .svc-faq__panel li::before,
+    .svc-services__list li::before,
+    .terms__body ul li::before,
+    .post-content ul li::before {
+        transform: translateY(-3px);
+    }
+
+    .svc-wms__check,
+    .svc-freight__check,
+    .svc-package__check,
+    .svc-checklist__check,
+    .svc-whychoose__check,
+    .svc-avcaps__check,
+    .svc-capblock__check,
+    .careers-check {
+        transform: translateY(-3px);
     }
 }
 
@@ -465,16 +521,26 @@ body :is(
         font-weight: 600;
     }
 
-    body .home-about__eyebrow {
-        margin-bottom: 30px;
-    }
-
+    /* Borderless dark eyebrows sit 10px above the title. Listed FIRST so the
+       bordered rule below wins the specificity tie for eyebrows that are both
+       .section-head--light and bordered (svc-expertise / svc-freight). */
     body :is(
         .section-head--light .section-head__eyebrow,
         .home-stats__eyebrow,
         .home-industries__eyebrow
     ) {
         margin-bottom: 10px;
+    }
+
+    /* Underlined/bordered eyebrows, sitewide: 10px below the text (inside the
+       border) and 30px below the border before the title. */
+    body :is(
+        .home-about__eyebrow,
+        .svc-expertise .section-head__eyebrow,
+        .svc-freight .section-head__eyebrow
+    ) {
+        padding-bottom: 10px;
+        margin-bottom: 30px;
     }
 }
 
