@@ -3655,6 +3655,12 @@
         grid-template-columns: 1fr;
     }
 
+    /* Why-choose keeps its landscape image at desktop, but stacks single-column
+       (image above the title) on mobile like the other feature sections. */
+    .svc-whychoose .svc-features__grid {
+        grid-template-columns: 1fr;
+    }
+
     .svc-features__media {
         order: -1;
     }
@@ -4553,6 +4559,20 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
 }
 
 @media (max-width: 782px) {
+    /* Statement band supplies its own 70px spacing; drop the adjacent sections'
+       50px margins so they don't stack on top of it. */
+    .esg-statement {
+        padding-block: 70px;
+    }
+
+    .svc-section.esg-policies {
+        margin-bottom: 0;
+    }
+
+    .svc-section.svc-integrated {
+        margin-top: 0;
+    }
+
     /* Larger, left-aligned statement on phones (matches the live layout). */
     .esg-statement__inner {
         text-align: left;
@@ -4560,8 +4580,10 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
 
     .esg-statement__text {
         max-width: none;
-        font-size: clamp(34px, 10vw, 46px);
-        line-height: 1.12;
+        font-size: 32px;
+        font-weight: 900;
+        line-height: 36px;
+        letter-spacing: -0.96px;
     }
 
     /* Let the statement wrap naturally on phones. */
