@@ -97,7 +97,7 @@
         --gutter: 10px;
         --hero-margin-inline: 10px;
         --body-font-size: 16px;
-        --body-line-height: 1.375; /* 22px at 16px */
+        --body-line-height: 1.4; /* 22.4px at 16px */
         --h3-line-height: 30px;
     }
 }

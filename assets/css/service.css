@@ -3481,6 +3481,8 @@
 
     .svc-tabs__media {
         order: -1;
+        /* 20px gap above the image at the top of an open accordion panel. */
+        margin-top: 20px;
     }
 
     .svc-tabs__desc,
@@ -3563,11 +3565,17 @@
         color: var(--color-primary);
     }
 
+    /* Overview accordion (grey background): arrow also turns brand blue on
+       hover, matching its active state. */
+    .svc-tabs-section--overview .svc-tabs__tab:hover .svc-tabs__tab-arrow {
+        color: var(--color-primary);
+    }
+
     .svc-tabs-section .svc-tabs__panel {
         order: calc(var(--tab-i) * 2 + 1);
         border: 0;
         border-radius: 0;
-        padding: 0 0 24px;
+        padding: 0 0 50px;
     }
 
     /* The tab row shows the title, so hide the duplicate one inside the panel. */
@@ -3585,7 +3593,7 @@
         display: flex;
         flex-direction: column;
         margin-block: 30px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        border-bottom: 1px solid var(--color-white);
     }
 
     .svc-expertise .svc-tabs__nav {
@@ -3602,7 +3610,7 @@
         margin: 0;
         padding: 15px 0;
         border: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        border-top: 1px solid var(--color-white);
         border-radius: 0;
         background: none;
         color: var(--color-white);
@@ -3611,9 +3619,11 @@
         letter-spacing: 0.02em;
     }
 
+    /* Title text stays white on hover/active (only the arrow changes colour);
+       separators stay pure white — no hover/active colour change. */
     .svc-expertise .svc-tabs__tab:hover,
     .svc-expertise .svc-tabs__tab.is-active {
-        color: var(--color-brand-yellow);
+        color: var(--color-white);
         background: none;
         border-top-color: var(--color-white);
     }
@@ -3632,20 +3642,51 @@
         height: 22px;
     }
 
+    /* Arrow turns branded yellow on hover and when active. */
+    .svc-expertise .svc-tabs__tab:hover .svc-tabs__tab-arrow,
+    .svc-expertise .svc-tabs__tab.is-active .svc-tabs__tab-arrow {
+        color: var(--color-brand-yellow);
+    }
+
     .svc-expertise .svc-tabs__tab.is-active .svc-tabs__tab-arrow {
         transform: rotate(0deg);
-        color: var(--color-brand-yellow);
     }
 
     .svc-expertise .svc-tabs__panel {
         order: calc(var(--tab-i) * 2 + 1);
         border: 0;
         border-radius: 0;
-        padding: 0 0 24px;
+        padding: 0 0 50px;
     }
 
     .svc-expertise .svc-tabs__title {
         display: none;
+    }
+}
+
+/* Smooth the mobile accordion open: the revealed panel fades and slides in.
+   (Panels toggle display:none when closed, so only the opening is animated.) */
+@keyframes svc-accordion-open {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 782px) {
+    .svc-tabs__panel.is-active {
+        animation: svc-accordion-open 260ms ease;
+    }
+
+    /* Slightly slower arrow rotation to match the smoother panel reveal. */
+    .svc-tabs-section .svc-tabs__tab-arrow,
+    .svc-expertise .svc-tabs__tab-arrow {
+        transition: transform 260ms ease, color var(--transition);
     }
 }
 
@@ -3667,6 +3708,7 @@
 @media (max-width: 860px) {
     .svc-features__grid {
         grid-template-columns: 1fr;
+        gap: 50px;
     }
 
     /* Why-choose keeps its landscape image at desktop, but stacks single-column
@@ -3685,6 +3727,17 @@
 }
 
 @media (max-width: 782px) {
+    /* Left-align each certification column — logo image and caption — on
+       mobile (they center on desktop). */
+    .svc-certs__logo {
+        justify-content: flex-start;
+    }
+
+    /* The CTPAT mark is oversized next to the other logos; trim it on mobile. */
+    .svc-certs__logo img[src*="ctpat"] {
+        max-height: 74px;
+    }
+
     .svc-caps__grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -3875,6 +3928,13 @@
         line-height: 22px;
     }
 
+    /* Freight labels and column headings step down to 25px on mobile. */
+    .svc-freight__label,
+    .svc-freight__col-head {
+        font-size: 25px;
+        font-weight: 600;
+    }
+
     /* Any visible accordion panel title (global): accordion typography with a
        20px gap below it before the body text. Titles that stay hidden in the
        accordion are unaffected (they're display:none). */
@@ -3915,11 +3975,19 @@
         font-size: 25px;
     }
 
-    /* Hero: fits its content, tighter padding, buttons stack. */
+    /* Hero: fits its content, tighter padding, buttons stack. 20px left inset
+       for the hero copy on mobile (right/top/bottom keep the 10px token). */
     .svc-hero__inner {
         height: auto;
         min-height: 340px;
         padding: 90px var(--hero-margin-inline);
+        padding-left: 20px;
+    }
+
+    /* Interior page-header heroes (History, FAQs) get the same 20px left inset
+       for their crumb + title on mobile. */
+    .svc-section.hist-head {
+        padding-left: 20px;
     }
 
     .svc-hero__title {
@@ -3935,7 +4003,8 @@
     .svc-hero__actions {
         flex-direction: column;
         align-items: flex-start;
-        row-gap: 14px;
+        /* 20px between the two stacked hero buttons on mobile (was 14px). */
+        row-gap: 20px;
     }
 
     /* Interior sections: 20px side padding on mobile (matches the 10px var
