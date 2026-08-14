@@ -514,6 +514,14 @@
     font-variant-numeric: tabular-nums;
 }
 
+.home-about__count-label {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
 /* Shrink the big count on mobile so the full number fits the viewport. */
 @media (max-width: 782px) {
     .home-about__count {
@@ -524,15 +532,8 @@
     .home-about__count-label {
         font-size: 13px;
         font-weight: 700;
+        line-height: 19.5px;
     }
-}
-
-.home-about__count-label {
-    font-family: var(--font-heading);
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
 }
 
 /* Heading left, copy + button right. */
@@ -916,10 +917,12 @@
         margin-right: 25px;
     }
 
-    /* Smaller label so even the longest names fit on one line. */
-    .home-industry__label {
-        padding-inline: 12px;
+    /* Smaller label on mobile. Extra specificity (.home-industries …) so it
+       beats the base .home-industry__label rule that appears later in the file. */
+    .home-industries .home-industry__label {
+        padding-inline: 4px;
         font-size: 12px;
+        white-space: nowrap;
     }
 }
 
@@ -1125,7 +1128,8 @@
 /* Mobile: shrink the big number so long figures don't overflow. */
 @media (max-width: 782px) {
     .home-stat__number {
-        font-size: clamp(34px, 10vw, 52px);
+        font-size: 50px;
+        font-weight: 600;
         line-height: 1.1;
     }
 
