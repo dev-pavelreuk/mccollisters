@@ -452,8 +452,9 @@ body :is(
     color: var(--color-white);
 }
 
-/* Eyebrows on dark/black backgrounds are heavier (600) on mobile for
-   legibility. Global across the dark-section eyebrow variants. */
+/* Eyebrows on dark/black backgrounds are heavier (600) on mobile. Those WITH an
+   underline/bottom border (.home-about__eyebrow) keep a 30px gap below; the
+   borderless ones sit 10px above the title. */
 @media (max-width: 782px) {
     body :is(
         .section-head--light .section-head__eyebrow,
@@ -462,6 +463,18 @@ body :is(
         .home-industries__eyebrow
     ) {
         font-weight: 600;
+    }
+
+    body .home-about__eyebrow {
+        margin-bottom: 30px;
+    }
+
+    body :is(
+        .section-head--light .section-head__eyebrow,
+        .home-stats__eyebrow,
+        .home-industries__eyebrow
+    ) {
+        margin-bottom: 10px;
     }
 }
 
