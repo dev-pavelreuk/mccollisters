@@ -3935,6 +3935,13 @@
         font-weight: 600;
     }
 
+    /* More space above the freight media image, less below, on mobile
+       (was 40px top / 90px bottom). */
+    .svc-freight__media {
+        margin-top: 70px;
+        margin-bottom: 30px;
+    }
+
     /* Any visible accordion panel title (global): accordion typography with a
        20px gap below it before the body text. Titles that stay hidden in the
        accordion are unaffected (they're display:none). */
