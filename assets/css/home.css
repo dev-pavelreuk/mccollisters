@@ -573,6 +573,18 @@
     margin-top: 6px;
 }
 
+/* Mobile: 30px between body paragraphs, and 40px total above the button
+   (30px flex gap + 10px margin). */
+@media (max-width: 782px) {
+    .home-about__body {
+        gap: 30px;
+    }
+
+    .home-about__btn {
+        margin-top: 10px;
+    }
+}
+
 /* Quote card — full-bleed image with copy overlaid on the right. */
 .home-about__quote {
     --overlay-opacity: 0.1;
@@ -644,7 +656,7 @@
 /* --- Certifications / affiliations -----------------------------------------
    A single row of black logos, evenly spaced, on the white page. */
 .home-certs {
-    padding-block: clamp(48px, 6vw, 80px);
+    padding-block: clamp(50px, 6vw, 80px);
     padding-inline: clamp(24px, 4vw, 50px);
     background: var(--color-white);
 }
@@ -816,7 +828,7 @@
 }
 
 .home-features__cta {
-    margin-top: clamp(28px, 4vw, 48px);
+    margin-top: clamp(30px, 4vw, 48px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1190,7 +1202,7 @@
 }
 
 .home-testimonials__title {
-    margin: 0 0 clamp(28px, 4vw, 48px);
+    margin: 0 0 clamp(30px, 4vw, 48px);
     font-size: clamp(38px, 5vw, 74px);
     font-weight: 500;
     line-height: 1.02;
@@ -1552,6 +1564,12 @@
         font-weight: 600;
     }
 
+    .home-marquee__dot {
+        width: 7px;
+        height: 7px;
+        margin-inline: clamp(0px, 2.4vw, 38px);
+    }
+
     /* Black box sits 10px from the edges with 20px inner padding; its inner
        .container drops its own inset so the padding isn't doubled. */
     .home-about {
@@ -1583,7 +1601,12 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;
-        gap: clamp(60px, 14vw, 90px) 24px;
+        gap: 0;
+    }
+
+    /* Breathing room around each of the six cert icons. */
+    .home-certs__item {
+        padding: 40px;
     }
 
     /* Bigger, uniform logo height across all six on mobile. */
@@ -1593,7 +1616,13 @@
 
     /* The NSC mark reads a touch large next to the others — nudge it down. */
     .home-certs__logo[src*="nsc-blk"] {
-        height: 54px;
+        height: 44px;
+    }
+
+    /* SmartWay + Commercial Space Federation read a bit small — bump them up. */
+    .home-certs__logo[src*="smartway"],
+    .home-certs__logo[src*="commercial-space"] {
+        height: 74px;
     }
 
     /* Features stacks: truck on top, accordion beneath. */
@@ -1763,15 +1792,28 @@
     .home-about__quote {
         justify-content: flex-start;
         min-height: 528px;
+        margin-top: 70px;
         /* Shift the photo left so only a sliver of his face shows at the left
            edge, and drop the navy fill so no blue strip shows. */
         background-position-x: -1050px;
         background-color: transparent;
     }
 
+    /* Narrow the copy and push it right so more of the photo shows on the left. */
+    .home-about__quote-inner {
+        max-width: 65%;
+        margin-left: auto;
+    }
+
+    /* 30px total above the quote's button: 20px figcaption margin + the button's
+       own 10px margin-top (they add, since the button is inline-flex). */
+    .home-about__quote-inner figcaption {
+        margin-bottom: 20px;
+    }
+
     .home-about__quote-text {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 19px;
     }
 
@@ -1783,9 +1825,9 @@
 
     .home-about__quote-role {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 1.2em;
-        white-space: nowrap;
+        white-space: normal;
     }
 }
 

@@ -348,9 +348,14 @@ document.addEventListener("DOMContentLoaded", () => {
 				return;
 			}
 
-			event.preventDefault();
+			// If this column is already open, let the heading's link navigate
+			// (e.g. second click on "Transportation" goes to /transportation/).
+			if (column.classList.contains("is-open")) {
+				return;
+			}
 
-			const isOpen = column.classList.contains("is-open");
+			// First click: open this column's links (close the others).
+			event.preventDefault();
 
 			megaColumns.forEach((otherColumn) => {
 				if (otherColumn !== column) {
@@ -358,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				}
 			});
 
-			column.classList.toggle("is-open", !isOpen);
+			column.classList.add("is-open");
 		});
 	});
 
