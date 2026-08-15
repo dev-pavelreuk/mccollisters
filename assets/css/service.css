@@ -1956,21 +1956,27 @@
     color: var(--color-dark);
 }
 
-/* Auto Transport page: pin the feature titles on mobile. */
-@media (max-width: 782px) {
-    .page-auto-transport .svc-feature__title {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.11px;
-        line-height: 13.2px;
-    }
-}
-
 .svc-feature__sub {
     margin: 0;
     font-size: 14px;
     font-weight: var(--body-font-weight);
     color: var(--color-text);
+}
+
+/* Feature titles/subs across the pages that use them (individuals, dealers,
+   OEMs, auto transport) step up on mobile. Placed after both base rules so it
+   wins the equal-specificity cascade. */
+@media (max-width: 782px) {
+    .svc-feature__title {
+        font-size: 13px;
+        line-height: 13px;
+    }
+
+    .svc-feature__sub {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22.4px;
+    }
 }
 
 /* --- Auto Transport: intro paragraph -------------------------------------- */
@@ -3611,6 +3617,23 @@
         margin-top: 0;
     }
 
+    /* No space above, 20px below each Auto Transport tab title on mobile. */
+    .svc-tabs-section .svc-tabs--auto .svc-tabs__title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    /* No space below the Auto Transport tab description on mobile. */
+    .svc-tabs-section .svc-tabs--auto .svc-tabs__desc {
+        margin-bottom: 0;
+    }
+
+    /* 20px above the Explore button in the Auto Transport tabs on mobile
+       (was 30px). */
+    .svc-tabs-section .svc-tabs--auto .svc-tabs__cta {
+        margin-top: 20px;
+    }
+
     .svc-expertise .svc-tabs {
         display: flex;
         flex-direction: column;
@@ -3960,6 +3983,12 @@
     .svc-freight__col-head {
         font-size: 25px;
         font-weight: 600;
+    }
+
+    /* Individual Auto Transport: keep "Our Services" / "Our Features" on one
+       line on mobile (drop the hard <br> in those titles). */
+    .page-individuals .svc-freight__title br {
+        display: none;
     }
 
     /* More space above the freight media image, less below, on mobile
