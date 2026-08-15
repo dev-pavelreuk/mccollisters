@@ -41,6 +41,15 @@ function mcc_body_classes(array $classes): array
         $classes[] = 'is-home';
     }
 
+    // Slug-based class (e.g. "page-auto-transport") so individual pages can be
+    // targeted in CSS without relying on the environment-specific page ID.
+    if (is_page()) {
+        $queried = get_queried_object();
+        if ($queried instanceof WP_Post) {
+            $classes[] = 'page-' . $queried->post_name;
+        }
+    }
+
     return $classes;
 }
 add_filter('body_class', 'mcc_body_classes');

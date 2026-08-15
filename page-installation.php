@@ -130,7 +130,7 @@ $faqs = [
     <!-- Installation expertise (tabs) -->
     <section class="svc-section svc-tabs-section svc-tabs-section--installexp">
         <div class="svc-section__inner">
-            <h2 class="svc-installexp__head"><?php echo esc_html($expertise_head); ?></h2>
+            <h3 class="svc-installexp__head"><?php echo esc_html($expertise_head); ?></h3>
 
             <div class="svc-tabs svc-tabs--install" data-tabs>
                 <div class="svc-tabs__nav" role="tablist">
