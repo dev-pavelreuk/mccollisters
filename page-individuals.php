@@ -47,7 +47,7 @@ $overview = [
 
 $expertise = [
     'eyebrow'        => 'expertise',
-    'services_title' => 'Our<br>Services',
+    'services_title' => 'Our <br>Services',
     'services_paras' => [
         'With our fleet of specialized transporters, crew of highly skilled drivers, network of trusted third-party partners (also known as 3PLs), and responsive customer service team, McCollister’s ensures your cars arrive timely, safely, and securely.',
         'Booking is easy through our online quoting system. Plus, we keep you connected through our real-time vehicle tracking and driver communication capabilities, so you can keep track of your precious cargo.',
@@ -64,7 +64,7 @@ $expertise = [
         'Race car transport',
         'Film and photo shoots',
     ],
-    'features_title' => 'Our<br>Features',
+    'features_title' => 'Our <br>Features',
     // Column-first: 1–6 col 1, 7–12 col 2.
     'features_items' => [
         'Vetted 3PL network with open and enclosed trailers',
