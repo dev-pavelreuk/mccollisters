@@ -1793,7 +1793,7 @@
 
 @media (max-width: 782px) {
     .svc-confidence__title-box h2 {
-        font-size: 34px;
+        font-size: 30px;
         line-height: 1.1;
     }
 }
@@ -1954,6 +1954,16 @@
     text-transform: uppercase;
     white-space: nowrap;
     color: var(--color-dark);
+}
+
+/* Auto Transport page: pin the feature titles on mobile. */
+@media (max-width: 782px) {
+    .page-auto-transport .svc-feature__title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.11px;
+        line-height: 13.2px;
+    }
 }
 
 .svc-feature__sub {
@@ -3565,9 +3575,10 @@
         color: var(--color-primary);
     }
 
-    /* Overview accordion (grey background): arrow also turns brand blue on
-       hover, matching its active state. */
-    .svc-tabs-section--overview .svc-tabs__tab:hover .svc-tabs__tab-arrow {
+    /* Overview & installation accordions (grey background): arrow also turns
+       brand blue on hover, matching its active state. */
+    .svc-tabs-section--overview .svc-tabs__tab:hover .svc-tabs__tab-arrow,
+    .svc-tabs-section--installexp .svc-tabs__tab:hover .svc-tabs__tab-arrow {
         color: var(--color-primary);
     }
 
@@ -3589,6 +3600,17 @@
    accordion only on true mobile (<=782px), recoloured for the black section
    (white text, yellow when open, white separators). */
 @media (max-width: 782px) {
+    /* Grey tab-section cards: 20px side padding on mobile (was 24px from the
+       1024px grey-card rule). Sitewide. */
+    .svc-tabs-section {
+        padding-inline: 20px;
+    }
+
+    /* Auto-transport tabs: drop the 30px top margin on mobile. */
+    .svc-tabs-section .svc-tabs--auto {
+        margin-top: 0;
+    }
+
     .svc-expertise .svc-tabs {
         display: flex;
         flex-direction: column;
@@ -3902,7 +3924,12 @@
     .svc-stats__grid {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
+        gap: 60px;
+    }
+
+    /* Drop the 12px top margin on the stat labels on mobile. */
+    .svc-stat__label {
+        margin-top: 0;
     }
 
     /* Keep a 10px inset on the capabilities image on mobile. */

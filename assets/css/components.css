@@ -451,28 +451,6 @@ body :is(
     ) li {
         line-height: 22.4px;
     }
-
-    /* Nudge all list checkmarks up 3px on mobile so they align better with the
-       first line of text. Covers both the ::before markers and the inline SVG
-       check icons (transform works on absolute pseudo-elements and flex kids
-       alike, without disturbing layout). */
-    .svc-faq__panel li::before,
-    .svc-services__list li::before,
-    .terms__body ul li::before,
-    .post-content ul li::before {
-        transform: translateY(-3px);
-    }
-
-    .svc-wms__check,
-    .svc-freight__check,
-    .svc-package__check,
-    .svc-checklist__check,
-    .svc-whychoose__check,
-    .svc-avcaps__check,
-    .svc-capblock__check,
-    .careers-check {
-        transform: translateY(-3px);
-    }
 }
 
 /* --- Section head ----------------------------------------------------------

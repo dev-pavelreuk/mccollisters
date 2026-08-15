@@ -70,7 +70,7 @@ $capabilities = [
 ];
 
 $confidence = [
-    'title' => 'Confidence With McCollister’s',
+    'title' => 'Confidence With<br>McCollister’s',
     'image' => $uploads . '2026/01/mccollisters-spacex-rocket-taking-off.jpg',
     'paras' => [
         'When aerospace companies select a transportation and logistics provider, the decision goes far beyond basic delivery capabilities. Because aerospace components are high-value, oversized, delicate, and highly regulated, the provider must meet strict technical, operational, and compliance standards. When you choose McCollister’s for your aerospace transit, you gain a partner equipped to manage complexity, risk, and regulatory demands at every stage.',
@@ -191,7 +191,7 @@ $faqs = [
         <div class="svc-confidence__inner">
             <div class="svc-confidence__left">
                 <div class="svc-confidence__title-box">
-                    <h2><?php echo esc_html($confidence['title']); ?></h2>
+                    <h2><?php echo wp_kses($confidence['title'], ['br' => []]); ?></h2>
                 </div>
                 <div class="svc-confidence__text-box">
                     <?php foreach ($confidence['paras'] as $p) : ?>
