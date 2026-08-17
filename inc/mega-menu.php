@@ -33,6 +33,46 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Warehousing-expertise deep links. These menu items (in the header mega menu
+ * and the footer) point to the warehousing page and open the matching
+ * tab/accordion via the #anchor (handled in components.js). Mapped by title so
+ * the behaviour works without editing the menu URLs in wp-admin.
+ *
+ * Returns the /warehousing/#anchor URL for a matching title, or null.
+ */
+function mcc_warehousing_anchor_url(string $title): ?string
+{
+	static $map = [
+		'asset recovery'    => 'asset-recovery',
+		'e-waste recycling' => 'e-waste-recycling',
+		'medical devices'   => 'medical-devices',
+		'solar'             => 'solar',
+		'solar experts'     => 'solar',
+	];
+
+	$key = strtolower(trim($title));
+
+	return isset($map[$key]) ? home_url('/warehousing/') . '#' . $map[$key] : null;
+}
+
+/**
+ * Rewrite footer (wp_nav_menu) links for the warehousing deep-link items, the
+ * same way the header mega menu does in mcc_get_menu_tree().
+ */
+function mcc_footer_warehousing_anchors(array $items): array
+{
+	foreach ($items as $item) {
+		$url = mcc_warehousing_anchor_url((string) $item->title);
+		if ($url !== null) {
+			$item->url = $url;
+		}
+	}
+
+	return $items;
+}
+add_filter('wp_nav_menu_objects', 'mcc_footer_warehousing_anchors');
+
+/**
  * Fetch a nav menu location's items as a nested tree instead of a flat list.
  */
 function mcc_get_menu_tree(string $location): array
@@ -52,10 +92,14 @@ function mcc_get_menu_tree(string $location): array
 	$indexed = [];
 
 	foreach ($items as $item) {
+		// Warehousing-expertise deep links open the matching tab/accordion (see
+		// mcc_warehousing_anchor_url + components.js).
+		$url = mcc_warehousing_anchor_url((string) $item->title) ?? $item->url;
+
 		$indexed[$item->ID] = [
 			'id'          => (int) $item->ID,
 			'title'       => $item->title,
-			'url'         => $item->url,
+			'url'         => $url,
 			'description' => trim((string) $item->description),
 			'classes'     => !empty($item->classes) ? array_values(array_filter((array) $item->classes)) : [],
 			'parent'      => (int) $item->menu_item_parent,

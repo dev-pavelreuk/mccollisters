@@ -336,6 +336,35 @@
 					activate(tab.dataset.tabsTab)
 				);
 			});
+
+			// Deep-link support: /warehousing/#asset-recovery (and the other
+			// anchors) opens the matching tab — or accordion item on mobile —
+			// and scrolls to it. Works both on load and when the hash changes
+			// while already on the page.
+			const applyHash = (smooth) => {
+				const anchor = decodeURIComponent(
+					(window.location.hash || "").replace(/^#/, "")
+				);
+				if (!anchor) {
+					return;
+				}
+				const tab = tabs.find(
+					(t) => t.id === anchor || t.dataset.tabAnchor === anchor
+				);
+				if (!tab) {
+					return;
+				}
+				activate(tab.dataset.tabsTab);
+				tab.scrollIntoView({
+					behavior: smooth ? "smooth" : "auto",
+					block: "start",
+				});
+			};
+
+			window.addEventListener("hashchange", () => applyHash(true));
+			// Defer the initial run so layout (and the browser's own hash jump)
+			// has settled before we re-scroll to the opened tab.
+			window.requestAnimationFrame(() => applyHash(false));
 		});
 	}
 
