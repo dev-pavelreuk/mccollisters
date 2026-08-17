@@ -545,12 +545,20 @@
 
 			let current = 0;
 
+			// Below 782px the track is laid out as a row (see hist-slider__stage
+			// in service.css), so it slides horizontally; above, it's a column
+			// and slides vertically.
+			const horizontalMq = window.matchMedia("(max-width: 782px)");
+
 			const go = (index) => {
 				current = Math.max(0, Math.min(slides.length - 1, index));
-				// Slide the track up/down to the active year.
+				// Slide the track to the active year (side to side on mobile,
+				// up/down on larger screens).
 				if (stage) {
 					stage.style.transform =
-						"translateY(" + -current * 100 + "%)";
+						"translate" +
+						(horizontalMq.matches ? "X" : "Y") +
+						"(" + -current * 100 + "%)";
 				}
 				slides.forEach((slide, i) => {
 					const on = i === current;
@@ -596,6 +604,10 @@
 					go(current + 1);
 				}
 			});
+
+			// Re-apply the transform on the correct axis when crossing the
+			// mobile breakpoint.
+			horizontalMq.addEventListener("change", () => go(current));
 
 			// Set the initial arrow availability (first slide → prev disabled).
 			go(0);

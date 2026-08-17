@@ -81,7 +81,7 @@ $eras = [
 ];
 
 $today = [
-    'title' => 'Today And Beyond',
+    'title' => 'Today And<br>Beyond',
     'paras' => [
         'Now with 15 full-service locations, a vast network of over 300 partner agents, and a diverse range of assets capable of handling specialized logistics needs across industries, McCollister’s has grown exponentially since 1945.',
         'McCollister’s continues to embody its founding principles while embracing modern technology, sustainability, and progressive strategies to address today’s complex logistics challenges. Whether moving priceless artifacts, satellites, sensitive medical equipment, or critical IT infrastructure, McCollister’s remains committed to excellence, safety, and customer satisfaction.',
