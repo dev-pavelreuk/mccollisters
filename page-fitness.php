@@ -174,7 +174,7 @@ $faqs = [
                     <img src="<?php echo esc_url($capabilities['image']); ?>" alt="<?php echo esc_attr($capabilities['alt']); ?>" loading="lazy" decoding="async">
                 </div>
                 <div class="svc-avcaps__content">
-                    <h3 class="svc-avcaps__list-title"><?php echo esc_html($capabilities['list_title']); ?></h3>
+                    <h4 class="svc-avcaps__list-title"><?php echo esc_html($capabilities['list_title']); ?></h4>
                     <ul class="svc-avcaps__list">
                         <?php foreach ($capabilities['items'] as $item) : ?>
                             <li>

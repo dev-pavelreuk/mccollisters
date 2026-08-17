@@ -80,7 +80,7 @@ $audiences = [
         ],
         [
             'icon'  => $uploads . '2026/06/Government-Military-Families-i.png',
-            'title' => 'Government & Military<br>Families',
+            'title' => 'Government & Military <br>Families',
             'text'  => 'McCollister’s has long supported military family relocations, understanding the unique demands, timelines, and expectations that accompany these moves.',
         ],
         [

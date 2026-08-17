@@ -29,7 +29,7 @@ $hero = [
 
 $overview = [
     'eyebrow' => 'overview',
-    'title'   => 'Commercial Relocations<br>Planned To Reduce Risk,<br>Stress, And Downtime',
+    'title'   => 'Commercial Relocations<br>Planned To Reduce<br class="br--mobile"> Risk, <br class="br--desktop">Stress, And Downtime',
     'paras'   => [
         'Commercial office moves are rarely simple. They often include systems furniture, modular workstations, shared power and data infrastructure, sensitive paper files and records, employee desk items and personal workspace contents, lab environments and specialty spaces, and technology that cannot tolerate downtime. When these elements are handled separately, or without sufficient planning, moves become fragmented, schedules slip, and productivity suffers.',
         'McCollister’s approaches commercial relocation as a managed operational transition, not a single-day event. We plan, coordinate, and execute every component of the move so people, assets, and systems arrive ready to work—together.',

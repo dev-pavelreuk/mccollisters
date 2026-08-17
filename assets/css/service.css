@@ -1628,7 +1628,7 @@
     }
 
     .svc-package__title {
-        font-size: 48px;
+        font-size: 40px;
         text-align: left;
     }
 
@@ -2623,7 +2623,8 @@
         gap: 28px;
     }
 
-    .svc-avcaps__list-title {
+    .svc-avcaps__list-title,
+    .svc-avconf__col-title {
         line-height: 30px;
     }
 }
@@ -4633,7 +4634,7 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
         width: 56%;
         max-width: 250px;
         height: auto;
-        margin: 16px 0 28px;
+        margin: 16px 0 20px;
     }
 
     .careers-drivers__title,
@@ -7392,5 +7393,97 @@ body.search .blog-search__btn {
     /* Logistics — freight brokerage (single closing paragraph) */
     .svc-freight__inner > .svc-freight__cta {
         margin-top: 40px;
+    }
+}
+
+/* Consistent 10px row-gap between line items on mobile, for lists whose items
+   carry no padding or top/bottom margin. Skips faq / terms / services lists
+   (their items have their own padding/margin). Placed last so it wins the
+   source-order cascade over each list's own gap. */
+@media (max-width: 782px) {
+    .svc-avcaps__list,
+    .svc-wms__benefits,
+    .svc-checklist__list,
+    .svc-whychoose__list,
+    .svc-package__list,
+    .svc-freight__caps,
+    .svc-capblock__list,
+    .careers-checklist,
+    .svc-freight__list,
+    .svc-features__list {
+        row-gap: 10px;
+    }
+}
+
+/* Any 28px bottom margin steps down to 20px on mobile, sitewide. Placed last so
+   it wins over each element's base margin. */
+@media (max-width: 782px) {
+    .svc-integrated__icon,
+    .svc-oemconf__lead,
+    .svc-avcaps__list,
+    .svc-avcaps__text,
+    .contact-hero__eyebrow {
+        margin-bottom: 20px;
+    }
+}
+
+/* Responsive heading line break: shown only on mobile (hidden by default). */
+.section-head__title .br--mobile {
+    display: none;
+}
+
+@media (max-width: 782px) {
+    /* Commercial relocation capability-block title steps to 25px on mobile. */
+    .svc-capblock__title {
+        font-size: 25px;
+    }
+
+    /* Capability-block list title matches the global h4 styling on mobile. */
+    .svc-capblock__list-title {
+        font-size: var(--h4-font-size);
+        font-weight: var(--h4-font-weight);
+        line-height: var(--h4-line-height);
+        text-transform: none;
+    }
+
+    /* Overview title breaks after "Reduce" (not after "Risk,") on mobile so
+       "Risk, Stress, And Downtime" stays on one line. */
+    .section-head__title .br--mobile {
+        display: inline;
+    }
+
+    .section-head__title .br--desktop {
+        display: none;
+    }
+
+    /* Residential relocation: keep "Government & Military Families" on one line
+       on mobile (drop the hard break in that card title). */
+    .page-residential-relocation .svc-integrated__title br {
+        display: none;
+    }
+
+    /* Large logo marquee: 70px top/bottom margin on mobile (was 100px). */
+    .svc-logos--lg {
+        margin-block: 70px;
+    }
+
+    /* Aviation/av-caps intro has no bottom spacing of its own — add 70px below
+       it on mobile. */
+    .svc-avcaps__intro {
+        margin-bottom: 70px;
+    }
+
+    /* Technical Services: all h3 headings are 25px/30px on mobile. */
+    .page-technical-services h3 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    /* Fitness: the capabilities list title uses the global h4 styling on mobile. */
+    .page-fitness .svc-avcaps__list-title {
+        font-size: var(--h4-font-size);
+        font-weight: var(--h4-font-weight);
+        line-height: var(--h4-line-height);
+        letter-spacing: 0;
     }
 }

@@ -291,3 +291,10 @@
         margin-right: 2px;
     }
 }
+
+/* 28px bottom margin steps down to 20px on mobile (matches the sitewide rule). */
+@media (max-width: 782px) {
+    .site-footer__social {
+        margin-bottom: 20px;
+    }
+}
