@@ -175,6 +175,9 @@
 .svc-tabs__tab {
     position: relative;
     flex: 0 0 auto;
+    /* Deep-linked tabs (e.g. /warehousing/#asset-recovery) clear the sticky
+       header when jumped to. */
+    scroll-margin-top: 120px;
     /* All tabs overlap the panel by 2px so activating one never shifts it. */
     margin-bottom: -2px;
     padding: 16px clamp(10px, 1.9vw, 26px) 18px;
@@ -4111,6 +4114,16 @@
     scroll-margin-top: 110px;
 }
 
+/* Logistics deep links (/logistics/#freight-brokerage, #heavy-haul) drop below
+   the sticky header so their "/ … /" eyebrow stays visible. Not applied on
+   mobile — the header slides away on scroll there, so the eyebrow isn't covered. */
+@media (min-width: 783px) {
+    #freight-brokerage,
+    #heavy-haul {
+        scroll-margin-top: 130px;
+    }
+}
+
 /* Shared blue file icon (PDF / DOC) used by the forms cards + guides list. */
 .svc-fileicon {
     display: block;
@@ -7550,5 +7563,12 @@ body.search .blog-search__btn {
     /* Contact us "More About McCollister's" section: 50px top margin on mobile. */
     .page-contact-us .svc-section.svc-integrated {
         margin-top: 50px;
+    }
+
+    /* Deep-linked accordion tab aligns near the top of the screen on mobile
+       (the sticky header slides off on scroll-down, so no large offset is
+       needed) — the tabs above it scroll out of view. */
+    .svc-tabs__tab {
+        scroll-margin-top: 10px;
     }
 }

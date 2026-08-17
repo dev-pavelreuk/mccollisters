@@ -367,6 +367,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
+	// Mobile: clicking a sub-menu leaf link closes the overlay so the
+	// destination is visible. This matters for same-page #anchor deep links
+	// (e.g. Services > Warehousing > Asset Recovery on the warehousing page):
+	// without a page reload the overlay would otherwise stay open over the
+	// accordion tab that opens. The hash still changes, so components.js opens
+	// and scrolls to the matching accordion tab.
+	navigation
+		.querySelectorAll(".mega-column__links a")
+		.forEach((link) => {
+			link.addEventListener("click", () => {
+				if (window.innerWidth <= 1024) {
+					closeMenu();
+				}
+			});
+		});
+
 	// Sticky header that hides on scroll-down and slides back in on scroll-up.
 	let lastScrollY = window.scrollY;
 	let headerTicking = false;

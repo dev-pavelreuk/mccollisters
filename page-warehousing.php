@@ -154,6 +154,7 @@ $expertise = [
     'tabs'    => [
         [
             'label' => 'Asset Recovery',
+            'slug'  => 'asset-recovery',
             'image' => $uploads . '2026/03/warehousing-asset-recovery.jpg',
             'title' => 'Asset Recovery',
             'paras' => [
@@ -163,6 +164,7 @@ $expertise = [
         ],
         [
             'label' => 'E-Waste Recycling',
+            'slug'  => 'e-waste-recycling',
             'image' => $uploads . '2026/03/mccollisters-e-waste-phones.jpg',
             'title' => 'E-Waste Recycling',
             'paras' => [
@@ -172,6 +174,7 @@ $expertise = [
         ],
         [
             'label' => 'Medical Devices',
+            'slug'  => 'medical-devices',
             'image' => $uploads . '2026/03/warehousing-medical-devices.jpg',
             'title' => 'Medical Devices',
             'paras' => [
@@ -181,6 +184,7 @@ $expertise = [
         ],
         [
             'label' => 'Solar Experts',
+            'slug'  => 'solar',
             'image' => $uploads . '2026/03/mccollisters-solar-experts.jpg',
             'title' => 'Solar Experts',
             'paras' => [
@@ -390,6 +394,10 @@ $faqs = [
                             class="svc-tabs__tab<?php echo $i === 0 ? ' is-active' : ''; ?>"
                             role="tab"
                             data-tabs-tab="<?php echo esc_attr($i); ?>"
+                            <?php // No id= for the anchor: an id would make this focusable button the
+                            // fragment target and show a focus ring. JS matches the hash to
+                            // data-tab-anchor and scrolls, so no id is needed. ?>
+                            <?php if (!empty($tab['slug'])) : ?>data-tab-anchor="<?php echo esc_attr($tab['slug']); ?>"<?php endif; ?>
                             style="--tab-i: <?php echo esc_attr($i); ?>"
                             aria-selected="<?php echo $i === 0 ? 'true' : 'false'; ?>"
                         >
