@@ -866,7 +866,12 @@ body::before {
 
 	.mega-column__links {
 		display: none;
-		padding-left: 28px;
+	}
+
+	/* 35px indent on the third-level link list. Needs the extra class to beat
+	   the global `.site-navigation__menu ul { padding: 0 }` (0,1,1) reset. */
+	.site-navigation__menu .mega-column__links {
+		padding-left: 35px;
 	}
 
 	.mega-column.is-open .mega-column__links {

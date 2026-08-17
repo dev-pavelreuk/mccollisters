@@ -45,8 +45,8 @@ if ($mcc_extra !== '') {
     <?php endif; ?>
 
     <?php if ($mcc_title !== '') : ?>
-        <?php // Allow <br> so titles can force line breaks; everything else is stripped. ?>
-        <<?php echo esc_html($mcc_tag); ?> class="section-head__title"><?php echo wp_kses($mcc_title, ['br' => []]); ?></<?php echo esc_html($mcc_tag); ?>>
+        <?php // Allow <br> (with an optional class for responsive breaks); everything else is stripped. ?>
+        <<?php echo esc_html($mcc_tag); ?> class="section-head__title"><?php echo wp_kses($mcc_title, ['br' => ['class' => true]]); ?></<?php echo esc_html($mcc_tag); ?>>
     <?php endif; ?>
 
     <?php if ($mcc_lead !== '') : ?>
