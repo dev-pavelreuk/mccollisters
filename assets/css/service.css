@@ -2485,6 +2485,17 @@
     margin-top: 20px;
 }
 
+/* Fitness: the capabilities subtitle matches the global section h3 styling
+   used on the other avcaps pages (aviation/final-mile) — 30px/600/-0.9px, with
+   a 30px line-height on mobile (see the mobile rule further down). */
+.page-fitness .svc-avcaps__subtitle {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: -0.9px;
+    text-transform: none;
+}
+
 .svc-avcaps__closing {
     margin-top: clamp(30px, 4vw, 44px);
 }
@@ -2624,7 +2635,8 @@
     }
 
     .svc-avcaps__list-title,
-    .svc-avconf__col-title {
+    .svc-avconf__col-title,
+    .page-fitness .svc-avcaps__subtitle {
         line-height: 30px;
     }
 }
@@ -4049,9 +4061,10 @@
     }
 
     /* Interior page-header heroes (History, FAQs) get the same 20px left inset
-       for their crumb + title on mobile. */
+       for their crumb + title on mobile, and no 50px bottom margin. */
     .svc-section.hist-head {
         padding-left: 20px;
+        margin-bottom: 0;
     }
 
     .svc-hero__title {
@@ -4353,7 +4366,7 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
 
     /* NSC reads large on mobile too — keep it smaller than the rest. */
     .svc-creds__logo--sm img {
-        max-height: 60px;
+        max-height: 50px;
     }
 
     .svc-creds__bbb svg {
@@ -7479,11 +7492,63 @@ body.search .blog-search__btn {
         line-height: 30px;
     }
 
+    /* Fitness: the freight sub-headings use the 25px h3 styling on mobile
+       (matches the capabilities subtitle); kept white for the dark section. */
+    .svc-freight__sub {
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        letter-spacing: -0.75px;
+        text-transform: none;
+    }
+
     /* Fitness: the capabilities list title uses the global h4 styling on mobile. */
     .page-fitness .svc-avcaps__list-title {
         font-size: var(--h4-font-size);
         font-weight: var(--h4-font-weight);
         line-height: var(--h4-line-height);
         letter-spacing: 0;
+    }
+
+    /* Fitness: capabilities subtitle sizing on mobile. */
+    .page-fitness .svc-avcaps__subtitle {
+        font-size: 25px;
+        font-weight: 600;
+        letter-spacing: -0.75px;
+        line-height: 30px;
+    }
+
+    /* Page-header h1 (History, FAQs) uses the global 35px/40px h1 size on mobile
+       (it otherwise stays at the 80px desktop token). */
+    .hist-head__title {
+        font-size: 35px;
+        line-height: 40px;
+    }
+
+    /* History timeline slides side to side (not up/down) on mobile — the JS
+       switches the transform to translateX to match (components.js). */
+    .hist-slider__stage {
+        flex-direction: row;
+    }
+
+    /* 2025 slide: shift the framing on mobile so the person stays visible. */
+    .hist-slider__slide[data-hist-slide="8"] {
+        background-position-x: 70%;
+    }
+
+    /* Locations page: tighter top padding on the locator on mobile (was 32px). */
+    .loc-locator {
+        padding-block-start: 20px;
+    }
+
+    /* Locations "more" section: 50px top margin on mobile (svc-integrated sections
+       are otherwise zeroed at the top). */
+    .svc-section.svc-integrated.loc-more {
+        margin-top: 50px;
+    }
+
+    /* Contact us "More About McCollister's" section: 50px top margin on mobile. */
+    .page-contact-us .svc-section.svc-integrated {
+        margin-top: 50px;
     }
 }

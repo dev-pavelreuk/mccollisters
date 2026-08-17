@@ -357,6 +357,7 @@ body :is(
         .svc-whychoose__title,
         .svc-freight__title,
         .svc-levels__packages-title,
+        .contact-hero__title,
         .home-services__title,
         .home-about__title,
         .home-features__title,
@@ -366,8 +367,14 @@ body :is(
         .home-blog__title,
         .careers-dark__title
     ) {
-        font-size: 32px;
+        font-size: 30px;
         line-height: 36px;
+    }
+
+    /* The other h2 titles carry -1.8px letter-spacing from their base rule;
+       the contact hero title isn't in that list, so match it here on mobile. */
+    .contact-hero__title {
+        letter-spacing: -1.8px;
     }
 }
 

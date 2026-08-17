@@ -163,7 +163,7 @@ $faqs = [
             <?php get_template_part('template-parts/components/section-head', null, [
                 'title' => $capabilities['title'],
             ]); ?>
-            <p class="svc-avcaps__subtitle"><?php echo esc_html($capabilities['subtitle']); ?></p>
+            <h3 class="svc-avcaps__subtitle"><?php echo esc_html($capabilities['subtitle']); ?></h3>
             <div class="svc-prose svc-avcaps__intro">
                 <?php foreach ($capabilities['intro'] as $p) : ?>
                     <p><?php echo esc_html($p); ?></p>
