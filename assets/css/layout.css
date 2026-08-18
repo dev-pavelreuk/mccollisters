@@ -48,7 +48,16 @@
 
 .entry-content > .alignwide {
     max-width: var(--container);
-    margin-inline: calc((var(--container-narrow) - var(--container)) / 2);
+}
+
+/* Only bleed the wide block out of the narrow column once the viewport is wide
+   enough to hold the full 1380px (container + gutters). Below that the negative
+   margin would push content off-screen and force a horizontal scrollbar, so it
+   simply stays column-width. */
+@media (min-width: 1420px) {
+    .entry-content > .alignwide {
+        margin-inline: calc((var(--container-narrow) - var(--container)) / 2);
+    }
 }
 
 .text-center {

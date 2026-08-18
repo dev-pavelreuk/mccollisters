@@ -59,6 +59,9 @@ body {
 	line-height: var(--body-line-height);
 	letter-spacing: 0;
 	text-transform: none;
+	/* Long unbreakable strings (URLs, emails, long words) wrap instead of
+	   pushing the page sideways on narrow screens. */
+	overflow-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

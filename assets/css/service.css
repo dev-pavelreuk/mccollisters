@@ -908,7 +908,8 @@
 
 .svc-certs__logo img {
     width: auto;
-    max-width: 190px;
+    /* Cap at 190px but never wider than the column (2-up on small phones). */
+    max-width: min(190px, 100%);
     max-height: 92px;
     object-fit: contain;
 }
@@ -4071,7 +4072,10 @@
     }
 
     .svc-hero__title {
-        font-size: 35px;
+        /* Holds 35px on mainstream phones (~389px+) and eases down on the very
+           smallest screens so a long single word (e.g. "TRANSPORTATION" on the
+           aerospace hero) can't overflow at ~320px. */
+        font-size: clamp(28px, 9vw, 35px);
     }
 
     .svc-hero__subtitle {
@@ -6643,6 +6647,14 @@ body.search .blog-search__btn {
 /* ---- Post body (Gutenberg content) ---------------------------------- */
 .post-content {
     margin-top: clamp(30px, 3.5vw, 40px);
+}
+
+/* Author-pasted tables / code blocks scroll within their own box instead of
+   overflowing the page on mobile. */
+.post-content :is(table, pre) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .post-content > * {
