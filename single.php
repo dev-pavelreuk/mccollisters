@@ -30,10 +30,9 @@ while (have_posts()) :
         <section class="svc-section single-post">
             <div class="svc-section__inner">
                 <div class="blog__inner">
-                    <article <?php post_class('single-post__main'); ?>>
-                        <?php get_template_part('template-parts/blog/view-all-posts'); ?>
+                    <header class="single-post__head">
+                            <?php get_template_part('template-parts/blog/view-all-posts'); ?>
 
-                        <header class="single-post__head">
                             <h1 class="single-post__title"><?php the_title(); ?></h1>
 
                             <?php
@@ -73,15 +72,16 @@ while (have_posts()) :
                                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
                                     </a>
                                     <a class="single-post__share-btn" href="<?php echo esc_url($share_ml); ?>" aria-label="<?php esc_attr_e('Share by email', 'mccollisters'); ?>">
-                                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 3.25-8.55 5.34a2 2 0 0 1-2.1 0L2.4 7.25a.85.85 0 1 1 .9-1.44L12 11.2l8.7-5.39a.85.85 0 1 1 .9 1.44z"/></svg>
+                                        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 48 0 69.5 0 96v19c0 7.4 3.4 14.3 9.2 18.9 30.6 24 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg>
                                     </a>
                                     <button type="button" class="single-post__share-btn" data-print aria-label="<?php esc_attr_e('Print this article', 'mccollisters'); ?>">
-                                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 3H6v4h12V3zm1 5H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-3 11H8v-5h8v5zm3-6.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                                        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M448 192V77.25c0-8.49-3.37-16.62-9.37-22.63L393.37 9.37c-6-6-14.14-9.37-22.63-9.37H96C78.33 0 64 14.33 64 32v160c-35.35 0-64 28.65-64 64v112c0 8.84 7.16 16 16 16h48v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h48c8.84 0 16-7.16 16-16V256c0-35.35-28.65-64-64-64zm-64 256H128v-96h256v96zm0-224H128V64h192v48c0 8.84 7.16 16 16 16h48v96zm48 72c-13.25 0-24-10.75-24-24s10.75-24 24-24 24 10.75 24 24-10.75 24-24 24z"/></svg>
                                     </button>
                                 </div>
                             </div>
-                        </header>
+                    </header>
 
+                    <article <?php post_class('single-post__main'); ?>>
                         <?php if (has_post_thumbnail()) : ?>
                             <figure class="single-post__media">
                                 <?php the_post_thumbnail('large', ['loading' => 'eager', 'decoding' => 'async']); ?>
