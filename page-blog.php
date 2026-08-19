@@ -60,10 +60,13 @@ $blog_query = new WP_Query([
                     </div>
 
                     <?php
+                    // Base on the Blog page's own permalink — get_permalink() here
+                    // would return the last looped post, sending pagination to a
+                    // single-post URL instead of /blog/page/N/.
                     mcc_render_pagination(
                         $paged,
                         (int) $blog_query->max_num_pages,
-                        trailingslashit(get_permalink()) . 'page/%#%/'
+                        trailingslashit(get_permalink(get_queried_object_id())) . 'page/%#%/'
                     );
                     ?>
                 </div>
