@@ -21,7 +21,7 @@ $hero = [
     'title'    => 'Final-Mile & White-Glove',
     'subtitle' => 'Specialized services for discerning clients',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

@@ -24,7 +24,7 @@ $hero = [
     'title'    => 'Warehousing',
     'subtitle' => 'Secure, scalable warehousing, distribution & fulfillment solutions for your business',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

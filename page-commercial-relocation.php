@@ -22,7 +22,7 @@ $hero = [
     'title'    => 'Commercial Relocation',
     'subtitle' => 'From floor plan to final placement, we keep your business moving',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

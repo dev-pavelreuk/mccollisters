@@ -22,7 +22,7 @@ $hero = [
     'title'    => 'Aviation',
     'subtitle' => 'Reliable logistics for aircraft, engines, and critical components',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

@@ -22,7 +22,7 @@ $hero = [
     'title'    => 'Transportation',
     'subtitle' => 'Specialized transportation services executed with precision',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];
