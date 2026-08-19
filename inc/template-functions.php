@@ -40,6 +40,9 @@ function mcc_footer_menu(string $location): void
  * it — in a `.single-post__closing` container, so it renders as the dark
  * call-out card at the end of every article. Runs after wpautop (priority 20) so
  * the paragraph/heading tags already exist. No-op when the post has no <h2>.
+ *
+ * A trailing image/figure (e.g. the McCollister's logo that ends the "Looking
+ * Ahead" section) is stripped so the dark card holds only the heading and copy.
  */
 function mcc_wrap_post_closing_section(string $content): string
 {
@@ -53,10 +56,27 @@ function mcc_wrap_post_closing_section(string $content): string
         return $content;
     }
 
+    $closing = substr($content, $pos);
+
+    // Pull a trailing image/figure (e.g. the McCollister's logo) OUT of the dark
+    // card so the card holds only the heading + body text — then render it just
+    // below the card. Handles a Gutenberg image block, an image inside its own
+    // paragraph (optionally wrapped in a link/picture), or a bare <img>.
+    $trailing = '';
+    $closing = preg_replace_callback(
+        '#\s*(<figure\b[^>]*>(?:(?!</figure>).)*?</figure>|<p\b[^>]*>(?:(?!</p>).)*?<img\b[^>]*>(?:(?!</p>).)*?</p>|(?:<a\b[^>]*>\s*)?<img\b[^>]*>(?:\s*</a>)?)\s*$#is',
+        function ($m) use (&$trailing) {
+            $trailing = $m[1];
+            return '';
+        },
+        $closing
+    );
+
     return substr($content, 0, $pos)
         . '<div class="single-post__closing">'
-        . substr($content, $pos)
-        . '</div>';
+        . $closing
+        . '</div>'
+        . $trailing;
 }
 add_filter('the_content', 'mcc_wrap_post_closing_section', 20);
 

@@ -6864,7 +6864,6 @@ body.search .blog-search__btn {
 .post-content img {
     max-width: 100%;
     height: auto;
-    border-radius: 16px;
 }
 
 /* Blue-check bullet lists, matching the article design. */
@@ -6905,6 +6904,16 @@ body.search .blog-search__btn {
     font-weight: var(--body-font-weight);
     line-height: 1.6;
     color: var(--color-text);
+}
+
+/* Lists inside the dark closing card: white text, brand-yellow checkmarks. */
+.single-post__closing ul li,
+.single-post__closing ol li {
+    color: var(--color-white);
+}
+
+.single-post__closing ul li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 12.5 9 17.5 20 6.5' stroke='%23FFC600' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 .post-content blockquote {
