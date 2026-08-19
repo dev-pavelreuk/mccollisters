@@ -146,6 +146,31 @@ function mcc_render_pagination(int $paged, int $total, ?string $base = null): vo
     echo '</nav>';
 }
 
+/**
+ * Sidebar search → posts only.
+ *
+ * The blog sidebar search form carries a `sidebar_post_search=1` marker; when
+ * present, the main search query is restricted to published posts. WordPress'
+ * native search already matches the term against the post title, excerpt, and
+ * content, so results only ever surface blog posts (e.g. searching "auto"
+ * returns "Why Flexibility Matters in Auto Transport"). A site-wide/header
+ * search — without the marker — is left untouched.
+ */
+function mcc_sidebar_post_search(WP_Query $query): void
+{
+    if (is_admin() || !$query->is_main_query() || !$query->is_search()) {
+        return;
+    }
+
+    if (empty($_GET['sidebar_post_search']) || $_GET['sidebar_post_search'] !== '1') {
+        return;
+    }
+
+    $query->set('post_type', 'post');
+    $query->set('post_status', 'publish');
+}
+add_action('pre_get_posts', 'mcc_sidebar_post_search');
+
 function mcc_body_classes(array $classes): array
 {
     if (is_front_page()) {
