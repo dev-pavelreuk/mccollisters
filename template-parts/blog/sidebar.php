@@ -34,6 +34,8 @@ $latest = $show_latest ? new WP_Query([
 ?>
 <aside class="blog__sidebar" aria-label="<?php esc_attr_e('Blog sidebar', 'mccollisters'); ?>">
     <form class="blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+        <?php // Marker so the search query is narrowed to posts only (see mcc_sidebar_post_search). ?>
+        <input type="hidden" name="sidebar_post_search" value="1">
         <input type="search" name="s" class="blog-search__input" placeholder="<?php esc_attr_e('Search…', 'mccollisters'); ?>" value="<?php echo esc_attr(get_search_query()); ?>" aria-label="<?php esc_attr_e('Search articles', 'mccollisters'); ?>">
         <button type="submit" class="blog-search__btn" aria-label="<?php esc_attr_e('Search', 'mccollisters'); ?>">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
