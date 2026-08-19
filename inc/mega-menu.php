@@ -334,5 +334,10 @@ function mcc_render_primary_navigation(): void
 			</li>
 		<?php endforeach; ?>
 	</ul>
+	<?php // Shared persistent dropdown frame (desktop only). The per-item panels
+	      // render transparently over this, so moving between menu items swaps
+	      // the content without the panel itself disappearing and reappearing.
+	      // Hidden on mobile, where the sub-menus are stacked accordions. ?>
+	<div class="site-navigation__panel" aria-hidden="true"></div>
 	<?php
 }
