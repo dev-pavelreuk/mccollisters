@@ -42,7 +42,7 @@ $more = [
         [
             'icon'  => $uploads . '2026/06/Certifications-About-Us-i.png',
             'title' => 'Certifications',
-            'url'   => home_url('/certifications/'),
+            'url'   => home_url('/forms-certifications-documents/') . '#credentials',
             'text'  => 'Find important forms, certifications, and helpful guides.',
         ],
         [

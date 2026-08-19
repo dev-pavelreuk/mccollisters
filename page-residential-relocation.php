@@ -23,7 +23,7 @@ $hero = [
     'title'    => 'Residential Relocation',
     'subtitle' => 'Planned. Protected. Professionally-Managed.',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

@@ -23,7 +23,7 @@ $hero = [
     'title'    => 'Aerospace',
     'subtitle' => 'Delivering excellence on the ground to get you up in the air',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];

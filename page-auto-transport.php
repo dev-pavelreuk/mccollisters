@@ -23,7 +23,7 @@ $hero = [
     'title'    => 'Auto Transport',
     'subtitle' => 'Driving innovation, delivering excellence',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
     ],
 ];
 

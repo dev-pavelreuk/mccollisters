@@ -22,7 +22,7 @@ $hero = [
     'title'    => 'Installation',
     'subtitle' => 'Single source installation expertise for complex, high value deployments',
     'buttons'  => [
-        ['label' => 'Industry Insights', 'url' => home_url('/resources/')],
+        ['label' => 'Industry Insights', 'url' => home_url('/blog/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
     ],
 ];
