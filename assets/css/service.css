@@ -85,6 +85,14 @@
     margin-inline: auto;
 }
 
+/* Blog single post: tighter top gap than the default 100px section (non-mobile;
+   mobile keeps the 50px-margin section rhythm). */
+@media (min-width: 783px) {
+    .svc-section.single-post {
+        padding-block-start: 50px;
+    }
+}
+
 /* First section after the hero: 50px above the eyebrow, 10px below it. Its
    bottom is 0 so the tab section's 100px top is the full gap between them. */
 .svc-section--tight-top {
@@ -5369,6 +5377,41 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
     }
 }
 
+/* Single post print: strip the site chrome (header, footer, sidebar, share/back
+   /prev-next controls, CTA cards, cookie banner) and print only the article —
+   title + body — full width. Triggered by the print share button (window.print). */
+@media print {
+    body.single .site-header,
+    body.single .site-footer,
+    body.single .blog__sidebar,
+    body.single .single-post__back,
+    body.single .single-post__share,
+    body.single .single-post__nav,
+    body.single .cta-cards,
+    #cmplz-cookiebanner-container,
+    .cmplz-cookiebanner {
+        display: none !important;
+    }
+
+    /* Collapse the two-column grid so the article fills the page. */
+    body.single .blog__inner {
+        display: block;
+    }
+
+    body.single .svc-section.single-post {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.single .single-post,
+    body.single .single-post__head,
+    body.single .single-post__main {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
 /* --- Press & Media page --------------------------------------------------- */
 .press__list {
     margin: 0;
@@ -6437,6 +6480,41 @@ body.search .blog-search__btn {
     min-width: 0;
 }
 
+.single-post__head {
+    min-width: 0;
+}
+
+/* Two-column single post (desktop only — the sidebar stacks below at <=1024px).
+   The left column stacks header (row 1) over the article body (row 2); the
+   sidebar sits in row 2 / column 2, so it starts level with the featured image
+   while the title, meta bar and social icons stay left-column width. */
+@media (min-width: 1025px) {
+    .svc-section.single-post .blog__inner {
+        row-gap: clamp(30px, 3.5vw, 40px);
+    }
+
+    .single-post__head {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .single-post__main {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .single-post__main + .blog__sidebar {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    /* Row-gap already provides the header→image spacing; drop the body's own
+       leading margin so the sidebar aligns exactly with the image top. */
+    .single-post__main > :first-child {
+        margin-top: 0;
+    }
+}
+
 /* "View All Posts" link sitting above the title (in place of an eyebrow). */
 .single-post__back {
     position: relative;
@@ -6525,7 +6603,7 @@ body.search .blog-search__btn {
 /* Article H1 uses its own type — not the global 80px h1. */
 .single-post__title {
     margin: 0 0 22px;
-    max-width: 12em;
+    max-width: 100%;
     font-family: var(--font-heading);
     font-size: 60px;
     font-weight: 500;
