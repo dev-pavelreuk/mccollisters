@@ -6147,14 +6147,15 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: clamp(18px, 3vw, 44px);
+    gap: 10px;
     margin-top: clamp(44px, 5vw, 70px);
 }
 
 .blog__pagination .page-numbers {
     font-family: var(--font-heading);
-    font-size: 15px;
+    font-size: 11px;
     font-weight: 700;
+    line-height: 21.667101px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-dark);
@@ -6162,9 +6163,25 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
     transition: color var(--transition);
 }
 
+@media (max-width: 782px) {
+    .blog__pagination .page-numbers {
+        font-size: 13px;
+        line-height: 22.4px;
+    }
+}
+
+/* Hover on any link, and the current page, use the brand blue. */
 .blog__pagination a.page-numbers:hover,
+.blog__pagination a.page-numbers:focus-visible,
 .blog__pagination .page-numbers.current {
     color: var(--color-primary);
+}
+
+/* Previous/Next on the first/last page: shown but muted and non-interactive. */
+.blog__pagination .page-numbers.is-disabled {
+    color: var(--color-muted);
+    pointer-events: none;
+    cursor: default;
 }
 
 /* Sidebar. */

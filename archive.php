@@ -53,18 +53,11 @@ get_header();
                     </div>
 
                     <?php
-                    $links = paginate_links([
-                        'type'      => 'array',
-                        'mid_size'  => 3,
-                        'end_size'  => 1,
-                        'prev_text' => __('Previous', 'mccollisters'),
-                        'next_text' => __('Next', 'mccollisters'),
-                    ]);
-                    if ($links) : ?>
-                        <nav class="blog__pagination" aria-label="<?php esc_attr_e('Articles pagination', 'mccollisters'); ?>">
-                            <?php foreach ($links as $link) { echo $link; /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ } ?>
-                        </nav>
-                    <?php endif; ?>
+                    mcc_render_pagination(
+                        (int) get_query_var('paged'),
+                        (int) $GLOBALS['wp_query']->max_num_pages
+                    );
+                    ?>
                 </div>
 
                 <?php get_template_part('template-parts/blog/sidebar', null, ['show_latest' => false]); ?>

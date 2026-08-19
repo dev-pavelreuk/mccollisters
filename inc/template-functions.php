@@ -60,6 +60,72 @@ function mcc_wrap_post_closing_section(string $content): string
 }
 add_filter('the_content', 'mcc_wrap_post_closing_section', 20);
 
+/**
+ * Render blog / archive pagination as "Previous 1 2 Next".
+ *
+ * Unlike the default paginate_links output, Previous and Next are always shown —
+ * disabled (a non-link span) on the first / last page — to match the reference
+ * design. $base is a paginate_links base string with a %#% placeholder (used by
+ * the static Blog page so links resolve to /blog/page/2/); pass null on true
+ * archives to let WordPress infer the URLs from the current request. Renders
+ * nothing when there is only one page.
+ */
+function mcc_render_pagination(int $paged, int $total, ?string $base = null): void
+{
+    $paged = max(1, $paged);
+
+    if ($total < 2) {
+        return;
+    }
+
+    $args = [
+        'format'    => '',
+        'current'   => $paged,
+        'total'     => $total,
+        'type'      => 'array',
+        'mid_size'  => 3,
+        'end_size'  => 1,
+        'prev_next' => false,
+    ];
+
+    if ($base !== null) {
+        $args['base'] = $base;
+    }
+
+    $numbers = paginate_links($args);
+
+    if (empty($numbers)) {
+        return;
+    }
+
+    // Build a page URL from the same base the numbers use. page/1/ redirects to
+    // the bare permalink, so link the first page cleanly.
+    $page_url = static function (int $n) use ($base): string {
+        if ($base !== null) {
+            return $n <= 1
+                ? str_replace('page/%#%/', '', $base)
+                : str_replace('%#%', (string) $n, $base);
+        }
+        return (string) get_pagenum_link($n);
+    };
+
+    $prev = $paged > 1
+        ? '<a class="page-numbers prev" href="' . esc_url($page_url($paged - 1)) . '">' . esc_html__('Previous', 'mccollisters') . '</a>'
+        : '<span class="page-numbers prev is-disabled" aria-disabled="true">' . esc_html__('Previous', 'mccollisters') . '</span>';
+
+    $next = $paged < $total
+        ? '<a class="page-numbers next" href="' . esc_url($page_url($paged + 1)) . '">' . esc_html__('Next', 'mccollisters') . '</a>'
+        : '<span class="page-numbers next is-disabled" aria-disabled="true">' . esc_html__('Next', 'mccollisters') . '</span>';
+
+    echo '<nav class="blog__pagination" aria-label="' . esc_attr__('Articles pagination', 'mccollisters') . '">';
+    echo $prev; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    foreach ((array) $numbers as $link) {
+        echo $link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+    echo $next; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo '</nav>';
+}
+
 function mcc_body_classes(array $classes): array
 {
     if (is_front_page()) {
