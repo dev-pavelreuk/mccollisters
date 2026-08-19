@@ -378,6 +378,32 @@ body :is(
     }
 }
 
+/* Tablet range (783–1024px): the theme jumps straight from the 30px mobile
+   size to the 60px desktop size, which overflows the narrower viewport and lets
+   titles overlap the body column (home-about, features, testimonials). Scale
+   the section H2 fluidly through this band so it fits. */
+@media (min-width: 783px) and (max-width: 1024px) {
+    body :is(
+        .section-head__title,
+        .svc-expertise__title,
+        .svc-whychoose__title,
+        .svc-freight__title,
+        .svc-levels__packages-title,
+        .contact-hero__title,
+        .home-services__title,
+        .home-about__title,
+        .home-features__title,
+        .home-industries__title,
+        .home-stats__title,
+        .home-testimonials__title,
+        .home-blog__title,
+        .careers-dark__title
+    ) {
+        font-size: clamp(30px, 4.2vw, 48px);
+        line-height: 1.08;
+    }
+}
+
 /* Global body / reading text: 13px / 500 across sections, driven by the body
    tokens. The `body` prefix wins over the per-section paragraph rules. */
 body :is(

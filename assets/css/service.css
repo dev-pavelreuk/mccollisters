@@ -50,6 +50,14 @@
     color: var(--color-white);
 }
 
+/* Tablet range: 80px is too large for 783–1024px, so scale the interior hero
+   title down through this band (mobile ≤782px keeps its own 35px rule). */
+@media (min-width: 783px) and (max-width: 1024px) {
+    .svc-hero__title {
+        font-size: clamp(34px, 5vw, 54px);
+    }
+}
+
 .svc-hero__subtitle {
     margin: 0 0 26px;
     max-width: 100%;
@@ -3566,7 +3574,7 @@
         border-radius: 0;
         background: none;
         color: var(--color-dark);
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.02em;
     }
@@ -3676,7 +3684,7 @@
         border-radius: 0;
         background: none;
         color: var(--color-white);
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.02em;
     }
@@ -4075,7 +4083,7 @@
         /* Holds 35px on mainstream phones (~389px+) and eases down on the very
            smallest screens so a long single word (e.g. "TRANSPORTATION" on the
            aerospace hero) can't overflow at ~320px. */
-        font-size: clamp(28px, 9vw, 35px);
+        font-size: clamp(28px, 9vw, 32px);
     }
 
     .svc-hero__subtitle {

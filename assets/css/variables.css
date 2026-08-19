@@ -90,12 +90,12 @@
     --transition: 180ms ease;
 }
 
-/* Tighter side spacing on mobile: 10px gutters site-wide. Body text bumps to
-   16px on mobile for readability. */
+/* Side spacing on mobile: 20px gutters site-wide. Body text bumps to 16px on
+   mobile for readability. */
 @media (max-width: 782px) {
     :root {
-        --gutter: 10px;
-        --hero-margin-inline: 10px;
+        --gutter: 20px;
+        --hero-margin-inline: 20px;
         --body-font-size: 16px;
         --body-line-height: 1.4; /* 22.4px at 16px */
         --h3-line-height: 30px;
