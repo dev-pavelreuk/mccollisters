@@ -279,3 +279,53 @@ textarea:focus-visible {
 	color: var(--color-white);
 	background: var(--color-dark);
 }
+
+/* ==========================================================================
+   Brand preloader
+   Full-screen black overlay with the McCollister's "M" mark doing a slow
+   heartbeat until the page finishes loading, then it fades out and is removed
+   by template-parts/components/preloader.php. Styled here (in the render-
+   blocking base.css) so it paints on the first frame with no content flash.
+   ========================================================================== */
+.mcc-preloader {
+	position: fixed;
+	inset: 0;
+	z-index: 100001;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--color-black);
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.mcc-preloader.is-loaded {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.mcc-preloader__logo {
+	width: clamp(70px, 8vw, 120px);
+	height: auto;
+	transform-origin: center;
+	animation: mcc-heartbeat 2.4s ease-in-out infinite;
+	will-change: transform;
+}
+
+/* Slow double-thump heartbeat, then a rest beat. */
+@keyframes mcc-heartbeat {
+	0%   { transform: scale(1); }
+	12%  { transform: scale(1.12); }
+	24%  { transform: scale(1); }
+	36%  { transform: scale(1.08); }
+	48%  { transform: scale(1); }
+	100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mcc-preloader__logo {
+		animation: none;
+	}
+}

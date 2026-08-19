@@ -21,6 +21,8 @@ if (!defined('ABSPATH')) {
 
 <?php wp_body_open(); ?>
 
+<?php get_template_part('template-parts/components/preloader'); ?>
+
 <a class="skip-link screen-reader-text" href="#primary">
 	<?php esc_html_e('Skip to content', 'mccollisters'); ?>
 </a>
