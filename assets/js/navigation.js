@@ -42,6 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Header position changes when .is-sticky toggles (padding/shadow shift),
 	// so re-measure on scroll too rather than only once on load.
 	window.addEventListener("scroll", queueHeaderMeasure, { passive: true });
+	// The header slides in/out with a 420ms transform transition; scroll events
+	// stop firing before it settles, so re-measure when the transition ends.
+	// --mcc-header-bottom is live, so an already-open dropdown re-anchors too.
+	header.addEventListener("transitionend", (event) => {
+		if (event.propertyName === "transform") {
+			setHeaderHeightVar();
+		}
+	});
 
 	// Give every dropdown the same height as the tallest one, so the overlay
 	// doesn't resize when moving between Services / Industries / Resources.
@@ -268,6 +276,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		const setExpanded = (isExpanded) => {
+			// Re-measure the header's bottom edge as the dropdown opens so it
+			// always anchors right under the header — even if the header slid
+			// back into view on a scroll-up and the scroll-based measure was
+			// last taken mid-transition.
+			if (isExpanded) {
+				setHeaderHeightVar();
+			}
 			parentLink.setAttribute("aria-expanded", String(isExpanded));
 		};
 
