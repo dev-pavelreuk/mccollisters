@@ -265,6 +265,58 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.body.classList.toggle("menu-open", !isOpen);
 	});
 
+	// The shared dropdown frame (.site-navigation__panel) stays mounted while
+	// any dropdown is open, and the active panel's content rides with it via
+	// .is-active — so content and frame open/close together. Opening cancels a
+	// pending close; closing is delayed so moving between two menu items keeps
+	// the frame up (the next item's open cancels the close) instead of blinking.
+	const submenuPanels = Array.from(
+		document.querySelectorAll(
+			".site-navigation__menu > .menu-item-has-children > .sub-menu"
+		)
+	);
+	let submenuCloseTimer;
+
+	const openSubmenuPanel = (panel) => {
+		if (window.innerWidth <= 1024) {
+			return;
+		}
+		window.clearTimeout(submenuCloseTimer);
+		// Already open → this is a switch between dropdowns, not a fresh open.
+		const switching = navigation.classList.contains("is-submenu-open");
+		navigation.classList.add("is-submenu-open");
+		submenuPanels.forEach((p) => {
+			if (p !== panel) {
+				p.classList.remove("is-active");
+				return;
+			}
+			if (switching) {
+				// Reveal the incoming panel instantly so its content — including
+				// the shared promo (recent-post) images that both split menus
+				// render — doesn't cross-fade and flash. Restore the transition
+				// right after so the eventual close still fades out.
+				p.style.transition = "none";
+				p.classList.add("is-active");
+				void p.offsetWidth;
+				p.style.transition = "";
+			} else {
+				// Fresh open from closed → let it fade in (CSS).
+				p.classList.add("is-active");
+			}
+		});
+	};
+
+	const closeSubmenuPanel = () => {
+		if (window.innerWidth <= 1024) {
+			return;
+		}
+		window.clearTimeout(submenuCloseTimer);
+		submenuCloseTimer = window.setTimeout(() => {
+			navigation.classList.remove("is-submenu-open");
+			submenuPanels.forEach((p) => p.classList.remove("is-active"));
+		}, 140);
+	};
+
 	// Keep aria-expanded in sync with the dropdown's actual state. It's
 	// rendered as "false" and, without this, never updates — so screen readers
 	// announce every dropdown as collapsed even while it's open (WCAG 4.1.2).
@@ -275,13 +327,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
+		const panel = item.querySelector(":scope > .sub-menu");
+
 		const setExpanded = (isExpanded) => {
-			// Re-measure the header's bottom edge as the dropdown opens so it
-			// always anchors right under the header — even if the header slid
-			// back into view on a scroll-up and the scroll-based measure was
-			// last taken mid-transition.
 			if (isExpanded) {
+				// Re-measure the header's bottom edge as the dropdown opens so
+				// it always anchors right under the header — even if the header
+				// slid back into view on a scroll-up and the scroll-based
+				// measure was last taken mid-transition.
 				setHeaderHeightVar();
+				openSubmenuPanel(panel);
+			} else {
+				closeSubmenuPanel();
 			}
 			parentLink.setAttribute("aria-expanded", String(isExpanded));
 		};
