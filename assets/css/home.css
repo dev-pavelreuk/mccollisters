@@ -10,6 +10,13 @@
     background: var(--color-white);
 }
 
+/* Non-mobile: tighten the gap between the hero and the services section. */
+@media (min-width: 783px) {
+    .home-services {
+        padding-top: 50px;
+    }
+}
+
 .home-services__grid {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
@@ -171,7 +178,7 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(90deg, rgba(9, 13, 18, 0.48) 0%, rgba(9, 13, 18, 0.22) 46%, rgba(9, 13, 18, 0.04) 100%);
+    background: linear-gradient(90deg, rgba(9, 13, 18, 1) 0%, rgba(9, 13, 18, 0) 60%, rgba(9, 13, 18, 0) 100%);
 }
 
 /* Content group is vertically centered; the facility box below is pulled out
