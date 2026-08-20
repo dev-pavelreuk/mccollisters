@@ -23,7 +23,7 @@
     z-index: -1;
     /* Dark on the left for text legibility, fading to clear on the right so the
        truck stays bright. */
-    background: linear-gradient(90deg, rgba(9, 13, 18, 0.45) 0%, rgba(9, 13, 18, 0.28) 35%, rgba(9, 13, 18, 0.08) 65%, rgba(9, 13, 18, 0) 100%);
+    background: linear-gradient(90deg, rgba(9, 13, 18, 1) 0%, rgba(9, 13, 18, 0) 60%, rgba(9, 13, 18, 0) 100%);
 }
 
 .svc-hero__inner {
