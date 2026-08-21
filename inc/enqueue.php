@@ -16,6 +16,29 @@ function mcc_asset_version(string $relative_path): string
     return file_exists($path) ? (string) filemtime($path) : MCC_THEME_VERSION;
 }
 
+/**
+ * Resolve an asset to its minified twin for production.
+ *
+ * Returns the `.min.css` / `.min.js` path when that file exists on disk — unless
+ * SCRIPT_DEBUG is on, in which case the readable source is served. Falls back to
+ * the source when no minified twin has been built. Regenerate the twins with
+ * bin/build-min.sh after editing a source file.
+ */
+function mcc_asset_min(string $relative_path): string
+{
+    if (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
+        return $relative_path;
+    }
+
+    $min = preg_replace('/\.(css|js)$/', '.min.$1', $relative_path, 1, $count);
+
+    if ($count && is_string($min) && file_exists(MCC_THEME_DIR . $min)) {
+        return $min;
+    }
+
+    return $relative_path;
+}
+
 function mcc_enqueue_assets(): void
 {
     wp_enqueue_style(
@@ -41,11 +64,13 @@ function mcc_enqueue_assets(): void
     $dependency = 'mcc-style';
 
     foreach ($styles as $handle => $relative_path) {
+        $asset = mcc_asset_min($relative_path);
+
         wp_enqueue_style(
             $handle,
-            MCC_THEME_URI . $relative_path,
+            MCC_THEME_URI . $asset,
             [$dependency],
-            mcc_asset_version($relative_path)
+            mcc_asset_version($asset)
         );
 
         $dependency = $handle;
@@ -60,31 +85,34 @@ function mcc_enqueue_assets(): void
         '6.7.2'
     );
 
+    $navigation = mcc_asset_min('/assets/js/navigation.js');
     wp_enqueue_script(
         'mcc-navigation',
-        MCC_THEME_URI . '/assets/js/navigation.js',
+        MCC_THEME_URI . $navigation,
         [],
-        mcc_asset_version('/assets/js/navigation.js'),
+        mcc_asset_version($navigation),
         true
     );
 
     // Reusable interactive components (counters, accordions, sliders) — loaded
     // site-wide so any page can use the data-attribute hooks.
+    $components = mcc_asset_min('/assets/js/components.js');
     wp_enqueue_script(
         'mcc-components',
-        MCC_THEME_URI . '/assets/js/components.js',
+        MCC_THEME_URI . $components,
         [],
-        mcc_asset_version('/assets/js/components.js'),
+        mcc_asset_version($components),
         true
     );
 
     // Hero typewriter animation — only needed on the front page.
     if (is_front_page()) {
+        $hero = mcc_asset_min('/assets/js/hero.js');
         wp_enqueue_script(
             'mcc-hero',
-            MCC_THEME_URI . '/assets/js/hero.js',
+            MCC_THEME_URI . $hero,
             [],
-            mcc_asset_version('/assets/js/hero.js'),
+            mcc_asset_version($hero),
             true
         );
     }
