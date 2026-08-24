@@ -6489,7 +6489,9 @@ body.search .blog-search__btn {
    Layout reuses the .blog__inner grid (main column + global sidebar).
    ========================================================================== */
 
-.single-post {
+/* Scoped to the section (svc-section) — a bare `.single-post` also matches the
+   WordPress `single-post` body class, which would put this margin on <body>. */
+.svc-section.single-post {
     margin-bottom: 100px;
 }
 
@@ -7048,7 +7050,7 @@ body.search .blog-search__btn {
 }
 
 @media (max-width: 782px) {
-    .single-post {
+    .svc-section.single-post {
         margin-bottom: 64px;
     }
 
