@@ -991,7 +991,7 @@
     /* Smaller label on mobile. Extra specificity (.home-industries …) so it
        beats the base .home-industry__label rule that appears later in the file. */
     .home-industries .home-industry__label {
-        padding: 10px 12px;
+        padding-inline: 4px;
         font-size: 12px;
         white-space: nowrap;
     }
@@ -1044,27 +1044,22 @@
     position: absolute;
     left: 0;
     right: 0;
-    /* Flush caption band at the card's bottom edge (rounded corners clip it via
-       the card's overflow:hidden). */
-    bottom: 0;
+    bottom: 20px;
     /* Above the base scrim (2) and the blue hover gradient (3); never let the
        animated track or a bright photo make the title look faded/transparent. */
     z-index: 5;
-    padding: 14px 16px;
+    padding-inline: 16px;
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(16px, 1.4vw, 20px);
     font-weight: 700;
     color: var(--color-white);
     opacity: 1;
-    /* Opaque caption band. The label sits on a measurable colour (white on
-       #0d0d0d = 21:1) instead of an unresolvable photo, so automated contrast
-       checks pass (WCAG 1.4.3). It must be fully opaque — any transparency
-       makes the checker composite it with the photo and fail again. */
-    background-color: #0d0d0d;
-    /* Keep the label on its own compositor layer so it always paints above the
-       blue hover gradient (which gets promoted to a layer while its opacity
-       animates) instead of flashing behind it. */
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    /* Force the label onto its own compositor layer so it always paints above
+       the blue hover gradient (which gets promoted to a layer while its opacity
+       animates). Without this the gradient can flash over the title for a frame
+       after the marquee's rAF layers are rebuilt (e.g. returning to the tab). */
     transform: translateZ(0);
     will-change: transform;
 }
