@@ -145,13 +145,13 @@ add_action('wp_footer', function () {
 				"acc": "https://access.equalweb.com/"
 			}
 		},
-		"Position": "left",
+		"Position": "right",
 		"Menulang": "EN",
 		"draggable": true,
 		"btnStyle": {
 			"vPosition": [
-				"80%",
-				"80%"
+				"50%",
+				"50%"
 			],
 			"margin": [
 				"0",
