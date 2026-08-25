@@ -663,30 +663,37 @@
 		});
 	}
 
-	/* --- Agile Store Locator a11y patch ----------------------------------- */
-	// The store-locator plugin renders icon-only buttons with no accessible
-	// name (the search "clear" button, and the "×" close button on the store
-	// detail modal, which is injected only when a marker is clicked). We can't
-	// edit plugin markup, so stamp aria-labels here (WCAG 4.1.2). Only runs on
-	// pages that actually contain the locator.
-	function initAslA11y() {
-		if (!document.querySelector(".asl-cont")) {
-			return;
-		}
-		const label = (root) => {
-			(root || document)
+	/* --- Third-party plugin a11y patches ---------------------------------- */
+	// Patch accessibility gaps in markup we can't edit (store locator, cookie
+	// banner). Runs once on load and again whenever those plugins inject their
+	// UI (both build DOM after load / on interaction), guarded by :not() so each
+	// element is only touched once.
+	function initVendorA11y() {
+		const patch = () => {
+			// Agile Store Locator icon-only buttons: the search "clear" button
+			// and the "×" close button on the store-detail modal (injected only
+			// when a marker is clicked) — no accessible name (WCAG 4.1.2).
+			document
 				.querySelectorAll(".asl-clear-btn:not([aria-label])")
 				.forEach((b) => b.setAttribute("aria-label", "Clear search"));
-			(root || document)
-				.querySelectorAll(
-					".agile-modal-header button:not([aria-label])"
-				)
+			document
+				.querySelectorAll(".agile-modal-header button:not([aria-label])")
 				.forEach((b) => b.setAttribute("aria-label", "Close"));
+
+			// Complianz cookie-banner category toggles aren't wrapped in a
+			// heading. Expose each header wrapper as a heading so screen-reader
+			// heading navigation works (WCAG 1.3.1). EqualWeb accepts this as
+			// the fix for a trigger it can't wrap in an <h3>.
+			document
+				.querySelectorAll(".cmplz-category-header:not([role])")
+				.forEach((h) => {
+					h.setAttribute("role", "heading");
+					h.setAttribute("aria-level", "3");
+				});
 		};
-		label(document);
-		// The detail modal is created on demand, so watch for later insertions.
+		patch();
 		if (window.MutationObserver) {
-			new MutationObserver(() => label(document)).observe(document.body, {
+			new MutationObserver(patch).observe(document.body, {
 				childList: true,
 				subtree: true,
 			});
@@ -701,7 +708,7 @@
 		initHeadingReveal();
 		initMarquee();
 		initHistorySlider();
-		initAslA11y();
+		initVendorA11y();
 	});
 
 	// Exposed so dynamically injected content (e.g. the FAQs industry modal)
