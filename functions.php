@@ -123,79 +123,66 @@ add_action('wp_footer', function () {
 /**
  * EqualWeb (interdeal) accessibility widget.
  *
- * Loads the EqualWeb accessibility toolbar for ADA/WCAG support. Ported from the
- * previous theme's functions.php (sitekey 41c9e1623efcda52a548e1ce628ee860,
- * EqualWeb core 5.2.8). Clears any saved drag position on load, then injects the
- * core script with SRI + crossorigin.
+ * Loads the EqualWeb accessibility toolbar for ADA/WCAG support (sitekey
+ * 41c9e1623efcda52a548e1ce628ee860, EqualWeb core 5.3.1). This is the current
+ * snippet from the EqualWeb dashboard — the core version and its SRI integrity
+ * hash MUST stay in sync or the browser blocks the script and the widget won't
+ * render. Update both together if EqualWeb issues a new version.
  */
 add_action('wp_footer', function () {
 	?>
-	<!-- Accessibility Code for mccollisters.com -->
+	<!-- Accessibility Code for "mccollisters.com" -->
 	<script>
-	(function () {
-
-		/* Clear saved EqualWeb dragged position */
-		try {
-			Object.keys(localStorage).forEach(function (key) {
-				if (
-					key.toLowerCase().includes('interdeal') ||
-					key.toLowerCase().includes('equalweb') ||
-					key.toLowerCase().includes('ind')
-				) {
-					localStorage.removeItem(key);
-				}
-			});
-		} catch (e) {}
-
-		window.interdeal = {
-			get sitekey() {
-				return "41c9e1623efcda52a548e1ce628ee860";
-			},
-			get domains() {
-				return {
-					js: "https://cdn.equalweb.com/",
-					acc: "https://access.equalweb.com/"
-				};
-			},
-			Position: "right", // Change to "left" if desired
-			Menulang: "EN",
-			draggable: false,
-			btnStyle: {
-				vPosition: [
-					"50%", // Change to "80%" if you want the default position
-					null
-				],
-				margin: [
-					"0",
-					"0"
-				],
-				scale: [
-					"0.5",
-					"0.5"
-				],
-				color: {
-					main: "#1c4bb6",
-					second: "#ffffff"
-				},
-				icon: {
-					outline: false,
-					outlineColor: "#ffffff",
-					type: 1,
-					shape: "circle"
-				}
+	/*
+	Want to customize your button? visit our documentation page:
+	https://login.equalweb.com/custom-button
+	*/
+	window.interdeal = {
+		get sitekey (){ return "41c9e1623efcda52a548e1ce628ee860"} ,
+		get domains(){
+			return {
+				"js": "https://cdn.equalweb.com/",
+				"acc": "https://access.equalweb.com/"
 			}
-		};
+		},
+		"Position": "left",
+		"Menulang": "EN",
+		"draggable": true,
+		"btnStyle": {
+			"vPosition": [
+				"80%",
+				"80%"
+			],
+			"margin": [
+				"0",
+				"0"
+			],
+			"scale": [
+				"0.5",
+				"0.5"
+			],
+			"color": {
+				"main": "#1c4bb6",
+				"second": "#ffffff"
+			},
+			"icon": {
+				"outline": false,
+				"outlineColor": "#ffffff",
+				"type":  1 ,
+				"shape": "circle"
+			}
+		},
+	};
 
-		var coreCall = document.createElement('script');
-		coreCall.src = window.interdeal.domains.js + 'core/5.2.8/accessibility.js';
-		coreCall.defer = true;
-		coreCall.integrity = 'sha512-ka0NgF7zDksnhoZ5ZCKlm+t0F7KTih5lCfXwuzQDnrwu/EdKZSsJotoJvQPd0cuVmV63s0q2cgoUjeki688PuQ==';
-		coreCall.crossOrigin = 'anonymous';
-		coreCall.setAttribute('data-cfasync', 'false');
-
-		document.body.appendChild(coreCall);
-
-	})();
+	(function(doc, head, body){
+		var coreCall             = doc.createElement('script');
+		coreCall.src             = interdeal.domains.js + 'core/5.3.1/accessibility.js';
+		coreCall.defer           = true;
+		coreCall.integrity       = 'sha512-3qLj5jbjMQnXk+FqEdVJjUnjJBGuBTRVOwaiT0ms6mQKQcrz4nulBxl2Hsr0/PpvEqdyJsMsU1NB+Mtfzw8hxA==';
+		coreCall.crossOrigin     = 'anonymous';
+		coreCall.setAttribute('data-cfasync', true );
+		body? body.appendChild(coreCall) : head.appendChild(coreCall);
+	})(document, document.head, document.body);
 	</script>
 	<?php
 }, 100);
