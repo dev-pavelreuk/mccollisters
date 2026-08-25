@@ -99,6 +99,8 @@
 
 .site-footer__phones a {
     display: block;
+    /* 24px row = min touch-target height (WCAG 2.5.8). */
+    line-height: 24px;
 }
 
 .site-footer__address-label {
@@ -140,6 +142,9 @@
 }
 
 .footer-menu a {
+    display: block;
+    /* 24px row = min touch-target height (WCAG 2.5.8). */
+    line-height: 24px;
     font-size: 12px;
     font-weight: 600;
 }
