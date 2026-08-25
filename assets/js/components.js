@@ -307,7 +307,7 @@
 	/* --- Tabs -------------------------------------------------------------- */
 	// Click a [data-tabs-tab="i"] to reveal the matching [data-tabs-panel="i"].
 	function initTabs() {
-		document.querySelectorAll("[data-tabs]").forEach((group) => {
+		document.querySelectorAll("[data-tabs]").forEach((group, gi) => {
 			const tabs = Array.from(
 				group.querySelectorAll("[data-tabs-tab]")
 			);
@@ -317,6 +317,24 @@
 			if (tabs.length === 0) {
 				return;
 			}
+
+			// Give each tab/panel an id and cross-link them so assistive tech
+			// can name the panel by its tab (WCAG 1.3.1 tabpanel name, 4.1.2).
+			const gid = "svc-tabs-" + gi;
+			panels.forEach((panel) => {
+				const key = panel.dataset.tabsPanel;
+				const tab = tabs.find((t) => t.dataset.tabsTab === key);
+				if (!panel.id) {
+					panel.id = gid + "-panel-" + key;
+				}
+				if (tab) {
+					if (!tab.id) {
+						tab.id = gid + "-tab-" + key;
+					}
+					panel.setAttribute("aria-labelledby", tab.id);
+					tab.setAttribute("aria-controls", panel.id);
+				}
+			});
 
 			const activate = (key) => {
 				tabs.forEach((tab) => {
@@ -601,7 +619,9 @@
 				years.forEach((year, i) => {
 					const on = i === current;
 					year.classList.toggle("is-active", on);
-					year.setAttribute("aria-selected", on ? "true" : "false");
+					// aria-pressed (not aria-selected) is the valid state for a
+					// <button>; aria-selected is only for tab/option roles (4.1.2).
+					year.setAttribute("aria-pressed", on ? "true" : "false");
 				});
 				// Only light up an arrow when there's a year to move to.
 				if (prev) {
