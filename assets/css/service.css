@@ -3585,6 +3585,9 @@
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.02em;
+        /* Let a long label ("Aviation & AOG Transport") wrap instead of
+           shoving the arrow off-screen at 320px (WCAG 1.4.10 reflow). */
+        white-space: normal;
     }
 
     .svc-tabs-section .svc-tabs__tab:hover,
@@ -3695,6 +3698,9 @@
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.02em;
+        /* Let a long label wrap instead of pushing the arrow off-screen at
+           320px (WCAG 1.4.10 reflow). */
+        white-space: normal;
     }
 
     /* Title text stays white on hover/active (only the arrow changes colour);
@@ -4118,11 +4124,13 @@
         margin-left: 0;
     }
 
-    /* Scale the expertise title so "A TRANSPORTATION" fits on one line. */
+    /* Scale the expertise title down on mobile. Allow wrapping: a longer
+       title (e.g. Transportation's) is wider than a 320px viewport, and
+       forcing nowrap pushed the whole section past the edge (broke WCAG
+       1.4.10 reflow). Titles that already fit still sit on one line. */
     .svc-expertise__title {
         font-size: clamp(22px, 7vw, 32px);
-        /* Keep "A Transportation" on a single line on mobile. */
-        white-space: nowrap;
+        white-space: normal;
     }
 }
 
