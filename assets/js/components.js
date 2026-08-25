@@ -690,6 +690,21 @@
 					h.setAttribute("role", "heading");
 					h.setAttribute("aria-level", "3");
 				});
+
+			// Complianz cookie-policy nests a consent checkbox inside an
+			// interactive <summary> — invalid HTML / nested interactive controls
+			// (WCAG 4.1.2). Lift it out to sit right after the <summary> (still
+			// inside its <details>). Its id and data-* are untouched, so the
+			// for-labelled toggle and Complianz's own handlers keep working.
+			document
+				.querySelectorAll("summary input.cmplz-accept-service")
+				.forEach((input) => {
+					const summary = input.closest("summary");
+					const details = summary && summary.parentElement;
+					if (summary && details && details.tagName === "DETAILS") {
+						summary.insertAdjacentElement("afterend", input);
+					}
+				});
 		};
 		patch();
 		if (window.MutationObserver) {
