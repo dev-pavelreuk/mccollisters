@@ -979,6 +979,12 @@
     overflow: hidden;
     color: var(--color-white);
     text-decoration: none;
+    /* Solid dark backing behind the card. The photo (.home-industry__img,
+       object-fit:cover) fully covers it, so this is invisible — its only job
+       is to give an automated contrast checker a resolvable background colour
+       for the white label instead of an unmeasurable photo (WCAG 1.4.3). It
+       honestly represents the scrimmed backdrop the label sits on. */
+    background-color: #0d0d0d;
 }
 
 /* Smaller 180×180 slides with a 25px gap on mobile. */
