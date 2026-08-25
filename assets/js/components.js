@@ -663,6 +663,36 @@
 		});
 	}
 
+	/* --- Agile Store Locator a11y patch ----------------------------------- */
+	// The store-locator plugin renders icon-only buttons with no accessible
+	// name (the search "clear" button, and the "×" close button on the store
+	// detail modal, which is injected only when a marker is clicked). We can't
+	// edit plugin markup, so stamp aria-labels here (WCAG 4.1.2). Only runs on
+	// pages that actually contain the locator.
+	function initAslA11y() {
+		if (!document.querySelector(".asl-cont")) {
+			return;
+		}
+		const label = (root) => {
+			(root || document)
+				.querySelectorAll(".asl-clear-btn:not([aria-label])")
+				.forEach((b) => b.setAttribute("aria-label", "Clear search"));
+			(root || document)
+				.querySelectorAll(
+					".agile-modal-header button:not([aria-label])"
+				)
+				.forEach((b) => b.setAttribute("aria-label", "Close"));
+		};
+		label(document);
+		// The detail modal is created on demand, so watch for later insertions.
+		if (window.MutationObserver) {
+			new MutationObserver(() => label(document)).observe(document.body, {
+				childList: true,
+				subtree: true,
+			});
+		}
+	}
+
 	document.addEventListener("DOMContentLoaded", () => {
 		initCounters();
 		initAccordions();
@@ -671,6 +701,7 @@
 		initHeadingReveal();
 		initMarquee();
 		initHistorySlider();
+		initAslA11y();
 	});
 
 	// Exposed so dynamically injected content (e.g. the FAQs industry modal)
