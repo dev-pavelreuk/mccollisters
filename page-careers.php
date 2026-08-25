@@ -412,7 +412,7 @@ $more = [
 
             function openModal(event) {
                 event.preventDefault();
-                frame.innerHTML = '<iframe src="' + src + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+                frame.innerHTML = '<iframe src="' + src + '" title="Video player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
                 modal.hidden = false;
                 document.body.style.overflow = 'hidden';
             }
