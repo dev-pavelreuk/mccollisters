@@ -3214,7 +3214,7 @@
     font-size: 13px;
     font-weight: 400;
     line-height: 22px;
-    color: rgba(255, 255, 255, 0.8);
+    color: #ffffff;
 }
 
 .hist-slider__title {
@@ -3234,7 +3234,7 @@
     font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.92);
+    color: #ffffff;
 }
 
 /* Year navigation — vertical list pinned to the left, arrows at the bottom. */
