@@ -30,9 +30,7 @@ get_header();
                                 <?php $cats = get_the_category(); $cat = $cats ? $cats[0] : null; ?>
                                 <article <?php post_class('blog-card'); ?>>
                                     <div class="blog-card__meta">
-                                        <a class="blog-card__date" href="<?php echo esc_url(get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d'))); ?>">
-                                            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('m.d.Y')); ?></time>
-                                        </a>
+                                        <time class="blog-card__date" datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('m.d.Y')); ?></time>
                                         <?php if ($cat) : ?>
                                             <span class="blog-card__dot" aria-hidden="true"></span>
                                             <a class="blog-card__cat" href="<?php echo esc_url(get_category_link($cat)); ?>"><?php echo esc_html($cat->name); ?></a>

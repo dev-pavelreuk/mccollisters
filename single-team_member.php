@@ -50,7 +50,7 @@ while (have_posts()) :
                         <div class="team-single__bio"><?php echo wp_kses_post($bio); ?></div>
                     <?php endif; ?>
 
-                    <a class="mcc-btn mcc-btn--on-light team-single__back" href="<?php echo esc_url(home_url('/our-team/')); ?>">
+                    <a class="mcc-btn mcc-btn--on-light team-single__back" href="<?php echo esc_url(get_post_type_archive_link('team_member') ?: home_url('/leadership/')); ?>">
                         <span class="mcc-btn__label"><?php esc_html_e('Back to Our Team', 'mccollisters'); ?></span>
                         <span class="mcc-btn__arrow" aria-hidden="true"><?php echo $arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></span>
                     </a>
