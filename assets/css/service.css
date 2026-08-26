@@ -3209,15 +3209,7 @@
 }
 
 .hist-slider__eyebrow {
-    /* Solid backing so the text sits on a measurable colour (WCAG 1.4.3)
-       instead of an unresolvable photo. #0c0f12 = the opaque version of the
-       slide scrim, so on the already-dark left of the slide it blends in.
-       fit-content + negative margin keep the text where it was. */
-    width: fit-content;
-    margin: 0 0 10px -12px;
-    padding: 3px 12px;
-    background-color: #0c0f12;
-    border-radius: 6px;
+    margin: 0 0 10px;
     font-family: var(--font-heading);
     font-size: 13px;
     font-weight: 400;
@@ -3237,14 +3229,8 @@
 }
 
 .hist-slider__text {
-    /* Solid backing (see .hist-slider__eyebrow) so the paragraph sits on a
-       measurable colour for automated contrast checks (WCAG 1.4.3). */
-    width: fit-content;
+    margin: 0;
     max-width: 600px;
-    margin: 0 0 0 -14px;
-    padding: 10px 14px;
-    background-color: #0c0f12;
-    border-radius: 8px;
     font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
     line-height: 1.7;
