@@ -26,7 +26,7 @@ $hero = [
     'subtitle' => 'Quick, reliable, customizable dealership transport solutions',
     'buttons'  => [
         ['label' => 'Individuals', 'url' => home_url('/auto-transport/individuals/')],
-        ['label' => 'OEMs', 'url' => home_url('/auto-transport/')],
+        ['label' => 'OEMs', 'url' => home_url('/auto-transport/oems/')],
     ],
 ];
 

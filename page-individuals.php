@@ -23,8 +23,8 @@ $hero = [
     'title'    => 'Individual Auto Transport',
     'subtitle' => 'Professional, personalized, reliable car shipping solutions',
     'buttons'  => [
-        ['label' => 'Dealers', 'url' => home_url('/auto-transport/')],
-        ['label' => 'OEMs', 'url' => home_url('/auto-transport/')],
+        ['label' => 'Dealers', 'url' => home_url('/auto-transport/dealers/')],
+        ['label' => 'OEMs', 'url' => home_url('/auto-transport/oems/')],
     ],
 ];
 
