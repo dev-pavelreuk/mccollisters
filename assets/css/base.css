@@ -191,7 +191,7 @@ ol:last-child {
 .hero-eyebrow {
 	display: block;
 	margin: 0;
-	padding-bottom: 10px;
+	padding-bottom: 20px;
 	font-family: var(--font-heading);
 	font-size: var(--eyebrow-font-size);
 	font-weight: var(--eyebrow-font-weight);
