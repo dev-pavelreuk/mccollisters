@@ -42,3 +42,12 @@
         margin-bottom: 30px;
     }
 }
+
+/* Bolder history eyebrow + body text on non-mobile (matching the 700-weight
+   year buttons). Legibility improvement; requested to test contrast scoring. */
+@media (min-width: 783px) {
+    .hist-slider__eyebrow,
+    .hist-slider__text {
+        font-weight: 700;
+    }
+}
