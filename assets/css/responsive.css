@@ -31,3 +31,13 @@
         justify-content: center;
     }
 }
+
+/* Intro eyebrows ("crumbs") on the hero-less head pages (history, locations,
+   team, talk-to-an-expert) get a bit more room below on non-mobile: 20px vs
+   the shared 10px section-eyebrow gap. Matches the body :is() specificity in
+   components.css and wins by load order (responsive.css is enqueued last). */
+@media (min-width: 783px) {
+    body :is(.hist-head__crumb, .loc-head__crumb) {
+        margin-bottom: 20px;
+    }
+}
