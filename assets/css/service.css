@@ -3509,14 +3509,25 @@
     border-radius: 20px;
     overflow: hidden;
     color: var(--color-white);
-    background: var(--color-navy) center / cover no-repeat;
+    /* Solid navy only. The photo lives on the .cta-card__bg sibling below, not
+       on the card itself, so the card's copy resolves to this solid colour for
+       automated contrast checks instead of an unreadable image (WCAG 1.4.3). */
+    background: var(--color-navy);
 }
 
-.cta-card::after {
-    content: "";
+/* Photo + scrim layer, painted behind the card's copy. Keeps the image out of
+   the DOM ancestry of the title/button; purely structural, no visual change. */
+.cta-card__bg {
     position: absolute;
     inset: 0;
     z-index: -1;
+    background: center / cover no-repeat;
+}
+
+.cta-card__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: linear-gradient(180deg, rgba(9, 13, 18, 0.05) 0%, rgba(9, 13, 18, 0.5) 100%);
 }
 

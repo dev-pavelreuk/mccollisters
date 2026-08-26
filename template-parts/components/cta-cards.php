@@ -36,7 +36,8 @@ $mcc_cards = isset($args['cards']) && is_array($args['cards']) ? $args['cards'] 
 <section class="cta-cards">
     <div class="cta-cards__grid">
         <?php foreach ($mcc_cards as $mcc_card) : ?>
-            <div class="cta-card" style="background-image: url('<?php echo esc_url($mcc_card['image']); ?>');">
+            <div class="cta-card">
+                <div class="cta-card__bg" style="background-image: url('<?php echo esc_url($mcc_card['image']); ?>');"></div>
                 <h2 class="cta-card__title"><?php echo wp_kses($mcc_card['title'], ['br' => []]); ?></h2>
                 <a class="mcc-btn cta-card__btn" href="<?php echo esc_url($mcc_card['button']['url']); ?>">
                     <span class="mcc-btn__label"><?php echo esc_html($mcc_card['button']['label']); ?></span>

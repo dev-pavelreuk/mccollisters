@@ -417,6 +417,8 @@ get_header();
                                 loading="lazy"
                                 decoding="async"
                             >
+                            <span class="home-industry__scrim" aria-hidden="true"></span>
+                            <span class="home-industry__hover" aria-hidden="true"></span>
                             <span class="home-industry__label"><?php echo esc_html($ind_name); ?></span>
                         </a>
                     <?php endforeach; ?>

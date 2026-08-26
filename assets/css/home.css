@@ -979,6 +979,11 @@
     overflow: hidden;
     color: var(--color-white);
     text-decoration: none;
+    /* Solid backing behind the card. The photo (.home-industry__img) covers it,
+       so it's invisible — but with the scrim/hover gradients moved to child
+       elements (below), the label's only ancestor background is this solid
+       colour, so automated contrast checks resolve it (WCAG 1.4.3). */
+    background-color: #0d0d0d;
 }
 
 /* Smaller 180×180 slides with a 25px gap on mobile. */
@@ -1006,8 +1011,10 @@
 }
 
 /* Always-on scrim at the base so the label stays legible over any photo. */
-.home-industry::after {
-    content: "";
+/* Base scrim + brand-blue hover gradient are real child elements (not ::before/
+   ::after on the link) so the link's only background is its solid colour — that
+   keeps the label's contrast measurable (WCAG 1.4.3). Visually identical. */
+.home-industry__scrim {
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -1016,8 +1023,7 @@
 }
 
 /* Brand-blue gradient that fades in on hover/focus. */
-.home-industry::before {
-    content: "";
+.home-industry__hover {
     position: absolute;
     inset: 0;
     z-index: 3;
@@ -1033,8 +1039,8 @@
     pointer-events: none;
 }
 
-.home-industry:hover::before,
-.home-industry:focus-visible::before {
+.home-industry:hover .home-industry__hover,
+.home-industry:focus-visible .home-industry__hover {
     opacity: 1;
 }
 
