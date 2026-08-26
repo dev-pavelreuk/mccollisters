@@ -135,7 +135,8 @@ $more = [
             <div class="hist-slider" data-hist-slider>
                 <div class="hist-slider__stage">
                     <?php foreach ($eras as $i => $era) : ?>
-                        <div class="hist-slider__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hist-slide="<?php echo esc_attr($i); ?>" style="background-image: url('<?php echo esc_url($era['image']); ?>');"<?php echo 0 === $i ? '' : ' aria-hidden="true"'; ?>>
+                        <div class="hist-slider__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hist-slide="<?php echo esc_attr($i); ?>"<?php echo 0 === $i ? '' : ' aria-hidden="true"'; ?>>
+                            <div class="hist-slider__slide-bg" style="background-image: url('<?php echo esc_url($era['image']); ?>');"></div>
                             <div class="hist-slider__content">
                                 <p class="hist-slider__eyebrow">/ <?php echo esc_html($era['year']); ?> /</p>
                                 <h2 class="hist-slider__title"><?php echo wp_kses($era['title'], ['br' => []]); ?></h2>
