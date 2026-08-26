@@ -1,0 +1,61 @@
+name: Deploy theme to Kinsta
+
+# Deploys the theme to Kinsta production on every push to main.
+# Safety: PHP is linted first — a syntax error fails the run and NOTHING is
+# deployed, so a bad edit (from GitHub's web editor or anywhere) can't white-
+# screen the live site. The .min CSS/JS are rebuilt in CI so source-only edits
+# take effect. Can also be run manually from the Actions tab (workflow_dispatch).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Never let two deploys overlap.
+concurrency:
+  group: deploy-kinsta-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+
+      - name: Lint PHP (a syntax error blocks the whole deploy)
+        run: |
+          find . -path ./node_modules -prune -o -name '*.php' -print0 \
+            | xargs -0 -n1 -P4 php -l
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rebuild minified CSS/JS
+        run: bash bin/build-min.sh
+
+      - name: Deploy to Kinsta via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          protocol: sftp
+          server: ${{ secrets.KINSTA_HOST }}
+          port: ${{ secrets.KINSTA_PORT }}
+          username: ${{ secrets.KINSTA_USER }}
+          password: ${{ secrets.KINSTA_PASSWORD }}
+          server-dir: public/wp-content/themes/mccollisters-custom/
+          local-dir: ./
+          # Keep dev/repo-only files off the server and never let the sync
+          # delete the server's own .git / state files.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/.DS_Store
