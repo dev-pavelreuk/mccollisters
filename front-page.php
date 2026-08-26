@@ -410,15 +410,17 @@ get_header();
                             href="<?php echo esc_url(home_url($ind_path)); ?>"
                             <?php echo $pass === 1 ? 'aria-hidden="true" tabindex="-1"' : ''; ?>
                         >
-                            <img
-                                class="home-industry__img"
-                                src="<?php echo esc_url($ind_uploads . $ind_img); ?>"
-                                alt="<?php echo $pass === 1 ? '' : esc_attr($ind_name); ?>"
-                                loading="lazy"
-                                decoding="async"
-                            >
-                            <span class="home-industry__scrim" aria-hidden="true"></span>
-                            <span class="home-industry__hover" aria-hidden="true"></span>
+                            <span class="home-industry__bg">
+                                <img
+                                    class="home-industry__img"
+                                    src="<?php echo esc_url($ind_uploads . $ind_img); ?>"
+                                    alt="<?php echo $pass === 1 ? '' : esc_attr($ind_name); ?>"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+                                <span class="home-industry__scrim" aria-hidden="true"></span>
+                                <span class="home-industry__hover" aria-hidden="true"></span>
+                            </span>
                             <span class="home-industry__label"><?php echo esc_html($ind_name); ?></span>
                         </a>
                     <?php endforeach; ?>

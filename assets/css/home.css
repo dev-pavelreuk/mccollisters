@@ -1002,6 +1002,17 @@
     }
 }
 
+/* Photo + gradients live on this z-index:-1 layer (like .cta-card__bg) so the
+   label has nothing overlapping it at positive z. That lets an automated
+   contrast checker resolve the label against the link's solid colour rather
+   than compositing the semi-transparent gradients (WCAG 1.4.3). No visual
+   change — this only reorders the stacking, not the appearance. */
+.home-industry__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
 .home-industry__img {
     position: absolute;
     inset: 0;
