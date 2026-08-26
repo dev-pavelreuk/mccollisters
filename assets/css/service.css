@@ -101,7 +101,7 @@
 }
 
 .svc-section--tight-top .section-head__eyebrow {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Industries / tabs section: spacing comes from .svc-tabs' own margins. */
@@ -3209,7 +3209,7 @@
 }
 
 .hist-slider__eyebrow {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     font-family: var(--font-heading);
     font-size: 13px;
     font-weight: 400;
