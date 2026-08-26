@@ -33,11 +33,12 @@
 }
 
 /* Intro eyebrows ("crumbs") on the hero-less head pages (history, locations,
-   team, talk-to-an-expert) get more room below on non-mobile: 50px vs
-   the shared 10px section-eyebrow gap. Matches the body :is() specificity in
-   components.css and wins by load order (responsive.css is enqueued last). */
+   team, talk-to-an-expert, blog) get more room below on non-mobile: 50px.
+   Matches the body :is() specificity in components.css and wins by load order
+   (responsive.css is enqueued last). .blog__crumb starts at 18px, the rest at
+   the shared 10px. Mobile keeps the original values. */
 @media (min-width: 783px) {
-    body :is(.hist-head__crumb, .loc-head__crumb) {
+    body :is(.hist-head__crumb, .loc-head__crumb, .blog__crumb) {
         margin-bottom: 50px;
     }
 }
