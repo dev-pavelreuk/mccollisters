@@ -49,14 +49,14 @@ $tabs = [
     [
         'label' => 'Auto Transport',
         'image' => $uploads . '2026/03/auto-logistics-inset.jpg',
-        'title' => 'Auto Transport',
-        'desc'  => 'McCollister’s supports aerospace and defense organizations with specialized logistics services for sensitive, oversized, and mission-critical assets. These shipments require a higher level of planning, coordination, and risk management—delivered through structured project oversight and trained teams. Rather than treating aerospace as standard freight, McCollister’s approaches each move as a managed project, aligning people, process, and equipment to meet strict requirements. For full details on aerospace transportation services, certifications, and project capabilities, visit our Aerospace Logistics page.',
+        'title' => 'Auto Transport & Logistics',
+        'desc'  => "McCollister’s provides specialized auto transportation and auto logistics solutions designed for individuals, dealers, and OEMs who require secure, reliable vehicle transport.\n\nThese vehicle-specific services are supported by experienced teams, specialized equipment, and clear communication throughout the process.\n\nFor full details on enclosed transport options, dealer and OEM support, tracking capabilities, and auto-focused service models, visit our dedicated Auto Transport page.",
         'url'   => home_url('/auto-transport/'),
     ],
     [
         'label' => 'Aviation',
         'image' => $uploads . '2026/03/aviation-logistics-inset.jpg',
-        'title' => 'Aviation',
+        'title' => 'Aviation & AOG Transportation',
         'desc'  => "McCollister’s offers specialized aviation logistics and transportation services for time-critical aircraft components and operationally sensitive shipments. These moves often require rapid response, precise coordination, and experienced handling to minimize downtime and keep aircraft in service.\n\nOur aviation logistics capabilities support aircraft engines and parts transportation, maintenance and repair operations, and aircraft-on-ground (AOG) shipments—managed through disciplined planning and around-the-clock coordination.\n\nFor full details on aviation transportation services, AOG support, and aviation-specific capabilities, visit our dedicated Aviation Logistics page.",
         'url'   => home_url('/aviation/'),
     ],
