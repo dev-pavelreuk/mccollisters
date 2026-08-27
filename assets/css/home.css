@@ -287,8 +287,12 @@
 }
 
 /* Tags link to their service pages but look exactly like the plain text they
-   replaced: always white, no underline, no hover/colour change. */
-.home-hero__tags a {
+   replaced: always white, never underlined, no hover/colour change in any
+   state. */
+.home-hero__tags a,
+.home-hero__tags a:hover,
+.home-hero__tags a:focus,
+.home-hero__tags a:focus-visible {
     color: inherit;
     text-decoration: none;
 }
