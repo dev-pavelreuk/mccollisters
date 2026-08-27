@@ -230,10 +230,12 @@
     display: block;
 }
 
-/* Bolder tab labels on mobile (the accordion tab weight is 600). */
+/* Accordion tab labels on mobile: uniform 18px / 600 / 21.6px site-wide. */
 @media (max-width: 782px) {
     .svc-tabs__tab-label {
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21.6px;
     }
 }
 
@@ -7907,8 +7909,6 @@ body.search .blog-search__btn {
 
     .page-transportation .svc-tabs-section .svc-tabs__tab-label {
         text-align: left;
-        white-space: nowrap;
-        font-size: clamp(10px, 3.4vw, 16px);
     }
 
     .page-transportation .section-head__title {
