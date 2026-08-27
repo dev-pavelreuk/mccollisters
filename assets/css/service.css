@@ -4203,6 +4203,14 @@
     #heavy-haul {
         scroll-margin-top: 24px;
     }
+
+    /* #guides has 100px top padding with the credential logos directly above it,
+       so a positive offset leaves them peeking. Pull the landing up (24px minus
+       the 100px padding) so the "/ resources /" eyebrow sits ~24px from the top
+       and the logos scroll out of view. Non-mobile only. */
+    #guides {
+        scroll-margin-top: -76px;
+    }
 }
 
 /* Shared blue file icon (PDF / DOC) used by the forms cards + guides list. */
