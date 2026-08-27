@@ -657,8 +657,8 @@
 
 .home-about__quote-text {
     margin: 0 0 28px;
-    font-size: clamp(17px, 1.6vw, 23px);
-    font-weight: 600;
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
     line-height: 1.3em;
     color: var(--color-white);
 }
