@@ -51,13 +51,13 @@ $partners_title = 'Trusted By Our<br>Partners';
 
 // Same brand marquee as the Auto Transport page.
 $logos = [
-    ['img' => $uploads . '2026/05/honda.png',             'alt' => 'Honda'],
-    ['img' => $uploads . '2026/05/jaguar-land-rover.png', 'alt' => 'Jaguar Land Rover'],
-    ['img' => $uploads . '2026/05/lamborghini.png',       'alt' => 'Lamborghini'],
-    ['img' => $uploads . '2026/05/lucid.png',             'alt' => 'Lucid'],
-    ['img' => $uploads . '2026/05/mclaren.png',           'alt' => 'McLaren'],
-    ['img' => $uploads . '2026/05/mercedes-benz.png',     'alt' => 'Mercedes-Benz'],
-    ['img' => $uploads . '2026/05/nissan.png',            'alt' => 'Nissan'],
+    ['img' => $uploads . '2026/05/honda.png',             'alt' => 'Honda',             'url' => 'https://www.honda.com/'],
+    ['img' => $uploads . '2026/05/jaguar-land-rover.png', 'alt' => 'Jaguar Land Rover', 'url' => 'https://www.jlr.com/'],
+    ['img' => $uploads . '2026/05/lamborghini.png',       'alt' => 'Lamborghini',       'url' => 'https://www.lamborghini.com/en-en'],
+    ['img' => $uploads . '2026/05/lucid.png',             'alt' => 'Lucid',             'url' => 'https://lucidmotors.com/'],
+    ['img' => $uploads . '2026/05/mclaren.png',           'alt' => 'McLaren',           'url' => 'https://www.mclaren.com/'],
+    ['img' => $uploads . '2026/05/mercedes-benz.png',     'alt' => 'Mercedes-Benz',     'url' => 'https://www.mbusa.com/en/home'],
+    ['img' => $uploads . '2026/05/nissan.png',            'alt' => 'Nissan',            'url' => 'https://www.nissanusa.com/'],
 ];
 
 $expertise = [
@@ -268,7 +268,13 @@ $faqs = [
             <?php for ($g = 0; $g < 2; $g++) : ?>
                 <div class="svc-logos__group">
                     <?php foreach ($logos as $logo) : ?>
-                        <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                        <?php if (!empty($logo['url'])) : ?>
+                            <a class="svc-logos__link" href="<?php echo esc_url($logo['url']); ?>" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-label="<?php echo esc_attr($logo['alt']); ?>">
+                                <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                            </a>
+                        <?php else : ?>
+                            <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             <?php endfor; ?>

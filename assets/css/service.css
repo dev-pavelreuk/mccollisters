@@ -2206,6 +2206,20 @@
     object-fit: contain;
 }
 
+/* Brand-logo link wrapper: a transparent pass-through so the img keeps its own
+   sizing/margins and the marquee lays out identically. Opens the brand site in
+   a new tab; a faint hover cue signals it's clickable. */
+.svc-logos__link {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    transition: opacity 180ms ease;
+}
+
+.svc-logos__link:hover {
+    opacity: 0.65;
+}
+
 /* Lucid is a wide wordmark — shrink it so it isn't oversized next to the rest. */
 .svc-logos__group img[src*="lucid"] {
     height: 18px;
