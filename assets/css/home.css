@@ -649,7 +649,9 @@
 
 .home-about__quote-inner {
     margin: 0;
-    max-width: 420px;
+    /* Wider column so the quote reads as 3 lines (not 4) and sits closer to the
+       photo on larger screens. Mobile keeps its own width override below. */
+    max-width: 560px;
     /* Drop the global blockquote's blue left border/indent. */
     padding-left: 0;
     border-left: 0;
