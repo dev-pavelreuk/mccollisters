@@ -1236,6 +1236,10 @@
     .svc-integrated__icon img[src*="In-The-News-Our-History-i"] {
         margin-left: -16px;
     }
+
+    .svc-integrated__icon img[src*="Our-Blog-Forms-Certifications-i"] {
+        margin-left: -26px;
+    }
 }
 
 .svc-integrated__title {
