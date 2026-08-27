@@ -38,12 +38,12 @@ $overview = [
 ];
 
 $logos = [
-    ['img' => $uploads . '2026/03/ncr.png',                             'alt' => 'NCR'],
-    ['img' => $uploads . '2026/03/pnc.png',                             'alt' => 'PNC'],
-    ['img' => $uploads . '2026/03/santander.png',                       'alt' => 'Santander'],
-    ['img' => $uploads . '2026/03/mccollisters-bank-of-america-logo.png', 'alt' => 'Bank of America'],
-    ['img' => $uploads . '2026/03/mccollisters-the-capital-one-logo.png', 'alt' => 'Capital One'],
-    ['img' => $uploads . '2026/03/chase.png',                           'alt' => 'Chase'],
+    ['img' => $uploads . '2026/03/ncr.png',                             'alt' => 'NCR',             'url' => 'https://www.ncr.com/'],
+    ['img' => $uploads . '2026/03/pnc.png',                             'alt' => 'PNC',             'url' => 'https://www.pnc.com/en/personal-banking.html'],
+    ['img' => $uploads . '2026/03/santander.png',                       'alt' => 'Santander',       'url' => 'https://www.santanderbank.com/'],
+    ['img' => $uploads . '2026/03/mccollisters-bank-of-america-logo.png', 'alt' => 'Bank of America', 'url' => 'https://www.bankofamerica.com/'],
+    ['img' => $uploads . '2026/03/mccollisters-the-capital-one-logo.png', 'alt' => 'Capital One',     'url' => 'https://www.capitalone.com/'],
+    ['img' => $uploads . '2026/03/chase.png',                           'alt' => 'Chase',           'url' => 'https://www.chase.com/'],
 ];
 
 $capabilities = [
@@ -167,7 +167,13 @@ $faqs = [
             <?php for ($g = 0; $g < 2; $g++) : ?>
                 <div class="svc-logos__group">
                     <?php foreach ($logos as $logo) : ?>
-                        <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                        <?php if (!empty($logo['url'])) : ?>
+                            <a class="svc-logos__link" href="<?php echo esc_url($logo['url']); ?>" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-label="<?php echo esc_attr($logo['alt']); ?>">
+                                <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                            </a>
+                        <?php else : ?>
+                            <img src="<?php echo esc_url($logo['img']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" loading="lazy" decoding="async">
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             <?php endfor; ?>
