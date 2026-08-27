@@ -666,7 +666,7 @@
 .home-about__quote-inner figcaption {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
     margin-bottom: 30px;
 }
 
@@ -1904,6 +1904,7 @@
     /* 30px total above the quote's button: 20px figcaption margin + the button's
        own 10px margin-top (they add, since the button is inline-flex). */
     .home-about__quote-inner figcaption {
+        gap: 4px;
         margin-bottom: 20px;
     }
 
