@@ -191,9 +191,10 @@
 .svc-tabs__tab {
     position: relative;
     flex: 0 0 auto;
-    /* Deep-linked tabs (e.g. /warehousing/#asset-recovery) clear the sticky
-       header when jumped to. */
-    scroll-margin-top: 120px;
+    /* Deep-linked tabs (e.g. /warehousing/#asset-recovery) land near the top on
+       non-mobile; the sticky header slides away on the jump, so a small offset
+       keeps the tab bar at the top and hides the intro copy above it. */
+    scroll-margin-top: 24px;
     /* All tabs overlap the panel by 2px so activating one never shifts it. */
     margin-bottom: -2px;
     padding: 16px clamp(10px, 1.9vw, 26px) 18px;
@@ -4191,7 +4192,7 @@
 #downloadables,
 #credentials,
 #guides {
-    scroll-margin-top: 110px;
+    scroll-margin-top: 24px;
 }
 
 /* Logistics deep links (/logistics/#freight-brokerage, #heavy-haul) drop below
@@ -4200,7 +4201,7 @@
 @media (min-width: 783px) {
     #freight-brokerage,
     #heavy-haul {
-        scroll-margin-top: 130px;
+        scroll-margin-top: 24px;
     }
 }
 
