@@ -1240,6 +1240,10 @@
     .svc-integrated__icon img[src*="Our-Blog-Forms-Certifications-i"] {
         margin-left: -26px;
     }
+
+    .svc-integrated__icon img[src*="ESG-Practices-About-Us-i"] {
+        margin-left: -14px;
+    }
 }
 
 .svc-integrated__title {
