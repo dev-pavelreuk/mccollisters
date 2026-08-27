@@ -427,7 +427,9 @@
 
 			Array.prototype.forEach.call(h2.childNodes, function (node) {
 				if (node.nodeType === 1 && node.tagName === "BR") {
-					frag.appendChild(document.createElement("br"));
+					// Clone (not recreate) so conditional-break classes like
+					// br--mobile / br--desktop survive the letter split.
+					frag.appendChild(node.cloneNode(false));
 					return;
 				}
 				node.textContent.split(/(\s+)/).forEach(function (part) {
