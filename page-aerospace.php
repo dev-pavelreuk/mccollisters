@@ -63,9 +63,9 @@ $capabilities = [
         'Real-time communications',
         'Samsara, Qualcomm, and multilayer tracking systems',
         'Comprehensive security measures',
-        'Company-owned flatbeds, tractors, and customized trailers',
         'Rigging services',
         'Warfighter support',
+        'Company-owned flatbeds, tractors, and customized trailers',
     ],
 ];
 
