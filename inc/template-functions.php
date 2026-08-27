@@ -189,3 +189,19 @@ function mcc_body_classes(array $classes): array
     return $classes;
 }
 add_filter('body_class', 'mcc_body_classes');
+
+/**
+ * The Locations page is the `facility` post-type archive (slug: locations), so
+ * its document <title> otherwise defaults to the "Facilities" post-type label.
+ * Force it to "Locations | <site name>". Priority 99 runs after Yoast's own
+ * pre_get_document_title filter, so this wins whether or not Yoast is active.
+ */
+function mcc_locations_document_title(string $title): string
+{
+    if (is_post_type_archive('facility')) {
+        return 'Locations | ' . get_bloginfo('name');
+    }
+
+    return $title;
+}
+add_filter('pre_get_document_title', 'mcc_locations_document_title', 99);
