@@ -649,35 +649,35 @@
 
 .home-about__quote-inner {
     margin: 0;
-    max-width: 460px;
+    max-width: 420px;
     /* Drop the global blockquote's blue left border/indent. */
     padding-left: 0;
     border-left: 0;
 }
 
 .home-about__quote-text {
-    margin: 0 0 20px;
-    font-size: 13px;
+    margin: 0 0 28px;
+    font-size: clamp(19px, 1.85vw, 26px);
     font-weight: 600;
-    line-height: 1.2em;
+    line-height: 1.3em;
     color: var(--color-white);
 }
 
 .home-about__quote-inner figcaption {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-bottom: 26px;
+    gap: 4px;
+    margin-bottom: 30px;
 }
 
 .home-about__quote-name {
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 800;
     color: var(--color-white);
 }
 
 .home-about__quote-role {
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 600;
     color: #ffffff;
 }
