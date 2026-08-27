@@ -77,9 +77,9 @@ get_header();
                 </div>
 
                 <ul class="home-hero__tags">
-                    <li><?php esc_html_e('Transportation', 'mccollisters'); ?></li>
-                    <li><?php esc_html_e('Warehousing', 'mccollisters'); ?></li>
-                    <li><?php esc_html_e('Logistics', 'mccollisters'); ?></li>
+                    <li><a href="<?php echo esc_url(home_url('/transportation/')); ?>"><?php esc_html_e('Transportation', 'mccollisters'); ?></a></li>
+                    <li><a href="<?php echo esc_url(home_url('/warehousing/')); ?>"><?php esc_html_e('Warehousing', 'mccollisters'); ?></a></li>
+                    <li><a href="<?php echo esc_url(home_url('/logistics/')); ?>"><?php esc_html_e('Logistics', 'mccollisters'); ?></a></li>
                 </ul>
             </div>
 
