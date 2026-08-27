@@ -657,7 +657,7 @@
 
 .home-about__quote-text {
     margin: 0 0 28px;
-    font-size: clamp(19px, 1.85vw, 26px);
+    font-size: clamp(17px, 1.6vw, 23px);
     font-weight: 600;
     line-height: 1.3em;
     color: var(--color-white);
@@ -671,13 +671,13 @@
 }
 
 .home-about__quote-name {
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 800;
     color: var(--color-white);
 }
 
 .home-about__quote-role {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     color: #ffffff;
 }
