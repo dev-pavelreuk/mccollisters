@@ -3061,6 +3061,16 @@
     padding-block-end: 0;
 }
 
+/* Hero-less head pages that inherit the section's 100px top (history, faqs,
+   blog): reduce the space above the crumb to 75px on non-mobile. The .loc-head
+   pages already sit at 50px. Mobile keeps its own spacing. */
+@media (min-width: 783px) {
+    .svc-section.hist-head,
+    .svc-section.blog {
+        padding-block-start: 75px;
+    }
+}
+
 /* Font size/weight come from the global eyebrow token rule (components.css). */
 .loc-head__crumb {
     margin: 0 0 18px;
