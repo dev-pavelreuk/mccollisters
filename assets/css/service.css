@@ -4039,6 +4039,7 @@
     .svc-faq__q {
         font-size: 18px;
         font-weight: 600;
+        line-height: 21.6px;
     }
 
     /* Numbered FAQ questions on mobile (01. / 02. / 03. …). Scoped to FAQ
