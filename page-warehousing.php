@@ -127,16 +127,19 @@ $certs = [
         [
             'logo'    => get_stylesheet_directory_uri() . '/assets/img/iso-13485-medical.svg',
             'alt'     => 'ISO 13485:2016 certified',
+            'url'     => 'https://www.iso.org/iso-13485-medical-devices.html',
             'caption' => 'Supports compliant storage and handling of regulated medical devices.',
         ],
         [
             'logo'    => $uploads . '2026/02/ctpat-blk.svg',
             'alt'     => 'CTPAT certified',
+            'url'     => 'https://www.cbp.gov/border-security/ports-entry/cargo-security/CTPAT',
             'caption' => 'Enhances international supply chain security and customs efficiency.',
         ],
         [
             'logo'    => $uploads . '2026/03/fda.svg',
             'alt'     => 'FDA registered',
+            'url'     => 'https://www.fda.gov/',
             'caption' => '(Tracy, CA) Approved for food, beverage, pharmaceutical & supplement logistics.',
         ],
         [
@@ -365,6 +368,10 @@ $faqs = [
                         <div class="svc-certs__logo">
                             <?php if (!empty($cert['badge'])) : ?>
                                 <span class="svc-certs__badge"><?php echo wp_kses($cert['badge'], ['br' => []]); ?></span>
+                            <?php elseif (!empty($cert['url'])) : ?>
+                                <a class="svc-certs__link" href="<?php echo esc_url($cert['url']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($cert['alt']); ?>">
+                                    <img src="<?php echo esc_url($cert['logo']); ?>" alt="<?php echo esc_attr($cert['alt']); ?>" loading="lazy" decoding="async">
+                                </a>
                             <?php else : ?>
                                 <img src="<?php echo esc_url($cert['logo']); ?>" alt="<?php echo esc_attr($cert['alt']); ?>" loading="lazy" decoding="async">
                             <?php endif; ?>
