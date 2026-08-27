@@ -2264,6 +2264,15 @@
     margin-top: 20px;
 }
 
+/* Finance & Banking: drop the section's ~100px top padding on non-mobile so the
+   "Our Capabilities" heading sits close under the scrolling logo ticker above.
+   Mobile keeps the default section rhythm. */
+@media (min-width: 783px) {
+    .page-finance-banking .svc-avcaps {
+        padding-block-start: 0;
+    }
+}
+
 .svc-avcaps__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
