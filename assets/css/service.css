@@ -7875,3 +7875,28 @@ body.search .blog-search__btn {
         scroll-margin-top: 10px;
     }
 }
+
+/* --- Transportation page, mobile: left-align + fit-to-one-line -------------
+   Per request, scoped to .page-transportation and mobile only. Tab (accordion)
+   labels are left-aligned and shrink fluidly so long ones ("Aviation & AOG
+   Transport") stay on a single line instead of centering + wrapping. Section
+   headings shrink so their <br> line breaks stand (e.g. "The Right Lane For /
+   Your Next Move" reads as 2 lines, not 3). Checkmarks/other sizes untouched. */
+@media (max-width: 782px) {
+    .page-transportation .svc-tabs-section .svc-tabs__tab {
+        text-align: left;
+        gap: 10px;
+    }
+
+    .page-transportation .svc-tabs-section .svc-tabs__tab-label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: clamp(10px, 3.4vw, 16px);
+    }
+
+    .page-transportation .section-head__title {
+        text-align: left;
+        white-space: nowrap;
+        font-size: clamp(19px, 6.6vw, 38px);
+    }
+}
