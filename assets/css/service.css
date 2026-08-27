@@ -562,7 +562,7 @@
     top: 0.3em;
     width: 16px;
     height: 16px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3.5 5.5 17 13.5' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
 .svc-faq__panel strong {
@@ -603,7 +603,7 @@
 /* FAQ page, mobile: a slightly thicker checkmark. */
 @media (max-width: 782px) {
     .faqs-main .svc-faq__panel li::before {
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3.5 5.5 17 13.5' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
     }
 }
 
@@ -3971,7 +3971,7 @@
         top: 0;
         width: 16px;
         height: 16px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3.5 5.5 17 13.5' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12.5 10 17.5 19 7' stroke='%230069cb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
     }
 
     /* Benefits collapse to a single column (row flow). */
@@ -7873,31 +7873,5 @@ body.search .blog-search__btn {
        needed) — the tabs above it scroll out of view. */
     .svc-tabs__tab {
         scroll-margin-top: 10px;
-    }
-}
-
-/* --- Compact checkmarks (non-mobile) --------------------------------------
-   Placed at the end of the file so it wins over the per-section base .*__check
-   rules above (same specificity, later source order). The check SVGs' viewBoxes
-   are cropped tight to the tick (inline markup + FAQ marker data-URI), so the
-   tick fills its box with no surrounding padding; a 10px box then renders a
-   ~10px tick. Mobile keeps the larger 16px box (checkmarks are fixed-size, not
-   fluid). */
-@media (min-width: 783px) {
-    .svc-wms__check, .svc-wms__check svg,
-    .svc-freight__check, .svc-freight__check svg,
-    .svc-package__check, .svc-package__check svg,
-    .svc-checklist__check, .svc-checklist__check svg,
-    .svc-whychoose__check, .svc-whychoose__check svg,
-    .svc-avcaps__check, .svc-avcaps__check svg,
-    .svc-capblock__check, .svc-capblock__check svg,
-    .careers-check, .careers-check svg {
-        width: 10px;
-        height: 10px;
-    }
-
-    .svc-faq__panel li::before {
-        width: 10px;
-        height: 10px;
     }
 }
