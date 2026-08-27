@@ -212,15 +212,15 @@ input[type="submit"] {
     margin-bottom: -0.15em;
 }
 
-/* On narrow phones a single long word (e.g. "Transportation") can be wider
-   than a 320px viewport and, being nowrap, forces horizontal scroll (breaks
-   WCAG 1.4.10 reflow). Let an over-long word break as a fallback here; words
-   that already fit are unaffected, so the mask animation is unchanged for
-   them. */
-@media (max-width: 767px) {
+/* On mobile the reveal mask (overflow:hidden) clips small parts of letters on
+   animated h2s. Show the overflow instead so nothing is cut off — the rise/fade
+   animation still plays, just without the clipping mask. Words wrap normally
+   between words (never mid-word) so a long word can't overflow a narrow phone. */
+@media (max-width: 782px) {
     .mcc-reveal__word {
+        overflow: visible;
         white-space: normal;
-        overflow-wrap: break-word;
+        overflow-wrap: normal;
     }
 }
 

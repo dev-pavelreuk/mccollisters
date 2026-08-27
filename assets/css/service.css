@@ -7918,3 +7918,72 @@ body.search .blog-search__btn {
         font-size: clamp(18px, 6.8vw, 32px);
     }
 }
+
+/* --- Responsive interior headings (mobile, non-homepage) -------------------
+   Site-wide fix (homepage excluded). Two problems solved on small phones:
+   (1) headings breaking words mid-word ("TRANSPORTATIO" / "N"), caused by the
+   body's overflow-wrap:break-word being inherited; (2) oversized fixed mobile
+   heading sizes running past 3 lines. Clamp bounds are in em (per request);
+   the vw term does the fluid scaling that actually tracks screen width so h1/h2
+   shrink to fit. Transportation keeps its own tuned rules (higher specificity). */
+@media (max-width: 782px) {
+    /* No mid-word breaking on any interior heading. */
+    body:not(.is-home) main :is(h1, h2, h3),
+    body:not(.is-home) main .section-head__title {
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
+    }
+
+    /* Broad fluid sizing for every interior h1/h2 so none runs past ~3 lines on
+       small phones. Catches section titles whose specific selector isn't listed
+       below; the two-class rules and Transportation keep their higher-specificity
+       overrides. Unitless line-height (responsive) replaces the tokens' fixed-px
+       line-heights, which left big gaps once the font shrank on mobile. */
+    body:not(.is-home) main h1 {
+        font-size: clamp(1.1em, 7vw, 2em);
+        line-height: 1.06;
+    }
+
+    body:not(.is-home) main h2 {
+        font-size: clamp(1.2em, 6.4vw, 2.2em);
+        line-height: 1.2;
+    }
+
+    /* Big page-title h1s (hero / page headers): scale long single words down to
+       one line, capped at 2em (~32px). */
+    .svc-hero__title,
+    .loc-head__title,
+    .team-head .loc-head__title,
+    .blog__title,
+    .blog__title--archive,
+    .single-post__title,
+    .contact-hero__title,
+    .team-single__title {
+        font-size: clamp(1.1em, 7vw, 2em);
+    }
+
+    /* Section-head titles carry their own <br> line breaks; size a touch smaller
+       so each segment fits on its line (smaller font = more chars per line =
+       fewer wraps) and any overspill wraps between words, never mid-word. */
+    body:not(.is-home) main .section-head__title {
+        font-size: clamp(1.05em, 5.4vw, 1.55em);
+        line-height: 1.2;
+    }
+
+    /* Section / block h2 titles. */
+    .section-head__title,
+    .svc-expertise__title,
+    .svc-caps .section-head__title,
+    .svc-confidence__title-box h2,
+    .careers-dark__title,
+    .careers-drivers__title {
+        font-size: clamp(1.2em, 6.4vw, 2.2em);
+    }
+
+    /* Smaller section titles. */
+    .svc-caps__title,
+    .hist-slider__title {
+        font-size: clamp(1em, 5.6vw, 1.55em);
+    }
+}
