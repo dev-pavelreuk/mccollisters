@@ -1225,12 +1225,16 @@
     object-fit: contain;
 }
 
-/* The Careers icon PNG carries extra transparent padding on its left (~17%),
-   so it reads as indented from its title. Nudge just this icon left on
+/* Some integrated-icon PNGs carry extra transparent padding on their left, so
+   they read as indented from their titles. Nudge those specific icons left on
    non-mobile so the visible icon lines up with the title's left edge. */
 @media (min-width: 783px) {
     .svc-integrated__icon img[src*="Careers-About-Us-i"] {
         margin-left: -22px;
+    }
+
+    .svc-integrated__icon img[src*="In-The-News-Our-History-i"] {
+        margin-left: -16px;
     }
 }
 
