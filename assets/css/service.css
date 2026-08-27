@@ -1248,6 +1248,10 @@
     .svc-integrated__icon img[src*="Our-History-About-Us-i"] {
         margin-left: -10px;
     }
+
+    .svc-integrated__icon img[src*="White-Glove-Handling-Logistics-i"] {
+        margin-left: -35px;
+    }
 }
 
 .svc-integrated__title {

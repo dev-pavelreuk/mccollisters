@@ -149,7 +149,7 @@ $integrated = [
             'text'  => 'Specialized logistics solutions to meet the moment—and your supply chain needs.',
         ],
         [
-            'icon'  => $uploads . '2026/06/Installation-Specialized-Handling-Logistics-i.png',
+            'icon'  => $uploads . '2026/06/Installation-Specialized-Handling-Logistics-io.png',
             'title' => 'Installation and specialized handling',
             'url'   => '',
             'text'  => 'Services supporting the transport, staging, and installation of complex, high-value equipment.',
