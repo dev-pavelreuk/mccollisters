@@ -8003,3 +8003,13 @@ body.search .blog-search__btn {
         font-size: clamp(1em, 5.6vw, 1.55em);
     }
 }
+
+/* FAQ accordion section headings (the industry name above the accordion, e.g.
+   "Aerospace") were caught by the global section-title shrink; bump them back up
+   on mobile since they're short. Higher specificity than the global rule. */
+@media (max-width: 782px) {
+    body:not(.is-home) main .svc-faqs .section-head__title {
+        font-size: clamp(1.6em, 8vw, 2.4em);
+        line-height: 1.15;
+    }
+}
