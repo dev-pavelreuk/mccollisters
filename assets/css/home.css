@@ -1009,6 +1009,7 @@
     .home-industries .home-industry__label {
         padding-inline: 4px;
         font-size: 12px;
+        font-weight: 700;
         white-space: nowrap;
     }
 }
@@ -1080,7 +1081,7 @@
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(16px, 1.4vw, 20px);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--color-white);
     opacity: 1;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
