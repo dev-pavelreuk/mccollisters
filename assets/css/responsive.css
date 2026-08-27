@@ -33,13 +33,13 @@
 }
 
 /* Intro eyebrows ("crumbs") on the hero-less head pages (history, locations,
-   team, talk-to-an-expert, blog) get more room below on non-mobile: 30px.
-   Matches the body :is() specificity in components.css and wins by load order
-   (responsive.css is enqueued last). .blog__crumb starts at 18px, the rest at
-   the shared 10px. Mobile keeps the original values. */
+   team, talk-to-an-expert, blog, faqs) sit 10px above the title on non-mobile —
+   the shared default (reverted from the earlier 30px). Matches the body :is()
+   specificity in components.css and wins by load order (responsive.css is
+   enqueued last). */
 @media (min-width: 783px) {
     body :is(.hist-head__crumb, .loc-head__crumb, .blog__crumb) {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
 }
 
