@@ -570,6 +570,26 @@
     color: var(--color-dark);
 }
 
+/* Inline text links inside body prose — standardized sitewide: bold black with
+   underline, turning bold blue with underline on hover/focus. Covers FAQ answers
+   (page + service-page accordions) and service-page prose copy; legal pages
+   (.terms__body) and blog posts (.post-content) carry the matching rule. */
+.svc-faq__panel a,
+.svc-prose a {
+    color: var(--color-black);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.svc-faq__panel a:hover,
+.svc-faq__panel a:focus-visible,
+.svc-prose a:hover,
+.svc-prose a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
 /* No trailing gap under the last block in a panel. */
 .svc-faq__panel > :last-child {
     margin-bottom: 0;
@@ -5678,12 +5698,16 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
 }
 
 .terms__body a {
-    color: var(--color-primary);
-    text-decoration: none;
+    color: var(--color-black);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
     word-break: break-word;
 }
 
-.terms__body a:hover {
+.terms__body a:hover,
+.terms__body a:focus-visible {
+    color: var(--color-primary);
     text-decoration: underline;
 }
 
@@ -6885,9 +6909,16 @@ body.search .blog-search__btn {
 }
 
 .post-content a {
-    color: var(--color-primary);
+    color: var(--color-black);
+    font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 3px;
+}
+
+.post-content a:hover,
+.post-content a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
 }
 
 /* Closing call-out: the post's last H2 and the copy beneath it render inside a
