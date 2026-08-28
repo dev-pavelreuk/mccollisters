@@ -44,8 +44,6 @@ while (have_posts()) :
                         <p class="team-single__role"><?php echo esc_html($job_title); ?></p>
                     <?php endif; ?>
 
-                    <span class="team-single__divider" aria-hidden="true"></span>
-
                     <?php if ($bio !== '') : ?>
                         <div class="team-single__bio"><?php echo wp_kses_post($bio); ?></div>
                     <?php endif; ?>
