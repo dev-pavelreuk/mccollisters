@@ -7973,7 +7973,9 @@ body.search .blog-search__btn {
     }
 
     body:not(.is-home) main h2 {
-        font-size: clamp(1.2em, 6.4vw, 2.2em);
+        /* Match the homepage h2 (30px) on mobile; the vw shrinks it only on
+           screens narrower than ~320px so long titles never overflow. */
+        font-size: clamp(1.375em, 9.4vw, 1.875em);
         line-height: 1.2;
     }
 
@@ -7994,7 +7996,7 @@ body.search .blog-search__btn {
        so each segment fits on its line (smaller font = more chars per line =
        fewer wraps) and any overspill wraps between words, never mid-word. */
     body:not(.is-home) main .section-head__title {
-        font-size: clamp(1.05em, 5.4vw, 1.55em);
+        font-size: clamp(1.375em, 9.4vw, 1.875em);
         line-height: 1.2;
     }
 
@@ -8012,15 +8014,5 @@ body.search .blog-search__btn {
     .svc-caps__title,
     .hist-slider__title {
         font-size: clamp(1em, 5.6vw, 1.55em);
-    }
-}
-
-/* FAQ accordion section headings (the industry name above the accordion, e.g.
-   "Aerospace") were caught by the global section-title shrink; bump them back up
-   on mobile since they're short. Higher specificity than the global rule. */
-@media (max-width: 782px) {
-    body:not(.is-home) main .svc-faqs .section-head__title {
-        font-size: clamp(1.6em, 8vw, 2.4em);
-        line-height: 1.15;
     }
 }
