@@ -7931,9 +7931,9 @@ body.search .blog-search__btn {
 
     /* Hero H1 ("TRANSPORTATION" — 14 chars) scales with the viewport so it fits
        on one line at every mobile width; px-based (reliable regardless of the
-       hero's inherited font-size), capped at 32px. */
+       hero's inherited font-size), capped at 28px to match the global h1. */
     .page-transportation .svc-hero__title {
-        font-size: clamp(18px, 7.2vw, 32px);
+        font-size: clamp(20px, 8vw, 28px);
     }
 }
 
@@ -7959,7 +7959,10 @@ body.search .blog-search__btn {
        overrides. Unitless line-height (responsive) replaces the tokens' fixed-px
        line-heights, which left big gaps once the font shrank on mobile. */
     body:not(.is-home) main h1 {
-        font-size: clamp(1.1em, 7vw, 2em);
+        /* h1 sits a step above h2 (24px) so it stays the most prominent heading:
+           caps at 28px and bolder (700) on mobile. px-based for reliable sizing. */
+        font-size: clamp(20px, 8vw, 28px);
+        font-weight: 700;
         line-height: 1.06;
     }
 
@@ -7971,7 +7974,7 @@ body.search .blog-search__btn {
     }
 
     /* Big page-title h1s (hero / page headers): scale long single words down to
-       one line, capped at 2em (~32px). */
+       one line, capped at 28px to match the h1 rule above. */
     .svc-hero__title,
     .loc-head__title,
     .team-head .loc-head__title,
@@ -7980,7 +7983,7 @@ body.search .blog-search__btn {
     .single-post__title,
     .contact-hero__title,
     .team-single__title {
-        font-size: clamp(1.1em, 7vw, 2em);
+        font-size: clamp(20px, 8vw, 28px);
     }
 
     /* Section-head titles carry their own <br> line breaks; size a touch smaller
