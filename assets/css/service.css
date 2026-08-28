@@ -7549,6 +7549,14 @@ body.search .blog-search__btn {
     padding-bottom: 100px;
 }
 
+/* Team member page: 75px top padding above the back link on non-mobile
+   (was the shared ~100px section top). */
+@media (min-width: 783px) {
+    .svc-section.team-single {
+        padding-block-start: 75px;
+    }
+}
+
 .team-single__grid {
     display: grid;
     grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
@@ -7598,6 +7606,7 @@ body.search .blog-search__btn {
 }
 
 .team-single__bio {
+    margin-top: 20px;
     max-width: 700px;
 }
 
@@ -7613,8 +7622,11 @@ body.search .blog-search__btn {
     margin-bottom: 0;
 }
 
+/* "Back to Our Team" link (blog-style single-post__back) sits above the grid,
+   left-aligned over the photo. Keeps the shared 30px gap below (from
+   single-post__back) before the person's photo + details. */
 .team-single__back {
-    margin-top: 25px;
+    margin-top: 0;
 }
 
 @media (max-width: 782px) {
