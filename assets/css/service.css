@@ -7966,7 +7966,7 @@ body.search .blog-search__btn {
     body:not(.is-home) main h2 {
         /* Match the homepage h2 (30px) on mobile; the vw shrinks it only on
            screens narrower than ~320px so long titles never overflow. */
-        font-size: clamp(1.375em, 9.4vw, 1.875em);
+        font-size: clamp(1.125em, 6.6vw, 1.875em);
         line-height: 1.2;
     }
 
@@ -7987,7 +7987,7 @@ body.search .blog-search__btn {
        so each segment fits on its line (smaller font = more chars per line =
        fewer wraps) and any overspill wraps between words, never mid-word. */
     body:not(.is-home) main .section-head__title {
-        font-size: clamp(1.375em, 9.4vw, 1.875em);
+        font-size: clamp(1.125em, 6.6vw, 1.875em);
         line-height: 1.2;
     }
 
