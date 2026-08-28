@@ -339,7 +339,7 @@ $faqs = [
             <!-- Quote banner again -->
             <div class="svc-quote svc-quote--inline">
                 <div class="svc-quote__inner">
-                    <iframe class="mcc-quote-2" src="https://dogqvekvr5n1p.cloudfront.net/public/banner-quote" title="McCollister&#039;s Banner Quote" scrolling="no" loading="lazy"></iframe>
+                    <iframe class="mcc-quote-2 skip-lazy" src="https://dogqvekvr5n1p.cloudfront.net/public/banner-quote" title="McCollister&#039;s Banner Quote" scrolling="no" loading="eager" data-skip-lazy="true" data-nitro-exclude="true"></iframe>
                 </div>
             </div>
         </div>
