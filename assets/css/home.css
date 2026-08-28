@@ -38,6 +38,18 @@
     line-height: 1.05;
 }
 
+/* Per-word line breaks in this title on mobile only (each word on its own line);
+   the breaks are hidden on desktop, where the words flow normally. */
+.home-services__title .br--mobile {
+    display: none;
+}
+
+@media (max-width: 782px) {
+    .home-services__title .br--mobile {
+        display: inline;
+    }
+}
+
 .home-services__list {
     display: flex;
     flex-direction: column;

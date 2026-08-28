@@ -123,7 +123,7 @@ get_header();
         <div class="container home-services__grid">
             <div class="home-services__intro">
                 <p class="home-services__eyebrow">/ <?php esc_html_e('services', 'mccollisters'); ?> /</p>
-                <h2 class="home-services__title"><?php esc_html_e('Streamlined Logistics, Seamless Delivery', 'mccollisters'); ?></h2>
+                <h2 class="home-services__title"><?php echo wp_kses(__('Streamlined <br class="br--mobile">Logistics, <br class="br--mobile">Seamless <br class="br--mobile">Delivery', 'mccollisters'), ['br' => ['class' => true]]); ?></h2>
             </div>
 
             <div class="home-services__list">
