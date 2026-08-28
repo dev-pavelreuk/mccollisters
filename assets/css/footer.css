@@ -213,7 +213,7 @@
 /* --- "since 1945" outlined mark --- */
 .site-footer__since {
     margin: 44px 0 0;
-    font-family: "Manrope Alt", sans-serif;
+    font-family: var(--font-heading);
     font-size: 63px;
     font-weight: 700;
     line-height: 1em;
