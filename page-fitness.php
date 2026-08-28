@@ -35,8 +35,8 @@ $overview = [
     'paras'   => [
         'Now layer in today’s reality. Fitness spaces are no longer just weight rooms and cardio floors. They are comprehensive wellness destinations, blending strength, recovery, digital ecosystems, mental health, and experience-driven design. Expectations are higher. Timelines are tighter. The margin for error is slim.',
         'When installation goes wrong, the cost isn’t just financial. It’s return trips. Delayed openings. Frustrated partners. Strained relationships. And in high-value, high-expectation environments, brand reputation is always on the line.',
-        'The difference comes down to one question: Is your logistics partner being treated as a true extension of your team, or just another task on someone’s checklist?',
-        'McCollister’s Fitness Solutions exists for clients who can’t afford the latter.',
+        'The difference comes down to one question: Is your fitness installation being treated as a unique project—or is it just another task on someone’s checklist?',
+        'Our fitness solutions exists for clients who can’t afford the latter.',
     ],
 ];
 
@@ -44,11 +44,11 @@ $capabilities = [
     'title'      => 'Nationwide Fitness<br>Logistics, Installation,<br>And Support',
     'subtitle'   => 'Built for modern wellness environments',
     'intro'      => [
-        'With over 20 years of hands-on experience in the fitness industry, McCollister’s supports original equipment manufacturers (OEMs), club operators, developers, and property teams with end-to-end fitness logistics designed for today’s complexity and tomorrow’s growth. That level of execution starts well before any equipment ever ships.',
-        'McCollister’s Fitness Solutions works closely with project managers, architects, and general contractors early in the development process to ensure fitness spaces are designed with installation requirements in mind from day one.',
+        'With over 20 years of hands-on experience in the fitness industry, McCollister’s supports original equipment manufacturers (OEMs), club operators, developers, and property teams with end-to-end fitness logistics designed for today’s complexity and tomorrow’s growth. That level of execution starts well before any equipment even ships.',
+        'McCollister’s Fitness works closely with project managers, architects, and general contractors early in the development process to ensure fitness spaces are designed with installation requirements in mind from day one.',
         'Beyond logistics and installation, our team provides early-stage technical input on critical considerations such as equipment placement, flooring specifications, electrical requirements, wall clearances, anchoring and mounting points, rigging considerations, and equipment flow throughout the space.',
         'By integrating installation expertise during the planning phase, McCollister’s helps project teams anticipate infrastructure needs, reduce change orders, and avoid costly downstream adjustments. The result is a facility that is fully prepared for precise, efficient equipment installation—and a smoother path from construction completion to operational readiness.',
-        'We don’t just move and install fitness equipment. We manage the entire system it lives in—and the expectations it carries once it hits the floor.',
+        'We don’t just move and install fitness equipment. We understand the ecosystem it lives in, the experience it enables, and the expectations it carries once it hits the floor.',
     ],
     'image'      => $uploads . '2026/03/gym-equipment-1000×1000-inset.jpg',
     'alt'        => 'A Rogue glute-ham developer bench beside stacked weight plates on blue gym turf.',
@@ -92,7 +92,7 @@ $confidence = [
 
 $cta = [
     'title'  => 'Let McCollister’s<br>Do The Heavy<br>Lifting',
-    'para'   => 'Whether you’re expanding nationally, opening a flagship location, or evolving an existing fitness space into a full wellness destination, McCollister’s Fitness Solutions delivers the experience behind the scenes so your brand shines front and center.',
+    'para'   => 'Whether you’re expanding nationally, opening a flagship location, or evolving an existing fitness space into a full wellness destination, McCollister’s delivers the experience behind the scenes so your brand shines front and center.',
     'button' => ['label' => 'Contact Us', 'url' => home_url('/contact-us/')],
 ];
 
