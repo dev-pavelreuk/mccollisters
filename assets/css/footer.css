@@ -303,3 +303,55 @@
         margin-bottom: 20px;
     }
 }
+
+/* Mobile: split the legal row into three lines regardless of the WP menu order —
+     Terms & Conditions | Privacy   (line 1)
+     Accessibility Statement        (line 2)
+     Website by Three C Creative    (line 3)
+   flex `order` + :has() target items by their link, so the DOM/menu order and
+   any extra items (e.g. Sitemap) don't affect the result. */
+@media (max-width: 782px) {
+    .footer-legal-menu {
+        justify-content: flex-start;
+        align-items: baseline;
+        gap: 8px 0;
+    }
+
+    /* Drop the default "|" between every item; re-added only between line-1 links. */
+    .footer-legal-menu li + li::before {
+        content: none;
+        margin: 0;
+    }
+
+    /* Line 1 — Terms & Conditions | Privacy */
+    .footer-legal-menu li:has(a[href*="terms"]) {
+        order: 1;
+    }
+
+    .footer-legal-menu li:has(a[href*="privacy"]) {
+        order: 2;
+    }
+
+    .footer-legal-menu li:has(a[href*="terms"])::after {
+        content: "|";
+        margin: 0 7px;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Line 2 — Accessibility Statement (own line). */
+    .footer-legal-menu li:has(a[href*="accessibility"]) {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    /* Line 3 — Website by Three C Creative (own line). */
+    .footer-legal-menu li:has(.site-footer__credit) {
+        order: 4;
+        flex-basis: 100%;
+    }
+
+    /* Sitemap isn't part of the requested mobile layout. */
+    .footer-legal-menu li:has(a[href*="sitemap"]) {
+        display: none;
+    }
+}
