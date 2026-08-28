@@ -126,6 +126,11 @@ input[type="submit"] {
 @media (max-width: 782px) {
     .mcc-btn__label {
         font-weight: 600;
+        /* Keep the label on one line and shrink the font on narrow screens so a
+           two-word label (e.g. "Industry Insights") fits instead of wrapping.
+           Stays 12px on common phones; only scales down below ~353px. */
+        white-space: nowrap;
+        font-size: clamp(9px, 3.4vw, 12px);
     }
 }
 
