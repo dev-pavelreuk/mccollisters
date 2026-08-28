@@ -43,11 +43,16 @@
     }
 }
 
-/* Bolder history eyebrow + body text on non-mobile (matching the 700-weight
-   year buttons). Legibility improvement; requested to test contrast scoring. */
+/* History timeline eyebrow + body text on non-mobile. The eyebrow stays bold
+   (700, matching the year buttons); the body text is a touch larger and lighter
+   (15px / 600) for readability. */
 @media (min-width: 783px) {
-    .hist-slider__eyebrow,
-    .hist-slider__text {
+    .hist-slider__eyebrow {
         font-weight: 700;
+    }
+
+    .hist-slider__text {
+        font-size: 15px;
+        font-weight: 600;
     }
 }
