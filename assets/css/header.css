@@ -220,9 +220,9 @@
 		background: var(--menu-panel-bg);
 		box-shadow: var(--shadow-sm);
 		/* Rounded bottom only — the top stays square where it drops from the
-		   nav bar. Matches the 16px image radius used across the site. */
-		border-bottom-left-radius: 16px;
-		border-bottom-right-radius: 16px;
+		   nav bar. */
+		border-bottom-left-radius: 25px;
+		border-bottom-right-radius: 25px;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
@@ -232,8 +232,8 @@
 	/* Match the widened frame and round the split (Industries/Resources)
 	   two-tone background's bottom corners so they don't square off the frame. */
 	.site-navigation__menu .sub-menu--split {
-		border-bottom-left-radius: 16px;
-		border-bottom-right-radius: 16px;
+		border-bottom-left-radius: 25px;
+		border-bottom-right-radius: 25px;
 	}
 
 	.site-navigation.is-submenu-open .site-navigation__panel {
