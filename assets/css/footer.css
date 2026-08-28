@@ -323,7 +323,7 @@
         margin: 0;
     }
 
-    /* Line 1 — Terms & Conditions | Privacy */
+    /* Line 1 — Terms & Conditions | Privacy | Sitemap */
     .footer-legal-menu li:has(a[href*="terms"]) {
         order: 1;
     }
@@ -332,7 +332,13 @@
         order: 2;
     }
 
-    .footer-legal-menu li:has(a[href*="terms"])::after {
+    .footer-legal-menu li:has(a[href*="sitemap"]) {
+        order: 3;
+    }
+
+    /* Leading "|" before the 2nd and 3rd line-1 links. */
+    .footer-legal-menu li:has(a[href*="privacy"])::before,
+    .footer-legal-menu li:has(a[href*="sitemap"])::before {
         content: "|";
         margin: 0 7px;
         color: rgba(255, 255, 255, 0.4);
@@ -340,18 +346,13 @@
 
     /* Line 2 — Accessibility Statement (own line). */
     .footer-legal-menu li:has(a[href*="accessibility"]) {
-        order: 3;
+        order: 4;
         flex-basis: 100%;
     }
 
     /* Line 3 — Website by Three C Creative (own line). */
     .footer-legal-menu li:has(.site-footer__credit) {
-        order: 4;
+        order: 5;
         flex-basis: 100%;
-    }
-
-    /* Sitemap isn't part of the requested mobile layout. */
-    .footer-legal-menu li:has(a[href*="sitemap"]) {
-        display: none;
     }
 }
