@@ -65,7 +65,7 @@ $tabs = [
 $integrated = [
     'title' => 'Integrated Services',
     'paras' => [
-        'Installation doesn’t happen in isolation—and neither do our services. McCollister’s installation solutions are fully integrated with our broader <strong><a href="' . esc_url(home_url('/transportation/')) . '">transportation</a></strong>, <strong><a href="' . esc_url(home_url('/warehousing/')) . '">warehousing</a></strong>, and <strong><a href="' . esc_url(home_url('/logistics/')) . '">logistics</a></strong> capabilities, allowing customers to work with one partner from origin to <strong>final placement</strong>.',
+        'Installation doesn’t happen in isolation—and neither do our services. McCollister’s installation solutions are fully integrated with our broader <strong><a href="' . esc_url(home_url('/transportation/')) . '">transportation</a></strong>, <strong><a href="' . esc_url(home_url('/warehousing/')) . '">warehousing</a></strong>, and <strong><a href="' . esc_url(home_url('/logistics/')) . '">logistics</a></strong> capabilities, allowing customers to work with one partner from origin to <strong><a href="' . esc_url(home_url('/final-mile-white-glove/')) . '">final placement</a></strong>.',
         'Whether your project requires inbound transportation, short- or long-term storage, staging, final-mile delivery, or on-site installation, our teams coordinate every step under a single project plan. This integrated approach reduces handoffs, improves visibility, and helps mitigate risk throughout the deployment lifecycle.',
     ],
     'button' => ['label' => 'Contact Us', 'url' => home_url('/contact-us/')],
