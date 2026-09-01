@@ -10,43 +10,21 @@ get_header();
 ?>
 <main id="primary" class="site-main">
     <?php
-    // Customizer-selected slides take priority; otherwise use the default
-    // sequence below.
-    $hero_slides = [];
-    for ($slide = 1; $slide <= 6; $slide++) {
-        $slide_url = mcc_get_theme_option('mcc_hero_slide_' . $slide, '');
-        if ($slide_url !== '') {
-            $hero_slides[] = $slide_url;
-        }
-    }
-
-    // Default sequence — the six images in the media library. Built from this
-    // site's own uploads URL so it resolves on both local and production.
-    if (empty($hero_slides)) {
-        $uploads      = wp_get_upload_dir();
-        $uploads_base = trailingslashit($uploads['baseurl']) . '2026/04/';
-        $hero_slides  = [
-            $uploads_base . 'slider-pic-2-100.jpg',
-            $uploads_base . 'warehouse-worker-rev.jpg',
-            $uploads_base . 'slider-pic-3-100.jpg',
-            $uploads_base . 'slider-pic-1-100.jpg',
-            $uploads_base . 'warehousing.jpg',
-            $uploads_base . 'data-center.jpg',
-        ];
-    }
+    // Shared with mcc_preload_hero_slide(), which preloads slide 1 from <head>.
+    $hero_slides = mcc_hero_slides();
     ?>
     <section class="home-hero">
         <?php if ($hero_slides) : ?>
             <div class="home-hero__slider" aria-hidden="true">
                 <?php foreach ($hero_slides as $index => $slide_url) : ?>
+                    <?php // Slide 1 is the LCP element — NitroPack must not lazy-load it. ?>
                     <div
-                        class="home-hero__slide<?php echo $index === 0 ? ' is-active' : ''; ?>"
+                        class="home-hero__slide<?php echo $index === 0 ? ' is-active skip-lazy' : ''; ?>"
+                        <?php echo $index === 0 ? ' data-skip-lazy="true" data-nitro-exclude="true"' : ''; ?>
                         style="background-image: url('<?php echo esc_url($slide_url); ?>');"
                     ></div>
                 <?php endforeach; ?>
             </div>
-            <?php // Preload the first slide so it still paints fast (background-images aren't discovered as early as <img>). ?>
-            <link rel="preload" as="image" href="<?php echo esc_url($hero_slides[0]); ?>" fetchpriority="high">
         <?php endif; ?>
         <div class="container home-hero__inner">
             <div class="home-hero__content">
@@ -340,10 +318,14 @@ get_header();
     <section class="home-features">
         <div class="home-features__grid">
             <div class="home-features__media">
+                <?php /* width/height give the browser an aspect ratio to reserve (CLS);
+                         the rendered size stays governed by .home-features__img in CSS. */ ?>
                 <img
                     class="home-features__img"
                     src="<?php echo esc_url($features_image); ?>"
                     alt="<?php esc_attr_e('McCollister’s Freightliner truck', 'mccollisters'); ?>"
+                    width="992"
+                    height="792"
                     loading="lazy"
                     decoding="async"
                 >

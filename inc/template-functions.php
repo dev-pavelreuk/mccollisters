@@ -205,3 +205,70 @@ function mcc_locations_document_title(string $title): string
     return $title;
 }
 add_filter('pre_get_document_title', 'mcc_locations_document_title', 99);
+
+/**
+ * Front-page hero slide URLs.
+ *
+ * Customizer-selected slides take priority; otherwise the default sequence of
+ * six media-library images, built from this site's own uploads URL so it
+ * resolves on both local and production.
+ *
+ * Extracted from front-page.php so mcc_preload_hero_slide() can resolve the
+ * first slide during wp_head, before the template runs.
+ */
+function mcc_hero_slides(): array
+{
+    $slides = [];
+
+    for ($slide = 1; $slide <= 6; $slide++) {
+        $slide_url = mcc_get_theme_option('mcc_hero_slide_' . $slide, '');
+
+        if ($slide_url !== '') {
+            $slides[] = $slide_url;
+        }
+    }
+
+    if (!empty($slides)) {
+        return $slides;
+    }
+
+    $uploads_base = trailingslashit(wp_get_upload_dir()['baseurl']) . '2026/04/';
+
+    return [
+        $uploads_base . 'slider-pic-2-100.jpg',
+        $uploads_base . 'warehouse-worker-rev.jpg',
+        $uploads_base . 'slider-pic-3-100.jpg',
+        $uploads_base . 'slider-pic-1-100.jpg',
+        $uploads_base . 'warehousing.jpg',
+        $uploads_base . 'data-center.jpg',
+    ];
+}
+
+/**
+ * Preload the first hero slide from <head>.
+ *
+ * The slide is a CSS background-image, which the browser cannot discover until
+ * it has built the CSSOM — so it is the LCP element but is fetched late. The
+ * preload previously sat in the body, after the slider markup, which is far
+ * later than the preload scanner needs it. Emitting it during wp_head makes it
+ * discoverable in the initial document (WCAG-neutral; purely a load-order
+ * change, the painted result is identical).
+ */
+function mcc_preload_hero_slide(): void
+{
+    if (!is_front_page()) {
+        return;
+    }
+
+    $slides = mcc_hero_slides();
+
+    if (empty($slides[0])) {
+        return;
+    }
+
+    printf(
+        '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
+        esc_url($slides[0])
+    );
+}
+add_action('wp_head', 'mcc_preload_hero_slide', 1);
