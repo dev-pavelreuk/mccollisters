@@ -17,11 +17,22 @@ get_header();
         <?php if ($hero_slides) : ?>
             <div class="home-hero__slider" aria-hidden="true">
                 <?php foreach ($hero_slides as $index => $slide_url) : ?>
-                    <?php // Slide 1 is the LCP element — NitroPack must not lazy-load it. ?>
+                    <?php
+                    /* Slide 1 is the LCP element: its background is inline so the
+                       browser fetches it immediately, and NitroPack is told not to
+                       lazy-load it. Slides 2-6 carry the URL in data-bg instead --
+                       hero.js applies it once the page has loaded and keeps one
+                       slide pre-warmed ahead of the rotation. Inlining all six cost
+                       ~1.7MB on first paint for images nobody sees for 5+ seconds. */
+                    ?>
                     <div
                         class="home-hero__slide<?php echo $index === 0 ? ' is-active skip-lazy' : ''; ?>"
-                        <?php echo $index === 0 ? ' data-skip-lazy="true" data-nitro-exclude="true"' : ''; ?>
-                        style="background-image: url('<?php echo esc_url($slide_url); ?>');"
+                        <?php if ($index === 0) : ?>
+                            data-skip-lazy="true" data-nitro-exclude="true"
+                            style="background-image: url('<?php echo esc_url($slide_url); ?>');"
+                        <?php else : ?>
+                            data-bg="<?php echo esc_url($slide_url); ?>"
+                        <?php endif; ?>
                     ></div>
                 <?php endforeach; ?>
             </div>
