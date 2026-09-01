@@ -266,9 +266,11 @@ function mcc_preload_hero_slide(): void
         return;
     }
 
+    // Must match what front-page.php actually requests, or the browser
+    // downloads the JPEG for the preload and the WebP for the background.
     printf(
         '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
-        esc_url($slides[0])
+        esc_url(mcc_webp_url($slides[0]))
     );
 }
 add_action('wp_head', 'mcc_preload_hero_slide', 1);
@@ -309,4 +311,51 @@ function mcc_icon(string $name, string $class = ''): string
         esc_attr($viewbox),
         esc_attr($path)
     );
+}
+
+/**
+ * Prefer Imagify's WebP twin for an uploads URL.
+ *
+ * Imagify generates `<file>.jpg.webp` beside each original but only *serves* it
+ * by rewriting <img> tags into <picture>. CSS background-images get no such
+ * treatment, and its rewrite-rule mode is Apache-only so it cannot help on
+ * Kinsta's nginx. The hero slider is a background-image, so it was being served
+ * the raw JPEG -- 590KB where a 157KB WebP already existed.
+ *
+ * Returns the original URL untouched unless it is an uploads URL whose .webp
+ * twin is actually present on disk.
+ */
+function mcc_webp_url(string $url): string
+{
+    if ($url === '') {
+        return $url;
+    }
+
+    $uploads = wp_get_upload_dir();
+
+    if (empty($uploads['baseurl']) || strpos($url, $uploads['baseurl']) !== 0) {
+        return $url;
+    }
+
+    // Split the query string off before testing the path on disk, and put it
+    // back afterwards -- ".jpg?v=2.webp" would be a 404.
+    $relative = substr($url, strlen($uploads['baseurl']));
+    $query    = '';
+
+    $mark = strpos($relative, '?');
+
+    if ($mark !== false) {
+        $query    = substr($relative, $mark);
+        $relative = substr($relative, 0, $mark);
+    }
+
+    if ($relative === '') {
+        return $url;
+    }
+
+    if (!file_exists($uploads['basedir'] . $relative . '.webp')) {
+        return $url;
+    }
+
+    return $uploads['baseurl'] . $relative . '.webp' . $query;
 }
