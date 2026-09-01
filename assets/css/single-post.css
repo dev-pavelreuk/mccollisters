@@ -1,0 +1,18 @@
+/* Blog-post-only font face.
+
+   The bold-italic weight is used by exactly one rule -- .post-content
+   blockquote in single.php -- but living in base.css it sat in the critical
+   path of every page. On the homepage it was the last resource to arrive
+   (~1,396ms) and therefore set the maximum critical path latency, for 40KB
+   nothing on that page renders.
+
+   Italic body text at normal weight has no matching face here and never did;
+   the browser synthesises an oblique, exactly as before. */
+@font-face {
+    font-family: "Commuters Sans";
+    src: url("../fonts/commuters-sans-bold-italic.woff2") format("woff2"),
+         url("../fonts/commuters-sans-bold-italic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+}

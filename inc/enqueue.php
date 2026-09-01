@@ -77,6 +77,19 @@ function mcc_enqueue_assets(): void
         $dependency = $handle;
     }
 
+    // Blog posts only: the bold-italic face is used by .post-content blockquote
+    // and nothing else, so it stays out of every other page's critical path.
+    if (is_singular('post')) {
+        $single_post = mcc_asset_min('/assets/css/single-post.css');
+
+        wp_enqueue_style(
+            'mcc-single-post',
+            MCC_THEME_URI . $single_post,
+            [$dependency],
+            mcc_asset_version($single_post)
+        );
+    }
+
     $navigation = mcc_asset_min('/assets/js/navigation.js');
     wp_enqueue_script(
         'mcc-navigation',

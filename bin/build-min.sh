@@ -27,6 +27,7 @@ CSS_FILES=(
   assets/css/service
   assets/css/pages
   assets/css/responsive
+  assets/css/single-post
 )
 
 JS_FILES=(
