@@ -43,7 +43,7 @@ $tabs = [
         'label' => 'Aerospace',
         'image' => $uploads . '2026/03/aerospace-logistics-inset.jpg',
         'title' => 'Aerospace Logistics',
-        'desc'  => 'McCollister’s supports aerospace and defense organizations with specialized logistics services for sensitive, oversized, and mission-critical assets. These shipments require a higher level of planning, coordination, and risk management—delivered through structured project oversight and trained teams.\n\nRather than treating aerospace as standard freight, McCollister’s approaches each move as a managed project, aligning people, process, and equipment to meet strict requirements.\n\nFor full details on aerospace transportation services, certifications, and project capabilities, visit our Aerospace Logistics page.',
+        'desc'  => "McCollister’s supports aerospace and defense organizations with specialized logistics services for sensitive, oversized, and mission-critical assets. These shipments require a higher level of planning, coordination, and risk management—delivered through structured project oversight and trained teams.\n\nRather than treating aerospace as standard freight, McCollister’s approaches each move as a managed project, aligning people, process, and equipment to meet strict requirements.\n\nFor full details on aerospace transportation services, certifications, and project capabilities, visit our Aerospace Logistics page.",
         'url'   => home_url('/aerospace/'),
     ],
     [
