@@ -192,10 +192,10 @@ function mcc_menu_promo_panel(): void
 				</div>
 			</form>
 			<div class="menu-promo__social">
-				<a href="https://www.instagram.com/mccollisters1945/" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-				<a href="https://www.facebook.com/McCollisters/" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-				<a href="https://www.linkedin.com/company/mccollister's-transportation/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-				<a href="https://www.youtube.com/@Mccollisters" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+				<a href="https://www.instagram.com/mccollisters1945/" aria-label="Instagram"><?php echo mcc_icon('instagram'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></a>
+				<a href="https://www.facebook.com/McCollisters/" aria-label="Facebook"><?php echo mcc_icon('facebook'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></a>
+				<a href="https://www.linkedin.com/company/mccollister's-transportation/" aria-label="LinkedIn"><?php echo mcc_icon('linkedin'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></a>
+				<a href="https://www.youtube.com/@Mccollisters" aria-label="YouTube"><?php echo mcc_icon('youtube'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?></a>
 			</div>
 		</div>
 	</div>

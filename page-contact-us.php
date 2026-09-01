@@ -27,10 +27,10 @@ $hero = [
 ];
 
 $socials = [
-    ['url' => 'https://www.instagram.com/mccollisters1945/', 'label' => 'Instagram', 'icon' => 'fab fa-instagram'],
-    ['url' => 'https://www.facebook.com/McCollisters/', 'label' => 'Facebook', 'icon' => 'fab fa-facebook'],
-    ['url' => 'https://www.linkedin.com/company/mccollister\'s-transportation/', 'label' => 'LinkedIn', 'icon' => 'fab fa-linkedin'],
-    ['url' => 'https://www.youtube.com/@Mccollisters', 'label' => 'YouTube', 'icon' => 'fab fa-youtube'],
+    ['url' => 'https://www.instagram.com/mccollisters1945/', 'label' => 'Instagram', 'icon' => 'instagram'],
+    ['url' => 'https://www.facebook.com/McCollisters/', 'label' => 'Facebook', 'icon' => 'facebook'],
+    ['url' => 'https://www.linkedin.com/company/mccollister\'s-transportation/', 'label' => 'LinkedIn', 'icon' => 'linkedin'],
+    ['url' => 'https://www.youtube.com/@Mccollisters', 'label' => 'YouTube', 'icon' => 'youtube'],
 ];
 
 $quote_img    = $uploads . '2026/05/Quotation-Marks-Blue.svg';
@@ -116,7 +116,7 @@ $more = [
                     <?php foreach ($socials as $s) : ?>
                         <li>
                             <a href="<?php echo esc_url($s['url']); ?>" aria-label="<?php echo esc_attr($s['label']); ?>" target="_blank" rel="noopener">
-                                <i class="<?php echo esc_attr($s['icon']); ?>" aria-hidden="true"></i>
+                                <?php echo mcc_icon($s['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
                             </a>
                         </li>
                     <?php endforeach; ?>

@@ -69,7 +69,7 @@ if (!defined('ABSPATH')) {
 				href="https://mccollisters.vendors.striven.com/account/sign-in?ReturnUrl=%2F"
 				aria-label="<?php esc_attr_e('Customer account', 'mccollisters'); ?>"
 			>
-				<i class="fas fa-user" aria-hidden="true"></i>
+				<?php echo mcc_icon('user'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
 			</a>
 
 			<a

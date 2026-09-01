@@ -5060,12 +5060,10 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
     transition: color var(--transition);
 }
 
-.contact-hero__socials i {
+.contact-hero__socials .mcc-icon {
     width: 20px;
     height: 20px;
-    font-size: 20px;
-    line-height: 20px;
-    text-align: center;
+    vertical-align: middle;
 }
 
 .contact-hero__socials a:hover {
