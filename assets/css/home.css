@@ -222,8 +222,15 @@
     letter-spacing: var(--h1-letter-spacing);
 }
 
-/* The rotating word: outlined (transparent fill, white stroke). */
+/* The rotating word: outlined (transparent fill, white stroke).
+
+   inline-block so hero.js can reserve the widest word's width on it. Without a
+   reserved width every typed/deleted character re-flows the line and slides
+   "Matters" sideways -- dozens of layout shifts per cycle, and the single
+   largest contributor to CLS on the homepage. */
 .home-hero__typed {
+    display: inline-block;
+    text-align: left;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--color-white);
 }
