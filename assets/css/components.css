@@ -676,3 +676,17 @@ textarea:focus {
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
+/* Inline SVG icons (see mcc_icon() in inc/template-functions.php).
+
+   Sized to match the Font Awesome glyphs these replaced: a webfont icon fills a
+   1em box, so `height: 1em` with `width: auto` over the original viewBox gives
+   the identical rendered size (448/512 -> 0.875em wide) and lets every existing
+   `font-size` rule keep controlling the icon exactly as before. The -0.125em
+   baseline shift is Font Awesome's own value. */
+.mcc-icon {
+    display: inline-block;
+    width: auto;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}

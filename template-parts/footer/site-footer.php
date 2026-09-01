@@ -15,10 +15,10 @@ $address         = mcc_get_theme_option('mcc_address', "8 Terri Lane\nBurlington
 $usdot           = mcc_get_theme_option('mcc_usdot', "USDOT 805405, MC-358185\nUSDOT 2213118, MC-182358");
 
 $social_links = [
-    ['https://www.instagram.com/mccollisters1945/', 'Instagram', 'fab fa-instagram'],
-    ['https://www.facebook.com/McCollisters/', 'Facebook', 'fab fa-facebook-f'],
-    ['https://www.linkedin.com/company/mccollister\'s-transportation/', 'LinkedIn', 'fab fa-linkedin-in'],
-    ['https://www.youtube.com/@Mccollisters', 'YouTube', 'fab fa-youtube'],
+    ['https://www.instagram.com/mccollisters1945/', 'Instagram', 'instagram'],
+    ['https://www.facebook.com/McCollisters/', 'Facebook', 'facebook-f'],
+    ['https://www.linkedin.com/company/mccollister\'s-transportation/', 'LinkedIn', 'linkedin-in'],
+    ['https://www.youtube.com/@Mccollisters', 'YouTube', 'youtube'],
 ];
 ?>
 <footer class="site-footer">
@@ -48,7 +48,7 @@ $social_links = [
                                 target="_blank"
                                 rel="noopener"
                             >
-                                <i class="<?php echo esc_attr($link[2]); ?>" aria-hidden="true"></i>
+                                <?php echo mcc_icon($link[2]); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
