@@ -23,15 +23,19 @@ get_header();
                        lazy-load it. Slides 2-6 carry the URL in data-bg instead --
                        hero.js applies it once the page has loaded and keeps one
                        slide pre-warmed ahead of the rotation. Inlining all six cost
-                       ~1.7MB on first paint for images nobody sees for 5+ seconds. */
+                       ~1.7MB on first paint for images nobody sees for 5+ seconds.
+
+                       mcc_webp_url() swaps in Imagify's WebP twin: it only rewrites
+                       <img> tags into <picture>, which cannot reach a CSS background,
+                       so these were being served the raw JPEG. */
                     ?>
                     <div
                         class="home-hero__slide<?php echo $index === 0 ? ' is-active skip-lazy' : ''; ?>"
                         <?php if ($index === 0) : ?>
                             data-skip-lazy="true" data-nitro-exclude="true"
-                            style="background-image: url('<?php echo esc_url($slide_url); ?>');"
+                            style="background-image: url('<?php echo esc_url(mcc_webp_url($slide_url)); ?>');"
                         <?php else : ?>
-                            data-bg="<?php echo esc_url($slide_url); ?>"
+                            data-bg="<?php echo esc_url(mcc_webp_url($slide_url)); ?>"
                         <?php endif; ?>
                     ></div>
                 <?php endforeach; ?>
