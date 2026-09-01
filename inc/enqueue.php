@@ -106,6 +106,18 @@ function mcc_enqueue_assets(): void
         true
     );
 
+    // Conversion tracking — pushes the GA4 events behind the Google Ads
+    // conversion actions into the GTM dataLayer. Loaded site-wide; it attaches
+    // delegated listeners only, so it is inert until something is clicked.
+    $tracking = mcc_asset_min('/assets/js/tracking.js');
+    wp_enqueue_script(
+        'mcc-tracking',
+        MCC_THEME_URI . $tracking,
+        [],
+        mcc_asset_version($tracking),
+        true
+    );
+
     // Hero typewriter animation — only needed on the front page.
     if (is_front_page()) {
         $hero = mcc_asset_min('/assets/js/hero.js');
