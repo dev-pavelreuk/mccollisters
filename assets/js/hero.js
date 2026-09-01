@@ -74,65 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		return;
 	}
 
-	/**
-	 * Reserve the widest word's width on the rotating span.
-	 *
-	 * The headline is "When <word> Matters" on one line (nowrap from 1025px up),
-	 * so without a reserved width every character typed or deleted re-flows the
-	 * line and slides "Matters" sideways. At 200ms per character across six
-	 * words that is dozens of layout shifts per cycle — the biggest single
-	 * contributor to the page's CLS.
-	 *
-	 * Measured rather than guessed in `ch`, because the words are uppercase and
-	 * the heading carries its own letter-spacing.
-	 */
-	const reserveWidth = () => {
-		const styles = window.getComputedStyle(target);
-		const probe = document.createElement("span");
-
-		probe.setAttribute("aria-hidden", "true");
-		probe.style.cssText =
-			"position:absolute;left:-9999px;top:0;white-space:pre;visibility:hidden;";
-		probe.style.fontFamily = styles.fontFamily;
-		probe.style.fontSize = styles.fontSize;
-		probe.style.fontWeight = styles.fontWeight;
-		probe.style.fontStyle = styles.fontStyle;
-		probe.style.letterSpacing = styles.letterSpacing;
-		probe.style.textTransform = styles.textTransform;
-
-		target.parentNode.appendChild(probe);
-
-		let widest = 0;
-
-		words.forEach((word) => {
-			probe.textContent = word;
-			widest = Math.max(widest, probe.getBoundingClientRect().width);
-		});
-
-		probe.remove();
-
-		if (widest > 0) {
-			target.style.minWidth = `${Math.ceil(widest)}px`;
-		}
-	};
-
-	reserveWidth();
-
-	// The web font usually lands after this first pass, and the fallback's
-	// metrics differ — re-measure so the reserved width matches real glyphs.
-	if (document.fonts && document.fonts.ready) {
-		document.fonts.ready.then(reserveWidth).catch(() => {});
-	}
-
-	// The heading scales with the viewport, so a resize invalidates the reserved
-	// width. Debounced: resize-driven movement is user-initiated and does not
-	// count toward CLS, this only keeps the spacing correct.
-	let resizeTimer = null;
-
-	window.addEventListener("resize", () => {
-		window.clearTimeout(resizeTimer);
-		resizeTimer = window.setTimeout(reserveWidth, 150);
-	});
 
 	const TYPE_SPEED = 200; // ms per character typed
 	const BACK_SPEED = 200; // ms per character deleted

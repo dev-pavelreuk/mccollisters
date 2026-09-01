@@ -222,15 +222,33 @@
     letter-spacing: var(--h1-letter-spacing);
 }
 
-/* The rotating word: outlined (transparent fill, white stroke).
+/* Width reservation for the rotating word.
 
-   inline-block so hero.js can reserve the widest word's width on it. Without a
-   reserved width every typed/deleted character re-flows the line and slides
-   "Matters" sideways -- dozens of layout shifts per cycle, and the single
-   largest contributor to CLS on the homepage. */
+   The headline is "When <word> Matters" on one line from 1025px up, so a word
+   that grows and shrinks character by character drags "Matters" with it --
+   dozens of layout shifts per typing cycle, and the biggest contributor to the
+   homepage's CLS.
+
+   The slot is a one-cell grid holding the visible word plus a hidden copy of
+   every candidate word, all stacked in that cell. The grid therefore sizes
+   itself to the widest word, in the real font, from first paint. Nothing here
+   depends on JavaScript: measuring and applying a min-width after load simply
+   moved the shift rather than removing it. */
+.home-hero__typed-slot {
+    display: inline-grid;
+}
+
+.home-hero__typed-slot > * {
+    grid-area: 1 / 1;
+}
+
+.home-hero__typed-sizer {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* The rotating word: outlined (transparent fill, white stroke). */
 .home-hero__typed {
-    display: inline-block;
-    text-align: left;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--color-white);
 }

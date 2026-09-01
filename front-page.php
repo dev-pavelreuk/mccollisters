@@ -47,10 +47,26 @@ get_header();
                     <?php // Visual, animated version — hidden from assistive tech, which reads the static phrase below. ?>
                     <span aria-hidden="true">
                         <span class="home-hero__title-part"><?php esc_html_e('When', 'mccollisters'); ?></span>
-                        <span
-                            class="home-hero__title-part home-hero__typed"
-                            data-words="TIMING,SAFETY,AGILITY,SECURITY,SCALING,PREcision"
-                        >Timing</span>
+                        <?php
+                        /* The rotating word sits in a grid slot alongside a hidden
+                           copy of every word, all in the same cell, so the slot is
+                           as wide as the widest word from first paint -- in the real
+                           font, without JavaScript. Reserving this width in JS
+                           instead meant the span painted at "Timing" width and then
+                           jumped, which is a layout shift in its own right. */
+                        $typed_words = ['TIMING', 'SAFETY', 'AGILITY', 'SECURITY', 'SCALING', 'PREcision'];
+                        ?>
+                        <span class="home-hero__title-part">
+                            <span class="home-hero__typed-slot">
+                                <span
+                                    class="home-hero__typed"
+                                    data-words="<?php echo esc_attr(implode(',', $typed_words)); ?>"
+                                >Timing</span>
+                                <?php foreach ($typed_words as $typed_word) : ?>
+                                    <span class="home-hero__typed-sizer" aria-hidden="true"><?php echo esc_html($typed_word); ?></span>
+                                <?php endforeach; ?>
+                            </span>
+                        </span>
                         <span class="home-hero__title-part"><?php esc_html_e('Matters', 'mccollisters'); ?></span>
                     </span>
                     <span class="screen-reader-text"><?php esc_html_e('When timing, safety, agility, security, scaling and precision matter.', 'mccollisters'); ?></span>
