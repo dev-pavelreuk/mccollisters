@@ -64,17 +64,42 @@ function mcc_enqueue_assets(): void
 
     $dependency = 'mcc-style';
 
-    foreach ($styles as $handle => $relative_path) {
-        $asset = mcc_asset_min($relative_path);
+    /*
+     * Production loads one combined stylesheet; development loads the readable
+     * sources so a rule can be traced to its file.
+     *
+     * bin/build-min.sh concatenates the minified files above, in this exact
+     * order, into assets/css/theme.min.css -- so the cascade is identical, but
+     * it is one render-blocking request instead of ten. That distinction barely
+     * shows on desktop and dominates on mobile: each stylesheet cost 180-890ms
+     * on Lighthouse's Slow 4G profile, ~6.5s in total.
+     */
+    $combined     = '/assets/css/theme.min.css';
+    $use_combined = !(defined('SCRIPT_DEBUG') && SCRIPT_DEBUG)
+        && file_exists(MCC_THEME_DIR . $combined);
 
+    if ($use_combined) {
         wp_enqueue_style(
-            $handle,
-            MCC_THEME_URI . $asset,
+            'mcc-theme',
+            MCC_THEME_URI . $combined,
             [$dependency],
-            mcc_asset_version($asset)
+            mcc_asset_version($combined)
         );
 
-        $dependency = $handle;
+        $dependency = 'mcc-theme';
+    } else {
+        foreach ($styles as $handle => $relative_path) {
+            $asset = mcc_asset_min($relative_path);
+
+            wp_enqueue_style(
+                $handle,
+                MCC_THEME_URI . $asset,
+                [$dependency],
+                mcc_asset_version($asset)
+            );
+
+            $dependency = $handle;
+        }
     }
 
     // Blog posts only: the bold-italic face is used by .post-content blockquote

@@ -43,6 +43,27 @@ for f in "${CSS_FILES[@]}"; do
   printf '  %-34s %7s -> %7s bytes\n' "${f##*/}.min.css" "$(wc -c < "${f}.css" | tr -d ' ')" "$(wc -c < "${f}.min.css" | tr -d ' ')"
 done
 
+# Concatenate the minified CSS into one file, in the exact order enqueue.php
+# loads it. Without a caching plugin combining them, each of these is a separate
+# render-blocking request -- cheap on desktop, but ~180-890ms each on mobile
+# Slow 4G, which is what dragged mobile LCP to 11.7s.
+#
+# It lands in assets/css/ so the `url("../fonts/…")` references inside still
+# resolve, and the source order is preserved byte-for-byte so the cascade is
+# identical to loading the files separately.
+COMBINED=assets/css/theme.min.css
+echo "Combining CSS into ${COMBINED}…"
+: > "$COMBINED"
+for f in "${CSS_FILES[@]}"; do
+  case "${f##*/}" in
+    single-post) continue ;;   # loaded only on single posts
+  esac
+  printf '/* %s */\n' "${f##*/}" >> "$COMBINED"
+  cat "${f}.min.css" >> "$COMBINED"
+  printf '\n' >> "$COMBINED"
+done
+printf '  %-34s %7s bytes\n' "theme.min.css" "$(wc -c < "$COMBINED" | tr -d ' ')"
+
 echo "Minifying JS (terser)…"
 for f in "${JS_FILES[@]}"; do
   # Default mangle keeps top-level (global) names intact; only nested locals are
