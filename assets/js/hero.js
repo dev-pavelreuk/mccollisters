@@ -12,15 +12,45 @@ document.addEventListener("DOMContentLoaded", () => {
 	).matches;
 
 	// Cross-fading background slider.
+	//
+	// Only slide 1 has an inline background (it is the LCP element). The rest
+	// carry their URL in data-bg so the browser does not fetch ~1.5MB of images
+	// nobody sees for five seconds. We apply one slide ahead of the rotation so
+	// each image has a full interval to download before it fades in.
 	const slides = document.querySelectorAll(".home-hero__slide");
+
+	const applyBg = (slide) => {
+		if (!slide || !slide.dataset.bg) {
+			return;
+		}
+
+		slide.style.backgroundImage = `url('${slide.dataset.bg}')`;
+		delete slide.dataset.bg;
+	};
 
 	if (slides.length > 1 && !reduceMotion) {
 		let current = 0;
 
+		// Warm the second slide only once the page has finished loading, so it
+		// never competes with the LCP image for bandwidth.
+		const warmNext = () => applyBg(slides[1]);
+
+		if (document.readyState === "complete") {
+			warmNext();
+		} else {
+			window.addEventListener("load", warmNext, { once: true });
+		}
+
 		window.setInterval(() => {
 			slides[current].classList.remove("is-active");
 			current = (current + 1) % slides.length;
+
+			// Safety net if the pre-warm has not run yet.
+			applyBg(slides[current]);
 			slides[current].classList.add("is-active");
+
+			// Pre-warm the following slide with a full interval of lead time.
+			applyBg(slides[(current + 1) % slides.length]);
 		}, 5000);
 	}
 
