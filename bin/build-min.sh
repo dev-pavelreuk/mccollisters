@@ -33,6 +33,7 @@ JS_FILES=(
   assets/js/navigation
   assets/js/components
   assets/js/hero
+  assets/js/tracking
 )
 
 echo "Minifying CSS (clean-css -O0, order-preserving)…"
