@@ -359,3 +359,67 @@ function mcc_webp_url(string $url): string
 
     return $uploads['baseurl'] . $relative . '.webp' . $query;
 }
+
+/**
+ * Google Ads call conversion tracking (American Eagle, AW-1045035527).
+ *
+ * Two parts, per Google's instructions:
+ *
+ *   1. A `config` command for the Ads conversion ID. The global site tag itself
+ *      is NOT added here -- Site Kit already loads gtag.js for GA4
+ *      (G-589RE20BVT), and loading it twice would be wrong. This is Google's
+ *      "if you installed the global site tag from another Google product"
+ *      path.
+ *   2. One `config` per phone number carrying its conversion label, which turns
+ *      on Google's forwarding-number substitution: it rewrites the displayed
+ *      number and the tel: href so calls can be attributed to ads.
+ *
+ * Both numbers live in the site footer, so this runs on every page rather than
+ * a single one as Google's boilerplate assumes.
+ *
+ * Consent: Complianz sets Consent Mode defaults with ad_storage denied, so
+ * these commands respect the visitor's choice -- substitution and conversion
+ * recording only happen once marketing consent is granted. Expect Ads to report
+ * fewer calls than actually occur.
+ *
+ * Priority 99 so it runs after Site Kit has defined gtag().
+ */
+function mcc_google_ads_call_tracking(): void
+{
+    $conversion_id = 'AW-1045035527';
+
+    // Phone number => conversion label supplied by the Ads account.
+    $numbers = [
+        '800-257-9595' => 'XjmrCKyzzekcEIf0p_ID',
+        // TODO: add 609-386-0600 once American Eagle sends its label.
+        // '609-386-0600' => '',
+    ];
+
+    $numbers = array_filter($numbers);
+
+    if ($numbers === []) {
+        return;
+    }
+    // JSON_UNESCAPED_SLASHES keeps the conversion label readable: without it the
+    // "/" in AW-xxx/label is emitted as "\/", which is valid JS but looks wrong
+    // to anyone comparing this against what Google supplied.
+    $json = static fn($value) => wp_json_encode($value, JSON_UNESCAPED_SLASHES);
+
+    echo "<script>\n";
+    // gtag() is defined by Site Kit's snippet above; this shim only guards
+    // against ordering surprises and queues onto the same dataLayer.
+    echo "window.dataLayer = window.dataLayer || [];\n";
+    echo "if (typeof window.gtag !== 'function') { window.gtag = function () { window.dataLayer.push(arguments); }; }\n";
+    echo 'gtag("config", ' . $json($conversion_id) . ");\n";
+
+    foreach ($numbers as $number => $label) {
+        printf(
+            'gtag("config", %s, { "phone_conversion_number": %s });' . "\n",
+            $json($conversion_id . '/' . $label),
+            $json($number)
+        );
+    }
+
+    echo "</script>\n";
+}
+add_action('wp_head', 'mcc_google_ads_call_tracking', 99);
