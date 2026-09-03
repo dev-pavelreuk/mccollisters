@@ -74,11 +74,15 @@ $certs = [
 $guides = [
     'eyebrow' => 'resources',
     'title'   => 'Helpful Guides',
+    // These four live in /downloads/ at the site root rather than the media
+    // library, carried over from the previous site. home_url() keeps them
+    // pointing at this domain -- the old markup linked them to the agency's
+    // channacohen.com, which no longer resolves.
     'items'   => [
-        ['title' => 'How to Prepare Your Vehicle for Transport', 'file' => '#'],
-        ['title' => 'Understanding Auto Terms',                  'file' => '#'],
-        ['title' => 'Can I Put Items in My Vehicle for Transport?', 'file' => '#'],
-        ['title' => 'Will the Driver Pick up or Deliver to My Home?', 'file' => '#'],
+        ['title' => 'How to Prepare Your Vehicle for Transport',     'file' => home_url('/downloads/How-to-Prepare-Your-Vehicle-for-Transport.pdf')],
+        ['title' => 'Understanding Auto Terms',                      'file' => home_url('/downloads/Understanding-Auto-Terms.pdf')],
+        ['title' => 'Can I Put Items in My Vehicle for Transport?',  'file' => home_url('/downloads/Can-I-put-items-in-my-vehicle-for-transport.pdf')],
+        ['title' => 'Will the Driver Pick up or Deliver to My Home?', 'file' => home_url('/downloads/Will-the-Driver-Pick-Up-or-Deliver-to-My-Home.pdf')],
     ],
 ];
 
