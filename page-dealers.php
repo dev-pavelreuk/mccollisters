@@ -149,34 +149,7 @@ $levels = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Dealer Auto Transport',
-    'items'   => [
-        [
-            'q' => 'What are the major risks associated with improper auto transportation?',
-            'a' => '<p>Choosing an incompetent and/or unreliable auto transportation partner can cost you thousands in lost revenue. Delays, damages, poor communication, and even thefts and scams can produce financial impacts that ripple across your operation, leading to significant losses that go beyond a single shipment. When vehicles sit idle, interest rates accumulate, depreciation increases, and resale value drops.</p>'
-                 . '<p>The losses caused by improper auto transport are not just monetary, however. Delayed and/or mishandled shipments will likely also harm your relationships with customers and other dealers, perhaps irreparably. In an industry where nurturing loyalty is fundamental to success, can you really afford to jeopardize your reputation?</p>'
-                 . '<p>Your customers and fellow dealers expect precision and professionalism just like you do. By partnering with a reputable and reliable auto transportation company, you can minimize frustration and inefficiency while maximizing revenue and satisfaction.</p>',
-        ],
-        [
-            'q' => 'What does white-glove delivery mean for auto transport?',
-            'a' => '<p>When it’s time to transport classic, luxury, antique, and exotic cars, you want to partner with a company that takes the utmost care of your vehicle and gives you peace of mind. White-glove delivery provides customers with a tailored and elevated delivery experience, including specialized handling, enhanced protection, and personalized coordination.</p>'
-                 . '<p>White-glove delivery is a core feature of McCollister’s platinum package. Some premium features include:</p>'
-                 . '<ul>'
-                 . '<li><strong>Customized company-owned trailers:</strong> Our white-glove deliveries travel exclusively in our fully enclosed carriers that safeguard vehicles from weather, road debris, vandalism, and theft. Hydraulic liftgates designed especially for ultra-low clearance vehicles help ensure damage-free loading.</li>'
-                 . '<li><strong>Maximized protection:</strong> We are meticulous in securing your car safely, using soft straps, padded tie-downs, non-abrasive covers, and other measures that protect your investment during transit. Our carriers’ air-ride suspension also helps limit unnecessary movement, further reducing the risk of in-transit damage.</li>'
-                 . '<li><strong>Direct supervision:</strong> Our dedicated customer relations team provides continuous oversight throughout the entire transport process. You will have one point of contact who will make sure your move is efficient, seamless, and headache free.</li>'
-                 . '<li><strong>Real-time GPS tracking:</strong> Through our telematics systems, we provide 24/7 visibility of your vehicle’s location with updates available through our online tracking portal.</li>'
-                 . '</ul>'
-                 . '<p><strong>Please note: white-glove delivery is only offered under our platinum package.</strong></p>',
-        ],
-        [
-            'q' => 'What types of vehicles do you transport?',
-            'a' => '<p>We transport virtually any vehicle a dealership handles—sedans, SUVs, trucks, and EVs, along with luxury, exotic, classic, and antique models, prototypes and concept cars, and low-clearance or wide-body builds. Our enclosed, asset-based fleet and vetted 3PL network let us match the right equipment to each vehicle, whether it’s a single high-value unit or a full load for inventory.</p>',
-        ],
-        [
-            'q' => 'What factors influence the cost of dealer auto transport?',
-            'a' => '<p>Pricing depends on distance and route, the service level you choose (open vs. enclosed; silver, gold, or platinum), vehicle size and condition (running vs. inoperable, oversized or low-clearance), pickup timing and flexibility, seasonal demand, and the total number of vehicles moving together. Consolidating shipments and allowing a wider pickup window generally lowers cost, while expedited, enclosed, and white-glove service carry a premium.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('auto-transport'),
 ];
 ?>
 <main id="primary" class="site-main">

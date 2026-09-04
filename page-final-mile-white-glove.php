@@ -71,51 +71,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Final Mile & White Glove',
-    'items'   => [
-        [
-            'q' => 'What is white-glove transportation?',
-            'a' => '<p>White-glove transportation is a specialized logistics service designed for shipments that require added care, coordination, and inside handling. At McCollister’s, this practice typically includes multi-person teams, inside pickup and delivery, careful placement, protective handling during transit, and debris removal once items are unpacked.</p>'
-                 . '<p>The goal is to ensure your products are not just dropped off, but delivered pristinely, safely, and with minimal disruption to your operations.</p>',
-        ],
-        [
-            'q' => 'Why is it called white-glove delivery?',
-            'a' => '<p>The term “white glove” refers to a higher standard of service and attention to detail. It reflects an approach where handling, presentation, and care matter just as much as transportation, similar to the way white gloves have traditionally symbolized precision and professionalism.</p>'
-                 . '<p>In logistics, it signals a level of service that goes beyond curbside or dock delivery.</p>',
-        ],
-        [
-            'q' => 'What is the difference between first- and final-mile logistics?',
-            'a' => '<p>First-mile logistics focuses on the beginning of a shipment’s journey. It typically refers to managing careful pickup and transfer from the asset’s origin point into the broader transportation network. In addition to these services, first-mile logistics can include tasks such as packaging, labeling, and sorting products prior to loading them onto vehicles for transport.</p>'
-                 . '<p>Conversely, final-mile delivery refers to the last stage of the shipment’s journey, from a distribution point or carrier handoff to its destination inside a facility, business, or residence. With McCollister’s final-mile services, this stage often includes inside delivery, placement, coordination with on-site teams, and white-glove handling to ensure products arrive ready for use, installation, or setup.</p>',
-        ],
-        [
-            'q' => 'What information do I need to gather to get a quote for white-glove services?',
-            'a' => '<p>To provide an accurate quote, we typically ask for:</p>'
-                 . '<ul>'
-                 . '<li>Origin and destination locations</li>'
-                 . '<li>Requested pickup and delivery dates</li>'
-                 . '<li>Item descriptions, dimensions, and weights (if available)</li>'
-                 . '<li>Delivery requirements, including inside placement or assembly needs</li>'
-                 . '<li>Site access details, arrival windows, and any special considerations</li>'
-                 . '<li>Equipment requirements such as dry van, climate-controlled van, or flatbed</li>'
-                 . '</ul>'
-                 . '<p>This information allows us to plan appropriately and ensure the right level of service from the start.</p>',
-        ],
-        [
-            'q' => 'What types of shipments benefit from white-glove services?',
-            'a' => '<p>White-glove delivery is a wise choice for products that require added care, coordination, or inside placement, particularly when presentation, condition, or timing matters. Common examples include:</p>'
-                 . '<ul>'
-                 . '<li><strong>Medical and laboratory equipment:</strong> Sensitive, oversized, or high-value devices requiring specialized transport.</li>'
-                 . '<li><strong>High-value electronic devices:</strong> Technical equipment that benefits from padded transport and controlled handling.</li>'
-                 . '<li><strong>Furniture and appliances:</strong> Large commercial or residential items requiring inside delivery and placement.</li>'
-                 . '<li><strong>Retail and e-commerce products:</strong> High-value, delicate, or oversized items that exceed standard parcel capabilities and require manual handling at delivery.</li>'
-                 . '<li><strong>Data centers:</strong> Servers and other critical infrastructure that require precise handling and coordination.</li>'
-                 . '<li><strong>Fine art, antiques, and specialty assets:</strong> Fragile or irreplaceable items where protection, discretion, and attention to detail are essential.</li>'
-                 . '<li><strong>Retail displays and fixture installations:</strong> In-store displays, fixtures, and branded environments that demand careful handling and proper placement.</li>'
-                 . '<li><strong>Automobiles:</strong> High-end automotive parts, equipment and accessories that need precision, discretion, and hands-on care.</li>'
-                 . '<li><strong>Trade show and exhibition materials:</strong> Booths, displays, and event materials requiring coordinated delivery, timing, and placement.</li>'
-                 . '</ul>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('final-mile-white-glove'),
 ];
 ?>
 <main id="primary" class="site-main">

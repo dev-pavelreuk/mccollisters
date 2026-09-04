@@ -107,28 +107,7 @@ $expertise = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Transportation',
-    'items'   => [
-        [
-            'q' => 'How is McCollister’s transportation different from standard freight services?',
-            'a' => 'McCollister’s specializes in transportation for assets that demand more planning, protection, and accountability than typical freight. Rather than applying a fixed process, we tailor equipment, handling methods, and routing to the specific asset and environment involved.',
-        ],
-        [
-            'q' => 'Do you handle both simple and complex transportation moves?',
-            'a' => 'Yes. We support everything from straightforward point-to-point deliveries to highly coordinated, multi-stage moves involving specialized equipment, staging, and white-glove handling—applying the same standards to each.',
-        ],
-        [
-            'q' => 'How do you determine the right transportation approach for a move?',
-            'a' => 'We start with the asset, the environment, and the outcome you need, then match the equipment, crew, and routing accordingly. Every plan is built around the specifics of the shipment rather than forced into a standard template.',
-        ],
-        [
-            'q' => 'Can transportation plans be customized for different industries or asset types?',
-            'a' => 'Absolutely. From aerospace and automotive to commercial and residential relocation, we adapt our handling methods, equipment, and processes to the requirements of each industry and asset type.',
-        ],
-        [
-            'q' => 'What happens if transportation needs change mid-move?',
-            'a' => 'Because our transportation connects seamlessly with warehousing, logistics, and final-mile capabilities, we can adapt as scope or priorities shift—maintaining continuity, visibility, and accountability throughout.',
-        ],
-    ],
+    'items'   => mcc_faqs_for('transportation'),
 ];
 ?>
 <main id="primary" class="site-main">

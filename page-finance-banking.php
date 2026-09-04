@@ -104,28 +104,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Finance & Banking',
-    'items'   => [
-        [
-            'q' => 'What types of ATM installations does McCollister’s support?',
-            'a' => '<p>McCollister’s supports through-the-wall (TTW) ATMs, drive-through/island construction, and free-standing lobby ATM kiosks, including challenging rigging and installations aligned to customer QC and compliance standards.</p>',
-        ],
-        [
-            'q' => 'Will I have a dedicated project manager and consistent updates?',
-            'a' => '<p>Yes. McCollister’s project managers and rigging experts work with customers through each project phase; managers are responsible for planning, permitting, and construction and can meet client-dictated update cadences.</p>',
-        ],
-        [
-            'q' => 'How do you address ADA compliance risk?',
-            'a' => '<p>McCollister’s verifies ATM installations for ADA compliance, including required height, wheelchair access, and access pathways, helping reduce exposure to alleged violations.</p>',
-        ],
-        [
-            'q' => 'Can you support multi-site deployments?',
-            'a' => '<p>Yes. McCollister’s is an all-in-one source for programmatic deployment and installation and provides logistics support that includes nationwide warehousing, staging, distribution, reverse logistics, and disposal—helpful for repeat deployments across multiple locations.</p>',
-        ],
-        [
-            'q' => 'Do you support decommissioning or certified destruction?',
-            'a' => '<p>Yes. McCollister’s offers PCI destruction &amp; NPI decommissioning services and can provide documentation supporting confidentiality and proper handling.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('finance-banking'),
 ];
 ?>
 <main id="primary" class="site-main">
