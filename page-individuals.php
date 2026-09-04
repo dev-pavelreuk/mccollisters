@@ -129,48 +129,7 @@ $levels = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Individual Auto Transport',
-    'items'   => [
-        [
-            'q' => 'What are the major risks associated with improper auto transportation?',
-            'a' => '<p>It is crucial to choose a reputable auto transport company to best protect your vehicle(s). Common issues that may arise include theft and scams, hidden fees, poor communication, severe damage due to poor handling and securing, delayed delivery, incorrect documentation, and inadequate insurance coverage.</p>',
-        ],
-        [
-            'q' => 'What does white-glove delivery mean for auto transport?',
-            'a' => '<p>When it’s time to transport classic, luxury, antique, and exotic cars, you want to partner with a company that takes the utmost care of your vehicle and gives you peace of mind. White-glove delivery provides customers with a tailored and elevated delivery experience, including specialized handling, enhanced protection, and personalized coordination.</p>'
-                 . '<p>White-glove delivery is a core feature of McCollister’s platinum package. Some premium features include:</p>'
-                 . '<ul>'
-                 . '<li><strong>Customized company-owned trailers:</strong> Our white-glove deliveries travel exclusively in our fully enclosed carriers that safeguard vehicles from weather, road debris, vandalism, and theft. Hydraulic liftgates designed especially for ultra-low clearance vehicles help ensure damage-free loading.</li>'
-                 . '<li><strong>Maximized protection:</strong> We are meticulous in securing your car safely, using soft straps, padded tie-downs, non-abrasive covers, and other measures that protect your investment during transit. Our carriers’ air-ride suspension also helps limit unnecessary movement, further reducing the risk of in-transit damage.</li>'
-                 . '<li><strong>Direct supervision:</strong> Our dedicated customer relations team provides continuous oversight throughout the entire transport process. You will have one point of contact who will make sure your move is efficient, seamless, and headache free.</li>'
-                 . '<li><strong>Real-time GPS tracking:</strong> Through our telematics systems, we provide 24/7 visibility of your vehicle’s location with updates available through our online tracking portal.</li>'
-                 . '</ul>'
-                 . '<p><strong>Please note: white-glove delivery is only offered under our platinum package.</strong></p>',
-        ],
-        [
-            'q' => 'How far in advance should auto transport be booked?',
-            'a' => '<p>When booking your transport, we ask for as much time as possible. For our gold and silver packages, we can usually provide transport within three days, depending on the season and weather. In the AutoVista app, you will see options for 1-, 3-, 5-, and 7-day pickup available. When choosing the best option for you, keep in mind that these date ranges are based on the date two business days from the completed submission of your booking. If you have a rush order that needs to be picked up fewer than two business days out from the date of booking, please contact us directly to confirm we can service the order.</p>'
-                 . '<p>For our platinum package, we can typically provide service within two to three weeks. Please contact us directly for more details.</p>',
-        ],
-        [
-            'q' => 'How do I prepare my vehicle for transport?',
-            'a' => '<p>To help ensure the best auto transport experience, it is essential to appropriately prepare your vehicle. Consider the following actions:</p>'
-                 . '<ul>'
-                 . '<li><strong>Clean both the exterior and interior of the car thoroughly.</strong> Doing so will make it easier to identify any pre-existing damage.</li>'
-                 . '<li><strong>Remove all personal belongings from the vehicle.</strong> These items may shift in transit, potentially damaging the interior. Additionally, they could draw unwanted attention.</li>'
-                 . '<li><strong>Document the vehicle’s current condition with detailed photos.</strong> Should anything happen to your car during transit, it is critical that you have time-stamped photos in case of disputes over damage claims.</li>'
-                 . '<li><strong>Perform a mechanical check.</strong> Make sure your vehicle is transport ready by inspecting the battery, checking for leaks, and verifying tire condition.</li>'
-                 . '<li><strong>Adjust the fuel level to approximately 1/4 of the tank’s capacity.</strong> More fuel than this amount adds unnecessary weight to the vehicle, which can lead to increased transport costs. Be sure to still have enough fuel to move the car during loading and unloading.</li>'
-                 . '<li><strong>Disable any alarm systems.</strong> Alarms that go off mid-journey can drain your car’s battery and cause unnecessary delays.</li>'
-                 . '<li><strong>Remove toll tags.</strong> If these are active, you could be charged for tolls incurred by the carrier.</li>'
-                 . '<li><strong>Share any special handling instructions with your driver.</strong> Customized cars require customized care. While our drivers are trained to safely transport all types of vehicles, we recognize that certain models may require additional attention. Please inform us of any aspects of your car that may affect loading or securing, so we can best protect your investment.</li>'
-                 . '</ul>',
-        ],
-        [
-            'q' => 'What is a 3PL?',
-            'a' => '<p>3PL stands for third-party logistics, and it is used to refer to organizations or networks that arrange or handle a variety of supply chain functions. In the case of McCollister’s Auto Transport, we mean companies we contract with to haul on our behalf. These businesses are well-vetted partners who exhibit the same dedication, values, and commitment to excellence as our internal asset-based fleet. Among other checks, the vetting process includes conducting verifications of appropriate insurance coverage, DOT compliance, and internal best practices.</p>'
-                 . '<p>Peace of mind on the road, delivered. For auto transport that exceeds your expectations, choose McCollister’s.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('auto-transport'),
 ];
 ?>
 <main id="primary" class="site-main">

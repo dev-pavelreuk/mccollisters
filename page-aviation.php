@@ -72,28 +72,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Aviation',
-    'items'   => [
-        [
-            'q' => 'What are the risks of not using a specialized aviation logistics provider?',
-            'a' => '<p>Aviation shipments involve tight timelines, sensitive components, and strict handling requirements. Using a general freight provider increases the risk of delays, improper handling, asset damage, and extended aircraft downtime—each of which can carry significant operational and financial consequences.</p>',
-        ],
-        [
-            'q' => 'What is aircraft-on-ground (AOG) transportation?',
-            'a' => '<p>AOG transportation supports situations where an aircraft is grounded due to mechanical issues or missing components. These shipments are time-critical and require immediate coordination to restore operations as quickly as possible.</p>',
-        ],
-        [
-            'q' => 'Can McCollister’s support time-critical aviation shipments?',
-            'a' => '<p>Yes. McCollister’s provides 24/7/365 pickup, delivery, and support for time-sensitive aviation moves, including AOG requests and scheduled critical shipments.</p>',
-        ],
-        [
-            'q' => 'How does McCollister’s ensure the safety of aviation components?',
-            'a' => '<p>Our aviation shipments are handled by trained drivers using specialized equipment and secure loading practices. Shipments are GPS-tracked to provide visibility and accountability throughout transit.</p>',
-        ],
-        [
-            'q' => 'How do I get started with McCollister’s for my aviation project?',
-            'a' => '<p>Simply contact our team to speak with an aviation logistics expert. We’ll assess your requirements and coordinate a transportation solution built around your timeline, asset, and operational needs.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('aviation'),
 ];
 ?>
 <main id="primary" class="site-main">

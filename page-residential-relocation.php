@@ -126,32 +126,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Residential Relocation',
-    'items'   => [
-        [
-            'q' => 'What types of residential relocations does McCollister’s support?',
-            'a' => '<p>McCollister’s supports a range of residential relocation needs, including employee and corporate relocations, military family moves, and private household moves. Each relocation is planned based on the specific scope, timing, and priorities of the move, rather than a standardized approach.</p>',
-        ],
-        [
-            'q' => 'How is McCollister’s different from a traditional household moving company?',
-            'a' => '<p>Unlike traditional household movers, McCollister’s operates as an asset-based transportation and logistics provider. Residential relocations are managed as coordinated projects, supported by trained professionals, established safety standards, and a single point of contact throughout the move.</p>',
-        ],
-        [
-            'q' => 'Can McCollister’s support complex or high-value household moves?',
-            'a' => '<p>Yes. McCollister’s regularly supports residential relocations that involve high-value items, specialty furnishings, or unique handling requirements. Each move is evaluated individually to ensure the appropriate level of planning, protection, and coordination.</p>',
-        ],
-        [
-            'q' => 'Is storage available as part of a residential relocation?',
-            'a' => '<p>Storage solutions can be incorporated into a residential relocation when timelines or circumstances require flexibility. Short-term or long-term storage options may be used to support transitions between residences or changing move schedules.</p>',
-        ],
-        [
-            'q' => 'Who will I work with during my residential relocation?',
-            'a' => '<p>Residential relocations are supported by a dedicated point of contact who helps coordinate planning, communication, and execution. This approach provides clarity, accountability, and consistent support from start to finish.</p>',
-        ],
-        [
-            'q' => 'Is my shipment covered for loss or damage during my relocation?',
-            'a' => '<p>Yes. McCollister’s offers full-value protection options for household goods during a residential relocation. Your sales consultant can walk you through available coverage options and help you select the level of protection that best fits your move.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('residential-relocation'),
 ];
 ?>
 <main id="primary" class="site-main">

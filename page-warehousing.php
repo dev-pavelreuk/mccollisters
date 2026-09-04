@@ -201,38 +201,7 @@ $expertise = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Warehousing',
-    'items'   => [
-        [
-            'q' => 'What are the risks associated with improper warehousing?',
-            'a' => '<p>Operational risks include, but are not limited to, fire hazards from overcrowded storage, inventory damage, reduced productivity from inefficient layouts, and potential regulatory fines for non-compliance with safety standards.</p>',
-        ],
-        [
-            'q' => 'What are the key functions of a warehouse?',
-            'a' => '<p>Modern warehouses play a critical role in keeping supply chains efficient, flexible, and responsive. Core warehouse functions include:</p>'
-                 . '<ul>'
-                 . '<li><strong>Receiving:</strong> Incoming shipments are carefully received, inspected, and documented to ensure accuracy and product integrity from the moment goods arrive.</li>'
-                 . '<li><strong>Storage:</strong> Inventory is strategically organized and maintained to support easy access, scalability, and efficient space utilization.</li>'
-                 . '<li><strong>Order Picking:</strong> Products are accurately selected from inventory based on order requirements, supporting fast, reliable fulfillment.</li>'
-                 . '<li><strong>Inventory Management:</strong> Real-time tracking and reporting help maintain optimal inventory levels, reducing excess stock while preventing shortages.</li>'
-                 . '<li><strong>Value-Added Services:</strong> Many warehouses offer customized services such as kitting, labeling, or light assembly to support unique operational and customer needs.</li>'
-                 . '</ul>'
-                 . '<p>Together, these capabilities work seamlessly to improve operational efficiency, enhance visibility, and support the smooth, reliable movement of freight across the supply chain.</p>',
-        ],
-        [
-            'q' => 'How can efficient warehousing support my overall logistics operations?',
-            'a' => '<p>Efficient warehousing is essential for your logistics operations to be balanced, responsive, and cost-effective. By optimizing inventory levels, warehouses help companies align supply with customer demand while avoiding excess stock or shortages.</p>'
-                 . '<p>Real-time inventory visibility supports better forecasting and planning, while well-positioned inventory enables fast, accurate order fulfillment. These capabilities also support just-in-time (JIT) strategies, helping reduce carrying costs without sacrificing service levels.</p>'
-                 . '<p>Advanced practices such as cross-docking and transloading further improve efficiency by moving goods quickly from inbound to outbound transportation. Combined, integrated warehousing and logistics operations support a more agile, reliable supply chain.</p>',
-        ],
-        [
-            'q' => 'What is a 3PL warehouse?',
-            'a' => '<p>A 3PL (third-party logistics) warehouse is a facility managed by an external provider that handles warehousing, inventory management, and order fulfillment for other companies. These warehouses specialize in receiving inventory, storing it, and picking, packing, and shipping orders to customers, allowing businesses to outsource logistics.</p>',
-        ],
-        [
-            'q' => 'Is third-party logistics the same as drop shipping? What’s the difference?',
-            'a' => '<p>No, they are different things. Drop shipping is a low-cost, inventory-free model where suppliers ship directly to customers, offering lower margins and less control. Third-party logistics, on the other hand, involves outsourcing inventory storage, packing, and shipping to a partner, providing higher control, faster delivery, and better branding, but requires purchasing stock upfront.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('warehousing'),
 ];
 ?>
 <main id="primary" class="site-main">

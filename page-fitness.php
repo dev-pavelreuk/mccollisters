@@ -99,28 +99,7 @@ $cta = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Fitness',
-    'items'   => [
-        [
-            'q' => 'What are the risks associated with improper fitness installation?',
-            'a' => '<p>Improper installation often leads to more than visible issues. Missed details can cause equipment downtime, return trips, delayed openings, and strained relationships with end users and partners. In premium environments, even small missteps can undermine trust and brand perception. The real cost is rarely just the invoice—it’s the long-term impact on your reputation.</p>',
-        ],
-        [
-            'q' => 'How does McCollister’s handle complex or multi-phase fitness projects?',
-            'a' => '<p>Every project is treated as a unique environment, not a repeatable task. That means early planning, coordination across stakeholders, flexibility when schedules shift, and experienced teams who anticipate challenges rather than react to them. Complexity isn’t the exception—it’s the expectation.</p>',
-        ],
-        [
-            'q' => 'Do you support both large facilities and smaller installations?',
-            'a' => '<p>Yes. McCollister’s supports the full spectrum, from single-unit residential or corporate gym installs to large, multi-story facilities and nationwide rollouts. The same attention to detail applies regardless of scale.</p>',
-        ],
-        [
-            'q' => 'Why does white-glove final-mile service matter so much in fitness?',
-            'a' => '<p>Fitness equipment doesn’t arrive in a vacuum. It enters active spaces, finished environments, and brand-defining moments. White-glove service ensures proper handling, placement, assembly, and presentation, reducing risk, eliminating rework, and protecting the client experience from day one.</p>',
-        ],
-        [
-            'q' => 'Does McCollister’s offer fitness equipment repair and maintenance?',
-            'a' => '<p>Yes. McCollister’s offers on-site fitness equipment repair and maintenance for commercial gyms, studios, residential communities, and corporate fitness centers, supporting both cardio and strength equipment. With decades of hands-on fitness experience, our technicians help minimize downtime and protect the member experience long after installation is complete.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('fitness'),
 ];
 ?>
 <main id="primary" class="site-main">

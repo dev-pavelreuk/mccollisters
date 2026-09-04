@@ -86,30 +86,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Technical <br>Services',
-    'items'   => [
-        [
-            'q' => 'What are the risks associated with trusting an inexperienced company for my data center project?',
-            'a' => '<p>Data center projects are typically costly and time-consuming. You may be tempted to save some money by trusting your project to the lowest bidder or attempting it yourself. Unfortunately, many logistics companies that offer professional IT services do so only as a secondary business. Therefore, going with a company that is not especially qualified to handle this type of work will almost certainly have huge negative consequences for your business. It will likely lead to project delays caused by poor planning or low skill, damage from bad packing/handling, and poor workmanship due to lack of training and ownership. For instance, when dealing with enterprise IT equipment, inept logistics teams will not know how to adequately protect your gear and optics, watch out for faceplates, properly handle rail kits, treat expensive DAC and SAS cabling, among a dozen other examples.</p>'
-                 . '<p>Additionally, logistics companies that do not specialize in data center projects will likely lack the ability to do thorough site surveys, increasing your risk of business disruption and downtime, compliance and security failures, cost overruns and scope creep.</p>'
-                 . '<p>McCollister’s Technical Services (MTS) has the expert knowledge, appropriate materials, and specialized workforce necessary to ensure your project is properly designed and strategized, your gear is handled safely, the right personnel are onsite, and the environment matches the planned documentation.</p>',
-        ],
-        [
-            'q' => 'What is data center relocation?',
-            'a' => '<p>Data center relocation or migration refers to moving an organization’s existing data center infrastructure from one environment to another. This process can include removing servers from the racking as well as serialized inventory, packing and securing boxes with security tape for transfer.</p>',
-        ],
-        [
-            'q' => 'What is data center decommissioning?',
-            'a' => '<p>Typically done when IT assets inside a data center have reached the end of their lifecycle, data center decommissioning is the process of properly disposing of the outdated equipment, according to industry standards, business need, and governmental regulations. MTS can provide many end-of-life services for decommissioning your data center, such as device removal, rack removal, cable removal, data destruction services, along with ITAD buyback options.</p>',
-        ],
-        [
-            'q' => 'What information do I need to gather to get a quote for data center relocation, migration, decommissioning and/or secure data disposal services?',
-            'a' => '<p>For an initial conversation with MTS, we would need to know the general scope of your proposed project (i.e., what you want to have done), how much material is involved (i.e., a general device list or count); where you want it done; and when you want it done. By giving us this information, we can often provide you with a quote for smaller projects through a quick email exchange. For larger and more detailed projects, we can use that information as a springboard to launch a productive planning call for your quote.</p>',
-        ],
-        [
-            'q' => 'When should I first contact McCollister’s to discuss my data center project?',
-            'a' => '<p>Organizations interested in undertaking a data center project should contact MTS as early as possible. If you involve us in your planning discussions, we can help design your project from start to finish, conduct consultations and site surveys, and address any challenges or concerns. Collaborating with us from the outset will give you confidence in the feasibility of your project and allow you to plan your resources appropriately. MTS is often fully booked out in multiple regions for even simple projects three or more weeks in advance. By contacting us at the start of your project planning, you can maximize safety, security, and efficiency, while minimizing business interruption.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('technical-services'),
 ];
 ?>
 <main id="primary" class="site-main">

@@ -160,28 +160,7 @@ $integrated = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Logistics',
-    'items'   => [
-        [
-            'q' => 'What is the difference between logistics and transportation services?',
-            'a' => '<p>Transportation focuses on moving freight from one location to another. Logistics encompasses the broader planning, coordination, and management of transportation, warehousing, handling, and delivery activities to ensure shipments move efficiently from origin through destination.</p>',
-        ],
-        [
-            'q' => 'When should I use a logistics provider instead of a single carrier?',
-            'a' => '<p>A logistics provider is best suited for shipments that involve multiple service components, specialized handling, tight timelines, or operational complexity. Logistics support helps reduce coordination burden, improve visibility, and manage risk when moves require more than standard transportation.</p>',
-        ],
-        [
-            'q' => 'Can McCollister’s handle urgent or time-sensitive shipments?',
-            'a' => '<p>Yes. McCollister’s supports urgent and time-critical shipments by coordinating equipment availability, routing, handling requirements, and communication across all service components. Our teams manage execution details to help meet aggressive timelines while maintaining shipment integrity.</p>',
-        ],
-        [
-            'q' => 'How does McCollister’s manage visibility across complex logistics projects?',
-            'a' => '<p>McCollister’s maintains visibility across logistics projects through centralized coordination, proactive communication, and tracking technologies that span transportation, handling, and delivery stages. This approach allows customers to stay informed while our logistics teams manage execution and issue resolution behind the scenes.</p>',
-        ],
-        [
-            'q' => 'Can McCollister’s scale as my needs change?',
-            'a' => '<p>Yes. McCollister’s works with you to design a logistics solution tailor-made for your project. We make sure it is built to scale with your changing needs, including fluctuating volumes, seasonal demand, and project-based requirements. Service scope and resources can be adjusted to support evolving logistics challenges without disrupting your operations.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('logistics'),
 ];
 ?>
 <main id="primary" class="site-main">

@@ -120,30 +120,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Commercial Relocation',
-    'items'   => [
-        [
-            'q' => 'What are the risks of using an inexperienced company for a commercial office move?',
-            'a' => '<p>Commercial relocations involve more than moving furniture. Inexperienced providers often lack the planning, communication, and coordination required for complex office environments. This scenario can result in damaged assets, downtime, poor employee experience, cost overruns, and last-minute chaos. McCollister’s specializes in structured commercial moves designed to prevent these outcomes.</p>',
-        ],
-        [
-            'q' => 'How are computers, monitors, and phone systems handled during an office move?',
-            'a' => '<p>McCollister’s supports the packing, protection, and coordination of employee desk-level technology as part of a commercial relocation. We provide antistatic monitor protection and organized packing solutions for keyboards, cables, mice, phones, and related equipment to keep components protected and properly grouped.</p>'
-                 . '<p>If requested, McCollister’s can also coordinate disconnection, reconnection, and rebooting of computers and phone systems through McCollister’s Technical Services (MTS) to help reduce downtime.</p>',
-        ],
-        [
-            'q' => 'Do you coordinate technology and data infrastructure moves?',
-            'a' => '<p>Yes. McCollister’s coordinates commercial relocation projects with our in-house technical services team, allowing organizations to manage furniture, systems furniture, desk-level technology, and more complex IT assets under one integrated plan.</p>'
-                 . '<p>This approach helps eliminate coordination gaps and ensures workspaces and technology environments come online together.</p>',
-        ],
-        [
-            'q' => 'What information is needed to get a quote for a commercial relocation project?',
-            'a' => '<p>To begin, we typically need a general understanding of the project scope, estimated size, locations involved, and desired timeline. For more complex relocations, we may conduct a site walk or planning call to ensure the quote reflects the full scope of work and avoids surprises later.</p>',
-        ],
-        [
-            'q' => 'When should we contact McCollister’s about our office move?',
-            'a' => '<p>The earlier, the better. Engaging McCollister’s early in the planning process allows us to help design the move, identify risks, and create a realistic timeline. Early involvement leads to smoother execution, fewer disruptions, and greater confidence throughout the relocation.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('commercial-relocation'),
 ];
 ?>
 <main id="primary" class="site-main">

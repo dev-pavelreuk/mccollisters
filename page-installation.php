@@ -74,24 +74,7 @@ $integrated = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Installation Services',
-    'items'   => [
-        [
-            'q' => 'What types of projects are best suited for McCollister’s installation services?',
-            'a' => '<p>Our installation services are designed for projects involving high-value, specialized, or operationally critical equipment, especially when coordination across transportation, storage, and on-site installation is required.</p>',
-        ],
-        [
-            'q' => 'Do you support multi-location or phased rollouts?',
-            'a' => '<p>Yes. McCollister’s regularly manages installations across multiple locations, supporting phased deployments, scheduled rollouts, and site-specific requirements through centralized project management.</p>',
-        ],
-        [
-            'q' => 'How does project management factor into installation services?',
-            'a' => '<p>Each installation project is supported by experienced project managers who coordinate timelines, site readiness, transportation, staging, and on-site execution to ensure consistency and accountability.</p>',
-        ],
-        [
-            'q' => 'Can installation services be bundled with transportation and warehousing?',
-            'a' => '<p>Absolutely. Installation services are often bundled with transportation and warehousing to create a seamless, end-to-end solution that minimizes delays, reduces risk, and improves overall project efficiency.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('installation'),
 ];
 ?>
 <main id="primary" class="site-main">

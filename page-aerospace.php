@@ -81,29 +81,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Aerospace',
-    'items'   => [
-        [
-            'q' => 'What is aerospace transportation and logistics?',
-            'a' => '<p>Aerospace transportation and logistics refers to the specialized movement, handling, and support of aircraft, spacecraft, aerospace components, and related materials throughout the supply chain. Because aerospace parts are extremely high-value, oversized, and time-critical, and often require strict regulatory compliance, this sector combines advanced logistical practices with industry-specific engineering and safety standards.</p>',
-        ],
-        [
-            'q' => 'What are the risks associated with improper aerospace transportation?',
-            'a' => '<p>Improper aerospace transportation can lead to damaged or contaminated parts, safety hazards for workers and drivers, and serious regulatory issues if rules set forth by the Federal Aviation Administration (FAA), International Traffic in Arms Regulations (ITAR), or the Export Administration Regulations (EAR) are not followed. These mistakes often cause delays that interrupt production or repair schedules, create documentation problems that prevent parts from being accepted, and can result in environmental spills or fires when hazardous materials are not handled correctly. Overall, improper handling increases financial losses, harms a company’s reputation, and may leave the organization responsible for costs that insurance will not cover.</p>',
-        ],
-        [
-            'q' => 'What considerations go into mapping out the safest and most effective route for aerospace transport?',
-            'a' => '<p>McCollister’s plans routes for aerospace transport by evaluating road dimensions, weight limits, infrastructure capability, regulatory permits, safety risks, weather, community and environmental impact, security requirements, and overall timing and cost efficiency to ensure the safe and on-time delivery of sensitive aerospace components. We always conduct detailed physical route surveys to ensure the safest and most efficient route is utilized.</p>',
-        ],
-        [
-            'q' => 'What security measures need to be put in place for aerospace transport?',
-            'a' => '<p>Aerospace transport security requires a combination of controlled access, real-time tracking, and secure vehicles to protect high-value and sensitive components. Key measures include limiting personnel access, using GPS and sensor monitoring, employing tamper-evident containers, and providing trained escorts for oversized or high-risk loads. Strict handling protocols, chain-of-custody documentation, cybersecurity for digital logistics systems, and compliance with regulations like ITAR are essential, along with contingency planning for theft, tampering, or emergencies to ensure the cargo reaches its destination safely and securely.</p>',
-        ],
-        [
-            'q' => 'When should aerospace companies first contact transportation and logistics companies?',
-            'a' => '<p>Aerospace companies should contact transportation and logistics providers as early as possible in the project or production planning phase, ideally before manufacturing begins or as soon as components are designed and sourced.</p>'
-                 . '<p>Contacting a logistics provider early—during design, procurement, or pre-production—is critical to ensure the safe, timely, and compliant movement of aerospace components while minimizing risk and cost.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('aerospace'),
 ];
 ?>
 <main id="primary" class="site-main">

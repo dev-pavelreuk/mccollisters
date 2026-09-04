@@ -156,32 +156,7 @@ $levels = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'OEM Auto Transport',
-    'items'   => [
-        [
-            'q' => 'What are the major risks associated with improper auto transportation?',
-            'a' => '<p>Choosing an incompetent and/or unreliable auto transportation partner can cause many problems that ripple throughout your organization. These issues can include:</p>'
-                 . '<ul>'
-                 . '<li>Delayed dealer shipments</li>'
-                 . '<li>Missed marketing windows for priority vehicles</li>'
-                 . '<li>Out of sync new vehicle launches</li>'
-                 . '<li>Adjusted factory output</li>'
-                 . '<li>Overcrowded storage facilities</li>'
-                 . '<li>Misaligned incentive programs due to lack of inventory</li>'
-                 . '</ul>'
-                 . '<p>Combined, these unnecessary setbacks reduce efficiency at scale and increase the total cost per delivered vehicle.</p>'
-                 . '<p>The losses caused by improper auto transport are not just monetary, however. Delayed and/or mishandled shipments will likely also harm your relationships with clients, perhaps irreparably.</p>'
-                 . '<p>By partnering with a reputable and reliable auto transportation company, you can minimize frustration and inefficiency while maximizing revenue and satisfaction.</p>',
-        ],
-        [
-            'q' => 'What types of OEM clients do you work with?',
-            'a' => '<p>We work with a range of OEM clients, including car manufacturers, automotive suppliers, EV companies, and global logistics partners needing white-label or branded shipping services.</p>',
-        ],
-        [
-            'q' => 'What factors influence the cost of OEM auto transport?',
-            'a' => '<p>McCollister’s OEM transport rates are structured around your specific logistics needs and volumes, as well as seasonal demand and market capacity.</p>'
-                 . '<p>For an accurate quote, please contact our dedicated OEM logistics team directly.</p>',
-        ],
-    ],
+    'items'   => mcc_faqs_for('auto-transport'),
 ];
 ?>
 <main id="primary" class="site-main">
