@@ -119,6 +119,7 @@ $more = [
     ],
 ];
 ?>
+<?php mcc_video_schema('1199843773'); ?>
 <main id="primary" class="site-main">
 
     <!-- Header -->

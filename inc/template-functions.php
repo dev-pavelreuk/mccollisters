@@ -497,3 +497,163 @@ function mcc_faq_schema(array $items): void
         wp_json_encode($schema, JSON_UNESCAPED_UNICODE)
     );
 }
+
+/**
+ * Complete the Organization node Yoast emits.
+ *
+ * Yoast Local SEO publishes the node but the business fields were never filled
+ * in, so it went out with no address, an empty telephone array and one of four
+ * social profiles. That node is what Google reads to build a Knowledge Panel,
+ * so it was the weakest part of the site's markup despite every page carrying
+ * schema.
+ *
+ * Everything here already appears on the site: the phones, email and address
+ * come from the same theme options the footer renders, and the profile URLs
+ * match the footer's social row.
+ *
+ * These can still be set in SEO -> Local SEO -> Business info; anything entered
+ * there is preserved, because this only fills fields Yoast left empty.
+ */
+function mcc_schema_organization(array $data): array
+{
+    $phone     = mcc_get_theme_option('mcc_phone', '609-386-0600');
+    $phone_alt = mcc_get_theme_option('mcc_phone_secondary', '800-257-9595');
+    $email     = mcc_get_theme_option('mcc_email', 'info@mccollisters.com');
+
+    if (empty($data['telephone'])) {
+        $data['telephone'] = $phone;
+    }
+
+    if (empty($data['email'])) {
+        $data['email'] = $email;
+    }
+
+    if (empty($data['address'])) {
+        // Structured rather than parsed out of the customizer's free-text
+        // address, which is formatted for display ("8 Terri Lane\nBurlington,
+        // NJ  08016") and would be fragile to split. Keep the two in step.
+        $data['address'] = [
+            '@type'           => 'PostalAddress',
+            'streetAddress'   => '8 Terri Lane',
+            'addressLocality' => 'Burlington',
+            'addressRegion'   => 'NJ',
+            'postalCode'      => '08016',
+            'addressCountry'  => 'US',
+        ];
+    }
+
+    if (empty($data['foundingDate'])) {
+        $data['foundingDate'] = '1945';
+    }
+
+    if (empty($data['areaServed'])) {
+        $data['areaServed'] = [
+            ['@type' => 'Country', 'name' => 'United States'],
+            ['@type' => 'Country', 'name' => 'Canada'],
+        ];
+    }
+
+    // Both numbers, so the 800 line is associated with the business too.
+    if (empty($data['contactPoint'])) {
+        $data['contactPoint'] = [
+            [
+                '@type'             => 'ContactPoint',
+                'contactType'       => 'customer service',
+                'telephone'         => $phone_alt,
+                'email'             => $email,
+                'availableLanguage' => 'English',
+            ],
+        ];
+    }
+
+    // Merge rather than replace: keep whatever Yoast already knows about.
+    $profiles = [
+        'https://www.facebook.com/McCollisters/',
+        'https://www.instagram.com/mccollisters1945/',
+        'https://www.linkedin.com/company/mccollister\'s-transportation/',
+        'https://www.youtube.com/@Mccollisters',
+    ];
+
+    $existing = isset($data['sameAs']) && is_array($data['sameAs']) ? $data['sameAs'] : [];
+    $data['sameAs'] = array_values(array_unique(array_merge($existing, $profiles)));
+
+    /*
+     * Drop Yoast Local's untouched default of 09:00-17:00 seven days a week.
+     * It claimed the business answers the phone on Saturday and Sunday, which
+     * is worse than publishing nothing: Google can surface those hours and send
+     * someone to call an empty office. Removed rather than guessed at — set the
+     * real hours in SEO -> Local SEO -> Opening hours and Yoast will emit them
+     * again, at which point this unset can go.
+     */
+    unset($data['openingHoursSpecification']);
+
+    return $data;
+}
+add_filter('wpseo_schema_organization', 'mcc_schema_organization');
+
+/**
+ * VideoObject structured data for the Vimeo videos.
+ *
+ * The three shorts had no markup at all, so Google had nothing to attach a
+ * video thumbnail to in search results. Unlike FAQ markup, video rich results
+ * are still very much alive.
+ *
+ * Metadata (thumbnail, duration, upload date) comes from Vimeo's oEmbed API and
+ * is recorded here rather than fetched per request -- an HTTP call on every
+ * page render to describe a video that changes once a year is not a trade worth
+ * making. Re-check with:
+ *   curl "https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/<id>"
+ *
+ * Vimeo's own titles are machine-generated slugs, so each entry carries a
+ * human-readable name and description written for search instead.
+ */
+function mcc_video_schema(string $vimeo_id): void
+{
+    static $videos = [
+        '1199843762' => [
+            'name'        => 'What McCollister\'s Does',
+            'description' => 'An introduction to McCollister\'s transportation, warehousing, logistics, and installation services across North America.',
+            'thumbnail'   => 'https://i.vimeocdn.com/video/2166776305-411897ffd2c5c8d57eaca04277dc5263f60b4eeecd3977ae',
+            'duration'    => 'PT59S',
+            'uploaded'    => '2026-06-09',
+        ],
+        '1199843780' => [
+            'name'        => 'Employees and Culture at McCollister\'s',
+            'description' => 'The people behind McCollister\'s and the culture that has kept careers here for decades.',
+            'thumbnail'   => 'https://i.vimeocdn.com/video/2166776413-7e38791001e6220065b8b4b9f5673ed1f58bbb16baf1ced5',
+            'duration'    => 'PT1M26S',
+            'uploaded'    => '2026-06-09',
+        ],
+        '1199843773' => [
+            'name'        => 'McCollister\'s Future, Growth and Legacy',
+            'description' => 'How a family-owned company founded in 1945 continues to grow as a nationwide logistics provider.',
+            'thumbnail'   => 'https://i.vimeocdn.com/video/2166776418-fc7e2daf37187d7f61200cf5d3852e79dcfb5422a792c55b',
+            'duration'    => 'PT1M53S',
+            'uploaded'    => '2026-06-09',
+        ],
+    ];
+
+    if (!isset($videos[$vimeo_id])) {
+        return;
+    }
+
+    $video = $videos[$vimeo_id];
+
+    $schema = [
+        '@context'     => 'https://schema.org',
+        '@type'        => 'VideoObject',
+        '@id'          => get_permalink() . '#video-' . $vimeo_id,
+        'name'         => $video['name'],
+        'description'  => $video['description'],
+        'thumbnailUrl' => $video['thumbnail'],
+        'uploadDate'   => $video['uploaded'],
+        'duration'     => $video['duration'],
+        'embedUrl'     => 'https://player.vimeo.com/video/' . $vimeo_id,
+        'publisher'    => ['@id' => home_url('/') . '#organization'],
+    ];
+
+    printf(
+        '<script type="application/ld+json">%s</script>' . "\n",
+        wp_json_encode($schema, JSON_UNESCAPED_UNICODE)
+    );
+}
