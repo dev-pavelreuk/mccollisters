@@ -520,10 +520,6 @@ function mcc_schema_organization(array $data): array
     $phone_alt = mcc_get_theme_option('mcc_phone_secondary', '800-257-9595');
     $email     = mcc_get_theme_option('mcc_email', 'info@mccollisters.com');
 
-    if (empty($data['telephone'])) {
-        $data['telephone'] = $phone;
-    }
-
     if (empty($data['email'])) {
         $data['email'] = $email;
     }
@@ -577,19 +573,50 @@ function mcc_schema_organization(array $data): array
     $existing = isset($data['sameAs']) && is_array($data['sameAs']) ? $data['sameAs'] : [];
     $data['sameAs'] = array_values(array_unique(array_merge($existing, $profiles)));
 
-    /*
-     * Drop Yoast Local's untouched default of 09:00-17:00 seven days a week.
-     * It claimed the business answers the phone on Saturday and Sunday, which
-     * is worse than publishing nothing: Google can surface those hours and send
-     * someone to call an empty office. Removed rather than guessed at — set the
-     * real hours in SEO -> Local SEO -> Opening hours and Yoast will emit them
-     * again, at which point this unset can go.
-     */
-    unset($data['openingHoursSpecification']);
-
     return $data;
 }
 add_filter('wpseo_schema_organization', 'mcc_schema_organization');
+
+/**
+ * Fix the two Organization fields Yoast Local writes after the filter above.
+ *
+ * wpseo_schema_organization runs before Yoast Local applies its own business
+ * data, so a telephone set there is overwritten with its empty value and a
+ * removed openingHoursSpecification comes straight back. Both survived to
+ * production that way. The graph filter runs on the finished graph, after
+ * every piece has had its say, so changes here stick.
+ *
+ * telephone: filled from the same option the footer renders.
+ *
+ * openingHoursSpecification: removed. Yoast Local's untouched default claimed
+ * 09:00-17:00 seven days a week including Saturday and Sunday, which is worse
+ * than publishing nothing -- Google can surface it and send someone to call an
+ * empty office. Removed rather than guessed at. Enter the real hours in
+ * SEO -> Local SEO -> Opening hours and delete this unset, and Yoast's own
+ * values will come through.
+ */
+function mcc_schema_graph_fixes(array $graph): array
+{
+    foreach ($graph as &$piece) {
+        $type = $piece['@type'] ?? '';
+        $type = is_array($type) ? $type : [$type];
+
+        if (!in_array('Organization', $type, true)) {
+            continue;
+        }
+
+        if (empty($piece['telephone'])) {
+            $piece['telephone'] = mcc_get_theme_option('mcc_phone', '609-386-0600');
+        }
+
+        unset($piece['openingHoursSpecification']);
+    }
+
+    unset($piece);
+
+    return $graph;
+}
+add_filter('wpseo_schema_graph', 'mcc_schema_graph_fixes', 99);
 
 /**
  * VideoObject structured data for the Vimeo videos.
