@@ -300,11 +300,23 @@ body::before {
 /* --- Mega layout (Services): full-width equal columns, no promo panel --- */
 .mega-columns {
 	display: flex;
-	/* Spacing between columns. */
-	gap: 180px;
+	/* Spacing between columns.
+	   The panel offers 1360px of content width at its widest (--container 1380
+	   + 60, less 40px padding either side) and four 180px columns consume 720px
+	   of it, so a flat 180px gap only fits above roughly a 1340px viewport.
+	   Below that the row overflowed and — because it is centred — was clipped at
+	   BOTH ends, so the first and last columns ran off-screen.
+	   This spends whatever room is left on the gaps instead:
+	   (viewport − 80px padding − 720px of columns) ÷ 3. It reaches the original
+	   180px at about 1440px and holds, so wide screens render exactly as before.
+	   Mobile never sees this — .mega-columns becomes display:block below 1025px. */
+	gap: clamp(40px, 33.3vw - 290px, 180px);
 	/* Center the column group within the overlay instead of stretching it
 	   edge-to-edge; columns keep their content width (see .mega-column). */
 	justify-content: center;
+	/* Safety net: if a column's content ever exceeds its 180px minimum, wrap
+	   onto a second row rather than clip off the edges. */
+	flex-wrap: wrap;
 }
 
 .mega-column {
