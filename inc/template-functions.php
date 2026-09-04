@@ -423,3 +423,77 @@ function mcc_google_ads_call_tracking(): void
     echo "</script>\n";
 }
 add_action('wp_head', 'mcc_google_ads_call_tracking', 99);
+
+/**
+ * Emit FAQPage structured data for a rendered FAQ accordion.
+ *
+ * Takes the same [['q' => …, 'a' => …], …] array the accordion renders from, so
+ * the markup can never describe questions the visitor cannot see -- Google
+ * requires the marked-up Q&A to match the visible content, and expandable
+ * accordions satisfy that.
+ *
+ * Deliberately NOT generated from inc/faq-data.php: that aggregate has drifted
+ * out of sync with the page templates (it is missing dealers, individuals and
+ * oems, and carries an auto-transport entry no template uses), so generating
+ * from it would mark up questions that are not on the page.
+ *
+ * Answers keep their HTML -- Google accepts a small subset (p, ul, ol, li, a,
+ * strong, em, br) and the answers here use exactly that. Slashes stay escaped
+ * in the JSON so a "</script>" inside any answer cannot close the tag early.
+ */
+function mcc_faq_schema(array $items): void
+{
+    $questions = [];
+
+    foreach ($items as $item) {
+        if (empty($item['q']) || empty($item['a'])) {
+            continue;
+        }
+
+        // Same allowlist the accordions render through, so the marked-up answer
+        // is byte-identical to the visible one. It is also a subset of the HTML
+        // Google accepts inside acceptedAnswer, which rules out anything
+        // unexpected reaching the JSON.
+        $answer = wp_kses($item['a'], [
+            'p'      => [],
+            'br'     => [],
+            'ul'     => [],
+            'ol'     => [],
+            'li'     => [],
+            'strong' => [],
+            'em'     => [],
+            'b'      => [],
+            'i'      => [],
+            'a'      => ['href' => [], 'target' => [], 'rel' => [], 'aria-label' => []],
+        ]);
+
+        if (trim(wp_strip_all_tags($answer)) === '') {
+            continue;
+        }
+
+        $questions[] = [
+            '@type'          => 'Question',
+            'name'           => wp_strip_all_tags($item['q']),
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text'  => $answer,
+            ],
+        ];
+    }
+
+    if ($questions === []) {
+        return;
+    }
+
+    $schema = [
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        '@id'        => get_permalink() . '#faq',
+        'mainEntity' => $questions,
+    ];
+
+    printf(
+        '<script type="application/ld+json">%s</script>' . "\n",
+        wp_json_encode($schema, JSON_UNESCAPED_UNICODE)
+    );
+}

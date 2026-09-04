@@ -94,6 +94,7 @@ $render_accordion = static function (array $items) use ($faq_arrow, $faq_kses): 
     echo '</div>';
 };
 ?>
+<?php mcc_faq_schema($general); ?>
 <main id="primary" class="site-main">
 
     <!-- Header -->

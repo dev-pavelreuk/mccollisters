@@ -394,6 +394,7 @@ $faqs = [
                 'eyebrow' => $faqs['eyebrow'],
                 'title'   => $faqs['title'],
             ]); ?>
+                        <?php mcc_faq_schema($faqs['items']); ?>
             <div class="svc-faqs__list" data-accordion>
                 <?php foreach ($faqs['items'] as $item) : ?>
                     <details class="svc-faq">
