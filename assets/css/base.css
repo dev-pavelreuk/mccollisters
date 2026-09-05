@@ -43,6 +43,13 @@
 html {
 	scroll-behavior: smooth;
 	-webkit-text-size-adjust: 100%;
+	/* Reserve the scrollbar's width even when nothing is scrolling. The FAQ
+	   modal locks the page with body { overflow: hidden }, which removes the
+	   scrollbar and shifted everything ~15px to the right as it opened.
+	   Reserving the gutter permanently means the page never moves.
+	   Site-wide by necessity — the shift happens at the moment of opening, so
+	   it cannot be reserved only while the modal is up. */
+	scrollbar-gutter: stable;
 }
 
 body {

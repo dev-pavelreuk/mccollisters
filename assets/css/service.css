@@ -5369,7 +5369,9 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
     flex-direction: column;
     width: 100%;
     max-width: 1040px;
-    min-height: 80vh;
+    /* No min-height: groups run from 7 to 28 questions, so a floor of 80vh left
+       the smaller modals mostly empty. The box now fits its content, capped by
+       max-height. */
     max-height: 94vh;
     padding: clamp(24px, 3vw, 48px);
     background: var(--color-white);
@@ -5446,6 +5448,10 @@ a.svc-creds__logo:focus-visible .svc-creds__bbb svg {
 
 .faqs-modal__body {
     overflow-y: auto;
+    /* An accordion opening can momentarily measure wider than the box, which
+       flashed a horizontal scrollbar. Nothing here is meant to scroll
+       sideways. */
+    overflow-x: hidden;
     margin-top: 4px;
 }
 
