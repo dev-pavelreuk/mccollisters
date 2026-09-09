@@ -20,8 +20,8 @@ $check   = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 
 
 $hero = [
     'image'    => $uploads . '2026/01/data-center3.jpg',
-    'title'    => 'Technical Services',
-    'subtitle' => 'The IT professional services division of McCollister’s',
+    'title'    => 'Data Center Services',
+    'subtitle' => 'Enterprise data center services by McCollister's',
     'buttons'  => [
         ['label' => 'Commercial Relocation', 'url' => home_url('/commercial-relocation/')],
         ['label' => 'Locations', 'url' => home_url('/locations/')],
@@ -33,14 +33,14 @@ $overview = [
     'title'   => 'Expert-Led Data<br>Center Projects<br>From Start To Finish',
     'paras'   => [
         'Every company relies on data to function. With data breaches continually on the rise and regulatory requirements growing more stringent, following best practices for data management is fundamental for business success. While organizations may have strong data governance related to data collection and storage, proper data center migration and decommissioning are often overlooked.',
-        'For businesses who want to ensure their data center project is managed delicately, deftly, and securely, McCollister’s Technical Services (MTS) offers expertly performed IT asset disposition (ITAD) and enterprise IT services. Our reliable and highly trained technicians and project managers have the specific knowledge and equipment required to complete your project efficiently, effectively, and responsibly — a capability most logistics companies lack. We specialize in several core services: data center relocation, physical migration, consolidation, and decommissioning; cabling services within the data center; secure data destruction; tape library decommissioning; e-waste disposal; and IT enterprise new product deployment.',
+        'For businesses who want to ensure their data center project is managed delicately, deftly, and securely, McCollister’s  Services (MTS) offers expertly performed IT asset disposition (ITAD) and enterprise IT services. Our reliable and highly trained technicians and project managers have the specific knowledge and equipment required to complete your project efficiently, effectively, and responsibly — a capability most logistics companies lack. We specialize in several core services: data center relocation, physical migration, consolidation, and decommissioning; cabling services within the data center; secure data destruction; tape library decommissioning; e-waste disposal; and IT enterprise new product deployment.',
     ],
 ];
 
 $capabilities = [
     'title'      => 'Our<br>Capabilities',
     'intro'      => [
-        'At MTS, we strive to make your experience as straightforward and stress-free as possible. When you choose MTS for your data center project, we assign a dedicated project manager to oversee and manage the entire process from beginning to end. We treat each project as crucial, with a focus on information gathering, planning, execution, and post-move assistance. As part of McCollister’s nationwide logistics network, MTS also provides access to specialized transportation services, warehousing, packing, and storage across the country. By integrating our best-in-class technical services with McCollister’s logistical prowess, we provide our clients with effortless turnkey solutions designed with their individual needs in mind.',
+        'At MTS, we strive to make your experience as straightforward and stress-free as possible. When you choose MTS for your data center project, we assign a dedicated project manager to oversee and manage the entire process from beginning to end. We treat each project as crucial, with a focus on information gathering, planning, execution, and post-move assistance. As part of McCollister’s nationwide logistics network, MTS also provides access to specialized transportation services, warehousing, packing, and storage across the country. By integrating our best-in-class  services with McCollister’s logistical prowess, we provide our clients with effortless turnkey solutions designed with their individual needs in mind.',
     ],
     'image'      => $uploads . '2026/03/arranging-wires-1000x1020.jpg',
     'alt'        => 'A man in a white shirt works on a server rack filled with numerous cables, illuminated by blue and red lights, in a data center.',
@@ -85,7 +85,7 @@ $confidence = [
 
 $faqs = [
     'eyebrow' => 'faqs',
-    'title'   => 'Technical <br>Services',
+    'title'   => 'Data Center Services',
     'items'   => mcc_faqs_for('technical-services'),
 ];
 ?>
