@@ -391,8 +391,7 @@ function mcc_google_ads_call_tracking(): void
     // Phone number => conversion label supplied by the Ads account.
     $numbers = [
         '800-257-9595' => 'XjmrCKyzzekcEIf0p_ID',
-        // TODO: add 609-386-0600 once American Eagle sends its label.
-        // '609-386-0600' => '',
+        '609-386-0600' => 'Oc0ZCKmzzekcEIf0p_ID',
     ];
 
     $numbers = array_filter($numbers);
