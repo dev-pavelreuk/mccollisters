@@ -1,10 +1,21 @@
 name: Deploy theme to Kinsta
 
-# Deploys the theme to Kinsta production on every push to main.
-# Safety: PHP is linted first — a syntax error fails the run and NOTHING is
-# deployed, so a bad edit (from GitHub's web editor or anywhere) can't white-
-# screen the live site. The .min CSS/JS are rebuilt in CI so source-only edits
-# take effect. Can also be run manually from the Actions tab (workflow_dispatch).
+# Pushes to main are deployed to the live theme folder on Kinsta.
+#
+# Safety: PHP is linted BEFORE anything is uploaded. A syntax error fails the
+# run and nothing is deployed, so a bad edit can't white-screen the live site
+# (this would have caught the unescaped apostrophe in 3ef1d05).
+#
+# The .min.css / .min.js twins are rebuilt in CI, so editing only the readable
+# source file is enough -- production loads the .min files.
+#
+# Transport is rsync over SSH. Kinsta is SFTP/SSH only (no plain FTP), and
+# rsync --delete makes the server mirror the repo: a file deleted or renamed in
+# git is removed from the server too, instead of leaving an orphan behind.
+# The --delete is scoped to the mccollisters-custom folder only, so the old
+# McCollisters theme kept as rollback is never touched.
+#
+# Can also be run by hand from the Actions tab (workflow_dispatch).
 
 on:
   push:
@@ -21,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -29,33 +40,53 @@ jobs:
           php-version: "8.1"
 
       - name: Lint PHP (a syntax error blocks the whole deploy)
-        run: |
-          find . -path ./node_modules -prune -o -name '*.php' -print0 \
-            | xargs -0 -n1 -P4 php -l
+        run: find . -name '*.php' -print0 | xargs -0 -n1 -P4 php -l
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "20"
 
       - name: Rebuild minified CSS/JS
         run: bash bin/build-min.sh
 
-      - name: Deploy to Kinsta via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          protocol: sftp
-          server: ${{ secrets.KINSTA_HOST }}
-          port: ${{ secrets.KINSTA_PORT }}
-          username: ${{ secrets.KINSTA_USER }}
-          password: ${{ secrets.KINSTA_PASSWORD }}
-          server-dir: public/wp-content/themes/mccollisters-custom/
-          local-dir: ./
-          # Keep dev/repo-only files off the server and never let the sync
-          # delete the server's own .git / state files.
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
-            **/.DS_Store
+      - name: Deploy to Kinsta over SSH
+        env:
+          SSH_HOST: ${{ secrets.KINSTA_HOST }}
+          SSH_PORT: ${{ secrets.KINSTA_PORT }}
+          SSH_USER: ${{ secrets.KINSTA_USER }}
+          SSH_PASSWORD: ${{ secrets.KINSTA_PASSWORD }}
+          SSH_KEY: ${{ secrets.KINSTA_SSH_KEY }}
+        run: |
+          set -euo pipefail
+
+          # Fail loudly and early if the secrets aren't configured, rather than
+          # letting rsync emit something cryptic.
+          : "${SSH_HOST:?KINSTA_HOST secret is not set}"
+          : "${SSH_PORT:?KINSTA_PORT secret is not set}"
+          : "${SSH_USER:?KINSTA_USER secret is not set}"
+
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+          # Prefer a deploy key if one is configured; otherwise fall back to the
+          # SFTP password Kinsta issues by default.
+          if [ -n "${SSH_KEY:-}" ]; then
+            printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+            chmod 600 ~/.ssh/deploy_key
+            RSH="ssh -p $SSH_PORT -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes"
+          else
+            : "${SSH_PASSWORD:?neither KINSTA_SSH_KEY nor KINSTA_PASSWORD is set}"
+            sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+            RSH="sshpass -e ssh -p $SSH_PORT"
+            export SSHPASS="$SSH_PASSWORD"
+          fi
+
+          rsync -avz --delete \
+            --exclude='.git' --exclude='.git/**' \
+            --exclude='.github' --exclude='.github/**' \
+            --exclude='.claude' --exclude='.claude/**' \
+            --exclude='node_modules' --exclude='node_modules/**' \
+            --exclude='.DS_Store' \
+            -e "$RSH" \
+            ./ "$SSH_USER@$SSH_HOST:public/wp-content/themes/mccollisters-custom/"
