@@ -90,3 +90,12 @@ jobs:
             --exclude='.DS_Store' \
             -e "$RSH" \
             ./ "$SSH_USER@$SSH_HOST:public/wp-content/themes/mccollisters-custom/"
+
+          # favicon.ico must sit at the DOCUMENT ROOT, not in the theme: nginx
+          # serves that path directly and never hands it to WordPress, so a file
+          # there overrides the <link rel="icon"> tags entirely. Keeping the
+          # source in the theme means it is version-controlled and redeployed;
+          # this line copies it to the one place the web server will serve it.
+          # No --delete here -- it must never touch anything else in the root.
+          rsync -avz -e "$RSH" \
+            ./favicon.ico "$SSH_USER@$SSH_HOST:public/favicon.ico"
