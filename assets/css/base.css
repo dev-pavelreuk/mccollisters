@@ -297,7 +297,7 @@ textarea:focus-visible {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: var(--color-black);
+	background: var(--color-primary);
 	opacity: 1;
 	visibility: visible;
 	transition: opacity 0.5s ease, visibility 0s linear 0.5s;
