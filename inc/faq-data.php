@@ -196,7 +196,7 @@ function mcc_faq_groups(): array
             ],
         ],
         'technical-services' => [
-            'label' => 'Technical Services',
+            'label' => 'Data Center Services',
             'pdf'   => 'FAQs-Technical-Services.pdf',
             'items' => [
                 ['q' => 'What are the risks associated with trusting an inexperienced company for my data center project?', 'a' => '<p>Inexperienced providers often cause project delays, equipment damage from improper packing and handling, compliance failures, and cost overruns. They may lack the ability to conduct thorough site surveys, properly protect optics and cabling, or manage the security requirements of enterprise IT environments.</p>'],
