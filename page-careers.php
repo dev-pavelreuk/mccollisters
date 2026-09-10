@@ -60,7 +60,7 @@ $apart = [
         ['num' => '01', 'text' => 'An enduring reputation for reliability, care, and precision in transportation and logistics'],
         ['num' => '02', 'text' => 'A family-owned, privately held company with decades of industry expertise and a unique culture and heritage'],
         ['num' => '03', 'text' => 'Opportunities to work with cutting-edge technology, specialized equipment, and complex logistics challenges'],
-        ['num' => '04', 'text' => 'Career paths across operations, driving, warehousing, installation services, logistics planning, sales, and corporate support, spanning 17 locations nationwide'],
+        ['num' => '04', 'text' => 'Career paths across operations, driving, warehousing, installation services, logistics planning, sales, and corporate support, with locations nationwide'],
     ],
 ];
 
