@@ -51,7 +51,7 @@ $tabs = [
         'image' => $uploads . '2026/03/technical-services-installation.jpg',
         'title' => 'Data Centers',
         'desc'  => 'McCollister’s Technical Services supports installation projects where data security, system integrity, and precision handling are non-negotiable. From data center infrastructure and enterprise IT deployments to decommissioning and migration projects, our specialized technicians and project managers deliver carefully planned, securely executed installations—integrated with McCollister’s nationwide transportation and logistics network.',
-        'url'   => home_url('/technical-services/'),
+        'url'   => home_url('/data-center-services/'),
     ],
     [
         'label' => 'Fitness Equipment',

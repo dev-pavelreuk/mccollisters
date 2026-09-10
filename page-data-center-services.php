@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Service Page — Technical Services
+ * Template Name: Service Page — Data Center Services
  *
- * Hard-coded service page (slug: technical-services). Editable content lives in
+ * Hard-coded service page (slug: data-center-services). Editable content lives in
  * the variables up top so it can later map to ACF. Reuses the global components:
  * .section-head, .mcc-btn, [data-accordion], the .svc-avcaps image+checklist and
  * the .svc-freight dark section — and service.css.

@@ -102,7 +102,7 @@ $technical = [
         'Many commercial moves require multiple vendors—one for furniture and another for IT and data infrastructure. McCollister’s simplifies this process by coordinating workplace moves with our technical services division, which specializes in data center relocation, IT asset handling, secure data destruction, and enterprise technology transitions.',
         'This integration reduces risk, shortens timelines, and ensures your workplace and technology environments come online together.',
     ],
-    'button'  => ['label' => 'Explore', 'url' => home_url('/technical-services/')],
+    'button'  => ['label' => 'Explore', 'url' => home_url('/data-center-services/')],
 ];
 
 $confidence = [

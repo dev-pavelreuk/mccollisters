@@ -273,7 +273,7 @@ function mcc_faq_link_tokens(string $answer): string
     return strtr($answer, [
         '@TALK@'      => esc_url(home_url('/talk-to-an-expert/')),
         '@ESG@'       => esc_url(home_url('/esg-practices/')),
-        '@TECHSERV@'  => esc_url(home_url('/technical-services/')),
+        '@TECHSERV@'  => esc_url(home_url('/data-center-services/')),
         '@PREPGUIDE@' => esc_url(home_url('/downloads/How-to-Prepare-Your-Vehicle-for-Transport.pdf')),
     ]);
 }

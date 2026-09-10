@@ -43,7 +43,7 @@ $serve = [
     'cards' => [
         ['label' => 'Aerospace',          'url' => home_url('/aerospace/'),          'image' => $uploads . '2026/02/spacex-gantry2.jpg',        'style' => 'background-position: top center;'],
         ['label' => 'Fitness',             'url' => home_url('/fitness/'),            'image' => $uploads . '2026/03/about-us-yelloow-shorts.jpg', 'style' => 'background-position: center;'],
-        ['label' => 'Technical Services',  'url' => home_url('/technical-services/'), 'image' => $uploads . '2026/02/data-center-lockup-1.jpg',  'style' => 'background-position: top center;'],
+        ['label' => 'Technical Services',  'url' => home_url('/data-center-services/'), 'image' => $uploads . '2026/02/data-center-lockup-1.jpg',  'style' => 'background-position: top center;'],
         ['label' => 'Auto Transport',      'url' => home_url('/auto-transport/'),     'image' => $uploads . '2026/02/antique-car-lockup1.jpg',   'style' => 'background-position: center;'],
         ['label' => 'Warehousing',         'url' => home_url('/warehousing/'),        'image' => $uploads . '2026/03/warehouse-racks2.jpg',      'style' => 'background-position: center;'],
     ],

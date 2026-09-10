@@ -7838,8 +7838,10 @@ body.search .blog-search__btn {
         margin-bottom: 70px;
     }
 
-    /* Technical Services: all h3 headings are 25px/30px on mobile. */
-    .page-technical-services h3 {
+    /* Data Center Services: all h3 headings are 25px/30px on mobile.
+       The class comes from mcc_body_classes(), which appends page-<slug> — so
+       it must track the page slug. */
+    .page-data-center-services h3 {
         font-size: 25px;
         line-height: 30px;
     }
