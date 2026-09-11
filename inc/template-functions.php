@@ -618,6 +618,23 @@ function mcc_schema_graph_fixes(array $graph): array
 add_filter('wpseo_schema_graph', 'mcc_schema_graph_fixes', 99);
 
 /**
+ * Pages are websites, not articles, when shared.
+ *
+ * Yoast gives every singular page og:type "article" -- the Open Graph type for
+ * dated news and blog content -- so service pages like Warehousing were being
+ * described to Facebook and LinkedIn as articles. Only the homepage got
+ * "website". Blog posts keep "article", which is right for them.
+ *
+ * /blog/ is an ordinary page here (page_for_posts is unset), so is_page()
+ * covers it as well.
+ */
+function mcc_opengraph_type(string $type): string
+{
+    return is_page() ? 'website' : $type;
+}
+add_filter('wpseo_opengraph_type', 'mcc_opengraph_type');
+
+/**
  * VideoObject structured data for the Vimeo videos.
  *
  * The three shorts had no markup at all, so Google had nothing to attach a
