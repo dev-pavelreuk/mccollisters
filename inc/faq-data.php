@@ -66,7 +66,7 @@ function mcc_faq_groups(): array
         ],
         'aerospace' => [
             'label' => 'Aerospace',
-            'pdf'   => 'FAQs-Page-Aerospace.pdf',
+            'pdf'   => 'FAQs-Aerospace.pdf',
             'items' => [
                 ['q' => 'What is aerospace transportation and logistics?', 'a' => '<p>Aerospace transportation and logistics refers to the specialized movement, handling, and support of spacecraft, aircraft, aerospace components, and related materials. Because aerospace parts are extremely high-value, oversized, and time-critical, this sector combines advanced logistical practices with industry-specific engineering and safety standards.</p>'],
                 ['q' => 'What are the risks associated with improper aerospace transportation?', 'a' => '<p>Improper aerospace transportation can lead to damaged or contaminated parts, safety hazards, and regulatory violations under the FAA, ITAR, or EAR. These mistakes cause production delays, documentation failures, environmental incidents, financial losses, and reputational harm. Some of these costs may not be covered by insurance.</p>'],
@@ -122,6 +122,20 @@ function mcc_faq_groups(): array
                 ['q' => 'Can McCollister’s handle a phased or multi-floor commercial relocation?', 'a' => '<p>Yes. McCollister’s regularly manages phased relocations where different floors, departments, or business units move on separate schedules. Each phase is planned and staffed independently while maintaining coordination across the full project timeline.</p>'],
                 ['q' => 'Does McCollister’s handle furniture disposal and recycling during a commercial move?', 'a' => '<p>Yes. McCollister’s coordinates the decommissioning, removal, and responsible disposal of furniture and equipment that will not transfer to the new location. Recycling and certified destruction services are available depending on the asset type.</p>'],
                 ['q' => 'How does McCollister’s minimize employee disruption during an office move?', 'a' => '<p>McCollister’s works with the project lead to develop employee communication plans, clear labeling and packing protocols, and a move schedule designed to minimize time away from productive work. The goal is a Monday morning that feels like nothing happened.</p>'],
+            ],
+        ],
+        'technical-services' => [
+            'label' => 'Data Center Services',
+            'pdf'   => 'FAQs-Data-Center-Services.pdf',
+            'items' => [
+                ['q' => 'What are the risks associated with trusting an inexperienced company for my data center project?', 'a' => '<p>Inexperienced providers often cause project delays, equipment damage from improper packing and handling, compliance failures, and cost overruns. They may lack the ability to conduct thorough site surveys, properly protect optics and cabling, or manage the security requirements of enterprise IT environments.</p>'],
+                ['q' => 'What is data center relocation?', 'a' => '<p>Data center relocation refers to moving an organization’s existing data center infrastructure from one environment to another. The process can include server removal from racking, serialized inventory, secure packing with security tape, and coordinated transfer to the new location.</p>'],
+                ['q' => 'What is data center decommissioning?', 'a' => '<p>Data center decommissioning is the process of properly disposing of IT assets that have reached end of life, according to industry standards and governmental regulations. McCollister’s Technical Services provides device removal, rack removal, cable removal, data destruction services, and ITAD buyback options.</p>'],
+                ['q' => 'What information do I need to gather to get a quote for data center services?', 'a' => '<p>For an initial conversation, McCollister’s Technical Services needs the general scope of your project, how much material is involved, where the work will take place, and when you need it completed. Smaller projects can often be quoted through a quick email exchange; larger projects begin with a planning call.</p>'],
+                ['q' => 'When should I first contact McCollister’s to discuss my data center project?', 'a' => '<p>As early as possible. McCollister’s Technical Services is often fully booked three or more weeks in advance, even for simple projects. Early engagement allows for site surveys, project design, and proper resource planning, maximizing safety and efficiency while minimizing business disruption.</p>'],
+                ['q' => 'Does McCollister’s provide certified data destruction?', 'a' => '<p>Yes. McCollister’s Technical Services offers on-site and off-site data destruction services that comply with NIST 800-88 standards. Certificates of destruction are provided for every asset processed, supporting regulatory compliance and audit documentation.</p>'],
+                ['q' => 'Can McCollister’s handle a full data center migration to a new facility?', 'a' => '<p>Yes. McCollister’s Technical Services manages end-to-end data center migrations, from pre-move site surveys and detailed project planning through physical relocation, rack-and-stack installation, cabling, and post-move verification at the destination facility.</p>'],
+                ['q' => 'Does McCollister’s provide IT asset disposition (ITAD) services?', 'a' => '<p>Yes. McCollister’s Technical Services offers ITAD services including asset auditing, data sanitization, remarketing, and certified recycling. Buyback options are available for equipment that retains market value, helping offset decommissioning costs.</p>'],
             ],
         ],
         'finance-banking' => [
@@ -193,20 +207,6 @@ function mcc_faq_groups(): array
                 ['q' => 'Is my shipment covered for loss or damage during my relocation?', 'a' => '<p>Yes. McCollister’s offers full-value protection options for household goods during a residential relocation. Your sales consultant can walk you through available coverage options and help you select the appropriate level of protection.</p>'],
                 ['q' => 'Does McCollister’s handle auto transport as part of a residential relocation?', 'a' => '<p>Yes. McCollister’s offers enclosed and open auto transport alongside household goods relocation, allowing families to coordinate vehicle and home moves through a single provider.</p>'],
                 ['q' => 'What is included in a residential relocation quote?', 'a' => '<p>Quotes typically account for distance, volume, packing and unpacking needs, specialty item handling, storage requirements, and delivery timeline. A McCollister’s consultant will conduct a virtual or on-site survey to ensure accuracy.</p>'],
-            ],
-        ],
-        'technical-services' => [
-            'label' => 'Data Center Services',
-            'pdf'   => 'FAQs-Technical-Services.pdf',
-            'items' => [
-                ['q' => 'What are the risks associated with trusting an inexperienced company for my data center project?', 'a' => '<p>Inexperienced providers often cause project delays, equipment damage from improper packing and handling, compliance failures, and cost overruns. They may lack the ability to conduct thorough site surveys, properly protect optics and cabling, or manage the security requirements of enterprise IT environments.</p>'],
-                ['q' => 'What is data center relocation?', 'a' => '<p>Data center relocation refers to moving an organization’s existing data center infrastructure from one environment to another. The process can include server removal from racking, serialized inventory, secure packing with security tape, and coordinated transfer to the new location.</p>'],
-                ['q' => 'What is data center decommissioning?', 'a' => '<p>Data center decommissioning is the process of properly disposing of IT assets that have reached end of life, according to industry standards and governmental regulations. McCollister’s Technical Services provides device removal, rack removal, cable removal, data destruction services, and ITAD buyback options.</p>'],
-                ['q' => 'What information do I need to gather to get a quote for data center services?', 'a' => '<p>For an initial conversation, McCollister’s Technical Services needs the general scope of your project, how much material is involved, where the work will take place, and when you need it completed. Smaller projects can often be quoted through a quick email exchange; larger projects begin with a planning call.</p>'],
-                ['q' => 'When should I first contact McCollister’s to discuss my data center project?', 'a' => '<p>As early as possible. McCollister’s Technical Services is often fully booked three or more weeks in advance, even for simple projects. Early engagement allows for site surveys, project design, and proper resource planning, maximizing safety and efficiency while minimizing business disruption.</p>'],
-                ['q' => 'Does McCollister’s provide certified data destruction?', 'a' => '<p>Yes. McCollister’s Technical Services offers on-site and off-site data destruction services that comply with NIST 800-88 standards. Certificates of destruction are provided for every asset processed, supporting regulatory compliance and audit documentation.</p>'],
-                ['q' => 'Can McCollister’s handle a full data center migration to a new facility?', 'a' => '<p>Yes. McCollister’s Technical Services manages end-to-end data center migrations, from pre-move site surveys and detailed project planning through physical relocation, rack-and-stack installation, cabling, and post-move verification at the destination facility.</p>'],
-                ['q' => 'Does McCollister’s provide IT asset disposition (ITAD) services?', 'a' => '<p>Yes. McCollister’s Technical Services offers ITAD services including asset auditing, data sanitization, remarketing, and certified recycling. Buyback options are available for equipment that retains market value, helping offset decommissioning costs.</p>'],
             ],
         ],
         'transportation' => [
