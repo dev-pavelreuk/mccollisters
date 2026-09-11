@@ -140,7 +140,7 @@ function mcc_faq_groups(): array
         ],
         'finance-banking' => [
             'label' => 'Finance & Banking',
-            'pdf'   => 'FAQs-Finance-and-Banking.pdf',
+            'pdf'   => 'FAQs-Finance-Banking.pdf',
             'items' => [
                 ['q' => 'What types of ATM installations does McCollister’s support?', 'a' => '<p>McCollister’s supports through-the-wall (TTW) ATMs, drive-through and island construction, and free-standing lobby ATM kiosks, including challenging rigging and installations aligned to customer quality control and compliance standards.</p>'],
                 ['q' => 'Will I have a dedicated project manager and consistent updates?', 'a' => '<p>Yes. McCollister’s project managers and rigging experts work with customers through each project phase. Managers are responsible for planning, permitting, and construction and can meet client-dictated update cadences.</p>'],
@@ -239,7 +239,7 @@ function mcc_faq_groups(): array
         ],
         'final-mile-white-glove' => [
             'label' => 'White Glove & Final Mile',
-            'pdf'   => 'FAQs-Final-Mile-and-White-Glove.pdf',
+            'pdf'   => 'FAQs-White-Glove-Final-Mile',
             'items' => [
                 ['q' => 'What is white-glove transportation?', 'a' => '<p>White-glove transportation is a specialized logistics service designed for shipments that require added care, coordination, and inside handling. At McCollister’s, this typically includes multi-person teams, inside pickup and delivery, careful placement, protective handling during transit, and debris removal.</p>'],
                 ['q' => 'Why is it called white-glove delivery?', 'a' => '<p>The term “white glove” reflects a higher standard of service and attention to detail, where handling, presentation, and care matter as much as transportation. In logistics, it signals a level of service that goes beyond curbside or dock delivery.</p>'],
