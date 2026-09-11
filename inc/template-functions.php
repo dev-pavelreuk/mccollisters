@@ -472,22 +472,9 @@ function mcc_faq_schema(array $items): void
             continue;
         }
 
-        // Same allowlist the accordions render through, so the marked-up answer
-        // is byte-identical to the visible one. It is also a subset of the HTML
-        // Google accepts inside acceptedAnswer, which rules out anything
-        // unexpected reaching the JSON.
-        $answer = wp_kses($item['a'], [
-            'p'      => [],
-            'br'     => [],
-            'ul'     => [],
-            'ol'     => [],
-            'li'     => [],
-            'strong' => [],
-            'em'     => [],
-            'b'      => [],
-            'i'      => [],
-            'a'      => ['href' => [], 'target' => [], 'rel' => [], 'aria-label' => []],
-        ]);
+        // The allowlist every FAQ accordion renders through, so the marked-up
+        // answer is byte-identical to the visible one.
+        $answer = wp_kses($item['a'], mcc_faq_answer_kses());
 
         if (trim(wp_strip_all_tags($answer)) === '') {
             continue;

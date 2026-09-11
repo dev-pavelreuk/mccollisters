@@ -178,7 +178,7 @@ $faqs = [
                             <span class="svc-faq__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6M9 6H18V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                         </summary>
                         <div class="svc-faq__panel">
-                            <?php echo wp_kses($item['a'], ['p' => [], 'ul' => [], 'li' => [], 'strong' => []]); ?>
+                            <?php echo wp_kses($item['a'], mcc_faq_answer_kses()); ?>
                         </div>
                     </details>
                 <?php endforeach; ?>

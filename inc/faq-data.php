@@ -307,6 +307,30 @@ function mcc_faq_link_tokens(string $answer): string
 }
 
 /**
+ * HTML allowed in an FAQ answer, wherever it is shown.
+ *
+ * One list for every FAQ accordion and for the FAQPage schema, so the answer
+ * Google reads matches the one visitors see, and whatever an editor writes in
+ * the FAQs editor -- links included -- appears on every page it is placed on.
+ * It is also a subset of the HTML Google accepts inside acceptedAnswer.
+ */
+function mcc_faq_answer_kses(): array
+{
+    return [
+        'p'      => [],
+        'br'     => [],
+        'ul'     => [],
+        'ol'     => [],
+        'li'     => [],
+        'strong' => [],
+        'em'     => [],
+        'b'      => [],
+        'i'      => [],
+        'a'      => ['href' => [], 'target' => [], 'rel' => [], 'aria-label' => []],
+    ];
+}
+
+/**
  * The items for one group, or an empty array if the slug is unknown.
  */
 function mcc_faqs_for(string $group): array
