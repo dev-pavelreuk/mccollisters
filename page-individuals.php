@@ -186,7 +186,7 @@ $faqs = [
                     <div class="svc-feature__icon">
                         <img src="<?php echo esc_url($f['icon']); ?>" alt="" loading="lazy" decoding="async">
                     </div>
-                    <h3 class="svc-feature__title"><?php echo esc_html($f['title']); ?></h3>
+                    <p class="svc-feature__title"><?php echo esc_html($f['title']); ?></p>
                     <p class="svc-feature__sub"><?php echo esc_html($f['sub']); ?></p>
                 </div>
             <?php endforeach; ?>
