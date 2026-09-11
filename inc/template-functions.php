@@ -207,6 +207,29 @@ function mcc_locations_document_title(string $title): string
 add_filter('pre_get_document_title', 'mcc_locations_document_title', 99);
 
 /**
+ * Same cause, breadcrumb: "Locations", not "Facilities".
+ *
+ * With no breadcrumb title set for the `facility` archive in Yoast, its crumb
+ * falls back to the post-type label "Facilities". Yoast builds the
+ * BreadcrumbList schema from these same crumbs, so this corrects what Google
+ * reads too (the theme renders no visible breadcrumb on this page). Matched on
+ * the crumb's ptarchive key rather than its text, so it survives a label change.
+ */
+function mcc_locations_breadcrumb(array $crumbs): array
+{
+    foreach ($crumbs as &$crumb) {
+        if (($crumb['ptarchive'] ?? '') === 'facility') {
+            $crumb['text'] = 'Locations';
+        }
+    }
+
+    unset($crumb);
+
+    return $crumbs;
+}
+add_filter('wpseo_breadcrumb_links', 'mcc_locations_breadcrumb');
+
+/**
  * Front-page hero slide URLs.
  *
  * Customizer-selected slides take priority; otherwise the default sequence of
