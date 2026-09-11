@@ -86,7 +86,7 @@ $confidence = [
 $faqs = [
     'eyebrow' => 'faqs',
     'title'   => 'Data Center Services',
-    'items'   => mcc_faqs_for('technical-services'),
+    'items'   => mcc_faqs_for('data-center-services'),
 ];
 ?>
 <main id="primary" class="site-main">

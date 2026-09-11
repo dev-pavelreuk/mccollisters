@@ -131,7 +131,7 @@ $render_accordion = static function (array $items) use ($faq_arrow, $faq_kses): 
     <?php foreach ($industries as $slug => $ind) : ?>
         <template data-faqs-tpl="<?php echo esc_attr($slug); ?>"
                   data-title="<?php echo esc_attr($ind['label'] . ' FAQs'); ?>"
-                  data-pdf="<?php echo esc_url($uploads . '2026/09/' . $ind['pdf']); ?>">
+                  data-pdf="<?php echo esc_url($ind['pdf_url'] ?? ''); ?>">
             <?php $render_accordion($ind['items']); ?>
         </template>
     <?php endforeach; ?>
@@ -171,6 +171,8 @@ $render_accordion = static function (array $items) use ($faq_arrow, $faq_kses): 
                 body.appendChild(tpl.content.cloneNode(true));
                 titleEl.textContent = tpl.getAttribute('data-title');
                 dlEl.setAttribute('href', tpl.getAttribute('data-pdf'));
+                dlEl.style.display = tpl.getAttribute('data-pdf') ? '' : 'none';
+                if (printBtn) { printBtn.style.display = dlEl.style.display; } // Print opens the PDF too
                 // Smooth height-animated, single-open accordion (same as the page).
                 if (window.mccInitAccordions) { window.mccInitAccordions(body); }
                 modal.hidden = false;

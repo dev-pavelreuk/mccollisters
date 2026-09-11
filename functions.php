@@ -21,6 +21,7 @@ $includes = [
 	'/inc/customizer.php',
 	'/inc/template-functions.php',
 	'/inc/mega-menu.php',
+	'/inc/faq-cpt.php',
 	'/inc/faq-data.php',
 ];
 
