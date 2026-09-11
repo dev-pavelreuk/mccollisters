@@ -48,7 +48,7 @@ $more = [
         ['icon' => $uploads . '2026/06/About-Us-Our-Team-i.png', 'title' => 'About Us', 'url' => home_url('/about-us/'), 'text' => 'Learn more about who we are, who we serve, and what we do.'],
         ['icon' => $uploads . '2026/06/Certifications-About-Us-i.png', 'title' => 'Certifications', 'url' => home_url('/forms-certifications-documents/'), 'text' => 'Find important forms, certifications, and helpful guides.'],
         ['icon' => $uploads . '2026/06/Careers-About-Us-i.png', 'title' => 'Careers', 'url' => home_url('/careers/'), 'text' => 'Learn more about working for McCollister’s and view open positions.'],
-        ['icon' => $uploads . '2026/06/ESG-Practices-About-Us-i.png', 'title' => 'ESG Practices', 'url' => home_url('/esg/'), 'text' => 'Explore the principles that guide our company and commitment to customers.'],
+        ['icon' => $uploads . '2026/06/ESG-Practices-About-Us-i.png', 'title' => 'ESG Practices', 'url' => home_url('/esg-practices/'), 'text' => 'Explore the principles that guide our company and commitment to customers.'],
     ],
 ];
 

@@ -126,7 +126,7 @@ $more = [
         [
             'icon'  => $uploads . '2026/06/ESG-Practices-About-Us-i.png',
             'title' => 'ESG Practices',
-            'url'   => home_url('/esg/'),
+            'url'   => home_url('/esg-practices/'),
             'text'  => 'Explore the principles that guide our company and commitment to customers.',
         ],
     ],
