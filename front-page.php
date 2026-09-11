@@ -177,7 +177,7 @@ get_header();
         __('Hospitality', 'mccollisters'),
         __('Medical Imaging', 'mccollisters'),
         __('Residential Relocation', 'mccollisters'),
-        __('Technical Services', 'mccollisters'),
+        __('Data Center Services', 'mccollisters'),
         __('Telecommunications', 'mccollisters'),
     ];
 
@@ -402,7 +402,7 @@ get_header();
         [__('Aerospace', 'mccollisters'), '/aerospace/', '2026/05/mccollisters-industrys_0023_layer-3.jpg'],
         [__('Auto Transport', 'mccollisters'), '/auto-transport/', '2026/05/mccollisters-industrys_0014_layer-13.jpg'],
         [__('Commercial Relocation', 'mccollisters'), '/commercial-relocation/', '2026/05/mccollisters-icomm-relo.jpg'],
-        [__('Technical Services', 'mccollisters'), '/data-center-services/', '2026/05/mccollisters-industrys_0019_layer-8.jpg'],
+        [__('Data Center Services', 'mccollisters'), '/data-center-services/', '2026/05/mccollisters-industrys_0019_layer-8.jpg'],
         [__('Residential Relocation', 'mccollisters'), '/residential-relocation/', '2026/05/mccollisters-industrys_0005_layer-21.jpg'],
         [__('Fitness', 'mccollisters'), '/fitness/', '2026/05/gym-rat-1.jpg'],
     ];
