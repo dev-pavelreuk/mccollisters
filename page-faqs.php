@@ -192,14 +192,10 @@ $render_accordion = static function (array $items) use ($faq_arrow, $faq_kses): 
                 if (e.key === 'Escape' && !modal.hidden) { closeModal(); }
             });
 
-            var printBtn = modal.querySelector('[data-faqs-print]');
+var printBtn = modal.querySelector('[data-faqs-print]');
             if (printBtn) {
                 printBtn.addEventListener('click', function () {
-                    // Open every answer so the print captures the full FAQ.
-                    body.querySelectorAll('details').forEach(function (d) { d.open = true; });
-                    document.body.classList.add('faqs-printing');
-                    window.print();
-                    document.body.classList.remove('faqs-printing');
+                    window.open(dlEl.getAttribute('href'), '_blank');
                 });
             }
         })();
