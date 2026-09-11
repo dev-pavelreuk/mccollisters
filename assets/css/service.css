@@ -4283,6 +4283,16 @@
     #guides {
         scroll-margin-top: -76px;
     }
+
+    /* #credentials had the same problem: the "/ credentials /" eyebrow landed
+       ~124px down with 24px of the Downloadables grid peeking in above it.
+       Subtract the section's actual top padding -- clamp(56px, 8vw, 100px),
+       not a flat 100px -- so the eyebrow sits 24px from the top at every width
+       in this range. Mobile removes that padding, so the base 24px is already
+       right there and this must not apply (it would overshoot by 56px). */
+    #credentials {
+        scroll-margin-top: calc(24px - clamp(56px, 8vw, 100px));
+    }
 }
 
 /* Shared blue file icon (PDF / DOC) used by the forms cards + guides list. */
