@@ -191,35 +191,54 @@ function mcc_body_classes(array $classes): array
 add_filter('body_class', 'mcc_body_classes');
 
 /**
- * The Locations page is the `facility` post-type archive (slug: locations), so
- * its document <title> otherwise defaults to the "Facilities" post-type label.
- * Force it to "Locations | <site name>". Priority 99 runs after Yoast's own
- * pre_get_document_title filter, so this wins whether or not Yoast is active.
+ * Post-type archives that are really pages of the site, and the name each one
+ * should go by: /locations/ is the `facility` archive and /leadership/ is the
+ * `team_member` archive, so their titles would otherwise default to the
+ * post-type labels ("Facilities", "Team Members").
  */
-function mcc_locations_document_title(string $title): string
+function mcc_archive_page_titles(): array
 {
-    if (is_post_type_archive('facility')) {
-        return 'Locations | ' . get_bloginfo('name');
+    return [
+        'facility'    => 'Locations',
+        'team_member' => 'Our Team',
+    ];
+}
+
+/**
+ * Give those archives their real document <title>. Priority 99 runs after
+ * Yoast's own pre_get_document_title filter, so this wins whether or not Yoast
+ * is active.
+ */
+function mcc_archive_document_title(string $title): string
+{
+    foreach (mcc_archive_page_titles() as $post_type => $label) {
+        if (is_post_type_archive($post_type)) {
+            return $label . ' | ' . get_bloginfo('name');
+        }
     }
 
     return $title;
 }
-add_filter('pre_get_document_title', 'mcc_locations_document_title', 99);
+add_filter('pre_get_document_title', 'mcc_archive_document_title', 99);
 
 /**
- * Same cause, breadcrumb: "Locations", not "Facilities".
+ * Same cause, breadcrumb: "Locations" and "Our Team", not the post-type labels.
  *
- * With no breadcrumb title set for the `facility` archive in Yoast, its crumb
- * falls back to the post-type label "Facilities". Yoast builds the
+ * With no breadcrumb title set for these archives in Yoast, each crumb falls
+ * back to its post-type label ("Facilities", "Team Members"). Yoast builds the
  * BreadcrumbList schema from these same crumbs, so this corrects what Google
  * reads too (the theme renders no visible breadcrumb on this page). Matched on
  * the crumb's ptarchive key rather than its text, so it survives a label change.
  */
-function mcc_locations_breadcrumb(array $crumbs): array
+function mcc_archive_breadcrumb(array $crumbs): array
 {
+    $labels = mcc_archive_page_titles();
+
     foreach ($crumbs as &$crumb) {
-        if (($crumb['ptarchive'] ?? '') === 'facility') {
-            $crumb['text'] = 'Locations';
+        $post_type = $crumb['ptarchive'] ?? '';
+
+        if (isset($labels[$post_type])) {
+            $crumb['text'] = $labels[$post_type];
         }
     }
 
@@ -227,7 +246,7 @@ function mcc_locations_breadcrumb(array $crumbs): array
 
     return $crumbs;
 }
-add_filter('wpseo_breadcrumb_links', 'mcc_locations_breadcrumb');
+add_filter('wpseo_breadcrumb_links', 'mcc_archive_breadcrumb');
 
 /**
  * Front-page hero slide URLs.
