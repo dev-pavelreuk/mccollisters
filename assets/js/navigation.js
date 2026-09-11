@@ -455,6 +455,32 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 		});
 
+	// Desktop: clicking a link inside a dropdown collapses it. For a same-page
+	// #anchor (Resources > Certifications while on the Forms page) nothing
+	// reloads -- the page just scrolls -- and while a dropdown reads as open the
+	// header is kept visible (keepVisible below), so it would stay over the
+	// destination. Whether the dropdown closes by itself then depends on the
+	// browser firing mouseleave as the header slides away under a still pointer.
+	// Collapsing on click makes the header hide on the jump everywhere, which
+	// the anchor offsets in service.css (#credentials, #guides) assume.
+	navigation.querySelectorAll(".sub-menu a").forEach((link) => {
+		link.addEventListener("click", () => {
+			if (window.innerWidth <= 1024) {
+				return;
+			}
+
+			submenuParents.forEach((item) => {
+				const parentLink = item.querySelector(":scope > a[aria-haspopup]");
+
+				if (parentLink) {
+					parentLink.setAttribute("aria-expanded", "false");
+				}
+			});
+
+			closeSubmenuPanel();
+		});
+	});
+
 	// Sticky header that hides on scroll-down and slides back in on scroll-up.
 	let lastScrollY = window.scrollY;
 	let headerTicking = false;
