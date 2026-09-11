@@ -171,11 +171,12 @@ $faqs = [
     </section>
 
     <!-- Quote banner (external embed) overlapping the hero -->
+    <!-- TEMPORARILY HIDDEN
     <div class="svc-quote">
         <div class="svc-quote__inner">
             <iframe id="mcc-banner-quote-embed" src="https://dogqvekvr5n1p.cloudfront.net/public/banner-quote" title="McCollister&#039;s Banner Quote" scrolling="no" loading="eager" class="skip-lazy" data-skip-lazy="true" data-nitro-exclude="true"></iframe>
         </div>
-    </div>
+    </div> -->
     <script>
         // Route each embed message to the iframe that actually sent it (matched
         // by event.source), so multiple quote embeds on the page each resize to
