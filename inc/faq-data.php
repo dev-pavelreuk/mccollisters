@@ -239,7 +239,7 @@ function mcc_faq_groups(): array
         ],
         'final-mile-white-glove' => [
             'label' => 'White Glove & Final Mile',
-            'pdf'   => 'FAQs-White-Glove-Final-Mile',
+            'pdf'   => 'FAQs-White-Glove-Final-Mile.pdf',
             'items' => [
                 ['q' => 'What is white-glove transportation?', 'a' => '<p>White-glove transportation is a specialized logistics service designed for shipments that require added care, coordination, and inside handling. At McCollister’s, this typically includes multi-person teams, inside pickup and delivery, careful placement, protective handling during transit, and debris removal.</p>'],
                 ['q' => 'Why is it called white-glove delivery?', 'a' => '<p>The term “white glove” reflects a higher standard of service and attention to detail, where handling, presentation, and care matter as much as transportation. In logistics, it signals a level of service that goes beyond curbside or dock delivery.</p>'],
