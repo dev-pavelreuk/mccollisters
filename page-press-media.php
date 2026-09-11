@@ -95,8 +95,10 @@ $more = [
             <ul class="press__list">
                 <?php foreach ($press as $item) : ?>
                     <li class="press__item">
-                        <a class="press__icon" href="<?php echo esc_url($item['url']); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($item['title']); ?>">
+                        <?php // Real link text, visually hidden, instead of aria-label: crawlers read a link's text, not its ARIA name. ?>
+                        <a class="press__icon" href="<?php echo esc_url($item['url']); ?>" target="_blank" rel="noopener">
                             <?php echo $ext_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                            <span class="screen-reader-text"><?php echo esc_html($item['title']); ?></span>
                         </a>
                         <div class="press__body">
                             <a class="press__title" href="<?php echo esc_url($item['url']); ?>" target="_blank" rel="noopener"><?php echo wp_kses($item['title'], []); ?></a>
