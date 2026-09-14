@@ -79,13 +79,25 @@ if (!function_exists('mcc_team_card')) {
         // sits high in the frame that crop clips the head, so use the taller
         // aspect-preserving size and let object-fit handle the box.
         $tall_crops = ['tyler-m-yoos'];
-        $img_size   = in_array($slug, $tall_crops, true) ? '2048x2048' : 'large';
+        $img_size   = in_array($slug, $tall_crops, true) ? '2048x2048' : 'logico_wider';
+
+        // Ask for a file big enough for the box. The card is a quarter of the
+        // container on desktop (~320px), a third at <=1024px and full width on
+        // mobile -- but .team-card__img magnifies the photo (scale 1.4), so the
+        // file has to cover 1.4x the box, and twice that again on a retina
+        // screen (~900px for a 320px card). Stating the box 1.4x larger than it
+        // really is makes the browser pick that file. WordPress prepends "auto,"
+        // to sizes on a lazy image, which would size from the layout box and
+        // keep picking one ~2x too small, so it is off for this image only.
+        $sizes = '(max-width: 782px) 140vw, (max-width: 1024px) 47vw, 35vw';
+        add_filter('wp_img_tag_add_auto_sizes', '__return_false');
         ?>
         <article class="team-card team-card--<?php echo esc_attr($slug); ?>">
             <a class="team-card__media" href="<?php echo esc_url(get_permalink($post_id)); ?>" aria-label="<?php echo esc_attr($name); ?>">
                 <span class="team-card__plus" aria-hidden="true"><?php echo $plus_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
                 <?php if (has_post_thumbnail($post_id)) : ?>
-                    <?php echo get_the_post_thumbnail($post_id, $img_size, ['class' => 'team-card__img', 'loading' => 'lazy', 'decoding' => 'async', 'alt' => esc_attr($name)]); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo get_the_post_thumbnail($post_id, $img_size, ['class' => 'team-card__img', 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => $sizes, 'alt' => esc_attr($name)]); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php remove_filter('wp_img_tag_add_auto_sizes', '__return_false'); ?>
                 <?php else : ?>
                     <span class="team-card__img team-card__img--placeholder" aria-hidden="true"></span>
                 <?php endif; ?>

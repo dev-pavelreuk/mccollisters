@@ -7456,7 +7456,13 @@ body.search .blog-search__btn {
 }
 
 /* Cover the whole box (no grey showing), no distortion. A slight zoom + shift
-   nudges the image down while keeping the box fully covered. */
+   nudges the image down while keeping the box fully covered.
+   Matched by position as well as class: Imagify serves WebP through a <picture>
+   wrapper and moves the class onto it, leaving the <img> class-less -- so the
+   zoom landed on the wrapper while the photo itself stayed on object-fit: fill,
+   stretched rather than cropped. Both selectors are needed: the class styles
+   whichever element carries it, the descendant styles the real <img>. */
+.team-card__media img,
 .team-card__img {
     width: 100%;
     height: 100%;
@@ -7469,11 +7475,19 @@ body.search .blog-search__btn {
     transition: filter 0.4s ease;
 }
 
+/* With the wrapper already scaled via its class, the inner image must not
+   scale a second time (1.4 x 1.4 = 1.96 would crop the faces). */
+.team-card__media picture.team-card__img img {
+    transform: none;
+}
+
 .team-card__img--placeholder {
     width: 100%;
     background: linear-gradient(160deg, #e7ebef 0%, #d7dde3 100%);
 }
 
+.team-card__media:hover img,
+.team-card__media:focus-visible img,
 .team-card__media:hover .team-card__img,
 .team-card__media:focus-visible .team-card__img {
     filter: grayscale(1);
@@ -7585,6 +7599,7 @@ body.search .blog-search__btn {
     background: var(--color-light);
 }
 
+.team-single__media img,
 .team-single__img {
     width: 100%;
     height: auto;
