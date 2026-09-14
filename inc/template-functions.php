@@ -249,6 +249,59 @@ function mcc_archive_breadcrumb(array $crumbs): array
 add_filter('wpseo_breadcrumb_links', 'mcc_archive_breadcrumb');
 
 /**
+ * Team groups hidden from the site.
+ *
+ * A slug listed here is left off the Our Team page entirely -- tab, panel and
+ * its members (see template-parts/team/team-listing.php) -- so its term archive
+ * would be the only way in. The two filters below close that off: the archive
+ * redirects to Our Team and the term drops out of the XML sitemap.
+ *
+ * The members' own /leadership/<name>/ pages are deliberately left alone; they
+ * are separate posts, not part of the group listing.
+ */
+function mcc_hidden_team_groups(): array
+{
+    return ['division-leaders'];
+}
+
+/**
+ * Send a hidden group's term archive to the Our Team page rather than 404,
+ * so any existing link or indexed URL lands somewhere sensible.
+ */
+function mcc_redirect_hidden_team_groups(): void
+{
+    if (!is_tax('team_group')) {
+        return;
+    }
+
+    $term = get_queried_object();
+
+    if ($term instanceof WP_Term && in_array($term->slug, mcc_hidden_team_groups(), true)) {
+        wp_safe_redirect(get_post_type_archive_link('team_member') ?: home_url('/leadership/'), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'mcc_redirect_hidden_team_groups');
+
+/**
+ * Keep hidden groups out of the XML sitemap, so nothing points at a URL that
+ * only redirects. Yoast applies this in its taxonomy sitemap provider.
+ */
+function mcc_exclude_hidden_team_groups_from_sitemap(array $excluded): array
+{
+    foreach (mcc_hidden_team_groups() as $slug) {
+        $term = get_term_by('slug', $slug, 'team_group');
+
+        if ($term instanceof WP_Term) {
+            $excluded[] = $term->term_id;
+        }
+    }
+
+    return $excluded;
+}
+add_filter('wpseo_exclude_from_sitemap_by_term_ids', 'mcc_exclude_hidden_team_groups_from_sitemap');
+
+/**
  * Front-page hero slide URLs.
  *
  * Customizer-selected slides take priority; otherwise the default sequence of

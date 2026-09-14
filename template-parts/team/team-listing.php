@@ -99,12 +99,20 @@ if (!function_exists('mcc_team_card')) {
     }
 }
 
-// Groups (Executives, Division Leaders, …); fall back to one flat list.
+// Groups (Executives, …); fall back to one flat list. Groups named by
+// mcc_hidden_team_groups() are left off entirely -- tab, panel and members --
+// and their term archive is redirected away (inc/template-functions.php).
+$hidden_groups = function_exists('mcc_hidden_team_groups') ? mcc_hidden_team_groups() : [];
+
 $groups = get_terms([
     'taxonomy'   => 'team_group',
     'hide_empty' => true,
     'orderby'    => 'term_order',
     'order'      => 'ASC',
+    'exclude'    => array_filter(array_map(
+        static fn(string $slug): int => (int) (get_term_by('slug', $slug, 'team_group')->term_id ?? 0),
+        $hidden_groups
+    )),
 ]);
 if (is_wp_error($groups)) {
     $groups = [];
