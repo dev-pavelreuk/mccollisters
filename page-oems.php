@@ -189,7 +189,11 @@ $faqs = [
         // their own height.
         window.addEventListener('message', function (event) {
             if (!event || !event.data || !event.data.type) { return; }
-            var iframes = document.querySelectorAll('iframe[src*="banner-quote"]');
+            // Scan every iframe rather than iframe[src*="banner-quote"]: the
+            // lazy-load layer strips the src attribute, so that selector matches
+            // nothing and the height is never applied. event.source below is
+            // what actually identifies the sender.
+            var iframes = document.getElementsByTagName('iframe');
             var target = null;
             for (var i = 0; i < iframes.length; i++) {
                 if (iframes[i].contentWindow === event.source) { target = iframes[i]; break; }
