@@ -516,7 +516,23 @@
 				return;
 			}
 
-			const inst = { track, group, offset: 0, paused: false, last: null };
+			// Pace the strip by seconds-per-logo rather than a fixed loop time: with a
+			// fixed 40s loop, adding logos makes the marquee scroll proportionally
+			// faster (24 logos scrolled 2.5x faster than 7). Holding seconds-per-logo
+			// constant keeps the original pacing at any count and any viewport.
+			// Matches today's timing: 40s / 7 logos, and 40s / 6 for the --lg strip.
+			const logoCount = group.querySelectorAll("img").length || 1;
+			const secondsPerLogo = slider.classList.contains("svc-logos--lg")
+				? 40 / 6
+				: 40 / 7;
+			const inst = {
+				track,
+				group,
+				offset: 0,
+				paused: false,
+				last: null,
+				loopSeconds: logoCount * secondsPerLogo,
+			};
 			const pause = () => {
 				inst.paused = true;
 			};
@@ -550,7 +566,7 @@
 				if (width <= 0) {
 					return;
 				}
-				inst.offset -= (width / 40) * dt;
+				inst.offset -= (width / inst.loopSeconds) * dt;
 				while (-inst.offset >= width) {
 					inst.offset += width;
 				}

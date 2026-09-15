@@ -91,13 +91,30 @@ $whychoose = [
 ];
 
 $logos = [
-    ['img' => $uploads . '2026/05/honda.png', 'alt' => 'Honda', 'url' => 'https://www.honda.com/'],
+    ['img' => $uploads . '2026/05/alfa-romeo.png',        'alt' => 'Alfa Romeo',        'url' => 'https://www.alfaromeousa.com/'],
+    ['img' => $uploads . '2026/05/aston-martin.png',      'alt' => 'Aston Martin',      'url' => 'https://www.astonmartin.com/'],
+    ['img' => $uploads . '2026/05/audi.png',              'alt' => 'Audi',              'url' => 'https://www.audiusa.com/'],
+    ['img' => $uploads . '2026/05/autonation.png',        'alt' => 'AutoNation',        'url' => 'https://www.autonation.com/'],
+    ['img' => $uploads . '2026/05/bentley.png',           'alt' => 'Bentley',           'url' => 'https://www.bentleymotors.com/'],
+    ['img' => $uploads . '2026/05/bmw.png',               'alt' => 'BMW',               'url' => 'https://www.bmwusa.com/'],
+    ['img' => $uploads . '2026/05/bugatti.png',           'alt' => 'Bugatti',           'url' => 'https://www.bugatti.com/'],
+    ['img' => $uploads . '2026/05/ferrari.png',           'alt' => 'Ferrari',           'url' => 'https://www.ferrari.com/'],
+    ['img' => $uploads . '2026/05/glovis.png',            'alt' => 'Glovis',            'url' => 'https://www.glovisusa.com/'],
+    ['img' => $uploads . '2026/05/honda.png',             'alt' => 'Honda',             'url' => 'https://www.honda.com/'],
     ['img' => $uploads . '2026/05/jaguar-land-rover.png', 'alt' => 'Jaguar Land Rover', 'url' => 'https://www.jlr.com/'],
-    ['img' => $uploads . '2026/05/lamborghini.png', 'alt' => 'Lamborghini', 'url' => 'https://www.lamborghini.com/en-en'],
-    ['img' => $uploads . '2026/05/lucid.png', 'alt' => 'Lucid', 'url' => 'https://lucidmotors.com/'],
-    ['img' => $uploads . '2026/05/mclaren.png', 'alt' => 'McLaren', 'url' => 'https://www.mclaren.com/'],
-    ['img' => $uploads . '2026/05/mercedes-benz.png', 'alt' => 'Mercedes-Benz', 'url' => 'https://www.mbusa.com/en/home'],
-    ['img' => $uploads . '2026/05/nissan.png', 'alt' => 'Nissan', 'url' => 'https://www.nissanusa.com/'],
+    ['img' => $uploads . '2026/05/lamborghini.png',       'alt' => 'Lamborghini',       'url' => 'https://www.lamborghini.com/en-en'],
+    ['img' => $uploads . '2026/05/lucid.png',             'alt' => 'Lucid',             'url' => 'https://lucidmotors.com/'],
+    ['img' => $uploads . '2026/05/mclaren.png',           'alt' => 'McLaren',           'url' => 'https://www.mclaren.com/'],
+    ['img' => $uploads . '2026/05/mercedes-benz.png',     'alt' => 'Mercedes-Benz',     'url' => 'https://www.mbusa.com/en/home'],
+    ['img' => $uploads . '2026/05/nissan.png',            'alt' => 'Nissan',            'url' => 'https://www.nissanusa.com/'],
+    ['img' => $uploads . '2026/05/porsche.png',           'alt' => 'Porsche',           'url' => 'https://www.porsche.com/usa/'],
+    ['img' => $uploads . '2026/05/rivian.png',            'alt' => 'Rivian',            'url' => 'https://rivian.com/'],
+    ['img' => $uploads . '2026/05/rolls-royce.png',       'alt' => 'Rolls-Royce',       'url' => 'https://www.rolls-roycemotorcars.com/'],
+    ['img' => $uploads . '2026/05/roush.png',             'alt' => 'Roush',             'url' => 'https://www.roush.com/'],
+    ['img' => $uploads . '2026/05/stellantis.png',        'alt' => 'Stellantis',        'url' => 'https://www.stellantis.com/'],
+    ['img' => $uploads . '2026/05/subaru.png',            'alt' => 'Subaru',            'url' => 'https://www.subaru.com/'],
+    ['img' => $uploads . '2026/05/tnt-drives.png',        'alt' => 'TNT Drives',        'url' => 'https://www.tntdrives.com/'],
+    ['img' => $uploads . '2026/05/toyota.png',            'alt' => 'Toyota',            'url' => 'https://www.toyota.com/'],
 ];
 ?>
 <main id="primary" class="site-main">
